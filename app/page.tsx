@@ -1,22 +1,34 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Mail, Code, Zap, Shield, ArrowRight, CheckCircle, Linkedin, Github, Twitter, Facebook } from 'lucide-react'
+import {
+  Mail,
+  Code,
+  Zap,
+  Shield,
+  ArrowRight,
+  CheckCircle,
+  Linkedin,
+  Github,
+  Twitter,
+  Instagram,
+  Facebook,
+} from "lucide-react";
 
 export default function Home() {
-  const [email, setEmail] = useState('')
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [email, setEmail] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     if (email) {
-      setIsSubmitted(true)
+      setIsSubmitted(true);
       setTimeout(() => {
-        setIsSubmitted(false)
-        setEmail('')
-      }, 3000)
+        setIsSubmitted(false);
+        setEmail("");
+      }, 3000);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white overflow-hidden">
@@ -38,33 +50,41 @@ export default function Home() {
           </span>
         </div>
         <div className="hidden md:flex items-center space-x-4">
-          <a 
-            href="https://linkedin.com/company/arktik" 
-            target="_blank" 
+          {/* <a
+            href="https://linkedin.com/company/arktik"
+            target="_blank"
             rel="noopener noreferrer"
             className="p-2 text-slate-400 hover:text-blue-400 transition-colors duration-300 hover:bg-white/10 rounded-lg"
           >
             <Linkedin className="w-5 h-5" />
-          </a>
-          <a 
-            href="https://github.com/arktik" 
-            target="_blank" 
+          </a> */}
+          <a
+            href="https://github.com/ArktikLabs"
+            target="_blank"
             rel="noopener noreferrer"
             className="p-2 text-slate-400 hover:text-white transition-colors duration-300 hover:bg-white/10 rounded-lg"
           >
             <Github className="w-5 h-5" />
           </a>
-          <a 
-            href="https://x.com/arktik" 
-            target="_blank" 
+          <a
+            href="https://x.com/ArktikLabs"
+            target="_blank"
             rel="noopener noreferrer"
             className="p-2 text-slate-400 hover:text-blue-400 transition-colors duration-300 hover:bg-white/10 rounded-lg"
           >
             <Twitter className="w-5 h-5" />
           </a>
-          <a 
-            href="https://facebook.com/arktik" 
-            target="_blank" 
+          <a
+            href="https://instagram.com/ArktikLabs"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 text-slate-400 hover:text-blue-400 transition-colors duration-300 hover:bg-white/10 rounded-lg"
+          >
+            <Instagram className="w-5 h-5" />
+          </a>
+          <a
+            href="https://facebook.com/ArktikLabs"
+            target="_blank"
             rel="noopener noreferrer"
             className="p-2 text-slate-400 hover:text-blue-500 transition-colors duration-300 hover:bg-white/10 rounded-lg"
           >
@@ -92,8 +112,9 @@ export default function Home() {
 
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-            We&apos;re crafting cutting-edge software solutions that transform businesses and drive innovation. 
-            Get ready for something extraordinary.
+            We&apos;re crafting cutting-edge software solutions that transform
+            businesses and drive innovation. Get ready for something
+            extraordinary.
           </p>
 
           {/* Features Grid */}
@@ -103,23 +124,36 @@ export default function Home() {
                 <Code className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-lg font-semibold mb-2">Custom Development</h3>
-              <p className="text-slate-400 text-sm">Tailored software solutions built to your exact specifications and requirements.</p>
+              <p className="text-slate-400 text-sm">
+                Tailored software solutions built to your exact specifications
+                and requirements.
+              </p>
             </div>
 
             <div className="group p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl hover:bg-white/10 transition-all duration-300 text-center">
               <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-400 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 mx-auto">
                 <Zap className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">Performance Optimized</h3>
-              <p className="text-slate-400 text-sm">Lightning-fast applications designed for optimal performance and user experience.</p>
+              <h3 className="text-lg font-semibold mb-2">
+                Performance Optimized
+              </h3>
+              <p className="text-slate-400 text-sm">
+                Lightning-fast applications designed for optimal performance and
+                user experience.
+              </p>
             </div>
 
             <div className="group p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl hover:bg-white/10 transition-all duration-300 text-center">
               <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-purple-400 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 mx-auto">
                 <Shield className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">Enterprise Security</h3>
-              <p className="text-slate-400 text-sm">Bank-level security protocols to protect your data and ensure compliance.</p>
+              <h3 className="text-lg font-semibold mb-2">
+                Enterprise Security
+              </h3>
+              <p className="text-slate-400 text-sm">
+                Bank-level security protocols to protect your data and ensure
+                compliance.
+              </p>
             </div>
 
             <div className="group p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl hover:bg-white/10 transition-all duration-300 text-center">
@@ -127,17 +161,27 @@ export default function Home() {
                 <CheckCircle className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-lg font-semibold mb-2">24/7 Support</h3>
-              <p className="text-slate-400 text-sm">Round-the-clock technical support and maintenance for your peace of mind.</p>
+              <p className="text-slate-400 text-sm">
+                Round-the-clock technical support and maintenance for your peace
+                of mind.
+              </p>
             </div>
           </div>
 
           {/* Email Signup */}
           <div className="max-w-md mx-auto">
-            <h3 className="text-2xl font-semibold mb-4">Be the first to know</h3>
-            <p className="text-slate-400 mb-6">Join our waitlist and get exclusive early access to our platform.</p>
-            
+            <h3 className="text-2xl font-semibold mb-4">
+              Be the first to know
+            </h3>
+            <p className="text-slate-400 mb-6">
+              Join our waitlist and get exclusive early access to our platform.
+            </p>
+
             {!isSubmitted ? (
-              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col sm:flex-row gap-3"
+              >
                 <div className="flex-1 relative">
                   <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
                   <input
@@ -181,5 +225,5 @@ export default function Home() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
