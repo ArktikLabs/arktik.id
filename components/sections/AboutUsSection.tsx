@@ -1,11 +1,6 @@
 import { Globe, Code, Users, TrendingUp, Zap, Target, Building2 } from "lucide-react"
 
 export function AboutUsSection() {
-  const stats = [
-    { number: "10+", label: "Years", subtitle: "Building at scale" },
-    { number: "Millions", label: "Users", subtitle: "Powered daily" },
-    { number: "Global", label: "Impact", subtitle: "Across continents" },
-  ]
 
   const expertise = [
     { icon: Target, label: "Product Leadership" },
@@ -54,23 +49,6 @@ export function AboutUsSection() {
               businesses worldwide.
             </p>
           </div>
-        </div>
-
-        {/* Stats Row */}
-        <div className="grid grid-cols-3 gap-8 mb-20 text-center">
-          {stats.map((stat, index) => (
-            <div key={index} className="group">
-              <div className="border border-gray-700 rounded-lg p-6 hover:border-lime-green/30 transition-all duration-300 hover:bg-gray-800/30">
-                <div className="text-2xl lg:text-3xl font-bold text-lime-green mb-2 font-heading">
-                  {stat.number}
-                </div>
-                <div className="text-white font-semibold mb-1">
-                  {stat.label}
-                </div>
-                <div className="text-gray-400 text-sm">{stat.subtitle}</div>
-              </div>
-            </div>
-          ))}
         </div>
 
         {/* Expertise Pills */}
