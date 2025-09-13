@@ -1,6 +1,19 @@
+"use client";
 import { Globe, Users, Heart, Scale } from "lucide-react";
+import { LinkPreview } from "@/components/ui/link-preview";
+import { useEffect } from "react";
 
 export function AboutUsSection() {
+  // Prefetch the screenshot for faster loading
+  useEffect(() => {
+    const mitUrl = "https://professionalprograms.mit.edu/blog/design/why-95-of-new-products-miss-the-mark-and-how-yours-can-avoid-the-same-fate/";
+    const screenshotUrl = `https://api.microlink.io/?url=${encodeURIComponent(mitUrl)}&screenshot=true&meta=false&embed=screenshot.url&colorScheme=dark&viewport.isMobile=true&viewport.deviceScaleFactor=1&viewport.width=900&viewport.height=540`;
+
+    // Create invisible image to prefetch
+    const img = new Image();
+    img.src = screenshotUrl;
+  }, []);
+
   const values = [
     {
       icon: Users,
@@ -33,8 +46,16 @@ export function AboutUsSection() {
       <section id="about-us" className="px-6 pt-20 pb-0 lg:px-12">
         {/* Quote Hero */}
         <div className="text-center mb-20">
-          <h2 className="text-3xl lg:text-5xl font-bold leading-tight mb-8 text-white font-heading">
-            <span className="text-lime-green">"</span>Most digital products fail
+          <h2 className="text-3xl lg:text-5xl font-bold leading-tight mb-4 text-white font-heading">
+            <span className="text-lime-green">"</span>
+            <LinkPreview
+              url="https://professionalprograms.mit.edu/blog/design/why-95-of-new-products-miss-the-mark-and-how-yours-can-avoid-the-same-fate/"
+              className="text-font hover:text-lime-green/80 transition-colors duration-200 cursor-pointer"
+              width={300}
+              height={180}
+            >
+              Most digital products fail<sup>*</sup>
+            </LinkPreview>
             — not because of the idea, but because of poor execution
             <span className="text-lime-green">"</span>
           </h2>
@@ -127,6 +148,21 @@ export function AboutUsSection() {
               ))}
             </div>
           </div>
+        </div>
+
+        {/* Reference */}
+        <div className="mb-12">
+          <p className="text-xs text-gray-500 text-left">
+            *
+            <LinkPreview
+              url="https://professionalprograms.mit.edu/blog/design/why-95-of-new-products-miss-the-mark-and-how-yours-can-avoid-the-same-fate/"
+              className="text-gray-500 hover:text-lime-green transition-colors duration-200 ml-1"
+              width={300}
+              height={180}
+            >
+              MIT Professional Programs: Why 95% of New Products Miss the Mark
+            </LinkPreview>
+          </p>
         </div>
       </section>
     </div>
