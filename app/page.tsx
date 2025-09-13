@@ -1,6 +1,5 @@
 import { Header } from "@/components/sections/Header"
 import { HeroSection } from "@/components/sections/HeroSection"
-import { QuotesSection } from "@/components/sections/QuotesSection"
 import { ServicesSection } from "@/components/sections/ServicesSection"
 import { WhyArktikSection } from "@/components/sections/WhyArktikSection"
 import { AboutUsSection } from "@/components/sections/AboutUsSection"
@@ -13,7 +12,6 @@ export default function Home() {
     <div className="min-h-screen text-white bg-dark-blue">
       <Header />
       <HeroSection />
-      <QuotesSection />
       <AboutUsSection />
       <ServicesSection />
       <WhyArktikSection />

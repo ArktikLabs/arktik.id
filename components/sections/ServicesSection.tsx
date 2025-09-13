@@ -28,8 +28,11 @@ export function ServicesSection() {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <section id="services" className="px-6 py-20 lg:px-12">
-        <h2 className="text-3xl font-bold mb-12 font-heading">Our service</h2>
+      <section id="services" className="px-6 pt-20 pb-0 lg:px-12">
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold font-heading mb-2">Our service</h2>
+          <div className="w-3/4 h-[2px] bg-lime-green"></div>
+        </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <ServiceCard
@@ -43,5 +46,5 @@ export function ServicesSection() {
         </div>
       </section>
     </div>
-  )
+  );
 }

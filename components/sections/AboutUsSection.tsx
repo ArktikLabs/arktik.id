@@ -1,148 +1,131 @@
-import { Globe, Code, Users, TrendingUp, Zap, Target, Building2 } from "lucide-react"
+import { Globe, Users, Heart, Scale } from "lucide-react";
 
 export function AboutUsSection() {
-
-  const expertise = [
-    { icon: Target, label: "Product Leadership" },
-    { icon: Code, label: "Engineering at Scale" },
-    { icon: Building2, label: "Enterprise Design" },
-  ]
-
-  const drives = [
-    {
-      icon: Globe,
-      title: "Global impact",
-      description: "Products and platforms we've built are trusted by millions of users and suppliers worldwide."
-    },
-    {
-      icon: Code,
-      title: "Enterprise DNA", 
-      description: "Deep expertise in B2B ecosystems, from supply chains and inventory systems to partner platforms."
-    },
+  const values = [
     {
       icon: Users,
-      title: "End-to-end execution",
-      description: "We operate across the full spectrum — product vision, technical architecture, and human-centered design."
+      title: "Collaboration First",
+      description:
+        "We co-create with our partners, building solutions together, not in isolation.",
     },
     {
-      icon: TrendingUp,
-      title: "Scale and resilience",
-      description: "Every solution we create is built to last, adapt, and grow 10× beyond the first launch."
-    }
-  ]
+      icon: Heart,
+      title: "Expertise with Empathy",
+      description:
+        "Decades of experience combined with deep understanding of people and business needs.",
+    },
+    {
+      icon: Scale,
+      title: "Impact at Scale",
+      description:
+        "We craft resilient technology trusted by millions worldwide.",
+    },
+    {
+      icon: Globe,
+      title: "Inclusive Innovation",
+      description:
+        "Pushing boundaries while staying grounded in equality and shared ownership.",
+    },
+  ];
 
   return (
     <div className="max-w-7xl mx-auto">
-      <section id="about-us" className="px-6 py-20 lg:px-12">
-        {/* Hero Statement */}
+      <section id="about-us" className="px-6 pt-20 pb-0 lg:px-12">
+        {/* Quote Hero */}
         <div className="text-center mb-20">
-          <h2 className="text-4xl lg:text-6xl font-bold mb-8 text-white font-heading">
-            About Us
+          <h2 className="text-3xl lg:text-5xl font-bold leading-tight mb-8 text-white font-heading">
+            <span className="text-lime-green">"</span>Most digital products fail
+            — not because of the idea, but because of poor execution
+            <span className="text-lime-green">"</span>
           </h2>
           <div className="max-w-4xl mx-auto">
-            <p className="text-xl lg:text-2xl text-lime-green font-medium mb-6">
-              We are problem solvers and builders.
-            </p>
-            <p className="text-gray-300 text-lg leading-relaxed">
-              Strategists, designers, and engineers who have spent the last
-              decade creating technology that powers millions of people and
-              businesses worldwide.
+            <p className="text-lg lg:text-xl text-gray-300 leading-relaxed">
+              At Arktik, we believe ideas deserve better. That's why we combine
+              strategy, design, and engineering to transform your vision into
+              software that actually works — reliable, scalable, and
+              user-friendly
             </p>
           </div>
         </div>
 
-        {/* Expertise Pills */}
-        <div className="flex flex-wrap justify-center gap-4 mb-20">
-          {expertise.map((item, index) => (
-            <div
-              key={index}
-              className="flex items-center gap-3 bg-gray-800/50 border border-gray-700 rounded-full px-6 py-3 hover:border-lime-green/50 transition-all duration-300"
-            >
-              <item.icon className="w-5 h-5 text-lime-green" />
-              <span className="text-white font-medium">{item.label}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* Two Column Layout */}
-        <div className="grid lg:grid-cols-2 gap-16 mb-20">
-          <div className="space-y-8">
-            <div className="bg-gradient-to-br from-gray-800/30 to-gray-900/30 border border-gray-700 rounded-xl p-8">
-              <h3 className="text-xl font-bold text-white mb-4">Our Focus</h3>
-              <p className="text-gray-300 leading-relaxed">
-                From supply systems and B2B platforms to security, analytics,
-                and marketing technology — our backgrounds intersect where{" "}
-                <span className="text-lime-green">
-                  complexity meets opportunity
-                </span>
-                .
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-gray-800/30 to-gray-900/30 border border-gray-700 rounded-xl p-8">
-              <h3 className="text-xl font-bold text-white mb-4">
-                Our Approach
+        {/* Three Column Story Layout */}
+        <div className="grid lg:grid-cols-3 gap-12 lg:gap-16 mb-20 relative">
+          {/* Who We Are */}
+          <div className="space-y-6 pb-8 lg:pb-0 border-b lg:border-b-0 border-gray-700">
+            <div className="text-center lg:text-left mb-6">
+              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-2 font-heading">
+                Who We Are
               </h3>
-              <p className="text-gray-300 leading-relaxed">
-                We don't just ship code or pixels. We solve{" "}
-                <span className="text-lime-green">
-                  business-critical problems
-                </span>
-                : inventory movement, real-time user design, global transaction
-                security, and intuitive enterprise tools.
-              </p>
+              <div className="w-3/4 h-[2px] bg-lime-green mx-auto lg:mx-0"></div>
             </div>
+            <p className="text-gray-300 leading-relaxed">
+              We are builders, strategists, designers, and engineers who have
+              spent the last decade creating technology that powers millions of
+              people and businesses worldwide.
+            </p>
+            <p className="text-gray-300 leading-relaxed">
+              But more than that, we are{" "}
+              <span className="text-lime-green font-medium">collaborators</span>
+              . We believe the best solutions come from listening,
+              understanding, and building together.
+            </p>
           </div>
 
+          {/* Vertical Separator 1 */}
+          <div className="hidden lg:block absolute left-1/3 top-0 bottom-0 w-[1px] bg-gray-700 transform -translate-x-1/2"></div>
+
+          {/* How We Work */}
+          <div className="space-y-6 pb-8 lg:pb-0 border-b lg:border-b-0 border-gray-700">
+            <div className="text-center lg:text-left mb-6">
+              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-2 font-heading">
+                How We Work
+              </h3>
+              <div className="w-3/4 h-[2px] bg-lime-green mx-auto lg:mx-0"></div>
+            </div>
+            <p className="text-gray-300 leading-relaxed">
+              With every project, we bring not only technical depth but also
+              empathy, inclusivity, and a shared commitment to your goals.
+            </p>
+            <p className="text-gray-300 leading-relaxed">
+              We work{" "}
+              <span className="text-lime-green font-medium">
+                equally, inclusively, and with curiosity
+              </span>{" "}
+              to push the boundaries of what software can do for businesses and
+              the people behind them.
+            </p>
+          </div>
+
+          {/* Vertical Separator 2 */}
+          <div className="hidden lg:block absolute left-2/3 top-0 bottom-0 w-[1px] bg-gray-700 transform -translate-x-1/2"></div>
+
+          {/* What We Believe */}
           <div className="space-y-6">
-            <div className="text-center lg:text-left">
-              <h3 className="text-2xl font-bold text-white mb-6 font-heading">
-                What drives us
+            <div className="text-center lg:text-left mb-6">
+              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-2 font-heading">
+                What We Believe
               </h3>
+              <div className="w-3/4 h-[2px] bg-lime-green mx-auto lg:mx-0"></div>
             </div>
-            {drives.map((drive, index) => (
-              <div key={index} className="flex gap-4 group">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-lime-green/10 border border-lime-green/20 rounded-lg flex items-center justify-center group-hover:bg-lime-green/20 transition-all duration-300">
-                    <drive.icon className="w-6 h-6 text-lime-green" />
+            <div className="space-y-4">
+              {values.map((value, index) => (
+                <div key={index} className="group">
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 mt-1">
+                      <value.icon className="w-5 h-5 text-lime-green" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">
+                        {value.title}
+                      </h4>
+                      <p className="text-gray-400 text-sm leading-relaxed">
+                        {value.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <h4 className="text-white font-semibold mb-2">
-                    {drive.title}
-                  </h4>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    {drive.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Closing Statement - Visual */}
-        <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-lime-green/5 to-transparent rounded-xl" />
-          <div className="relative bg-gray-900/50 border border-gray-700 rounded-xl p-8 lg:p-12">
-            <div className="flex items-center gap-4 mb-6">
-              <Zap className="w-8 h-8 text-lime-green" />
-              <h3 className="text-2xl font-bold text-white font-heading">
-                Breaking Boundaries
-              </h3>
+              ))}
             </div>
-            <p className="text-gray-300 text-lg leading-relaxed max-w-4xl">
-              We are not here to follow conventions. We are here to{" "}
-              <span className="text-lime-green font-medium">
-                push boundaries
-              </span>{" "}
-              of what software can do for businesses and the people behind them.
-              In stealth today,
-              <span className="text-white font-medium">
-                {" "}
-                building tomorrow's platforms
-              </span>{" "}
-              that redefine how companies work, connect, and grow.
-            </p>
           </div>
         </div>
       </section>

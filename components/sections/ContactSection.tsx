@@ -8,9 +8,12 @@ export function ContactSection() {
     <div className="max-w-7xl mx-auto">
       <section id="contact" className="px-6 py-20 lg:px-12">
         <div className="mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-white font-heading">
-            Ready to bring your vision to life?
-          </h2>
+          <div className="mb-6">
+            <h2 className="text-3xl lg:text-4xl font-bold text-white font-heading mb-2">
+              Ready to bring your vision to life?
+            </h2>
+            <div className="w-3/4 h-[2px] bg-lime-green"></div>
+          </div>
           <p className="text-gray-400 text-lg max-w-2xl mb-8">
             Let's discuss your project and explore how we can help you achieve
             your goals.
