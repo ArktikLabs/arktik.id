@@ -41,7 +41,7 @@ export function HeroSection() {
             <div className="max-w-4xl">
               <h1 className="text-4xl lg:text-6xl font-bold leading-tight text-balance font-heading">
                 Building <FlipWords words={words} className="text-lime-green" />{" "}
-                digital experiences
+                digital products
               </h1>
             </div>
             <div className="hidden lg:block flex-shrink-0">

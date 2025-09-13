@@ -6,7 +6,7 @@ export function WhyArktikSection() {
     {
       icon: Globe,
       title: "Global Experience",
-      description: "With over 7 years leading product, engineering, and design in world-class tech companies, we bring the expertise to build solutions to elevate your business to the next level."
+      description: "With over 7 years leading product, engineering, and design in world-class tech companies, we partner with you to bring this expertise to your business and elevate it to the next level."
     },
     {
       icon: Infinity,
@@ -30,7 +30,7 @@ export function WhyArktikSection() {
       <section id="why-arktik" className="px-6 pt-20 pb-0 lg:px-12">
         <div className="mb-12">
           <h2 className="text-3xl font-bold font-heading mb-2">
-            Why Choose Arktik
+            Why Arktik
           </h2>
           <div className="w-3/4 h-[2px] bg-lime-green"></div>
         </div>

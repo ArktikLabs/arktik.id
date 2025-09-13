@@ -61,10 +61,9 @@ export function AboutUsSection() {
           </h2>
           <div className="max-w-4xl mx-auto">
             <p className="text-lg lg:text-xl text-gray-300 leading-relaxed">
-              At Arktik, we believe ideas deserve better. That's why we combine
-              strategy, design, and engineering to transform your vision into
-              software that actually works — reliable, scalable, and
-              user-friendly
+              At Arktik, we believe ideas deserve better execution. That's why we don't just build software — we partner with you to combine
+              strategy, design, and engineering, transforming your vision into
+              products that actually work and drive measurable results.
             </p>
           </div>
         </div>
@@ -81,7 +80,7 @@ export function AboutUsSection() {
             </div>
             <p className="text-gray-300 leading-relaxed">
               We are builders, strategists, designers, and engineers who have
-              spent the last decade creating technology that powers millions of
+              spent over 7 years creating technology that powers millions of
               people and businesses worldwide.
             </p>
             <p className="text-gray-300 leading-relaxed">
@@ -114,6 +113,9 @@ export function AboutUsSection() {
               </span>{" "}
               to push the boundaries of what software can do for businesses and
               the people behind them.
+            </p>
+            <p className="text-gray-300 leading-relaxed">
+              Our 7+ years of global experience means we know what works — and we bring that knowledge into every collaboration.
             </p>
           </div>
 

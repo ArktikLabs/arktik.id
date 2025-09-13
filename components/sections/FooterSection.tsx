@@ -25,8 +25,7 @@ export function FooterSection() {
           {/* Description section */}
           <div className="mb-16">
             <p className="text-gray-400 text-lg leading-relaxed">
-              A digital creative agency crafting clear, fast, accessible
-              products.
+              Transforming ideas into digital products that drive real business growth.
             </p>
           </div>
 
