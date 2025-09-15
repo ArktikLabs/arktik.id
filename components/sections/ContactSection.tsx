@@ -1,10 +1,48 @@
+"use client"
+
 import { CTAButton } from "@/components/ui/cta-button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, MessageCircle } from "lucide-react"
 import { Underline } from "@/components/ui/underline";
+import { useState } from "react";
 
 export function ContactSection() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    message: "",
+  });
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const whatsappMessage = `Hi Arktik! I'm interested in your services.
+
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Company/Project: ${formData.company}
+
+Message: ${formData.message}`;
+
+    const whatsappUrl = `https://wa.me/6285117697889?text=${encodeURIComponent(
+      whatsappMessage
+    )}`;
+    window.open(whatsappUrl, "_blank");
+  };
   return (
     <div className="max-w-7xl mx-auto">
       <section id="contact" className="px-6 py-20 lg:px-12">
@@ -41,28 +79,37 @@ export function ContactSection() {
         </div>
 
         <div className="max-w-6xl">
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="grid md:grid-cols-2 gap-12">
               {/* Left Column - Personal Info */}
               <div className="grid grid-rows-[auto_auto_1fr] gap-8">
                 <div>
                   <Input
                     type="text"
+                    name="name"
                     placeholder="Your name"
+                    value={formData.name}
+                    onChange={handleInputChange}
                     className="bg-transparent border-0 border-b-2 border-gray-600 rounded-none text-white placeholder:text-gray-400 focus:border-lime-green focus:ring-0 px-0 pb-2"
                   />
                 </div>
                 <div>
                   <Input
                     type="email"
+                    name="email"
                     placeholder="Your email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     className="bg-transparent border-0 border-b-2 border-gray-600 rounded-none text-white placeholder:text-gray-400 focus:border-lime-green focus:ring-0 px-0 pb-2"
                   />
                 </div>
                 <div className="flex items-end">
                   <Input
                     type="tel"
+                    name="phone"
                     placeholder="Phone number"
+                    value={formData.phone}
+                    onChange={handleInputChange}
                     className="bg-transparent border-0 border-b-2 border-gray-600 rounded-none text-white placeholder:text-gray-400 focus:border-lime-green focus:ring-0 px-0 pb-2"
                   />
                 </div>
@@ -73,13 +120,19 @@ export function ContactSection() {
                 <div>
                   <Input
                     type="text"
+                    name="company"
                     placeholder="Company/Project name"
+                    value={formData.company}
+                    onChange={handleInputChange}
                     className="bg-transparent border-0 border-b-2 border-gray-600 rounded-none text-white placeholder:text-gray-400 focus:border-lime-green focus:ring-0 px-0 pb-2"
                   />
                 </div>
                 <div className="flex flex-col">
                   <Textarea
+                    name="message"
                     placeholder="Tell us about your project..."
+                    value={formData.message}
+                    onChange={handleInputChange}
                     className="bg-transparent border-0 border-b-2 border-gray-600 rounded-none text-white placeholder:text-gray-400 focus:border-lime-green focus:ring-0 resize-none px-0 pb-2 overflow-y-auto flex-grow min-h-[48px]"
                   />
                 </div>
