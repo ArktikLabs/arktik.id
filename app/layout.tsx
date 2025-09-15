@@ -4,7 +4,7 @@ import { Bricolage_Grotesque, Funnel_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Suspense } from "react";
 import { CursorPreloader } from "@/components/CursorPreloader";
-import { GoogleTagManager } from "@next/third-parties/google";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 
 const bricolageGrotesque = Bricolage_Grotesque({
@@ -115,6 +115,7 @@ export default function RootLayout({
         <CursorPreloader />
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
+        <GoogleAnalytics gaId="G-LNP9L6T64P" />
       </body>
     </html>
   );
