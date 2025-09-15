@@ -183,14 +183,16 @@ export function Header() {
                 : "text-white hover:bg-black/30"
             }`}
           >
-            Our work
+            Our works
           </a>
         </nav>
-        <CTAButton 
-          variant="small" 
+        <CTAButton
+          variant="small"
           className="text-sm"
           onClick={() => {
-            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+            document
+              .getElementById("contact")
+              ?.scrollIntoView({ behavior: "smooth" });
           }}
         >
           Contact us

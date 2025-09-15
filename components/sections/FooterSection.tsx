@@ -11,12 +11,14 @@ export function FooterSection() {
           width={0}
           height={0}
           className="w-full h-auto opacity-20"
-          style={{
-            maskImage:
-              "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.2) 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.2) 100%)",
-          } as React.CSSProperties}
+          style={
+            {
+              maskImage:
+                "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.2) 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.2) 100%)",
+            } as React.CSSProperties
+          }
         />
       </div>
 
@@ -25,7 +27,7 @@ export function FooterSection() {
           {/* Description section */}
           <div className="mb-16">
             <p className="text-gray-400 text-lg leading-relaxed">
-              Transforming ideas into digital products that drive real business growth.
+              Transforming ideas into products that drive real business growth.
             </p>
           </div>
 

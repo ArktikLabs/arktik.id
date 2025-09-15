@@ -3,16 +3,15 @@
 import { FlipWords } from "@/components/ui/flip-words";
 import { InteractiveDemo } from "@/components/ui/interactive-demo";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 
 export function HeroSection() {
   const words = [
-    "clear",
-    "fast",
-    "purposeful",
-    "beautiful",
+    "scalable",
+    "reliable",
+    "innovative",
+    "custom",
     "modern",
-    "accessible",
+    "secure",
   ];
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -41,8 +40,11 @@ export function HeroSection() {
             <div className="max-w-4xl">
               <h1 className="text-4xl lg:text-6xl font-bold leading-tight text-balance font-heading">
                 Building <FlipWords words={words} className="text-lime-green" />{" "}
-                digital products
+                software solutions
               </h1>
+              <p className="text-lg lg:text-xl text-gray-300 mt-6 leading-relaxed">
+                Leading software development company delivering end-to-end web, mobile, and backend systems globally, on time.
+              </p>
             </div>
             <div className="hidden lg:block flex-shrink-0">
               <InteractiveDemo />

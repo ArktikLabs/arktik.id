@@ -21,20 +21,19 @@ const funnelSans = Funnel_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://arktik.id"),
-  title:
-    "Arktik - Building Clear Digital Experiences | Digital Product Development",
+  title: "Arktik - Custom Software Development Company",
   description:
-    "Transform your business with Arktik's expert digital product development, AI automation, and custom software solutions. 7+ years of global experience delivering scalable, user-friendly applications.",
+    "Professional software development company with 7+ years turning technology into business growth through web, mobile & backend solutions delivered globally.",
   keywords: [
-    "digital product development",
     "custom software development",
+    "software development company",
     "AI automation",
     "mobile app development",
     "web development",
     "UI/UX design",
     "technology consulting",
     "business automation",
-    "digital creative agency",
+    "software house",
   ],
   authors: [{ name: "Arktik Team" }],
   creator: "Arktik",
@@ -57,13 +56,13 @@ export const metadata: Metadata = {
     siteName: "Arktik",
     title: "Arktik - Building Clear Digital Experiences",
     description:
-      "A digital creative agency crafting clear, fast, accessible products. Expert digital product development, AI automation, and custom software solutions.",
+      "Leading software development company crafting scalable, reliable solutions globally. Expert custom software development, AI automation, and end-to-end technology services.",
     images: [
       {
         url: "/og-en.webp",
         width: 1200,
         height: 630,
-        alt: "Arktik - Digital Creative Agency",
+        alt: "Arktik - Software Development Company",
       },
     ],
   },
@@ -71,7 +70,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Arktik - Building Clear Digital Experiences",
     description:
-      "A digital creative agency crafting clear, fast, accessible products. Expert digital product development, AI automation, and custom software solutions.",
+      "Leading software development company crafting scalable, reliable solutions globally. Expert custom software development, AI automation, and end-to-end technology services.",
     images: ["/og-en.webp"],
     creator: "@arktik",
   },

@@ -1,4 +1,5 @@
 import { WorkCard } from "@/components/cards/WorkCard";
+import { Underline } from "@/components/ui/underline";
 
 export function WorksSection() {
   const works = [
@@ -18,7 +19,7 @@ export function WorksSection() {
       title: "This Could Be Yours",
       href: "#contact",
       description:
-        "Your idea deserves better execution. Let's transform it into a digital product that drives real growth. From concept to launch, we'll build your success story.",
+        "Your idea deserves better execution. Let's transform it into custom software that drives real growth. From concept to launch, we'll build your success story.",
       buttonText: "Get Started",
       isImageCard: false,
     },
@@ -28,8 +29,8 @@ export function WorksSection() {
     <div className="max-w-7xl mx-auto">
       <section id="portfolio" className="px-6 pt-20 pb-0 lg:px-12">
         <div className="mb-12">
-          <h2 className="text-3xl font-bold font-heading mb-2">Portfolio</h2>
-          <div className="w-4/5 h-[2px] bg-lime-green"></div>
+          <h2 className="text-3xl font-bold font-heading mb-2">Our Works</h2>
+          <Underline />
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {works.map((work, index) => (

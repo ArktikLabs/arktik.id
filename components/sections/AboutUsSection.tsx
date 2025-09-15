@@ -91,8 +91,8 @@ export function AboutUsSection() {
               <div className="w-3/4 h-[2px] bg-lime-green mx-auto lg:mx-0"></div>
             </div>
             <p className="text-gray-300 leading-relaxed">
-              We are builders, strategists, designers, and engineers who have
-              spent over 7 years creating technology that powers millions of
+              We are a software development company with builders, strategists, designers, and engineers who have
+              spent over 7 years creating software solutions that power millions of
               people and businesses worldwide.
             </p>
             <p className="text-gray-300 leading-relaxed">
