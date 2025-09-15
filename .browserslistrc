@@ -1,0 +1,8 @@
+# Modern browsers only - ES2020+ support
+> 1%
+last 2 versions
+not dead
+not ie 11
+not chrome < 87
+not firefox < 78
+not safari < 14
