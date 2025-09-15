@@ -96,12 +96,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <GoogleTagManager gtmId="GTM-WG3SNLHH" />
-        <link
-          rel="preload"
-          href="/aurora-bg.webp"
-          as="image"
-          type="image/webp"
-        />
       </head>
       <body
         className={`${funnelSans.className} ${bricolageGrotesque.variable} ${funnelSans.variable}`}
