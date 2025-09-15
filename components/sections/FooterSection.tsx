@@ -41,7 +41,7 @@ export function FooterSection() {
 
             <div className="flex space-x-4">
               <a
-                href="https://x.com/arktik"
+                href="https://x.com/arktiklabs"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-lime-green transition-colors duration-200"
@@ -57,7 +57,7 @@ export function FooterSection() {
                 </svg>
               </a>
               <a
-                href="https://instagram.com/arktik"
+                href="https://instagram.com/arktiklabs"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-lime-green transition-colors duration-200"
@@ -73,7 +73,7 @@ export function FooterSection() {
                 </svg>
               </a>
               <a
-                href="https://facebook.com/arktik"
+                href="https://facebook.com/arktiklabs"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-lime-green transition-colors duration-200"
@@ -89,7 +89,7 @@ export function FooterSection() {
                 </svg>
               </a>
               <a
-                href="https://linkedin.com/company/arktik"
+                href="https://linkedin.com/company/arktiklabs"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-lime-green transition-colors duration-200"
