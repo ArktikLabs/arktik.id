@@ -54,7 +54,7 @@ export function AboutUsSection() {
               width={300}
               height={180}
             >
-              95% digital products fail<sup>*</sup>
+              95% products fail<sup>*</sup>
             </LinkPreview>
             — not because of the idea, but because of poor execution
             <span className="text-lime-green">"</span>
@@ -91,9 +91,10 @@ export function AboutUsSection() {
               <div className="w-3/4 h-[2px] bg-lime-green mx-auto lg:mx-0"></div>
             </div>
             <p className="text-gray-300 leading-relaxed">
-              We are a software development company with builders, strategists, designers, and engineers who have
-              spent over 7 years creating software solutions that power millions of
-              people and businesses worldwide.
+              We are a software development company with builders, strategists,
+              designers, and engineers who have spent over 7 years creating
+              software solutions that power millions of people and businesses
+              worldwide.
             </p>
             <p className="text-gray-300 leading-relaxed">
               But more than that, we are{" "}

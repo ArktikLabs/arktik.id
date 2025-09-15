@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://arktik.id",
     siteName: "Arktik",
-    title: "Arktik - Building Clear Digital Experiences",
+    title: "Arktik - Custom Software Development Company",
     description:
       "Leading software development company crafting scalable, reliable solutions globally. Expert custom software development, AI automation, and end-to-end technology services.",
     images: [
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Arktik - Building Clear Digital Experiences",
+    title: "Arktik - Custom Software Development Company",
     description:
       "Leading software development company crafting scalable, reliable solutions globally. Expert custom software development, AI automation, and end-to-end technology services.",
     images: ["/og-en.webp"],
