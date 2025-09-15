@@ -122,6 +122,7 @@ export function Header() {
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
           className="cursor-pointer"
+          aria-label="Go to top of page"
         >
           <Image
             src="/logo.svg"

@@ -98,11 +98,6 @@ export default function RootLayout({
         <GoogleTagManager gtmId="GTM-WG3SNLHH" />
         <link
           rel="preload"
-          href="/_next/static/css/app/layout.css"
-          as="style"
-        />
-        <link
-          rel="preload"
           href="/aurora-bg.webp"
           as="image"
           type="image/webp"
