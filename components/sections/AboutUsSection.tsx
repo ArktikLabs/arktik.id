@@ -59,7 +59,7 @@ export function AboutUsSection() {
             — not because of the idea, but because of poor execution
             <span className="text-lime-green">"</span>
           </h2>
-          <p className="text-xs text-gray-500 mb-5">
+          <div className="text-xs text-gray-500 mb-5">
             *
             <LinkPreview
               url="https://professionalprograms.mit.edu/blog/design/why-95-of-new-products-miss-the-mark-and-how-yours-can-avoid-the-same-fate/"
@@ -69,7 +69,7 @@ export function AboutUsSection() {
             >
               MIT Professional Programs: Why 95% of New Products Miss the Mark
             </LinkPreview>
-          </p>
+          </div>
           <div className="max-w-4xl mx-auto">
             <p className="text-lg lg:text-xl text-gray-300 leading-relaxed">
               At Arktik, we believe ideas deserve better execution. That's why
