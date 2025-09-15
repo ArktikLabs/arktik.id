@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     "business automation",
     "software house",
   ],
-  authors: [{ name: "Arktik Team" }],
+  authors: [{ name: "Arktik Labs" }],
   creator: "Arktik",
   publisher: "Arktik",
   robots: {
@@ -65,15 +65,22 @@ export const metadata: Metadata = {
         alt: "Arktik - Software Development Company",
       },
     ],
+    emails: ["hello@arktik.id"],
+    phoneNumbers: ["+6281234567890"],
   },
   twitter: {
+    site: "@arktiklabs",
     card: "summary_large_image",
     title: "Arktik - Custom Software Development Company",
     description:
       "Leading software development company crafting scalable, reliable solutions globally. Expert custom software development, AI automation, and end-to-end technology services.",
     images: ["/og-en.webp"],
-    creator: "@arktik",
+    creator: "@arktiklabs",
   },
+  abstract:
+    "Leading software development company crafting scalable, reliable solutions globally. Expert custom software development, AI automation, and end-to-end technology services.",
+  category: "technology",
+  classification: "software development",
   alternates: {
     canonical: "https://arktik.id",
   },
