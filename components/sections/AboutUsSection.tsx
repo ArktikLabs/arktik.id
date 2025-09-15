@@ -19,7 +19,7 @@ export function AboutUsSection() {
       icon: Users,
       title: "Collaboration First",
       description:
-        "We co-create with our partners, building solutions together, not in isolation.",
+        "We co-create with our partners, building solutions together, for mutual success.",
     },
     {
       icon: Heart,
