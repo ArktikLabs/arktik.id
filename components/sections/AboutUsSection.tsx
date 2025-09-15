@@ -54,14 +54,26 @@ export function AboutUsSection() {
               width={300}
               height={180}
             >
-              Most digital products fail<sup>*</sup>
+              95% digital products fail<sup>*</sup>
             </LinkPreview>
             — not because of the idea, but because of poor execution
             <span className="text-lime-green">"</span>
           </h2>
+          <p className="text-xs text-gray-500 mb-5">
+            *
+            <LinkPreview
+              url="https://professionalprograms.mit.edu/blog/design/why-95-of-new-products-miss-the-mark-and-how-yours-can-avoid-the-same-fate/"
+              className="text-gray-500 hover:text-lime-green transition-colors duration-200 ml-1"
+              width={300}
+              height={180}
+            >
+              MIT Professional Programs: Why 95% of New Products Miss the Mark
+            </LinkPreview>
+          </p>
           <div className="max-w-4xl mx-auto">
             <p className="text-lg lg:text-xl text-gray-300 leading-relaxed">
-              At Arktik, we believe ideas deserve better execution. That's why we don't just build software — we partner with you to combine
+              At Arktik, we believe ideas deserve better execution. That's why
+              we don't just build software — we partner with you to combine
               strategy, design, and engineering, transforming your vision into
               products that actually work and drive measurable results.
             </p>
@@ -115,7 +127,8 @@ export function AboutUsSection() {
               the people behind them.
             </p>
             <p className="text-gray-300 leading-relaxed">
-              Our 7+ years of global experience means we know what works — and we bring that knowledge into every collaboration.
+              Our 7+ years of global experience means we know what works — and
+              we bring that knowledge into every collaboration.
             </p>
           </div>
 
@@ -150,21 +163,6 @@ export function AboutUsSection() {
               ))}
             </div>
           </div>
-        </div>
-
-        {/* Reference */}
-        <div className="mb-12">
-          <p className="text-xs text-gray-500 text-left">
-            *
-            <LinkPreview
-              url="https://professionalprograms.mit.edu/blog/design/why-95-of-new-products-miss-the-mark-and-how-yours-can-avoid-the-same-fate/"
-              className="text-gray-500 hover:text-lime-green transition-colors duration-200 ml-1"
-              width={300}
-              height={180}
-            >
-              MIT Professional Programs: Why 95% of New Products Miss the Mark
-            </LinkPreview>
-          </p>
         </div>
       </section>
     </div>

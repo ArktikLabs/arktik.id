@@ -12,10 +12,11 @@ export function ContactSection() {
             <h2 className="text-3xl lg:text-4xl font-bold text-white font-heading mb-2">
               Ready to transform your idea into reality?
             </h2>
-            <div className="w-3/4 h-[2px] bg-lime-green"></div>
+            <div className="w-4/5 h-[2px] bg-lime-green"></div>
           </div>
           <p className="text-gray-400 text-lg max-w-2xl mb-8">
-            Let's explore how we can transform your vision into measurable success.
+            Let's explore how we can transform your vision into measurable
+            success.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6">

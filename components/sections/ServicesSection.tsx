@@ -31,7 +31,7 @@ export function ServicesSection() {
       <section id="services" className="px-6 pt-20 pb-0 lg:px-12">
         <div className="mb-12">
           <h2 className="text-3xl font-bold font-heading mb-2">Services</h2>
-          <div className="w-3/4 h-[2px] bg-lime-green"></div>
+          <div className="w-4/5 h-[2px] bg-lime-green"></div>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
