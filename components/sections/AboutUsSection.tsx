@@ -54,7 +54,7 @@ export function AboutUsSection() {
               width={300}
               height={180}
             >
-              95% products fail<sup>*</sup>
+              95% of new products miss the mark<sup>*</sup>
             </LinkPreview>
             — not because of the idea, but because of poor execution
             <span className="text-lime-green">"</span>
