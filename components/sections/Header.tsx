@@ -173,7 +173,7 @@ export function Header() {
                 : "text-white hover:bg-black/30"
             }`}
           >
-            Why arktik?
+            Why Arktik?
           </a>
           <a
             ref={portfolioRef}

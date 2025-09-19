@@ -66,7 +66,7 @@ export const metadata: Metadata = {
       },
     ],
     emails: ["hello@arktik.id"],
-    phoneNumbers: ["+6281234567890"],
+    phoneNumbers: ["+62 851-1769-7889"],
   },
   twitter: {
     site: "@arktiklabs",
