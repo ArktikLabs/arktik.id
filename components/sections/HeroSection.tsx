@@ -14,6 +14,7 @@ export function HeroSection() {
     "secure",
   ];
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +23,11 @@ export function HeroSection() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Avoid SSR hydration mismatch for InteractiveDemo by mounting it client-side
+  useEffect(() => {
+    setMounted(true);
   }, []);
 
   return (
@@ -47,7 +53,7 @@ export function HeroSection() {
               </p>
             </div>
             <div className="hidden lg:block flex-shrink-0">
-              <InteractiveDemo />
+              {mounted ? <InteractiveDemo /> : null}
             </div>
           </div>
         </div>
