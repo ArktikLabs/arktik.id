@@ -6,8 +6,7 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start",
-    "preview": "npx serve out"
+    "start": "next start"
   },
   "dependencies": {
     "@next/third-parties": "^15.5.3",

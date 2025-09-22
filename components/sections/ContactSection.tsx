@@ -6,6 +6,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Mail, MessageCircle } from "lucide-react"
 import { Underline } from "@/components/ui/underline";
 import { useState } from "react";
+import { sendGTMEvent } from "@next/third-parties/google";
+import { ConfirmModal } from "@/components/ui/ConfirmModal";
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -15,6 +17,9 @@ export function ContactSection() {
     company: "",
     message: "",
   });
+  const [leadStarted, setLeadStarted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -24,12 +29,48 @@ export function ContactSection() {
       ...prev,
       [name]: value,
     }));
+
+    // Fire lead_form_start once on first meaningful input
+    if (!leadStarted && value.trim().length > 3) {
+      const startedKey = "lead_form_started_contact";
+      try {
+        const already =
+          typeof window !== "undefined" &&
+          window.sessionStorage.getItem(startedKey) === "1";
+        if (!already) {
+          setLeadStarted(true);
+          window.sessionStorage.setItem(startedKey, "1");
+          sendGTMEvent({ event: "lead_form_start", form: "contact" });
+        }
+      } catch {
+        // sessionStorage might be unavailable; still send event once
+        setLeadStarted(true);
+        sendGTMEvent({ event: "lead_form_start", form: "contact" });
+      }
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    const hasContent = [
+      formData.name,
+      formData.email,
+      formData.phone,
+      formData.company,
+      formData.message,
+    ].some((v) => v.trim().length > 0);
 
-    const whatsappMessage = `Hi Arktik! I'm interested in your services.
+    if (!hasContent) {
+      // Ask confirmation only if the form is essentially empty
+      setConfirmOpen(true);
+      return;
+    }
+    // If the user filled something, proceed without extra friction
+    handleConfirm();
+  };
+
+  const buildWhatsappMessage = () => `Hi Arktik! I'm interested in your services.
 
 Name: ${formData.name}
 Email: ${formData.email}
@@ -38,11 +79,74 @@ Company/Project: ${formData.company}
 
 Message: ${formData.message}`;
 
+  const handleConfirm = () => {
+    if (isSubmitting) return;
+    const whatsappMessage = buildWhatsappMessage();
     const whatsappUrl = `https://wa.me/6285117697889?text=${encodeURIComponent(
       whatsappMessage
     )}`;
+
+    // First-party capture (no PII to GA): fire-and-forget
+    try {
+      const eventId =
+        typeof crypto !== "undefined" && "randomUUID" in crypto
+          ? crypto.randomUUID()
+          : undefined;
+      const payload = {
+        ...formData,
+        source: "contact_whatsapp",
+        page:
+          typeof window !== "undefined" ? window.location.pathname : undefined,
+        referrer:
+          typeof document !== "undefined" ? document.referrer : undefined,
+        userAgent:
+          typeof navigator !== "undefined" ? navigator.userAgent : undefined,
+        eventId,
+      };
+      const json = JSON.stringify(payload);
+      if (typeof navigator !== "undefined" && "sendBeacon" in navigator) {
+        const blob = new Blob([json], { type: "application/json" });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (navigator as any).sendBeacon("/api/leads", blob);
+      } else {
+        fetch("/api/leads", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: json,
+          keepalive: true,
+        }).catch(() => {});
+      }
+
+      // Track confirmed lead (no value/currency)
+      sendGTMEvent({
+        event: "generate_lead",
+        method: "whatsapp",
+        form: "contact",
+        cta: "send_message",
+        label: "contact_form_whatsapp",
+        event_id: eventId,
+      });
+    } catch {
+      // no-op
+    }
+
+    setIsSubmitting(true);
+    setConfirmOpen(false);
     window.open(whatsappUrl, "_blank");
+    setTimeout(() => setIsSubmitting(false), 1500);
   };
+
+  const handleCancel = () => {
+    setConfirmOpen(false);
+    sendGTMEvent({
+      event: "lead_cancel",
+      method: "whatsapp",
+      form: "contact",
+      label: "confirm_cancel",
+    });
+  };
+
+  // Removed focus-based starter; now handled in handleInputChange
   return (
     <div className="max-w-7xl mx-auto">
       <section id="contact" className="px-6 py-20 lg:px-12">
@@ -62,6 +166,13 @@ Message: ${formData.message}`;
             <a
               href="mailto:hello@arktik.id"
               className="flex items-center gap-3 text-white hover:text-lime-green transition-colors duration-200 group"
+              onClick={() =>
+                sendGTMEvent({
+                  event: "contact_click",
+                  method: "email",
+                  label: "mailto_header",
+                })
+              }
             >
               <Mail className="w-5 h-5 text-lime-green group-hover:text-lime-green" />
               <span>hello@arktik.id</span>
@@ -71,6 +182,13 @@ Message: ${formData.message}`;
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 text-white hover:text-lime-green transition-colors duration-200 group"
+              onClick={() =>
+                sendGTMEvent({
+                  event: "contact_click",
+                  method: "whatsapp",
+                  label: "wa_header",
+                })
+              }
             >
               <MessageCircle className="w-5 h-5 text-lime-green group-hover:text-lime-green" />
               <span>+62 851-1769-7889</span>
@@ -141,12 +259,29 @@ Message: ${formData.message}`;
 
             {/* Button aligned right */}
             <div className="flex justify-end">
-              <CTAButton type="submit" variant="small">
+              <CTAButton
+                type="submit"
+                variant="small"
+                disabled={isSubmitting}
+                aria-disabled={isSubmitting}
+              >
                 Send message
               </CTAButton>
             </div>
           </form>
         </div>
+
+        <ConfirmModal
+          open={confirmOpen}
+          onCancel={handleCancel}
+          onConfirm={handleConfirm}
+          confirmDisabled={isSubmitting}
+          title="Open WhatsApp?"
+          description="You haven't filled the form. We can still open WhatsApp with a blank message. Proceed?"
+          confirmText={isSubmitting ? "Opening…" : "Confirm & Open WhatsApp"}
+        >
+          {buildWhatsappMessage()}
+        </ConfirmModal>
       </section>
     </div>
   );
