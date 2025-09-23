@@ -165,7 +165,7 @@ Message: ${formData.message}`;
           <div className="flex flex-col sm:flex-row gap-6">
             <a
               href="mailto:hello@arktik.id"
-              className="flex items-center gap-3 text-white hover:text-lime-green transition-colors duration-200 group contact_email_link"
+              className="flex items-center gap-3 text-white hover:text-lime-green transition-colors duration-200 group"
               onClick={() =>
                 sendGTMEvent({
                   event: "contact_click",
@@ -175,13 +175,13 @@ Message: ${formData.message}`;
               }
             >
               <Mail className="w-5 h-5 text-lime-green group-hover:text-lime-green" />
-              <span>hello@arktik.id</span>
+              <span className="contact_email_link">hello@arktik.id</span>
             </a>
             <a
               href="https://wa.me/6285117697889"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 text-white hover:text-lime-green transition-colors duration-200 group contact_whatsapp_link"
+              className="flex items-center gap-3 text-white hover:text-lime-green transition-colors duration-200 group"
               onClick={() =>
                 sendGTMEvent({
                   event: "contact_click",
@@ -191,7 +191,7 @@ Message: ${formData.message}`;
               }
             >
               <MessageCircle className="w-5 h-5 text-lime-green group-hover:text-lime-green" />
-              <span>+62 851-1769-7889</span>
+              <span className="contact_whatsapp_link">+62 851-1769-7889</span>
             </a>
           </div>
         </div>
