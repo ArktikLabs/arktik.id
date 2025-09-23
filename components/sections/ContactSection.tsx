@@ -79,7 +79,7 @@ Company/Project: ${formData.company}
 
 Message: ${formData.message}`;
 
-  const handleConfirm = () => {
+  const handleConfirm = ({ isModal = false }) => {
     if (isSubmitting) return;
     const whatsappMessage = buildWhatsappMessage();
     const whatsappUrl = `https://wa.me/6285117697889?text=${encodeURIComponent(
@@ -119,7 +119,7 @@ Message: ${formData.message}`;
 
       // Track confirmed lead (no value/currency)
       sendGTMEvent({
-        event: "generate_lead",
+        event: `generate_lead${isModal ? "_modal" : ""}`,
         method: "whatsapp",
         form: "contact",
         cta: "send_message",
@@ -168,9 +168,7 @@ Message: ${formData.message}`;
               className="flex items-center gap-3 text-white hover:text-lime-green transition-colors duration-200 group"
               onClick={() =>
                 sendGTMEvent({
-                  event: "contact_click",
-                  method: "email",
-                  label: "mailto_header",
+                  event: "contact_click_email",
                 })
               }
             >
@@ -184,9 +182,7 @@ Message: ${formData.message}`;
               className="flex items-center gap-3 text-white hover:text-lime-green transition-colors duration-200 group"
               onClick={() =>
                 sendGTMEvent({
-                  event: "contact_click",
-                  method: "whatsapp",
-                  label: "wa_header",
+                  event: "contact_click_whatsapp",
                 })
               }
             >
