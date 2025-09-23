@@ -106,7 +106,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <GoogleTagManager gtmId="GTM-WG3SNLHH" />
+        <GoogleTagManager gtmId="GTM-WDNKG95C" />
       </head>
       <body
         className={`${funnelSans.className} ${bricolageGrotesque.variable} ${funnelSans.variable}`}
