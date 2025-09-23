@@ -67,10 +67,11 @@ export function ContactSection() {
       return;
     }
     // If the user filled something, proceed without extra friction
-    handleConfirm();
+    handleConfirm({ isModal: false });
   };
 
-  const buildWhatsappMessage = () => `Hi Arktik! I'm interested in your services.
+  const buildWhatsappMessage =
+    () => `Hi Arktik! I'm interested in your services.
 
 Name: ${formData.name}
 Email: ${formData.email}
@@ -271,7 +272,7 @@ Message: ${formData.message}`;
         <ConfirmModal
           open={confirmOpen}
           onCancel={handleCancel}
-          onConfirm={handleConfirm}
+          onConfirm={() => handleConfirm({ isModal: true })}
           confirmDisabled={isSubmitting}
           title="Open WhatsApp?"
           description="You haven't filled the form. We can still open WhatsApp with a blank message. Proceed?"
