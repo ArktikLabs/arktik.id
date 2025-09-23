@@ -165,7 +165,7 @@ Message: ${formData.message}`;
           <div className="flex flex-col sm:flex-row gap-6">
             <a
               href="mailto:hello@arktik.id"
-              className="flex items-center gap-3 text-white hover:text-lime-green transition-colors duration-200 group"
+              className="flex items-center gap-3 text-white hover:text-lime-green transition-colors duration-200 group contact_email_link"
               onClick={() =>
                 sendGTMEvent({
                   event: "contact_click",
@@ -181,7 +181,7 @@ Message: ${formData.message}`;
               href="https://wa.me/6285117697889"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 text-white hover:text-lime-green transition-colors duration-200 group"
+              className="flex items-center gap-3 text-white hover:text-lime-green transition-colors duration-200 group contact_whatsapp_link"
               onClick={() =>
                 sendGTMEvent({
                   event: "contact_click",
@@ -264,6 +264,7 @@ Message: ${formData.message}`;
                 variant="small"
                 disabled={isSubmitting}
                 aria-disabled={isSubmitting}
+                className="generate_lead_cta"
               >
                 Send message
               </CTAButton>
