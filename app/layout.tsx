@@ -20,7 +20,7 @@ const funnelSans = Funnel_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://arktik.id"),
+  metadataBase: new URL("https://www.arktik.id"),
   title: "Arktik - Custom Software Development Company",
   description:
     "Professional software development company with 7+ years turning technology into business growth through web, mobile & backend solutions delivered globally.",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://arktik.id",
+    url: "https://www.arktik.id",
     siteName: "Arktik",
     title: "Arktik - Custom Software Development Company",
     description:
@@ -82,7 +82,7 @@ export const metadata: Metadata = {
   category: "technology",
   classification: "software development",
   alternates: {
-    canonical: "https://arktik.id",
+    canonical: "https://www.arktik.id",
   },
   icons: {
     icon: [
