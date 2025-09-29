@@ -2,8 +2,11 @@
 import { Globe, Users, Heart, Scale } from "lucide-react";
 import { LinkPreview } from "@/components/ui/link-preview";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 export function AboutUsSection() {
+  const t = useTranslations('aboutUs')
+
   // Prefetch the screenshot for faster loading
   useEffect(() => {
     const mitUrl = "https://professionalprograms.mit.edu/blog/design/why-95-of-new-products-miss-the-mark-and-how-yours-can-avoid-the-same-fate/";
@@ -17,27 +20,23 @@ export function AboutUsSection() {
   const values = [
     {
       icon: Users,
-      title: "Collaboration First",
-      description:
-        "We co-create with our partners, building solutions together, for mutual success.",
+      title: t('whatWeBelieve.values.collaboration.title'),
+      description: t('whatWeBelieve.values.collaboration.description'),
     },
     {
       icon: Heart,
-      title: "Expertise with Empathy",
-      description:
-        "Decades of experience combined with deep understanding of people and business needs.",
+      title: t('whatWeBelieve.values.expertise.title'),
+      description: t('whatWeBelieve.values.expertise.description'),
     },
     {
       icon: Scale,
-      title: "Impact at Scale",
-      description:
-        "We craft resilient technology trusted by millions worldwide.",
+      title: t('whatWeBelieve.values.impact.title'),
+      description: t('whatWeBelieve.values.impact.description'),
     },
     {
       icon: Globe,
-      title: "Inclusive Innovation",
-      description:
-        "Pushing boundaries while staying grounded in equality and shared ownership.",
+      title: t('whatWeBelieve.values.innovation.title'),
+      description: t('whatWeBelieve.values.innovation.description'),
     },
   ];
 
@@ -54,9 +53,8 @@ export function AboutUsSection() {
               width={300}
               height={180}
             >
-              95% of new products miss the mark<sup>*</sup>
+              {t('quoteText')}<sup>*</sup>
             </LinkPreview>
-            — not because of the idea, but because of poor execution
             <span className="text-lime-green">"</span>
           </h2>
           <div className="text-xs text-gray-500 mb-5">
@@ -67,15 +65,12 @@ export function AboutUsSection() {
               width={300}
               height={180}
             >
-              MIT Professional Programs: Why 95% of New Products Miss the Mark
+              {t('quoteSource')}
             </LinkPreview>
           </div>
           <div className="max-w-4xl mx-auto">
             <p className="text-lg lg:text-xl text-gray-300 leading-relaxed">
-              At Arktik, we believe ideas deserve better execution. That's why
-              we don't just build software — we partner with you to combine
-              strategy, design, and engineering, transforming your vision into
-              products that actually work and drive measurable results.
+              {t('mainDescription')}
             </p>
           </div>
         </div>
@@ -86,21 +81,15 @@ export function AboutUsSection() {
           <div className="space-y-6 pb-8 lg:pb-0 border-b lg:border-b-0 border-gray-700">
             <div className="text-center lg:text-left mb-6">
               <h3 className="text-2xl lg:text-3xl font-bold text-white mb-2 font-heading">
-                Who We Are
+                {t('whoWeAre.title')}
               </h3>
               <div className="w-3/4 h-[2px] bg-lime-green mx-auto lg:mx-0"></div>
             </div>
             <p className="text-gray-300 leading-relaxed">
-              We are a software development company with builders, strategists,
-              designers, and engineers who have spent over 7 years creating
-              software solutions that power millions of people and businesses
-              worldwide.
+              {t('whoWeAre.description1')}
             </p>
             <p className="text-gray-300 leading-relaxed">
-              But more than that, we are{" "}
-              <span className="text-lime-green font-medium">collaborators</span>
-              . We believe the best solutions come from listening,
-              understanding, and building together.
+              {t('whoWeAre.description2')}
             </p>
           </div>
 
@@ -111,25 +100,18 @@ export function AboutUsSection() {
           <div className="space-y-6 pb-8 lg:pb-0 border-b lg:border-b-0 border-gray-700">
             <div className="text-center lg:text-left mb-6">
               <h3 className="text-2xl lg:text-3xl font-bold text-white mb-2 font-heading">
-                How We Work
+                {t('howWeWork.title')}
               </h3>
               <div className="w-3/4 h-[2px] bg-lime-green mx-auto lg:mx-0"></div>
             </div>
             <p className="text-gray-300 leading-relaxed">
-              With every project, we bring not only technical depth but also
-              empathy, inclusivity, and a shared commitment to your goals.
+              {t('howWeWork.description1')}
             </p>
             <p className="text-gray-300 leading-relaxed">
-              We work{" "}
-              <span className="text-lime-green font-medium">
-                equally, inclusively, and with curiosity
-              </span>{" "}
-              to push the boundaries of what software can do for businesses and
-              the people behind them.
+              {t('howWeWork.description2')}
             </p>
             <p className="text-gray-300 leading-relaxed">
-              Our 7+ years of global experience means we know what works — and
-              we bring that knowledge into every collaboration.
+              {t('howWeWork.description3')}
             </p>
           </div>
 
@@ -140,7 +122,7 @@ export function AboutUsSection() {
           <div className="space-y-6">
             <div className="text-center lg:text-left mb-6">
               <h3 className="text-2xl lg:text-3xl font-bold text-white mb-2 font-heading">
-                What We Believe
+                {t('whatWeBelieve.title')}
               </h3>
               <div className="w-3/4 h-[2px] bg-lime-green mx-auto lg:mx-0"></div>
             </div>

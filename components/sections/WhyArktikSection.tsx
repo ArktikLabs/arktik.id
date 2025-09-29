@@ -1,32 +1,31 @@
 import { WhyArktikCard } from "@/components/cards/WhyArktikCard"
 import { Globe, Infinity, Puzzle, TrendingUp, Rocket } from "lucide-react"
 import { Underline } from "@/components/ui/underline";
+import { useTranslations } from "next-intl";
 
 export function WhyArktikSection() {
+  const t = useTranslations('whyArktik')
+
   const features = [
     {
       icon: Globe,
-      title: "Global Experience",
-      description:
-        "With over 7 years leading product, engineering, and design in world-class tech companies, we partner with you to bring this expertise to your business and elevate it to the next level.",
+      title: t('features.globalExperience.title'),
+      description: t('features.globalExperience.description'),
     },
     {
       icon: Infinity,
-      title: "End-to-End Expertise",
-      description:
-        "We manage the full product lifecycle from launch to optimization and scaling because your growth doesn't stop at release.",
+      title: t('features.endToEnd.title'),
+      description: t('features.endToEnd.description'),
     },
     {
       icon: Puzzle,
-      title: "Tailored Solutions",
-      description:
-        "Every business is unique. We build custom solutions that fit your goals, whether you're a fast-moving startup or a large enterprise.",
+      title: t('features.tailored.title'),
+      description: t('features.tailored.description'),
     },
     {
       icon: TrendingUp,
-      title: "Proven Impact",
-      description:
-        "From empowering small businesses to scaling platforms across countries, we deliver results with the same customer-first focus every time.",
+      title: t('features.proven.title'),
+      description: t('features.proven.description'),
     },
   ];
 
@@ -34,14 +33,14 @@ export function WhyArktikSection() {
     <div className="max-w-7xl mx-auto">
       <section id="why-arktik" className="px-6 pt-20 pb-0 lg:px-12">
         <div className="mb-12">
-          <h2 className="text-3xl font-bold font-heading mb-2">Why Arktik?</h2>
+          <h2 className="text-3xl font-bold font-heading mb-2">{t('title')}</h2>
           <Underline />
         </div>
 
         <WhyArktikCard
           icon={Rocket}
-          title="We Turn Technology Into Business Growth"
-          description="While others build features, we build success aligning every solution with your goals to deliver measurable results that matter."
+          title={t('mainCard.title')}
+          description={t('mainCard.description')}
           isLarge={true}
         />
 

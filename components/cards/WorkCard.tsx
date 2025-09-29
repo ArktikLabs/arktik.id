@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
 
 interface WorkCardProps {
   title: string;
@@ -42,8 +41,8 @@ export function WorkCard({
 
     return (
       <CardWrapper>
-        <Card className="bg-gradient-to-br from-service-blue via-service-blue/95 to-slate-800/50 border-slate-600/50 transition-all duration-500 hover:shadow-2xl hover:shadow-lime-400/20 group cursor-pointer overflow-hidden hover:border-lime-400/30 hover:scale-[1.02] transform-gpu">
-          <div className="relative h-64 bg-gradient-to-br from-slate-700 to-slate-800 overflow-hidden">
+        <Card className="bg-gradient-to-br from-service-blue via-service-blue/95 to-slate-800/50 border-slate-600/50 transition-all duration-500 hover:shadow-2xl hover:shadow-lime-400/20 group cursor-pointer overflow-hidden hover:border-lime-400/30 hover:scale-[1.02] transform-gpu h-full p-0">
+          <div className="relative h-full bg-gradient-to-br from-slate-700 to-slate-800 overflow-hidden">
             <Image
               src={imageSrc}
               alt={title}
@@ -79,11 +78,11 @@ export function WorkCard({
 
   return (
     <Card
-      className="bg-gradient-to-br from-service-blue via-service-blue/95 to-slate-800/50 border-slate-600/50 transition-all duration-500 hover:shadow-2xl hover:shadow-lime-400/20 group cursor-pointer hover:border-lime-400/30 hover:scale-[1.02] transform-gpu relative overflow-hidden"
+      className="bg-gradient-to-br from-service-blue via-service-blue/95 to-slate-800/50 border-slate-600/50 transition-all duration-500 hover:shadow-2xl hover:shadow-lime-400/20 group cursor-pointer hover:border-lime-400/30 hover:scale-[1.02] transform-gpu relative overflow-hidden h-full flex flex-col"
       onClick={handleClick}
     >
       <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-lime-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      <CardContent className="p-6 relative z-10">
+      <CardContent className="p-6 relative z-10 flex flex-col h-full">
         <div className="w-10 h-10 bg-gradient-to-br from-slate-600 to-slate-700 rounded-lg mb-5 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
           <div className="w-5 h-5 bg-gradient-to-br from-white to-lime-green rounded-sm group-hover:rotate-12 transition-transform duration-300" />
         </div>
@@ -91,11 +90,11 @@ export function WorkCard({
           {title}
         </h3>
         {description && (
-          <p className="text-gray-400 text-sm leading-relaxed mb-6 group-hover:text-gray-300 transition-colors duration-300">
+          <p className="text-gray-400 text-sm leading-relaxed mb-6 group-hover:text-gray-300 transition-colors duration-300 flex-grow">
             {description}
           </p>
         )}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mt-auto">
           <Button
             variant="link"
             className="text-lime-green hover:text-lime-green/80 p-0 h-auto font-medium transition-all duration-300 group-hover:translate-x-1"

@@ -3,12 +3,15 @@
 import { CTAButton } from "@/components/ui/cta-button"
 import { useEffect, useState, useRef } from "react"
 import Image from "next/image"
+import { useTranslations } from "next-intl"
+import { LanguageSwitcher } from "@/components/ui/language-switcher"
 
 export function Header() {
+  const t = useTranslations('header')
   const [scrollProgress, setScrollProgress] = useState(0)
   const [activeSection, setActiveSection] = useState('')
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 })
-  
+
   const aboutUsRef = useRef<HTMLAnchorElement>(null);
   const servicesRef = useRef<HTMLAnchorElement>(null);
   const whyArktikRef = useRef<HTMLAnchorElement>(null);
@@ -151,7 +154,7 @@ export function Header() {
                 : "text-white hover:bg-black/30"
             }`}
           >
-            About us
+            {t('aboutUs')}
           </a>
           <a
             ref={servicesRef}
@@ -162,7 +165,7 @@ export function Header() {
                 : "text-white hover:bg-black/30"
             }`}
           >
-            Our services
+            {t('services')}
           </a>
           <a
             ref={whyArktikRef}
@@ -173,7 +176,7 @@ export function Header() {
                 : "text-white hover:bg-black/30"
             }`}
           >
-            Why Arktik?
+            {t('whyArktik')}
           </a>
           <a
             ref={portfolioRef}
@@ -184,20 +187,23 @@ export function Header() {
                 : "text-white hover:bg-black/30"
             }`}
           >
-            Our works
+            {t('portfolio')}
           </a>
         </nav>
-        <CTAButton
-          variant="small"
-          className="text-sm"
-          onClick={() => {
-            document
-              .getElementById("contact")
-              ?.scrollIntoView({ behavior: "smooth" });
-          }}
-        >
-          Contact us
-        </CTAButton>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <CTAButton
+            variant="small"
+            className="text-sm"
+            onClick={() => {
+              document
+                .getElementById("contact")
+                ?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            {t('contact')}
+          </CTAButton>
+          <LanguageSwitcher />
+        </div>
       </div>
     </header>
   );
