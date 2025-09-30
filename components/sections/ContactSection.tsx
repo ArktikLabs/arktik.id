@@ -8,8 +8,11 @@ import { Underline } from "@/components/ui/underline";
 import { useState } from "react";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { ConfirmModal } from "@/components/ui/ConfirmModal";
+import { useTranslations } from "next-intl";
 
 export function ContactSection() {
+  const t = useTranslations('contact')
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -70,15 +73,16 @@ export function ContactSection() {
     handleConfirm({ isModal: false });
   };
 
-  const buildWhatsappMessage =
-    () => `Hi Arktik! I'm interested in your services.
+  const buildWhatsappMessage = () => {
+    return `${t('whatsapp.greeting')}
 
-Name: ${formData.name}
-Email: ${formData.email}
-Phone: ${formData.phone}
-Company/Project: ${formData.company}
+${t('whatsapp.nameLabel')}: ${formData.name}
+${t('whatsapp.emailLabel')}: ${formData.email}
+${t('whatsapp.phoneLabel')}: ${formData.phone}
+${t('whatsapp.companyLabel')}: ${formData.company}
 
-Message: ${formData.message}`;
+${t('whatsapp.messageLabel')}: ${formData.message}`;
+  };
 
   const handleConfirm = ({ isModal = false }) => {
     if (isSubmitting) return;
@@ -154,13 +158,12 @@ Message: ${formData.message}`;
         <div className="mb-12">
           <div className="mb-6">
             <h2 className="text-3xl lg:text-4xl font-bold text-white font-heading mb-2">
-              Ready to transform your idea into reality?
+              {t('title')}
             </h2>
             <Underline />
           </div>
           <p className="text-gray-400 text-lg max-w-2xl mb-8">
-            Let's explore how we can transform your vision into measurable
-            success.
+            {t('description')}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6">
@@ -202,7 +205,7 @@ Message: ${formData.message}`;
                   <Input
                     type="text"
                     name="name"
-                    placeholder="Your name"
+                    placeholder={t('form.namePlaceholder')}
                     value={formData.name}
                     onChange={handleInputChange}
                     className="bg-transparent border-0 border-b-2 border-gray-600 rounded-none text-white placeholder:text-gray-400 focus:border-lime-green focus:ring-0 px-0 pb-2"
@@ -212,7 +215,7 @@ Message: ${formData.message}`;
                   <Input
                     type="email"
                     name="email"
-                    placeholder="Your email"
+                    placeholder={t('form.emailPlaceholder')}
                     value={formData.email}
                     onChange={handleInputChange}
                     className="bg-transparent border-0 border-b-2 border-gray-600 rounded-none text-white placeholder:text-gray-400 focus:border-lime-green focus:ring-0 px-0 pb-2"
@@ -222,7 +225,7 @@ Message: ${formData.message}`;
                   <Input
                     type="tel"
                     name="phone"
-                    placeholder="Phone number"
+                    placeholder={t('form.phonePlaceholder')}
                     value={formData.phone}
                     onChange={handleInputChange}
                     className="bg-transparent border-0 border-b-2 border-gray-600 rounded-none text-white placeholder:text-gray-400 focus:border-lime-green focus:ring-0 px-0 pb-2"
@@ -236,7 +239,7 @@ Message: ${formData.message}`;
                   <Input
                     type="text"
                     name="company"
-                    placeholder="Company/Project name"
+                    placeholder={t('form.companyPlaceholder')}
                     value={formData.company}
                     onChange={handleInputChange}
                     className="bg-transparent border-0 border-b-2 border-gray-600 rounded-none text-white placeholder:text-gray-400 focus:border-lime-green focus:ring-0 px-0 pb-2"
@@ -245,7 +248,7 @@ Message: ${formData.message}`;
                 <div className="flex flex-col">
                   <Textarea
                     name="message"
-                    placeholder="Tell us about your project..."
+                    placeholder={t('form.messagePlaceholder')}
                     value={formData.message}
                     onChange={handleInputChange}
                     className="bg-transparent border-0 border-b-2 border-gray-600 rounded-none text-white placeholder:text-gray-400 focus:border-lime-green focus:ring-0 resize-none px-0 pb-2 overflow-y-auto flex-grow min-h-[48px]"
@@ -263,7 +266,7 @@ Message: ${formData.message}`;
                 aria-disabled={isSubmitting}
                 className="generate_lead_cta"
               >
-                Send message
+                {t('form.sendButton')}
               </CTAButton>
             </div>
           </form>
@@ -274,9 +277,9 @@ Message: ${formData.message}`;
           onCancel={handleCancel}
           onConfirm={() => handleConfirm({ isModal: true })}
           confirmDisabled={isSubmitting}
-          title="Open WhatsApp?"
-          description="You haven't filled the form. We can still open WhatsApp with a blank message. Proceed?"
-          confirmText={isSubmitting ? "Opening…" : "Confirm & Open WhatsApp"}
+          title={t('modal.title')}
+          description={t('modal.description')}
+          confirmText={isSubmitting ? t('modal.confirmingText') : t('modal.confirmText')}
         >
           {buildWhatsappMessage()}
         </ConfirmModal>

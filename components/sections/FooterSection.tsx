@@ -1,6 +1,8 @@
 import Image from "next/image"
+import { useTranslations } from "next-intl"
 
 export function FooterSection() {
+  const t = useTranslations('footer');
   return (
     <>
       {/* Full viewport width logo with gradient fade */}
@@ -27,7 +29,7 @@ export function FooterSection() {
           {/* Description section */}
           <div className="mb-16">
             <p className="text-gray-400 text-lg leading-relaxed">
-              Transforming ideas into products that drive real business growth.
+              {t('description')}
             </p>
           </div>
 
@@ -35,7 +37,7 @@ export function FooterSection() {
           <div className="flex justify-between items-center relative z-10">
             <div className="flex items-center space-x-4">
               <p className="text-gray-500 text-sm">
-                © {new Date().getFullYear()} Arktik. All rights reserved.
+                {t('copyright', { year: new Date().getFullYear() })}
               </p>
             </div>
 

@@ -1,0 +1,151 @@
+{
+  "common": {
+    "title": "Arktik - Partner Teknologi untuk Pertumbuhan Bisnis Anda",
+    "description": "Perusahaan pengembangan software profesional dengan 7+ tahun pengalaman mengubah teknologi menjadi pertumbuhan bisnis melalui solusi web, mobile & backend yang dikirim secara global."
+  },
+  "header": {
+    "aboutUs": "Tentang kami",
+    "services": "Layanan kami",
+    "whyArktik": "Mengapa Arktik?",
+    "portfolio": "Karya kami",
+    "contact": "Hubungi kami"
+  },
+  "hero": {
+    "buildingTitle": "Menciptakan software",
+    "softwareSolutions": "yang berkualitas",
+    "flipWords": {
+      "0": "scalable",
+      "1": "andal",
+      "2": "inovatif",
+      "3": "kustom",
+      "4": "modern",
+      "5": "aman"
+    },
+    "description": "Perusahaan pengembangan software terdepan yang menghadirkan sistem web, mobile, dan backend end-to-end secara global, tepat waktu.",
+    "scrollToExplore": "Gulir untuk menjelajah"
+  },
+  "aboutUs": {
+    "quoteText": "95% produk baru gagal mencapai target — bukan karena idenya, tapi karena eksekusi yang buruk",
+    "quoteSource": "MIT Professional Programs: Mengapa 95% Produk Baru Meleset dari Target",
+    "mainDescription": "Di Arktik, kami percaya bahwa setiap ide layak mendapat eksekusi yang lebih baik. Itulah mengapa kami tidak hanya membangun software — kami bermitra dengan Anda untuk menggabungkan strategi, desain, dan engineering, mengubah visi Anda menjadi produk yang benar-benar berfungsi dan menghasilkan hasil yang terukur.",
+    "whoWeAre": {
+      "title": "Siapa Kami",
+      "description1": "Kami adalah perusahaan pengembangan software dengan para builder, strategis, desainer, dan engineer yang telah menghabiskan lebih dari 7 tahun menciptakan solusi software yang memberdayakan jutaan orang dan bisnis di seluruh dunia.",
+      "description2": "Namun lebih dari itu, kami adalah kolaborator. Kami percaya bahwa solusi terbaik lahir dari mendengarkan, memahami, dan membangun bersama."
+    },
+    "howWeWork": {
+      "title": "Cara Kami Bekerja",
+      "description1": "Dalam setiap proyek, kami tidak hanya menghadirkan kedalaman teknis tetapi juga empati, inklusivitas, dan komitmen bersama terhadap tujuan Anda.",
+      "description2": "Kami bekerja dengan setara, inklusif, dan penuh rasa ingin tahu untuk mendorong batas-batas kemampuan software bagi bisnis dan orang-orang di baliknya.",
+      "description3": "Pengalaman global kami selama 7+ tahun membuat kami tahu apa yang berhasil — dan kami membawa pengetahuan itu ke dalam setiap kolaborasi."
+    },
+    "whatWeBelieve": {
+      "title": "Apa yang Kami Yakini",
+      "values": {
+        "collaboration": {
+          "title": "Kolaborasi Utama",
+          "description": "Kami berkreasi bersama mitra kami, membangun solusi bersama-sama, untuk kesuksesan bersama."
+        },
+        "expertise": {
+          "title": "Keahlian dengan Empati",
+          "description": "Puluhan tahun pengalaman dikombinasikan dengan pemahaman mendalam tentang kebutuhan manusia dan bisnis."
+        },
+        "impact": {
+          "title": "Dampak Berskala",
+          "description": "Kami menciptakan teknologi tangguh yang dipercaya oleh jutaan orang di seluruh dunia."
+        },
+        "innovation": {
+          "title": "Inovasi Inklusif",
+          "description": "Mendorong batas-batas sambil tetap berpijak pada kesetaraan dan kepemilikan bersama."
+        }
+      }
+    }
+  },
+  "services": {
+    "title": "Layanan Kami",
+    "customDevelopment": {
+      "title": "Custom Software Development",
+      "description": "Aplikasi web dan mobile yang disesuaikan untuk berkembang dengan pertumbuhan bisnis Anda — dari konsep hingga deployment, kami menciptakan solusi software yang disukai pengguna dan diandalkan bisnis.",
+      "features": {
+        "0": "Website yang mengonversi dan berkembang dengan bisnis Anda",
+        "1": "Aplikasi mobile yang disukai dan dikunjungi kembali pengguna",
+        "2": "Software kustom yang berkembang dengan kesuksesan Anda"
+      }
+    },
+    "consulting": {
+      "title": "Konsultasi dan Pengembangan Teknologi",
+      "description": "Dari konsultasi strategis hingga pengembangan dan dukungan, kami membantu Anda memecahkan masalah bisnis dengan teknologi yang tepat, memastikan investasi teknologi Anda memberikan ROI nyata dan menjaga bisnis Anda siap untuk masa depan."
+    },
+    "aiAutomation": {
+      "title": "Solusi AI & Otomasi",
+      "description": "Dari chatbot hingga predictive analytics, kami mengimplementasikan solusi berbasis AI yang mengotomatisasi tugas, mengungkap insights, dan memberikan keunggulan kompetitif bagi bisnis Anda — membebaskan tim Anda untuk fokus pada hal yang paling penting."
+    },
+    "design": {
+      "title": "Brand Design dan UI/UX",
+      "description": "Kami menciptakan antarmuka intuitif yang mengubah pengunjung menjadi pelanggan — meningkatkan usability, mengurangi churn, dan meningkatkan kepuasan untuk mendorong hasil bisnis Anda."
+    }
+  },
+  "whyArktik": {
+    "title": "Mengapa Arktik?",
+    "mainCard": {
+      "title": "Kami Mengubah Teknologi Menjadi Pertumbuhan Bisnis",
+      "description": "Sementara yang lain membangun fitur, kami membangun kesuksesan dengan menyelaraskan setiap solusi dengan tujuan Anda untuk menghasilkan hasil terukur yang berarti."
+    },
+    "features": {
+      "globalExperience": {
+        "title": "Pengalaman Global",
+        "description": "Dengan lebih dari 7 tahun memimpin produk, engineering, dan desain di perusahaan teknologi kelas dunia, kami bermitra dengan Anda untuk membawa keahlian ini ke bisnis Anda dan mengangkatnya ke level berikutnya."
+      },
+      "endToEnd": {
+        "title": "Keahlian End-to-End",
+        "description": "Kami mengelola siklus hidup produk lengkap dari peluncuran hingga optimisasi dan scaling karena pertumbuhan Anda tidak berhenti di rilis."
+      },
+      "tailored": {
+        "title": "Solusi yang Disesuaikan",
+        "description": "Setiap bisnis unik. Kami membangun solusi kustom yang sesuai dengan tujuan Anda, baik Anda startup yang bergerak cepat atau perusahaan besar."
+      },
+      "proven": {
+        "title": "Dampak Terbukti",
+        "description": "Dari memberdayakan usaha kecil hingga menskalakan platform lintas negara, kami menghasilkan hasil dengan fokus customer-first yang sama setiap waktu."
+      }
+    }
+  },
+  "contact": {
+    "title": "Siap mengubah ide Anda menjadi kenyataan?",
+    "description": "Mari jelajahi bagaimana kami dapat mengubah visi Anda menjadi kesuksesan yang terukur.",
+    "form": {
+      "namePlaceholder": "Nama Anda",
+      "emailPlaceholder": "Email Anda",
+      "phonePlaceholder": "Nomor telepon",
+      "companyPlaceholder": "Nama perusahaan/proyek",
+      "messagePlaceholder": "Ceritakan tentang proyek Anda...",
+      "sendButton": "Kirim pesan"
+    },
+    "modal": {
+      "title": "Buka WhatsApp?",
+      "description": "Anda belum mengisi form. Kami tetap bisa membuka WhatsApp dengan pesan kosong. Lanjutkan?",
+      "confirmText": "Konfirmasi & Buka WhatsApp",
+      "confirmingText": "Membuka…"
+    },
+    "whatsapp": {
+      "greeting": "Hai Arktik! Saya tertarik dengan layanan Anda.",
+      "nameLabel": "Nama",
+      "emailLabel": "Email",
+      "phoneLabel": "Telepon",
+      "companyLabel": "Perusahaan/Proyek",
+      "messageLabel": "Pesan"
+    }
+  },
+  "works": {
+    "title": "Karya Kami",
+    "cta": {
+      "title": "Ini Bisa Jadi Milik Anda",
+      "description": "Ide Anda layak mendapat eksekusi yang lebih baik. Mari kita ubah menjadi software kustom yang mendorong pertumbuhan nyata. Dari konsep hingga peluncuran, kami akan membangun kisah sukses Anda.",
+      "buttonText": "Mulai Sekarang"
+    }
+  },
+  "footer": {
+    "description": "Mengubah ide menjadi produk yang mendorong pertumbuhan bisnis nyata.",
+    "copyright": "© {year} Arktik. Semua hak dilindungi."
+  }
+}

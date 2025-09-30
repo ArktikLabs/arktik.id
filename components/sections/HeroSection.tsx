@@ -3,16 +3,15 @@
 import { FlipWords } from "@/components/ui/flip-words";
 import { InteractiveDemo } from "@/components/ui/interactive-demo";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 export function HeroSection() {
-  const words = [
-    "scalable",
-    "reliable",
-    "innovative",
-    "custom",
-    "modern",
-    "secure",
-  ];
+  const t = useTranslations('hero')
+
+  // Convert object to array for flipWords
+  const wordsObj = t.raw('flipWords') as Record<string, string>;
+  const words = Object.values(wordsObj);
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -45,11 +44,11 @@ export function HeroSection() {
           <div className="flex items-start justify-between w-full gap-12">
             <div className="max-w-4xl">
               <h1 className="text-4xl lg:text-6xl font-bold leading-tight text-balance font-heading">
-                Building <FlipWords words={words} className="text-lime-green" />{" "}
-                software solutions
+                {t('buildingTitle')} <FlipWords words={words} className="text-lime-green" />{" "}
+                {t('softwareSolutions')}
               </h1>
               <p className="text-lg lg:text-xl text-gray-300 mt-6 leading-relaxed">
-                Leading software development company delivering end-to-end web, mobile, and backend systems globally, on time.
+                {t('description')}
               </p>
             </div>
             <div className="hidden lg:block flex-shrink-0">
@@ -76,7 +75,7 @@ export function HeroSection() {
             }}
             className="text-gray-400 text-xs font-light text-center hover:text-lime-green transition-colors duration-300 cursor-pointer font-sans tracking-wide uppercase lg:order-2"
           >
-            Scroll to explore
+            {t('scrollToExplore')}
           </button>
           <div className="relative w-px h-12 bg-gradient-to-b from-lime-green via-lime-green/75 to-lime-green/50 overflow-hidden lg:order-1">
             <div

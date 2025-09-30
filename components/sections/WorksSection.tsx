@@ -1,7 +1,9 @@
 import { WorkCard } from "@/components/cards/WorkCard";
 import { Underline } from "@/components/ui/underline";
+import { useTranslations } from "next-intl";
 
 export function WorksSection() {
+  const t = useTranslations('works');
   const works = [
     {
       title: "Lenggah",
@@ -16,11 +18,10 @@ export function WorksSection() {
       isImageCard: true,
     },
     {
-      title: "This Could Be Yours",
+      title: t('cta.title'),
       href: "#contact",
-      description:
-        "Your idea deserves better execution. Let's transform it into custom software that drives real growth. From concept to launch, we'll build your success story.",
-      buttonText: "Get Started",
+      description: t('cta.description'),
+      buttonText: t('cta.buttonText'),
       isImageCard: false,
     },
   ];
@@ -29,10 +30,10 @@ export function WorksSection() {
     <div className="max-w-7xl mx-auto">
       <section id="portfolio" className="px-6 pt-20 pb-0 lg:px-12">
         <div className="mb-12">
-          <h2 className="text-3xl font-bold font-heading mb-2">Our Works</h2>
+          <h2 className="text-3xl font-bold font-heading mb-2">{t('title')}</h2>
           <Underline />
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-6 items-stretch">
           {works.map((work, index) => (
             <WorkCard
               key={index}

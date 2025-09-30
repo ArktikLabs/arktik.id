@@ -1,0 +1,151 @@
+{
+  "common": {
+    "title": "Arktik - Custom Software Development Company",
+    "description": "Professional software development company with 7+ years turning technology into business growth through web, mobile & backend solutions delivered globally."
+  },
+  "header": {
+    "aboutUs": "About us",
+    "services": "Our services",
+    "whyArktik": "Why Arktik?",
+    "portfolio": "Our works",
+    "contact": "Contact us"
+  },
+  "hero": {
+    "buildingTitle": "Building",
+    "softwareSolutions": "software solutions",
+    "flipWords": {
+      "0": "scalable",
+      "1": "reliable",
+      "2": "innovative",
+      "3": "custom",
+      "4": "modern",
+      "5": "secure"
+    },
+    "description": "Leading software development company delivering end-to-end web, mobile, and backend systems globally, on time.",
+    "scrollToExplore": "Scroll to explore"
+  },
+  "aboutUs": {
+    "quoteText": "95% of new products miss the mark — not because of the idea, but because of poor execution",
+    "quoteSource": "MIT Professional Programs: Why 95% of New Products Miss the Mark",
+    "mainDescription": "At Arktik, we believe ideas deserve better execution. That's why we don't just build software — we partner with you to combine strategy, design, and engineering, transforming your vision into products that actually work and drive measurable results.",
+    "whoWeAre": {
+      "title": "Who We Are",
+      "description1": "We are a software development company with builders, strategists, designers, and engineers who have spent over 7 years creating software solutions that power millions of people and businesses worldwide.",
+      "description2": "But more than that, we are collaborators. We believe the best solutions come from listening, understanding, and building together."
+    },
+    "howWeWork": {
+      "title": "How We Work",
+      "description1": "With every project, we bring not only technical depth but also empathy, inclusivity, and a shared commitment to your goals.",
+      "description2": "We work equally, inclusively, and with curiosity to push the boundaries of what software can do for businesses and the people behind them.",
+      "description3": "Our 7+ years of global experience means we know what works — and we bring that knowledge into every collaboration."
+    },
+    "whatWeBelieve": {
+      "title": "What We Believe",
+      "values": {
+        "collaboration": {
+          "title": "Collaboration First",
+          "description": "We co-create with our partners, building solutions together, for mutual success."
+        },
+        "expertise": {
+          "title": "Expertise with Empathy",
+          "description": "Decades of experience combined with deep understanding of people and business needs."
+        },
+        "impact": {
+          "title": "Impact at Scale",
+          "description": "We craft resilient technology trusted by millions worldwide."
+        },
+        "innovation": {
+          "title": "Inclusive Innovation",
+          "description": "Pushing boundaries while staying grounded in equality and shared ownership."
+        }
+      }
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "customDevelopment": {
+      "title": "Custom Software Development",
+      "description": "Tailored web and mobile applications built to scale with your business growth — from concept to deployment, we create software solutions that users love and businesses rely on.",
+      "features": {
+        "0": "Websites that convert and grow with your business",
+        "1": "Mobile apps that users love and return to",
+        "2": "Custom software that scales with your success"
+      }
+    },
+    "consulting": {
+      "title": "Technology Consulting and Development",
+      "description": "From strategic consulting to development and support, we help you solve business problems with the right technologies, ensuring your technology investments deliver real ROI and keep your business ready for what's next."
+    },
+    "aiAutomation": {
+      "title": "AI & Automation Solutions",
+      "description": "From chatbots to predictive analytics, we implement AI-driven solutions that automate tasks, unlock insights, and give your business a competitive edge — freeing your team to focus on what matters most."
+    },
+    "design": {
+      "title": "Brand Design and UI/UX",
+      "description": "We craft intuitive interfaces that convert visitors into customers — improving usability, reducing churn, and increasing satisfaction to drive your business results."
+    }
+  },
+  "whyArktik": {
+    "title": "Why Arktik?",
+    "mainCard": {
+      "title": "We Turn Technology Into Business Growth",
+      "description": "While others build features, we build success aligning every solution with your goals to deliver measurable results that matter."
+    },
+    "features": {
+      "globalExperience": {
+        "title": "Global Experience",
+        "description": "With over 7 years leading product, engineering, and design in world-class tech companies, we partner with you to bring this expertise to your business and elevate it to the next level."
+      },
+      "endToEnd": {
+        "title": "End-to-End Expertise",
+        "description": "We manage the full product lifecycle from launch to optimization and scaling because your growth doesn't stop at release."
+      },
+      "tailored": {
+        "title": "Tailored Solutions",
+        "description": "Every business is unique. We build custom solutions that fit your goals, whether you're a fast-moving startup or a large enterprise."
+      },
+      "proven": {
+        "title": "Proven Impact",
+        "description": "From empowering small businesses to scaling platforms across countries, we deliver results with the same customer-first focus every time."
+      }
+    }
+  },
+  "contact": {
+    "title": "Ready to transform your idea into reality?",
+    "description": "Let's explore how we can transform your vision into measurable success.",
+    "form": {
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "Your email",
+      "phonePlaceholder": "Phone number",
+      "companyPlaceholder": "Company/Project name",
+      "messagePlaceholder": "Tell us about your project...",
+      "sendButton": "Send message"
+    },
+    "modal": {
+      "title": "Open WhatsApp?",
+      "description": "You haven't filled the form. We can still open WhatsApp with a blank message. Proceed?",
+      "confirmText": "Confirm & Open WhatsApp",
+      "confirmingText": "Opening…"
+    },
+    "whatsapp": {
+      "greeting": "Hi Arktik! I'm interested in your services.",
+      "nameLabel": "Name",
+      "emailLabel": "Email",
+      "phoneLabel": "Phone",
+      "companyLabel": "Company/Project",
+      "messageLabel": "Message"
+    }
+  },
+  "works": {
+    "title": "Our Works",
+    "cta": {
+      "title": "This Could Be Yours",
+      "description": "Your idea deserves better execution. Let's transform it into custom software that drives real growth. From concept to launch, we'll build your success story.",
+      "buttonText": "Get Started"
+    }
+  },
+  "footer": {
+    "description": "Transforming ideas into products that drive real business growth.",
+    "copyright": "© {year} Arktik. All rights reserved."
+  }
+}
