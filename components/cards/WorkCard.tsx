@@ -42,7 +42,7 @@ export function WorkCard({
     return (
       <CardWrapper>
         <Card className="bg-gradient-to-br from-service-blue via-service-blue/95 to-slate-800/50 border-slate-600/50 transition-all duration-500 hover:shadow-2xl hover:shadow-lime-400/20 group cursor-pointer overflow-hidden hover:border-lime-400/30 hover:scale-[1.02] transform-gpu h-full p-0">
-          <div className="relative h-full bg-gradient-to-br from-slate-700 to-slate-800 overflow-hidden">
+          <div className="relative h-64 md:h-full bg-gradient-to-br from-slate-700 to-slate-800 overflow-hidden">
             <Image
               src={imageSrc}
               alt={title}

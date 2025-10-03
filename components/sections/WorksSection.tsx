@@ -33,7 +33,7 @@ export function WorksSection() {
           <h2 className="text-3xl font-bold font-heading mb-2">{t('title')}</h2>
           <Underline />
         </div>
-        <div className="grid md:grid-cols-3 gap-6 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
           {works.map((work, index) => (
             <WorkCard
               key={index}
