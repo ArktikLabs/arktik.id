@@ -4,10 +4,16 @@ import { ServicesSection } from "@/components/sections/ServicesSection"
 import { WhyArktikSection } from "@/components/sections/WhyArktikSection"
 import { AboutUsSection } from "@/components/sections/AboutUsSection"
 import { WorksSection } from "@/components/sections/WorksSection"
+import { BlogSection } from "@/components/sections/BlogSection"
 import { ContactSection } from "@/components/sections/ContactSection"
 import { FooterSection } from "@/components/sections/FooterSection"
 
-export default function Home() {
+interface HomeProps {
+  params: { locale: string }
+}
+
+export default async function Home({ params }: HomeProps) {
+  const { locale } = await params
   return (
     <div className="min-h-screen text-white bg-dark-blue">
       <Header />
@@ -16,6 +22,7 @@ export default function Home() {
       <ServicesSection />
       <WhyArktikSection />
       <WorksSection />
+      <BlogSection locale={locale} />
       <ContactSection />
       <FooterSection />
     </div>

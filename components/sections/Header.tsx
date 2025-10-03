@@ -3,11 +3,14 @@
 import { CTAButton } from "@/components/ui/cta-button"
 import { useEffect, useState, useRef } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { useTranslations } from "next-intl"
+import { usePathname } from "next/navigation"
 import { LanguageSwitcher } from "@/components/ui/language-switcher"
 
 export function Header() {
   const t = useTranslations('header')
+  const pathname = usePathname()
   const [scrollProgress, setScrollProgress] = useState(0)
   const [activeSection, setActiveSection] = useState('')
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 })
@@ -16,6 +19,10 @@ export function Header() {
   const servicesRef = useRef<HTMLAnchorElement>(null);
   const whyArktikRef = useRef<HTMLAnchorElement>(null);
   const portfolioRef = useRef<HTMLAnchorElement>(null);
+  const blogRef = useRef<HTMLAnchorElement>(null);
+
+  // Check if we're on a blog page
+  const isBlogPage = pathname?.includes('/blog')
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +34,7 @@ export function Header() {
       setScrollProgress(progress);
 
       // Detect active section
-      const sections = ["about-us", "services", "why-arktik", "portfolio"];
+      const sections = ["about-us", "services", "why-arktik", "portfolio", "blog"];
       const scrollPosition = scrollY + 100; // Add offset for header
 
       let currentSection = "";
@@ -61,6 +68,9 @@ export function Header() {
           break;
         case "portfolio":
           activeRef = portfolioRef;
+          break;
+        case "blog":
+          activeRef = blogRef;
           break;
       }
 
@@ -120,12 +130,10 @@ export function Header() {
       }}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-6 lg:px-12">
-        <button
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
+        <Link
+          href="/"
           className="cursor-pointer"
-          aria-label="Go to top of page"
+          aria-label="Go to homepage"
         >
           <Image
             src="/logo.svg"
@@ -134,7 +142,7 @@ export function Header() {
             height={40}
             className="h-9 w-auto"
           />
-        </button>
+        </Link>
         <nav className="hidden md:flex items-center space-x-8 h-8 relative">
           {/* Animated background indicator */}
           <div
@@ -147,7 +155,7 @@ export function Header() {
           />
           <a
             ref={aboutUsRef}
-            href="#about-us"
+            href={isBlogPage ? (pathname?.startsWith('/en') ? '/en#about-us' : '/id#about-us') : '#about-us'}
             className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
               activeSection === "about-us"
                 ? "text-lime-green"
@@ -158,7 +166,7 @@ export function Header() {
           </a>
           <a
             ref={servicesRef}
-            href="#services"
+            href={isBlogPage ? (pathname?.startsWith('/en') ? '/en#services' : '/id#services') : '#services'}
             className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
               activeSection === "services"
                 ? "text-lime-green"
@@ -169,7 +177,7 @@ export function Header() {
           </a>
           <a
             ref={whyArktikRef}
-            href="#why-arktik"
+            href={isBlogPage ? (pathname?.startsWith('/en') ? '/en#why-arktik' : '/id#why-arktik') : '#why-arktik'}
             className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
               activeSection === "why-arktik"
                 ? "text-lime-green"
@@ -180,7 +188,7 @@ export function Header() {
           </a>
           <a
             ref={portfolioRef}
-            href="#portfolio"
+            href={isBlogPage ? (pathname?.startsWith('/en') ? '/en#portfolio' : '/id#portfolio') : '#portfolio'}
             className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
               activeSection === "portfolio"
                 ? "text-lime-green"
@@ -189,15 +197,47 @@ export function Header() {
           >
             {t('portfolio')}
           </a>
+          {isBlogPage ? (
+            <Link
+              ref={blogRef}
+              href={pathname?.startsWith('/en') ? '/en/blog' : '/id/blog'}
+              className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
+                pathname?.endsWith('/blog')
+                  ? "text-lime-green"
+                  : "text-white hover:bg-black/30"
+              }`}
+            >
+              {t('blog')}
+            </Link>
+          ) : (
+            <a
+              ref={blogRef}
+              href="#blog"
+              className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
+                activeSection === "blog"
+                  ? "text-lime-green"
+                  : "text-white hover:bg-black/30"
+              }`}
+            >
+              {t('blog')}
+            </a>
+          )}
         </nav>
         <div className="flex items-center gap-2 sm:gap-3">
           <CTAButton
             variant="small"
             className="text-sm"
             onClick={() => {
-              document
-                .getElementById("contact")
-                ?.scrollIntoView({ behavior: "smooth" });
+              if (isBlogPage) {
+                // Redirect to homepage contact section
+                const homeUrl = pathname?.startsWith('/en') ? '/en#contact' : '/id#contact';
+                window.location.href = homeUrl;
+              } else {
+                // Scroll to contact section on current page
+                document
+                  .getElementById("contact")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }
             }}
           >
             {t('contact')}

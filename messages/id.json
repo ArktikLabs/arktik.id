@@ -8,6 +8,7 @@
     "services": "Layanan kami",
     "whyArktik": "Mengapa Arktik?",
     "portfolio": "Karya kami",
+    "blog": "Blog",
     "contact": "Hubungi kami"
   },
   "hero": {
@@ -143,6 +144,61 @@
       "description": "Ide Anda layak mendapat eksekusi yang lebih baik. Mari kita ubah menjadi software kustom yang mendorong pertumbuhan nyata. Dari konsep hingga peluncuran, kami akan membangun kisah sukses Anda.",
       "buttonText": "Mulai Sekarang"
     }
+  },
+  "blog": {
+    "title": "Wawasan Terbaru",
+    "description": "Temukan pemikiran terbaru kami tentang teknologi, strategi, dan pertumbuhan bisnis",
+    "viewAll": "Lihat Semua Artikel",
+    "completeGuides": "Panduan Lengkap",
+    "latestArticles": "Artikel Terbaru",
+    "completeGuideLabel": "Panduan Lengkap"
+  },
+  "blogPage": {
+    "title": "Blog | Arktik",
+    "description": "Wawasan tentang strategi digital, pengembangan software, dan solusi teknologi.",
+    "hero": {
+      "badge": "Pusat Pengetahuan",
+      "title": "Wawasan & Keahlian",
+      "description": "Temukan yang terbaru dalam strategi digital, pengembangan software, dan solusi teknologi yang mendorong pertumbuhan bisnis."
+    },
+    "stats": {
+      "articles": "Artikel",
+      "guides": "Panduan",
+      "categories": "Kategori"
+    },
+    "categories": {
+      "title": "Jelajahi Berdasarkan Kategori",
+      "subtitle": "Telusuri konten kami yang diorganisir berdasarkan topik dan area keahlian."
+    },
+    "guides": {
+      "title": "Panduan Lengkap",
+      "subtitle": "Panduan mendalam yang mencakup topik dari awal hingga akhir."
+    },
+    "articles": {
+      "title": "Artikel Terbaru",
+      "subtitle": "Wawasan dan update terbaru dari tim ahli kami."
+    }
+  },
+  "cards": {
+    "project": "Proyek",
+    "anonymous": "Anonim",
+    "completeGuide": "Panduan Lengkap",
+    "learnMore": "Pelajari lebih lanjut"
+  },
+  "categoryPage": {
+    "completeGuides": "Panduan Lengkap",
+    "articles": "Artikel",
+    "emptyState": {
+      "title": "Belum Ada Konten",
+      "description": "Kami belum menerbitkan artikel atau panduan untuk kategori ini. Nantikan pembaruan!",
+      "backToBlog": "Kembali ke Blog"
+    }
+  },
+  "pillarPage": {
+    "completeGuide": "Panduan Lengkap",
+    "guides": "Panduan",
+    "relatedArticles": "Artikel Terkait",
+    "readingTime": "{minutes} menit baca"
   },
   "footer": {
     "description": "Mengubah ide menjadi produk yang mendorong pertumbuhan bisnis nyata.",

@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 interface WorkCardProps {
   title: string;
@@ -20,10 +22,12 @@ export function WorkCard({
   href,
   imageSrc,
   description,
-  buttonText = "Learn more",
+  buttonText,
   isImageCard = false,
   onClick,
 }: WorkCardProps) {
+  const t = useTranslations('cards')
+
   if (isImageCard && imageSrc) {
     const CardWrapper = ({ children }: { children: React.ReactNode }) =>
       href ? (
@@ -31,35 +35,58 @@ export function WorkCard({
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="block"
+          className="w-full group/card"
         >
           {children}
         </a>
       ) : (
-        <>{children}</>
+        <div className="w-full group/card">
+          {children}
+        </div>
       );
 
     return (
       <CardWrapper>
-        <Card className="bg-gradient-to-br from-service-blue via-service-blue/95 to-slate-800/50 border-slate-600/50 transition-all duration-500 hover:shadow-2xl hover:shadow-lime-400/20 group cursor-pointer overflow-hidden hover:border-lime-400/30 hover:scale-[1.02] transform-gpu h-full p-0">
-          <div className="relative h-64 md:h-full bg-gradient-to-br from-slate-700 to-slate-800 overflow-hidden">
-            <Image
-              src={imageSrc}
-              alt={title}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent backdrop-blur-sm group-hover:translate-y-full transition-all duration-500 p-4">
-              <h3 className="text-xl font-bold text-lime-green font-heading drop-shadow-lg">
-                {title}
-              </h3>
+        <div
+          className={cn(
+            "cursor-pointer overflow-hidden relative card h-96 rounded-md shadow-xl w-full flex flex-col justify-between p-4",
+            "bg-cover bg-center"
+          )}
+          style={{
+            backgroundImage: `url(${imageSrc})`
+          }}
+          onClick={onClick}
+        >
+          <div className="absolute w-full h-full top-0 left-0 bg-black/0 transition duration-300 group-hover/card:bg-black/30"></div>
+
+          {/* Top section with project type */}
+          <div className="flex flex-row items-center justify-between w-full z-10">
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-lime-green rounded-full"></div>
+              <span className="font-normal text-base text-gray-50 relative z-10">
+                {t('project')}
+              </span>
             </div>
-            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <ArrowUpRight className="w-6 h-6 text-lime-green drop-shadow-lg" />
+            <ArrowUpRight className="w-4 h-4 text-lime-green opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
+          </div>
+
+          {/* Content */}
+          <div className="text content">
+            <h3 className="font-bold text-xl md:text-2xl text-gray-50 relative z-10 line-clamp-2">
+              {title}
+            </h3>
+            {description && (
+              <p className="font-normal text-sm text-gray-50 relative z-10 my-4 line-clamp-3">
+                {description}
+              </p>
+            )}
+
+            {/* Project Badge */}
+            <div className="inline-block bg-lime-green/20 border border-lime-green/30 text-lime-green px-3 py-1 rounded text-xs font-medium relative z-10 mt-4">
+              {buttonText || t('learnMore')}
             </div>
           </div>
-        </Card>
+        </div>
       </CardWrapper>
     );
   }
@@ -99,7 +126,7 @@ export function WorkCard({
             variant="link"
             className="text-lime-green hover:text-lime-green/80 p-0 h-auto font-medium transition-all duration-300 group-hover:translate-x-1"
           >
-            {buttonText}
+            {buttonText || t('learnMore')}
           </Button>
           <ArrowUpRight className="w-4 h-4 text-lime-green group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
         </div>

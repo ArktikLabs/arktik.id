@@ -8,6 +8,7 @@
     "services": "Our services",
     "whyArktik": "Why Arktik?",
     "portfolio": "Our works",
+    "blog": "Blog",
     "contact": "Contact us"
   },
   "hero": {
@@ -143,6 +144,61 @@
       "description": "Your idea deserves better execution. Let's transform it into custom software that drives real growth. From concept to launch, we'll build your success story.",
       "buttonText": "Get Started"
     }
+  },
+  "blog": {
+    "title": "Latest Insights",
+    "description": "Discover our latest thinking on technology, strategy, and business growth",
+    "viewAll": "View All Articles",
+    "completeGuides": "Complete Guides",
+    "latestArticles": "Latest Articles",
+    "completeGuideLabel": "Complete Guide"
+  },
+  "blogPage": {
+    "title": "Blog | Arktik",
+    "description": "Insights on digital strategy, software development, and technology solutions.",
+    "hero": {
+      "badge": "Knowledge Hub",
+      "title": "Insights & Expertise",
+      "description": "Discover the latest in digital strategy, software development, and technology solutions that drive business growth."
+    },
+    "stats": {
+      "articles": "Articles",
+      "guides": "Guides",
+      "categories": "Categories"
+    },
+    "categories": {
+      "title": "Explore by Category",
+      "subtitle": "Browse our content organized by topics and expertise areas."
+    },
+    "guides": {
+      "title": "Complete Guides",
+      "subtitle": "In-depth guides that cover topics from start to finish."
+    },
+    "articles": {
+      "title": "Latest Articles",
+      "subtitle": "Fresh insights and updates from our team of experts."
+    }
+  },
+  "cards": {
+    "project": "Project",
+    "anonymous": "Anonymous",
+    "completeGuide": "Complete Guide",
+    "learnMore": "Learn more"
+  },
+  "categoryPage": {
+    "completeGuides": "Complete Guides",
+    "articles": "Articles",
+    "emptyState": {
+      "title": "No Content Yet",
+      "description": "We haven't published any articles or guides for this category yet. Stay tuned for updates!",
+      "backToBlog": "Back to Blog"
+    }
+  },
+  "pillarPage": {
+    "completeGuide": "Complete Guide",
+    "guides": "Guides",
+    "relatedArticles": "Related Articles",
+    "readingTime": "{minutes} min read"
   },
   "footer": {
     "description": "Transforming ideas into products that drive real business growth.",

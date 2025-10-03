@@ -162,7 +162,7 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
             </h2>
             <Underline />
           </div>
-          <p className="text-gray-400 text-lg max-w-2xl mb-8">
+          <p className="text-gray-400 text-lg mb-8">
             {t('description')}
           </p>
 

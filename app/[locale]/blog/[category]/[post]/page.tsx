@@ -1,0 +1,210 @@
+import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { getBlogPostBySlug, getBlogPosts } from '@/lib/services/contentful'
+import { RichTextRenderer } from '@/components/blog/RichTextRenderer'
+import { BlogPostCard } from '@/components/blog/BlogPostCard'
+import { Header } from '@/components/sections/Header'
+import { FooterSection } from '@/components/sections/FooterSection'
+import { ChevronRight, Calendar, Clock, User, Tag } from 'lucide-react'
+import Link from 'next/link'
+
+interface BlogPostPageProps {
+  params: {
+    locale: string
+    category: string
+    post: string
+  }
+}
+
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+  const { locale, category: categorySlug, post: postSlug } = await params
+  const post = await getBlogPostBySlug(categorySlug, postSlug, locale)
+
+  if (!post) {
+    return {
+      title: 'Article Not Found | Arktik',
+    }
+  }
+
+  return {
+    title: post.fields.seoTitle || `${post.fields.title} | Arktik`,
+    description: post.fields.seoDescription || post.fields.excerpt,
+  }
+}
+
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { locale, category: categorySlug, post: postSlug } = await params
+
+  try {
+    const post = await getBlogPostBySlug(categorySlug, postSlug, locale)
+
+    if (!post) {
+      notFound()
+    }
+
+    const { posts: relatedPosts } = await getBlogPosts({
+      categorySlug,
+      locale,
+      limit: 3,
+    })
+
+    // Filter out current post from related posts
+    const filteredRelatedPosts = relatedPosts.filter(
+      (relatedPost) => relatedPost.sys.id !== post.sys.id
+    )
+
+    const category = post.fields.category.fields
+    const author = post.fields.author?.fields
+    const pillar = post.fields.pillar?.fields
+
+    return (
+      <div className="min-h-screen text-white bg-dark-blue">
+        <Header />
+
+        <main className="container mx-auto px-4 py-16">
+          {/* Breadcrumb */}
+          <nav className="flex items-center space-x-2 text-sm text-gray-400 mb-8">
+            <Link href="/blog" className="hover:text-white transition-colors">
+              Blog
+            </Link>
+            <ChevronRight className="w-4 h-4" />
+            <Link
+              href={`/blog/${categorySlug}`}
+              className="hover:text-white transition-colors"
+            >
+              {category.title}
+            </Link>
+            <ChevronRight className="w-4 h-4" />
+            <span className="text-white">{post.fields.title}</span>
+          </nav>
+
+          {/* Article */}
+          <article className="max-w-4xl mx-auto">
+            <header className="mb-12">
+              {post.fields.featuredImage && (
+                <img
+                  src={post.fields.featuredImage.fields.file?.url}
+                  alt={post.fields.featuredImage.fields.title || post.fields.title}
+                  className="w-full h-64 md:h-96 object-cover rounded-lg mb-8"
+                />
+              )}
+
+              <div className="mb-6">
+                <Link
+                  href={`/blog/${categorySlug}`}
+                  className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm font-medium mb-4 transition-colors"
+                >
+                  {category.title}
+                </Link>
+                <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                  {post.fields.title}
+                </h1>
+                <p className="text-xl text-gray-300 mb-6">
+                  {post.fields.excerpt}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-6 text-gray-400 text-sm mb-8">
+                <div className="flex items-center space-x-2">
+                  <Calendar className="w-4 h-4" />
+                  <span>
+                    {new Date(post.sys.createdAt).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </span>
+                </div>
+
+                {author && (
+                  <div className="flex items-center space-x-2">
+                    <User className="w-4 h-4" />
+                    <span>{author.name}</span>
+                  </div>
+                )}
+
+                <div className="flex items-center space-x-2">
+                  <Clock className="w-4 h-4" />
+                  <span>5 min read</span>
+                </div>
+              </div>
+
+              {/* Tags */}
+              {post.fields.tags && post.fields.tags.length > 0 && (
+                <div className="flex items-center space-x-2 mb-8">
+                  <Tag className="w-4 h-4 text-gray-400" />
+                  <div className="flex flex-wrap gap-2">
+                    {post.fields.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="bg-gray-800 text-gray-300 px-2 py-1 rounded text-sm"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Pillar Link */}
+              {pillar && (
+                <div className="bg-blue-900/30 border border-blue-700 rounded-lg p-4 mb-8">
+                  <p className="text-sm text-blue-300 mb-2">Part of our complete guide:</p>
+                  <Link
+                    href={`/blog/${categorySlug}/guides/${pillar.slug}`}
+                    className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
+                  >
+                    {pillar.title} →
+                  </Link>
+                </div>
+              )}
+            </header>
+
+            {/* Content */}
+            <div className="prose prose-lg prose-invert max-w-none mb-16">
+              <RichTextRenderer content={post.fields.body} />
+            </div>
+
+            {/* Author Bio */}
+            {author && (
+              <div className="bg-gray-900 rounded-lg p-6 mb-16">
+                <div className="flex items-start space-x-4">
+                  {author.avatar && (
+                    <img
+                      src={author.avatar.fields.file?.url}
+                      alt={author.name}
+                      className="w-16 h-16 rounded-full"
+                    />
+                  )}
+                  <div>
+                    <h3 className="text-xl font-bold mb-2">{author.name}</h3>
+                    {author.bio && (
+                      <p className="text-gray-300">{author.bio}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+          </article>
+
+          {/* Related Posts */}
+          {filteredRelatedPosts.length > 0 && (
+            <section className="max-w-6xl mx-auto">
+              <h2 className="text-3xl font-bold mb-8">More from {category.title}</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredRelatedPosts.map((relatedPost) => (
+                  <BlogPostCard key={relatedPost.sys.id} post={relatedPost} />
+                ))}
+              </div>
+            </section>
+          )}
+        </main>
+
+        <FooterSection />
+      </div>
+    )
+  } catch (error) {
+    console.error('Error loading blog post:', error)
+    notFound()
+  }
+}

@@ -1,0 +1,1113 @@
+[
+  {
+    "name": "Author",
+    "description": "Represents the person or team behind a blog post, including name, role, bio, photo, and social links",
+    "displayField": "name",
+    "fields": [
+      {
+        "id": "name",
+        "name": "Name",
+        "type": "Symbol",
+        "localized": false,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "bio",
+        "name": "Bio",
+        "type": "RichText",
+        "localized": true,
+        "required": false,
+        "validations": [
+          {
+            "enabledMarks": [
+              "bold",
+              "italic",
+              "underline",
+              "code"
+            ],
+            "message": "Only bold, italic, underline, and code marks are allowed"
+          },
+          {
+            "enabledNodeTypes": [
+              "heading-1",
+              "heading-2",
+              "heading-3",
+              "heading-4",
+              "heading-5",
+              "heading-6",
+              "ordered-list",
+              "unordered-list",
+              "hr",
+              "blockquote",
+              "embedded-entry-block",
+              "embedded-asset-block",
+              "hyperlink",
+              "entry-hyperlink",
+              "asset-hyperlink",
+              "embedded-entry-inline"
+            ],
+            "message": "Only heading 1, heading 2, heading 3, heading 4, heading 5, heading 6, ordered list, unordered list, horizontal rule, quote, block entry, asset, link to Url, link to entry, link to asset, and inline entry nodes are allowed"
+          },
+          {
+            "nodes": {}
+          }
+        ],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "photo",
+        "name": "Photo",
+        "type": "Link",
+        "localized": false,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false,
+        "linkType": "Asset"
+      },
+      {
+        "id": "role",
+        "name": "Role",
+        "type": "Symbol",
+        "localized": true,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "socialLinks",
+        "name": "Social Links",
+        "type": "Array",
+        "localized": false,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false,
+        "items": {
+          "type": "Symbol",
+          "validations": []
+        }
+      }
+    ],
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "jgaf39378tqa"
+        }
+      },
+      "id": "author",
+      "type": "ContentType",
+      "createdAt": "2025-10-01T01:02:19.353Z",
+      "updatedAt": "2025-10-01T01:12:07.223Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "publishedVersion": 3,
+      "publishedAt": "2025-10-01T01:12:07.223Z",
+      "firstPublishedAt": "2025-10-01T01:02:19.941Z",
+      "createdBy": {
+        "sys": {
+          "type": "Link",
+          "linkType": "User",
+          "id": "08SGNdMYIW6kWoeOFtvUEB"
+        }
+      },
+      "updatedBy": {
+        "sys": {
+          "type": "Link",
+          "linkType": "User",
+          "id": "08SGNdMYIW6kWoeOFtvUEB"
+        }
+      },
+      "publishedCounter": 2,
+      "version": 4,
+      "publishedBy": {
+        "sys": {
+          "type": "Link",
+          "linkType": "User",
+          "id": "08SGNdMYIW6kWoeOFtvUEB"
+        }
+      },
+      "urn": "crn:contentful:::content:spaces/jgaf39378tqa/environments/master/content_types/author"
+    }
+  },
+  {
+    "name": "Blog Post",
+    "description": "Individual article covering a specific topic, linked to a category and optionally a pillar for context and SEO",
+    "displayField": "title",
+    "fields": [
+      {
+        "id": "title",
+        "name": "Title",
+        "type": "Symbol",
+        "localized": true,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "slug",
+        "name": "Slug",
+        "type": "Symbol",
+        "localized": false,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "excerpt",
+        "name": "Excerpt",
+        "type": "Symbol",
+        "localized": true,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "body",
+        "name": "Body",
+        "type": "RichText",
+        "localized": true,
+        "required": false,
+        "validations": [
+          {
+            "enabledMarks": [
+              "bold",
+              "italic",
+              "underline",
+              "code"
+            ],
+            "message": "Only bold, italic, underline, and code marks are allowed"
+          },
+          {
+            "enabledNodeTypes": [
+              "heading-1",
+              "heading-2",
+              "heading-3",
+              "heading-4",
+              "heading-5",
+              "heading-6",
+              "ordered-list",
+              "unordered-list",
+              "hr",
+              "blockquote",
+              "embedded-entry-block",
+              "embedded-asset-block",
+              "hyperlink",
+              "entry-hyperlink",
+              "asset-hyperlink",
+              "embedded-entry-inline"
+            ],
+            "message": "Only heading 1, heading 2, heading 3, heading 4, heading 5, heading 6, ordered list, unordered list, horizontal rule, quote, block entry, asset, link to Url, link to entry, link to asset, and inline entry nodes are allowed"
+          },
+          {
+            "nodes": {}
+          }
+        ],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "category",
+        "name": "Category",
+        "type": "Link",
+        "localized": false,
+        "required": false,
+        "validations": [
+          {
+            "linkContentType": [
+              "category"
+            ]
+          }
+        ],
+        "disabled": false,
+        "omitted": false,
+        "linkType": "Entry"
+      },
+      {
+        "id": "pillar",
+        "name": "Pillar",
+        "type": "Link",
+        "localized": false,
+        "required": false,
+        "validations": [
+          {
+            "linkContentType": [
+              "pillarPage"
+            ]
+          }
+        ],
+        "disabled": false,
+        "omitted": false,
+        "linkType": "Entry"
+      },
+      {
+        "id": "author",
+        "name": "Author",
+        "type": "Link",
+        "localized": false,
+        "required": false,
+        "validations": [
+          {
+            "linkContentType": [
+              "author"
+            ]
+          }
+        ],
+        "disabled": false,
+        "omitted": false,
+        "linkType": "Entry"
+      },
+      {
+        "id": "featuredImage",
+        "name": "Featured image",
+        "type": "Link",
+        "localized": false,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false,
+        "linkType": "Asset"
+      },
+      {
+        "id": "tags",
+        "name": "Tags",
+        "type": "Array",
+        "localized": false,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false,
+        "items": {
+          "type": "Symbol",
+          "validations": []
+        }
+      },
+      {
+        "id": "seoTitle",
+        "name": "SEO Title",
+        "type": "Symbol",
+        "localized": true,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "seoDescription",
+        "name": "SEO Description",
+        "type": "Symbol",
+        "localized": true,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      }
+    ],
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "jgaf39378tqa"
+        }
+      },
+      "id": "blogPost",
+      "type": "ContentType",
+      "createdAt": "2025-10-01T01:01:34.689Z",
+      "updatedAt": "2025-10-01T01:11:56.007Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "publishedVersion": 9,
+      "publishedAt": "2025-10-01T01:11:56.007Z",
+      "firstPublishedAt": "2025-10-01T01:01:35.167Z",
+      "createdBy": {
+        "sys": {
+          "type": "Link",
+          "linkType": "User",
+          "id": "08SGNdMYIW6kWoeOFtvUEB"
+        }
+      },
+      "updatedBy": {
+        "sys": {
+          "type": "Link",
+          "linkType": "User",
+          "id": "08SGNdMYIW6kWoeOFtvUEB"
+        }
+      },
+      "publishedCounter": 5,
+      "version": 10,
+      "publishedBy": {
+        "sys": {
+          "type": "Link",
+          "linkType": "User",
+          "id": "08SGNdMYIW6kWoeOFtvUEB"
+        }
+      },
+      "urn": "crn:contentful:::content:spaces/jgaf39378tqa/environments/master/content_types/blogPost"
+    }
+  },
+  {
+    "name": "Case Study",
+    "description": "Showcases a real client project, highlighting the challenge, solution, and results as proof of impact",
+    "displayField": "title",
+    "fields": [
+      {
+        "id": "title",
+        "name": "Title",
+        "type": "Symbol",
+        "localized": true,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "slug",
+        "name": "Slug",
+        "type": "Symbol",
+        "localized": false,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "clientName",
+        "name": "Client Name",
+        "type": "Symbol",
+        "localized": false,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "challenge",
+        "name": "Challenge",
+        "type": "RichText",
+        "localized": true,
+        "required": false,
+        "validations": [
+          {
+            "enabledMarks": [
+              "bold",
+              "italic",
+              "underline",
+              "code"
+            ],
+            "message": "Only bold, italic, underline, and code marks are allowed"
+          },
+          {
+            "enabledNodeTypes": [
+              "heading-1",
+              "heading-2",
+              "heading-3",
+              "heading-4",
+              "heading-5",
+              "heading-6",
+              "ordered-list",
+              "unordered-list",
+              "hr",
+              "blockquote",
+              "embedded-entry-block",
+              "embedded-asset-block",
+              "hyperlink",
+              "entry-hyperlink",
+              "asset-hyperlink",
+              "embedded-entry-inline"
+            ],
+            "message": "Only heading 1, heading 2, heading 3, heading 4, heading 5, heading 6, ordered list, unordered list, horizontal rule, quote, block entry, asset, link to Url, link to entry, link to asset, and inline entry nodes are allowed"
+          },
+          {
+            "nodes": {}
+          }
+        ],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "solution",
+        "name": "Solution",
+        "type": "RichText",
+        "localized": true,
+        "required": false,
+        "validations": [
+          {
+            "enabledMarks": [
+              "bold",
+              "italic",
+              "underline",
+              "code"
+            ],
+            "message": "Only bold, italic, underline, and code marks are allowed"
+          },
+          {
+            "enabledNodeTypes": [
+              "heading-1",
+              "heading-2",
+              "heading-3",
+              "heading-4",
+              "heading-5",
+              "heading-6",
+              "ordered-list",
+              "unordered-list",
+              "hr",
+              "blockquote",
+              "embedded-entry-block",
+              "embedded-asset-block",
+              "hyperlink",
+              "entry-hyperlink",
+              "asset-hyperlink",
+              "embedded-entry-inline"
+            ],
+            "message": "Only heading 1, heading 2, heading 3, heading 4, heading 5, heading 6, ordered list, unordered list, horizontal rule, quote, block entry, asset, link to Url, link to entry, link to asset, and inline entry nodes are allowed"
+          },
+          {
+            "nodes": {}
+          }
+        ],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "results",
+        "name": "Results",
+        "type": "RichText",
+        "localized": true,
+        "required": false,
+        "validations": [
+          {
+            "enabledMarks": [
+              "bold",
+              "italic",
+              "underline",
+              "code"
+            ],
+            "message": "Only bold, italic, underline, and code marks are allowed"
+          },
+          {
+            "enabledNodeTypes": [
+              "heading-1",
+              "heading-2",
+              "heading-3",
+              "heading-4",
+              "heading-5",
+              "heading-6",
+              "ordered-list",
+              "unordered-list",
+              "hr",
+              "blockquote",
+              "embedded-entry-block",
+              "embedded-asset-block",
+              "hyperlink",
+              "entry-hyperlink",
+              "asset-hyperlink",
+              "embedded-entry-inline"
+            ],
+            "message": "Only heading 1, heading 2, heading 3, heading 4, heading 5, heading 6, ordered list, unordered list, horizontal rule, quote, block entry, asset, link to Url, link to entry, link to asset, and inline entry nodes are allowed"
+          },
+          {
+            "nodes": {}
+          }
+        ],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "category",
+        "name": "Category",
+        "type": "Link",
+        "localized": false,
+        "required": false,
+        "validations": [
+          {
+            "linkContentType": [
+              "category"
+            ]
+          }
+        ],
+        "disabled": false,
+        "omitted": false,
+        "linkType": "Entry"
+      },
+      {
+        "id": "relatedPosts",
+        "name": "Related Posts",
+        "type": "Array",
+        "localized": false,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false,
+        "items": {
+          "type": "Link",
+          "validations": [
+            {
+              "linkContentType": [
+                "blogPost"
+              ]
+            }
+          ],
+          "linkType": "Entry"
+        }
+      },
+      {
+        "id": "featuredImage",
+        "name": "Featured Image",
+        "type": "Link",
+        "localized": false,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false,
+        "linkType": "Asset"
+      },
+      {
+        "id": "seoTitle",
+        "name": "SEO Title",
+        "type": "Symbol",
+        "localized": true,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "seoDescription",
+        "name": "SEO Description",
+        "type": "Symbol",
+        "localized": true,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      }
+    ],
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "jgaf39378tqa"
+        }
+      },
+      "id": "caseStudy",
+      "type": "ContentType",
+      "createdAt": "2025-10-01T01:03:36.199Z",
+      "updatedAt": "2025-10-01T01:12:18.579Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "publishedVersion": 7,
+      "publishedAt": "2025-10-01T01:12:18.579Z",
+      "firstPublishedAt": "2025-10-01T01:03:36.693Z",
+      "createdBy": {
+        "sys": {
+          "type": "Link",
+          "linkType": "User",
+          "id": "08SGNdMYIW6kWoeOFtvUEB"
+        }
+      },
+      "updatedBy": {
+        "sys": {
+          "type": "Link",
+          "linkType": "User",
+          "id": "08SGNdMYIW6kWoeOFtvUEB"
+        }
+      },
+      "publishedCounter": 4,
+      "version": 8,
+      "publishedBy": {
+        "sys": {
+          "type": "Link",
+          "linkType": "User",
+          "id": "08SGNdMYIW6kWoeOFtvUEB"
+        }
+      },
+      "urn": "crn:contentful:::content:spaces/jgaf39378tqa/environments/master/content_types/caseStudy"
+    }
+  },
+  {
+    "name": "Category",
+    "description": "Organizes blog posts and pillars into main themes, each with a title, icon, and description",
+    "displayField": "title",
+    "fields": [
+      {
+        "id": "title",
+        "name": "Title",
+        "type": "Symbol",
+        "localized": true,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "icon",
+        "name": "Icon",
+        "type": "Link",
+        "localized": false,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false,
+        "linkType": "Asset"
+      },
+      {
+        "id": "description",
+        "name": "Description",
+        "type": "RichText",
+        "localized": true,
+        "required": false,
+        "validations": [
+          {
+            "enabledMarks": [
+              "bold",
+              "italic",
+              "underline",
+              "code"
+            ],
+            "message": "Only bold, italic, underline, and code marks are allowed"
+          },
+          {
+            "enabledNodeTypes": [
+              "heading-1",
+              "heading-2",
+              "heading-3",
+              "heading-4",
+              "heading-5",
+              "heading-6",
+              "ordered-list",
+              "unordered-list",
+              "hr",
+              "blockquote",
+              "embedded-entry-block",
+              "embedded-asset-block",
+              "hyperlink",
+              "entry-hyperlink",
+              "asset-hyperlink",
+              "embedded-entry-inline"
+            ],
+            "message": "Only heading 1, heading 2, heading 3, heading 4, heading 5, heading 6, ordered list, unordered list, horizontal rule, quote, block entry, asset, link to Url, link to entry, link to asset, and inline entry nodes are allowed"
+          },
+          {
+            "nodes": {}
+          }
+        ],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "slug",
+        "name": "Slug",
+        "type": "Symbol",
+        "localized": false,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      }
+    ],
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "jgaf39378tqa"
+        }
+      },
+      "id": "category",
+      "type": "ContentType",
+      "createdAt": "2025-10-01T00:58:05.828Z",
+      "updatedAt": "2025-10-01T01:11:21.962Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "publishedVersion": 3,
+      "publishedAt": "2025-10-01T01:11:21.962Z",
+      "firstPublishedAt": "2025-10-01T00:58:06.284Z",
+      "createdBy": {
+        "sys": {
+          "type": "Link",
+          "linkType": "User",
+          "id": "08SGNdMYIW6kWoeOFtvUEB"
+        }
+      },
+      "updatedBy": {
+        "sys": {
+          "type": "Link",
+          "linkType": "User",
+          "id": "08SGNdMYIW6kWoeOFtvUEB"
+        }
+      },
+      "publishedCounter": 2,
+      "version": 4,
+      "publishedBy": {
+        "sys": {
+          "type": "Link",
+          "linkType": "User",
+          "id": "08SGNdMYIW6kWoeOFtvUEB"
+        }
+      },
+      "urn": "crn:contentful:::content:spaces/jgaf39378tqa/environments/master/content_types/category"
+    }
+  },
+  {
+    "name": "Global Settings",
+    "description": "Stores site-wide defaults like SEO metadata, OpenGraph image, and supported languages",
+    "displayField": "defaultSeoTitle",
+    "fields": [
+      {
+        "id": "defaultSeoTitle",
+        "name": "Default SEO Title",
+        "type": "Symbol",
+        "localized": true,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "defaultSeoDescription",
+        "name": "Default SEO Description",
+        "type": "Symbol",
+        "localized": true,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "defaultOgImage",
+        "name": "Default OG Image",
+        "type": "Link",
+        "localized": false,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false,
+        "linkType": "Asset"
+      },
+      {
+        "id": "supportedLanguages",
+        "name": "Supported Languages",
+        "type": "Array",
+        "localized": false,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false,
+        "items": {
+          "type": "Symbol",
+          "validations": []
+        }
+      }
+    ],
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "jgaf39378tqa"
+        }
+      },
+      "id": "globalSettings",
+      "type": "ContentType",
+      "createdAt": "2025-10-01T01:04:14.060Z",
+      "updatedAt": "2025-10-01T01:12:32.333Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "publishedVersion": 3,
+      "publishedAt": "2025-10-01T01:12:32.333Z",
+      "firstPublishedAt": "2025-10-01T01:04:14.517Z",
+      "createdBy": {
+        "sys": {
+          "type": "Link",
+          "linkType": "User",
+          "id": "08SGNdMYIW6kWoeOFtvUEB"
+        }
+      },
+      "updatedBy": {
+        "sys": {
+          "type": "Link",
+          "linkType": "User",
+          "id": "08SGNdMYIW6kWoeOFtvUEB"
+        }
+      },
+      "publishedCounter": 2,
+      "version": 4,
+      "publishedBy": {
+        "sys": {
+          "type": "Link",
+          "linkType": "User",
+          "id": "08SGNdMYIW6kWoeOFtvUEB"
+        }
+      },
+      "urn": "crn:contentful:::content:spaces/jgaf39378tqa/environments/master/content_types/globalSettings"
+    }
+  },
+  {
+    "name": "Pillar Page",
+    "description": "Acts as a long-form hub article that introduces a key topic within a category and links to related blog posts",
+    "displayField": "title",
+    "fields": [
+      {
+        "id": "title",
+        "name": "Title",
+        "type": "Symbol",
+        "localized": true,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "slug",
+        "name": "Slug",
+        "type": "Symbol",
+        "localized": false,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "introduction",
+        "name": "Introduction",
+        "type": "RichText",
+        "localized": true,
+        "required": false,
+        "validations": [
+          {
+            "enabledMarks": [
+              "bold",
+              "italic",
+              "underline",
+              "code"
+            ],
+            "message": "Only bold, italic, underline, and code marks are allowed"
+          },
+          {
+            "enabledNodeTypes": [
+              "heading-1",
+              "heading-2",
+              "heading-3",
+              "heading-4",
+              "heading-5",
+              "heading-6",
+              "ordered-list",
+              "unordered-list",
+              "hr",
+              "blockquote",
+              "embedded-entry-block",
+              "embedded-asset-block",
+              "hyperlink",
+              "entry-hyperlink",
+              "asset-hyperlink",
+              "embedded-entry-inline"
+            ],
+            "message": "Only heading 1, heading 2, heading 3, heading 4, heading 5, heading 6, ordered list, unordered list, horizontal rule, quote, block entry, asset, link to Url, link to entry, link to asset, and inline entry nodes are allowed"
+          },
+          {
+            "nodes": {}
+          }
+        ],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "body",
+        "name": "Body",
+        "type": "RichText",
+        "localized": true,
+        "required": false,
+        "validations": [
+          {
+            "enabledMarks": [
+              "bold",
+              "italic",
+              "underline",
+              "code"
+            ],
+            "message": "Only bold, italic, underline, and code marks are allowed"
+          },
+          {
+            "enabledNodeTypes": [
+              "heading-1",
+              "heading-2",
+              "heading-3",
+              "heading-4",
+              "heading-5",
+              "heading-6",
+              "ordered-list",
+              "unordered-list",
+              "hr",
+              "blockquote",
+              "embedded-entry-block",
+              "embedded-asset-block",
+              "hyperlink",
+              "entry-hyperlink",
+              "asset-hyperlink",
+              "embedded-entry-inline"
+            ],
+            "message": "Only heading 1, heading 2, heading 3, heading 4, heading 5, heading 6, ordered list, unordered list, horizontal rule, quote, block entry, asset, link to Url, link to entry, link to asset, and inline entry nodes are allowed"
+          },
+          {
+            "nodes": {}
+          }
+        ],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "category",
+        "name": "Category",
+        "type": "Link",
+        "localized": false,
+        "required": false,
+        "validations": [
+          {
+            "linkContentType": [
+              "category"
+            ]
+          }
+        ],
+        "disabled": false,
+        "omitted": false,
+        "linkType": "Entry"
+      },
+      {
+        "id": "relatedPosts",
+        "name": "Related posts",
+        "type": "Array",
+        "localized": false,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false,
+        "items": {
+          "type": "Link",
+          "validations": [
+            {
+              "linkContentType": [
+                "blogPost"
+              ]
+            }
+          ],
+          "linkType": "Entry"
+        }
+      },
+      {
+        "id": "featuredImage",
+        "name": "Featured image",
+        "type": "Link",
+        "localized": false,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false,
+        "linkType": "Asset"
+      },
+      {
+        "id": "seoTitle",
+        "name": "SEO Title",
+        "type": "Symbol",
+        "localized": true,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      },
+      {
+        "id": "seoDescription",
+        "name": "SEO Description",
+        "type": "Symbol",
+        "localized": true,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
+      }
+    ],
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "jgaf39378tqa"
+        }
+      },
+      "id": "pillarPage",
+      "type": "ContentType",
+      "createdAt": "2025-10-01T00:59:54.105Z",
+      "updatedAt": "2025-10-01T01:11:44.614Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "publishedVersion": 7,
+      "publishedAt": "2025-10-01T01:11:44.614Z",
+      "firstPublishedAt": "2025-10-01T00:59:54.628Z",
+      "createdBy": {
+        "sys": {
+          "type": "Link",
+          "linkType": "User",
+          "id": "08SGNdMYIW6kWoeOFtvUEB"
+        }
+      },
+      "updatedBy": {
+        "sys": {
+          "type": "Link",
+          "linkType": "User",
+          "id": "08SGNdMYIW6kWoeOFtvUEB"
+        }
+      },
+      "publishedCounter": 4,
+      "version": 8,
+      "publishedBy": {
+        "sys": {
+          "type": "Link",
+          "linkType": "User",
+          "id": "08SGNdMYIW6kWoeOFtvUEB"
+        }
+      },
+      "urn": "crn:contentful:::content:spaces/jgaf39378tqa/environments/master/content_types/pillarPage"
+    }
+  }
+]
