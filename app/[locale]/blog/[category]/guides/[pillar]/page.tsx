@@ -10,6 +10,8 @@ import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { Calendar, Clock, BookOpen } from 'lucide-react'
 import { calculateCombinedReadingTime } from '@/lib/utils/reading-time'
 import Link from 'next/link'
+import { BlogHeroSection } from '@/components/sections/BlogHeroSection'
+import { PostCtaSection } from '@/components/blog/PostCtaSection'
 
 interface PillarPageProps {
   params: {
@@ -39,9 +41,10 @@ export default async function PillarPage({ params }: PillarPageProps) {
   const { locale, category: categorySlug, pillar: pillarSlug } = await params
 
   try {
-    const [pillar, t] = await Promise.all([
+    const [pillar, t, postCtaT] = await Promise.all([
       getPillarPageBySlug(categorySlug, pillarSlug, locale),
       getTranslations('pillarPage'),
+      getTranslations('postCta'),
     ])
 
     if (!pillar) {
@@ -63,22 +66,24 @@ export default async function PillarPage({ params }: PillarPageProps) {
       pillar.fields.body
     ])
 
+    const postCtaContent = {
+      badge: postCtaT('badge'),
+      title: pillar.fields.ctaTitle ?? postCtaT('title'),
+      description: pillar.fields.ctaDescription ?? postCtaT('description'),
+      primaryCta: postCtaT('primaryCta'),
+      secondaryCta: postCtaT('secondaryCta'),
+    }
+
     return (
       <div className="min-h-screen text-white bg-dark-blue">
         <Header />
 
-        {/* Hero Background */}
-        <section className="relative h-64 md:h-80">
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-80"
-            style={{
-              backgroundImage: heroImage
-                ? `url(${heroImage})`
-                : "url('/aurora-bg.webp')"
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent from-70% to-dark-blue z-[1]" />
-        </section>
+        <BlogHeroSection
+          imageUrl={heroImage ?? '/aurora-bg.webp'}
+          className="min-h-[320px] md:min-h-[380px]"
+          containerClassName="pt-28 pb-16"
+          imageClassName={heroImage ? 'opacity-90' : undefined}
+        />
 
         <main className="relative max-w-7xl mx-auto px-6 lg:px-12 py-16">
           {/* Breadcrumb */}
@@ -96,39 +101,38 @@ export default async function PillarPage({ params }: PillarPageProps) {
           <article className="mb-16">
             {/* Article Header */}
             <header className="mb-12">
-              <div className="flex items-center space-x-2 mb-4">
-                <BookOpen className="w-5 h-5 text-lime-green" />
-                <span className="text-lime-green font-medium">{t('completeGuide')}</span>
-              </div>
-
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-balance font-heading mb-6">
-                {pillar.fields.title}
-              </h1>
-
-              <div className="flex items-center space-x-6 text-gray-400 text-sm mb-8">
-                <div className="flex items-center space-x-2">
-                  <Calendar className="w-4 h-4" />
+              <div className="mb-6 flex flex-wrap items-center gap-4 text-sm font-medium text-lime-green">
+                <div className="inline-flex items-center gap-2">
+                  <BookOpen className="h-5 w-5" />
+                  <span>{t('completeGuide')}</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-400">
+                  <Calendar className="h-4 w-4" />
                   <span>
-                    {new Date(pillar.sys.createdAt).toLocaleDateString(locale === 'id' ? 'id-ID' : 'en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
+                    {new Date(pillar.sys.createdAt).toLocaleDateString(
+                      locale === 'id' ? 'id-ID' : 'en-US',
+                      {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      }
+                    )}
                   </span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Clock className="w-4 h-4" />
+                <div className="flex items-center gap-2 text-gray-400">
+                  <Clock className="h-4 w-4" />
                   <span>{t('readingTime', { minutes: readingTime })}</span>
                 </div>
                 {pillar.fields.author?.fields?.name && (
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center gap-2 text-gray-400">
                     <span>by</span>
                     <span className="text-lime-green">{pillar.fields.author.fields.name}</span>
                   </div>
                 )}
               </div>
-
-              {/* Introduction */}
+              <h1 className="mb-6 text-4xl font-bold leading-tight text-balance font-heading md:text-5xl lg:text-6xl">
+                {pillar.fields.title}
+              </h1>
               {pillar.fields.introduction && (
                 <div className="prose prose-xl prose-invert mb-12 border-b border-gray-700 pb-8">
                   <RichTextRenderer content={pillar.fields.introduction} />
@@ -141,6 +145,17 @@ export default async function PillarPage({ params }: PillarPageProps) {
               <RichTextRenderer content={pillar.fields.body} />
             </div>
           </article>
+
+        <div className="mb-16">
+            <PostCtaSection
+              locale={locale}
+              badge={postCtaContent.badge}
+              title={postCtaContent.title}
+              description={postCtaContent.description}
+              primaryCta={postCtaContent.primaryCta}
+              secondaryCta={postCtaContent.secondaryCta}
+            />
+          </div>
 
           {/* Related Posts */}
           {relatedPosts.length > 0 && (

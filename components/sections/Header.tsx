@@ -159,7 +159,7 @@ export function Header() {
             className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
               activeSection === "about-us"
                 ? "text-lime-green"
-                : "text-white hover:bg-black/30"
+                : "text-white hover:text-lime-green hover:bg-lime-green/10"
             }`}
           >
             {t('aboutUs')}
@@ -170,7 +170,7 @@ export function Header() {
             className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
               activeSection === "services"
                 ? "text-lime-green"
-                : "text-white hover:bg-black/30"
+                : "text-white hover:text-lime-green hover:bg-lime-green/10"
             }`}
           >
             {t('services')}
@@ -181,7 +181,7 @@ export function Header() {
             className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
               activeSection === "why-arktik"
                 ? "text-lime-green"
-                : "text-white hover:bg-black/30"
+                : "text-white hover:text-lime-green hover:bg-lime-green/10"
             }`}
           >
             {t('whyArktik')}
@@ -192,7 +192,7 @@ export function Header() {
             className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
               activeSection === "portfolio"
                 ? "text-lime-green"
-                : "text-white hover:bg-black/30"
+                : "text-white hover:text-lime-green hover:bg-lime-green/10"
             }`}
           >
             {t('portfolio')}
@@ -202,9 +202,9 @@ export function Header() {
               ref={blogRef}
               href={pathname?.startsWith('/en') ? '/en/blog' : '/id/blog'}
               className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
-                pathname?.endsWith('/blog')
-                  ? "text-lime-green"
-                  : "text-white hover:bg-black/30"
+                pathname?.startsWith('/en/blog') || pathname?.startsWith('/id/blog')
+                  ? 'text-lime-green bg-lime-green/10'
+                  : 'text-white hover:text-lime-green hover:bg-lime-green/10'
               }`}
             >
               {t('blog')}
@@ -216,7 +216,7 @@ export function Header() {
               className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
                 activeSection === "blog"
                   ? "text-lime-green"
-                  : "text-white hover:bg-black/30"
+                  : "text-white hover:text-lime-green hover:bg-lime-green/10"
               }`}
             >
               {t('blog')}

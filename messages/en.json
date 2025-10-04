@@ -179,6 +179,21 @@
       "subtitle": "Fresh insights and updates from our team of experts."
     }
   },
+  "caseStudiesPage": {
+    "metadata": {
+      "title": "Case Studies | Arktik",
+      "description": "In-depth looks at the partnerships and products we've built to unlock growth."
+    },
+    "hero": {
+      "title": "Case Studies",
+      "description": "Explore how we partner with teams to design, build, and scale digital products that create measurable results."
+    },
+    "emptyState": {
+      "title": "Case studies coming soon",
+      "description": "We're preparing detailed stories to show how we help partners succeed. Check back soon or browse more insights on the blog.",
+      "backToBlog": "Back to Blog"
+    }
+  },
   "cards": {
     "project": "Project",
     "anonymous": "Anonymous",
@@ -199,6 +214,13 @@
     "guides": "Guides",
     "relatedArticles": "Related Articles",
     "readingTime": "{minutes} min read"
+  },
+  "postCta": {
+    "badge": "Let's Talk",
+    "title": "Ready to build your next product?",
+    "description": "Whether you need a partner to ship fast or a team to scale with you, we help turn ambitious ideas into software that performs.",
+    "primaryCta": "Start a conversation",
+    "secondaryCta": "Explore services"
   },
   "footer": {
     "description": "Transforming ideas into products that drive real business growth.",

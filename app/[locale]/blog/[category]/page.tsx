@@ -11,6 +11,7 @@ import { getPlainTextFromRichText, getAssetUrl } from '@/lib/utils/contentful'
 import { FileX, ArrowLeft } from 'lucide-react'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import Link from 'next/link'
+import { BlogHeroSection } from '@/components/sections/BlogHeroSection'
 
 interface CategoryPageProps {
   params: {
@@ -54,44 +55,31 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       <div className="min-h-screen text-white bg-dark-blue">
         <Header />
 
-        {/* Hero Section */}
-        <section className="relative">
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-80"
-            style={{ backgroundImage: "url('/aurora-bg.webp')" }}
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent from-70% to-dark-blue z-[1]" />
-
-          {/* Hero Content */}
-          <div className="max-w-7xl mx-auto relative z-10">
-            <div className="px-6 lg:px-12 pt-32 pb-24 relative">
-              <div className="max-w-4xl">
-                <div className="flex items-center mb-6">
-                  {category.fields.icon && (
-                    <img
-                      src={category.fields.icon.fields.file?.url}
-                      alt=""
-                      className="w-12 h-12 mr-4 rounded-lg"
-                    />
-                  )}
-                  <h1 className="text-4xl lg:text-6xl font-bold leading-tight text-balance font-heading">
-                    {category.fields.title}
-                  </h1>
-                </div>
-
-                {category.fields.description && (
-                  <div className="text-lg lg:text-xl text-gray-300 leading-relaxed max-w-3xl">
-                    {typeof category.fields.description === 'string'
-                      ? category.fields.description
-                      : <RichTextRenderer content={category.fields.description} />
-                    }
-                  </div>
-                )}
-              </div>
+        <BlogHeroSection>
+          <div className="max-w-4xl">
+            <div className="mb-6 flex items-center">
+              {category.fields.icon && (
+                <img
+                  src={category.fields.icon.fields.file?.url}
+                  alt=""
+                  className="mr-4 h-12 w-12 rounded-lg"
+                />
+              )}
+              <h1 className="text-4xl font-bold leading-tight text-balance font-heading lg:text-6xl">
+                {category.fields.title}
+              </h1>
             </div>
+
+            {category.fields.description && (
+              <div className="max-w-3xl text-lg leading-relaxed text-gray-300 lg:text-xl">
+                {typeof category.fields.description === 'string'
+                  ? category.fields.description
+                  : <RichTextRenderer content={category.fields.description} />
+                }
+              </div>
+            )}
           </div>
-        </section>
+        </BlogHeroSection>
 
         <main className="relative max-w-7xl mx-auto px-6 lg:px-12 py-16">
           {/* Breadcrumb */}

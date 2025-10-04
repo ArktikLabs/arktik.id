@@ -15,24 +15,28 @@ interface BreadcrumbProps {
 
 export function Breadcrumb({ items, className }: BreadcrumbProps) {
   return (
-    <nav className={cn("flex items-center space-x-2 text-sm", className)}>
+    <nav className={cn("flex min-w-0 items-center space-x-2 text-sm", className)}>
       {items.map((item, index) => (
-        <div key={index} className="flex items-center space-x-2">
+        <div key={index} className="flex items-center space-x-2 min-w-0">
           {index > 0 && <ChevronRight className="w-4 h-4 text-gray-400" />}
 
           {item.href && !item.isActive ? (
             <Link
               href={item.href}
-              className="text-gray-400 hover:text-lime-green transition-colors"
+              className="block min-w-0 truncate text-gray-400 transition-colors hover:text-lime-green"
+              title={item.label}
             >
               {item.label}
             </Link>
           ) : (
             <span className={cn(
+              "block min-w-0 truncate",
               item.isActive
                 ? "text-lime-green"
                 : "text-gray-400"
-            )}>
+            )}
+              title={item.label}
+            >
               {item.label}
             </span>
           )}

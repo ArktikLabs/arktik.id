@@ -179,6 +179,21 @@
       "subtitle": "Wawasan dan update terbaru dari tim ahli kami."
     }
   },
+  "caseStudiesPage": {
+    "metadata": {
+      "title": "Studi Kasus | Arktik",
+      "description": "Kisah kolaborasi dan produk yang kami bangun untuk mendorong pertumbuhan bisnis."
+    },
+    "hero": {
+      "title": "Studi Kasus",
+      "description": "Pelajari bagaimana kami bermitra dengan tim untuk merancang, membangun, dan menumbuhkan produk digital yang memberikan hasil terukur."
+    },
+    "emptyState": {
+      "title": "Studi kasus segera hadir",
+      "description": "Kami sedang menyiapkan cerita detail tentang bagaimana kami membantu mitra mencapai sukses. Kunjungi kembali nanti atau jelajahi insight lain di blog.",
+      "backToBlog": "Kembali ke Blog"
+    }
+  },
   "cards": {
     "project": "Proyek",
     "anonymous": "Anonim",
@@ -199,6 +214,13 @@
     "guides": "Panduan",
     "relatedArticles": "Artikel Terkait",
     "readingTime": "{minutes} menit baca"
+  },
+  "postCta": {
+    "badge": "Mari Berdiskusi",
+    "title": "Siap membangun produk berikutnya?",
+    "description": "Butuh partner yang gesit atau tim yang bisa tumbuh bersama? Kami membantu mengubah ide ambisius menjadi software yang benar-benar bekerja.",
+    "primaryCta": "Mulai percakapan",
+    "secondaryCta": "Lihat layanan"
   },
   "footer": {
     "description": "Mengubah ide menjadi produk yang mendorong pertumbuhan bisnis nyata.",

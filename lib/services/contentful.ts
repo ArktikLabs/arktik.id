@@ -259,6 +259,7 @@ export async function getCaseStudyBySlug(slug: string, locale?: string): Promise
   }
 }
 
+
 // Authors
 export async function getAuthors(locale?: string): Promise<AuthorEntry[]> {
   try {

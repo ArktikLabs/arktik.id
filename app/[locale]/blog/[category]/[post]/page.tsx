@@ -7,6 +7,8 @@ import { Header } from '@/components/sections/Header'
 import { FooterSection } from '@/components/sections/FooterSection'
 import { ChevronRight, Calendar, Clock, User, Tag } from 'lucide-react'
 import Link from 'next/link'
+import { PostCtaSection } from '@/components/blog/PostCtaSection'
+import { getTranslations } from 'next-intl/server'
 
 interface BlogPostPageProps {
   params: {
@@ -36,26 +38,31 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { locale, category: categorySlug, post: postSlug } = await params
 
   try {
-    const post = await getBlogPostBySlug(categorySlug, postSlug, locale)
+    const [post, relatedData, postCtaT] = await Promise.all([
+      getBlogPostBySlug(categorySlug, postSlug, locale),
+      getBlogPosts({ categorySlug, locale, limit: 3 }),
+      getTranslations('postCta'),
+    ])
 
     if (!post) {
       notFound()
     }
 
-    const { posts: relatedPosts } = await getBlogPosts({
-      categorySlug,
-      locale,
-      limit: 3,
-    })
-
-    // Filter out current post from related posts
-    const filteredRelatedPosts = relatedPosts.filter(
+    const filteredRelatedPosts = relatedData.posts.filter(
       (relatedPost) => relatedPost.sys.id !== post.sys.id
     )
 
     const category = post.fields.category.fields
     const author = post.fields.author?.fields
     const pillar = post.fields.pillar?.fields
+
+    const postCtaContent = {
+      badge: postCtaT('badge'),
+      title: post.fields.ctaTitle ?? postCtaT('title'),
+      description: post.fields.ctaDescription ?? postCtaT('description'),
+      primaryCta: postCtaT('primaryCta'),
+      secondaryCta: postCtaT('secondaryCta'),
+    }
 
     return (
       <div className="min-h-screen text-white bg-dark-blue">
@@ -165,11 +172,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <RichTextRenderer content={post.fields.body} />
             </div>
 
-            {/* Author Bio */}
-            {author && (
-              <div className="bg-gray-900 rounded-lg p-6 mb-16">
-                <div className="flex items-start space-x-4">
-                  {author.avatar && (
+          {/* Author Bio */}
+          {author && (
+            <div className="bg-gray-900 rounded-lg p-6 mb-16">
+              <div className="flex items-start space-x-4">
+                {author.avatar && (
                     <img
                       src={author.avatar.fields.file?.url}
                       alt={author.name}
@@ -182,12 +189,23 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                       <p className="text-gray-300">{author.bio}</p>
                     )}
                   </div>
-                </div>
               </div>
-            )}
-          </article>
+            </div>
+          )}
+        </article>
 
-          {/* Related Posts */}
+        <div className="max-w-4xl mx-auto mb-16">
+          <PostCtaSection
+            locale={locale}
+            badge={postCtaContent.badge}
+            title={postCtaContent.title}
+            description={postCtaContent.description}
+            primaryCta={postCtaContent.primaryCta}
+            secondaryCta={postCtaContent.secondaryCta}
+          />
+        </div>
+
+        {/* Related Posts */}
           {filteredRelatedPosts.length > 0 && (
             <section className="max-w-6xl mx-auto">
               <h2 className="text-3xl font-bold mb-8">More from {category.title}</h2>

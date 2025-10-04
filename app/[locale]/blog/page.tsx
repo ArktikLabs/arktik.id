@@ -7,7 +7,8 @@ import { CategoryCard } from '@/components/blog/CategoryCard'
 import { PillarCard } from '@/components/blog/PillarCard'
 import { Header } from '@/components/sections/Header'
 import { FooterSection } from '@/components/sections/FooterSection'
-import { ArrowRight, BookOpen, Users, Calendar } from 'lucide-react'
+import { BlogHeroSection } from '@/components/sections/BlogHeroSection'
+import { BookOpen, Users, Calendar } from 'lucide-react'
 
 interface BlogPageProps {
   params: { locale: string }
@@ -38,47 +39,38 @@ export default async function BlogPage({ params }: BlogPageProps) {
       notFound()
     }
 
+    const stats = [
+      { icon: Users, count: recentPosts.length, label: t('stats.articles') },
+      { icon: BookOpen, count: pillars.length, label: t('stats.guides') },
+      { icon: Calendar, count: categories.length, label: t('stats.categories') },
+    ].filter((stat) => stat.count > 0)
+
     return (
       <div className="min-h-screen text-white bg-dark-blue">
         <Header />
 
-        {/* Hero Section */}
-        <section className="relative">
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-80"
-            style={{ backgroundImage: "url('/aurora-bg.webp')" }}
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent from-70% to-dark-blue z-[1]" />
-
-          {/* Hero Content */}
-          <div className="max-w-7xl mx-auto relative z-10">
-            <div className="px-6 lg:px-12 pt-32 pb-24 relative">
-              <div className="max-w-4xl">
-                <h1 className="text-4xl lg:text-6xl font-bold leading-tight text-balance font-heading">
-                  {t('hero.title')}
-                </h1>
-                <p className="text-lg lg:text-xl text-gray-300 mt-6 leading-relaxed">
-                  {t('hero.description')}
-                </p>
-                <div className="flex items-center space-x-8 mt-8 text-sm text-gray-400">
-                  <div className="flex items-center space-x-2">
-                    <Users className="w-4 h-4" />
-                    <span>{recentPosts.length} {t('stats.articles')}</span>
+        <BlogHeroSection>
+          <div className="max-w-4xl">
+            <h1 className="text-4xl font-bold leading-tight text-balance font-heading lg:text-6xl">
+              {t('hero.title')}
+            </h1>
+            <p className="mt-6 text-lg leading-relaxed text-gray-300 lg:text-xl">
+              {t('hero.description')}
+            </p>
+            {stats.length > 0 && (
+              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-gray-400 sm:flex-nowrap">
+                {stats.map(({ icon: Icon, count, label }) => (
+                  <div key={label} className="flex items-center gap-2">
+                    <Icon className="h-4 w-4" />
+                    <span>
+                      {count} {label}
+                    </span>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <BookOpen className="w-4 h-4" />
-                    <span>{pillars.length} {t('stats.guides')}</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Calendar className="w-4 h-4" />
-                    <span>{categories.length} {t('stats.categories')}</span>
-                  </div>
-                </div>
+                ))}
               </div>
-            </div>
+            )}
           </div>
-        </section>
+        </BlogHeroSection>
 
         <main className="relative max-w-7xl mx-auto px-6 lg:px-12 py-16">
 

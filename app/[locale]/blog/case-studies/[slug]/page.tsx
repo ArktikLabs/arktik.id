@@ -4,8 +4,10 @@ import { getCaseStudyBySlug, getCaseStudies } from '@/lib/services/contentful'
 import { RichTextRenderer } from '@/components/blog/RichTextRenderer'
 import { Header } from '@/components/sections/Header'
 import { FooterSection } from '@/components/sections/FooterSection'
-import { ChevronRight, Calendar, Building, CheckCircle } from 'lucide-react'
+import { ChevronRight, Calendar, Building } from 'lucide-react'
 import Link from 'next/link'
+import { PostCtaSection } from '@/components/blog/PostCtaSection'
+import { getTranslations } from 'next-intl/server'
 
 interface CaseStudyPageProps {
   params: {
@@ -34,21 +36,30 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   const { locale, slug } = await params
 
   try {
-    const caseStudy = await getCaseStudyBySlug(slug, locale)
+    const [caseStudy, related, postCtaT] = await Promise.all([
+      getCaseStudyBySlug(slug, locale),
+      getCaseStudies({ locale, limit: 3 }),
+      getTranslations('postCta'),
+    ])
 
     if (!caseStudy) {
       notFound()
     }
 
-    const { caseStudies: relatedCaseStudies } = await getCaseStudies({
-      locale,
-      limit: 3,
-    })
+    const { caseStudies: relatedCaseStudies } = related
 
     // Filter out current case study
     const filteredRelated = relatedCaseStudies.filter(
       (cs) => cs.sys.id !== caseStudy.sys.id
     )
+
+    const postCtaContent = {
+      badge: postCtaT('badge'),
+      title: caseStudy.fields.ctaTitle ?? postCtaT('title'),
+      description: caseStudy.fields.ctaDescription ?? postCtaT('description'),
+      primaryCta: postCtaT('primaryCta'),
+      secondaryCta: postCtaT('secondaryCta'),
+    }
 
     return (
       <div className="min-h-screen text-white bg-dark-blue">
@@ -142,6 +153,17 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               </section>
             )}
           </article>
+
+          <div className="max-w-4xl mx-auto mt-16">
+            <PostCtaSection
+              locale={locale}
+              badge={postCtaContent.badge}
+              title={postCtaContent.title}
+              description={postCtaContent.description}
+              primaryCta={postCtaContent.primaryCta}
+              secondaryCta={postCtaContent.secondaryCta}
+            />
+          </div>
 
           {/* Related Case Studies */}
           {filteredRelated.length > 0 && (

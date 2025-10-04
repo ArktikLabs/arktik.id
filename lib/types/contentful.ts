@@ -40,6 +40,8 @@ export interface BlogPost extends ContentfulBase {
   tags?: string[]
   seoTitle?: string
   seoDescription?: string
+  ctaTitle?: string
+  ctaDescription?: string
 }
 
 // Pillar Page content type
@@ -53,6 +55,8 @@ export interface PillarPage extends ContentfulBase {
   featuredImage?: Asset
   seoTitle?: string
   seoDescription?: string
+  ctaTitle?: string
+  ctaDescription?: string
 }
 
 // Case Study content type
@@ -68,6 +72,8 @@ export interface CaseStudy extends ContentfulBase {
   featuredImage?: Asset
   seoTitle?: string
   seoDescription?: string
+  ctaTitle?: string
+  ctaDescription?: string
 }
 
 // Contentful API response types
