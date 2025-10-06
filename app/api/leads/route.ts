@@ -11,6 +11,7 @@ type LeadPayload = {
   referrer?: string;
   userAgent?: string;
   eventId?: string;
+  locale?: string;
 };
 
 export async function POST(request: Request) {

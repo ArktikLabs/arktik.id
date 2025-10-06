@@ -108,6 +108,7 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
         userAgent:
           typeof navigator !== "undefined" ? navigator.userAgent : undefined,
         eventId,
+        locale,
       };
       const json = JSON.stringify(payload);
       if (typeof navigator !== "undefined" && "sendBeacon" in navigator) {
