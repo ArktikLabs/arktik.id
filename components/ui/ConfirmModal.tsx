@@ -15,6 +15,7 @@ interface ConfirmModalProps {
   onCancel: () => void;
   confirmDisabled?: boolean;
   className?: string;
+  locale?: string;
 }
 
 export function ConfirmModal({
@@ -28,6 +29,7 @@ export function ConfirmModal({
   onCancel,
   confirmDisabled,
   className,
+  locale,
 }: ConfirmModalProps) {
   const confirmRef = useRef<HTMLButtonElement | null>(null);
 
@@ -78,7 +80,7 @@ export function ConfirmModal({
               type="button"
               variant="outline"
               onClick={onCancel}
-              className="border-gray-700 text-gray-200 hover:bg-slate-800 generate_lead_modal_cancel"
+              className={`border-gray-700 text-gray-200 hover:bg-slate-800 generate_lead_modal_cancel${locale ? `_${locale}` : ''}`}
             >
               {cancelText}
             </Button>
@@ -87,7 +89,7 @@ export function ConfirmModal({
               ref={confirmRef}
               onClick={onConfirm}
               disabled={!!confirmDisabled}
-              className="bg-lime-green text-slate-900 hover:bg-lime-green/90 generate_lead_modal_confirm"
+              className={`bg-lime-green text-slate-900 hover:bg-lime-green/90 generate_lead_modal_confirm${locale ? `_${locale}` : ''}`}
             >
               {confirmText}
             </Button>

@@ -181,7 +181,7 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
               }
             >
               <Mail className="w-5 h-5 text-lime-green group-hover:text-lime-green" />
-              <span className="contact_email_link">hello@arktik.id</span>
+              <span className={`contact_email_link_${locale}`}>hello@arktik.id</span>
             </a>
             <a
               href="https://wa.me/6285117697889"
@@ -196,7 +196,7 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
               }
             >
               <MessageCircle className="w-5 h-5 text-lime-green group-hover:text-lime-green" />
-              <span className="contact_whatsapp_link">+62 851-1769-7889</span>
+              <span className={`contact_whatsapp_link_${locale}`}>+62 851-1769-7889</span>
             </a>
           </div>
         </div>
@@ -269,7 +269,7 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
                 variant="small"
                 disabled={isSubmitting}
                 aria-disabled={isSubmitting}
-                className="generate_lead_cta"
+                className={`generate_lead_cta_${locale}`}
               >
                 {t('form.sendButton')}
               </CTAButton>
@@ -285,6 +285,7 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
           title={t('modal.title')}
           description={t('modal.description')}
           confirmText={isSubmitting ? t('modal.confirmingText') : t('modal.confirmText')}
+          locale={locale}
         >
           {buildWhatsappMessage()}
         </ConfirmModal>
