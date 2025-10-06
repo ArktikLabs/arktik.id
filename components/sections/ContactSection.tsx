@@ -8,10 +8,11 @@ import { Underline } from "@/components/ui/underline";
 import { useState } from "react";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { ConfirmModal } from "@/components/ui/ConfirmModal";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export function ContactSection() {
   const t = useTranslations('contact')
+  const locale = useLocale()
 
   const [formData, setFormData] = useState({
     name: "",
@@ -43,12 +44,12 @@ export function ContactSection() {
         if (!already) {
           setLeadStarted(true);
           window.sessionStorage.setItem(startedKey, "1");
-          sendGTMEvent({ event: "lead_form_start", form: "contact" });
+          sendGTMEvent({ event: "lead_form_start", form: "contact", locale });
         }
       } catch {
         // sessionStorage might be unavailable; still send event once
         setLeadStarted(true);
-        sendGTMEvent({ event: "lead_form_start", form: "contact" });
+        sendGTMEvent({ event: "lead_form_start", form: "contact", locale });
       }
     }
   };
@@ -130,6 +131,7 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
         cta: "send_message",
         label: "contact_form_whatsapp",
         event_id: eventId,
+        locale,
       });
     } catch {
       // no-op
@@ -148,6 +150,7 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
       method: "whatsapp",
       form: "contact",
       label: "confirm_cancel",
+      locale,
     });
   };
 
@@ -173,6 +176,7 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
               onClick={() =>
                 sendGTMEvent({
                   event: "contact_click_email",
+                  locale,
                 })
               }
             >
@@ -187,6 +191,7 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
               onClick={() =>
                 sendGTMEvent({
                   event: "contact_click_whatsapp",
+                  locale,
                 })
               }
             >
