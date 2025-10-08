@@ -225,5 +225,14 @@
   "footer": {
     "description": "Mengubah ide menjadi produk yang mendorong pertumbuhan bisnis nyata.",
     "copyright": "© {year} Arktik. Semua hak dilindungi."
+  },
+  "showcase": {
+    "viewport": {
+      "mobile": "Mobile",
+      "tablet": "Tablet",
+      "desktop": "Desktop"
+    },
+    "viewingIn": "Sedang melihat dalam mode",
+    "mode": ""
   }
 }

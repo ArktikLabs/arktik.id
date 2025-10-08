@@ -225,5 +225,14 @@
   "footer": {
     "description": "Transforming ideas into products that drive real business growth.",
     "copyright": "© {year} Arktik. All rights reserved."
+  },
+  "showcase": {
+    "viewport": {
+      "mobile": "Mobile",
+      "tablet": "Tablet",
+      "desktop": "Desktop"
+    },
+    "viewingIn": "Viewing in",
+    "mode": "mode"
   }
 }

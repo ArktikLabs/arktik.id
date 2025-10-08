@@ -1,22 +1,20 @@
 import { WorkCard } from "@/components/cards/WorkCard";
 import { Underline } from "@/components/ui/underline";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { getAllShowcases } from "@/lib/data/showcases";
 
 export function WorksSection() {
   const t = useTranslations('works');
+  const locale = useLocale();
+  const showcases = getAllShowcases();
+
   const works = [
-    {
-      title: "Lenggah",
-      href: "https://lenggah.com",
-      imageSrc: "/portofolio/lenggah.webp",
+    ...showcases.map(showcase => ({
+      title: showcase.title,
+      href: locale === 'id' ? `/showcase/${showcase.slug}` : `/${locale}/showcase/${showcase.slug}`,
+      imageSrc: showcase.thumbnail || "/portofolio/default.webp",
       isImageCard: true,
-    },
-    {
-      title: "Mata Screen Print",
-      href: "https://matascreenprint.com",
-      imageSrc: "/portofolio/matascreenprint.webp",
-      isImageCard: true,
-    },
+    })),
     {
       title: t('cta.title'),
       href: "#contact",
