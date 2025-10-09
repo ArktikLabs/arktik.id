@@ -56,14 +56,14 @@ export function ShowcaseViewer({ title, link, activeViewport = 'desktop' }: Show
           }}
         >
           {/* Browser Chrome */}
-          <div className="bg-gray-700 px-4 py-2 flex items-center gap-2 border-b border-gray-600">
+          <div className="bg-gray-700 px-4 py-2 flex items-center border-b border-gray-600 relative">
             <div className="flex gap-2">
               <div className="w-3 h-3 bg-red-500 rounded-full"></div>
               <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
             </div>
-            <div className="flex-1 text-center">
-              <span className="text-xs text-gray-300 truncate">{link}</span>
+            <div className="absolute inset-x-0 flex justify-center pointer-events-none">
+              <span className="text-xs text-gray-300 truncate max-w-[60%]">{link}</span>
             </div>
           </div>
 

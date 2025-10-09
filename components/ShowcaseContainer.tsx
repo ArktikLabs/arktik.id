@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Link } from '@/i18n/routing';
 import { ShowcaseViewer } from './ShowcaseViewer';
+import Image from 'next/image';
 
 interface ShowcaseContainerProps {
   title: string;
@@ -70,9 +71,16 @@ export function ShowcaseContainer({ title, link }: ShowcaseContainerProps) {
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-6 lg:px-12">
           <Link
             href="/"
-            className="inline-flex items-center text-white/80 hover:text-white transition-all duration-200 text-sm font-medium"
+            className="cursor-pointer"
+            aria-label="Go to homepage"
           >
-            ← Back to Homepage
+            <Image
+              src="/assets/logo.svg"
+              alt="arktik"
+              width={0}
+              height={40}
+              className="h-9 w-auto"
+            />
           </Link>
 
           <div className="flex items-center gap-6">
