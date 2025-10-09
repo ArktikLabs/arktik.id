@@ -8,7 +8,7 @@ export function FooterSection() {
       {/* Full viewport width logo with gradient fade */}
       <div className="w-full">
         <Image
-          src="/logo.svg"
+          src="/assets/logo.svg"
           alt="arktik"
           width={0}
           height={0}
@@ -29,7 +29,7 @@ export function FooterSection() {
           {/* Description section */}
           <div className="mb-16">
             <p className="text-gray-400 text-lg leading-relaxed">
-              {t('description')}
+              {t("description")}
             </p>
           </div>
 
@@ -37,7 +37,7 @@ export function FooterSection() {
           <div className="flex justify-between items-center relative z-10">
             <div className="flex items-center space-x-4">
               <p className="text-gray-500 text-sm">
-                {t('copyright', { year: new Date().getFullYear() })}
+                {t("copyright", { year: new Date().getFullYear() })}
               </p>
             </div>
 

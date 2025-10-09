@@ -130,13 +130,9 @@ export function Header() {
       }}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-6 lg:px-12">
-        <Link
-          href="/"
-          className="cursor-pointer"
-          aria-label="Go to homepage"
-        >
+        <Link href="/" className="cursor-pointer" aria-label="Go to homepage">
           <Image
-            src="/logo.svg"
+            src="/assets/logo.svg"
             alt="arktik"
             width={0}
             height={40}
@@ -155,59 +151,84 @@ export function Header() {
           />
           <a
             ref={aboutUsRef}
-            href={isBlogPage ? (pathname?.startsWith('/en') ? '/en#about-us' : '/id#about-us') : '#about-us'}
+            href={
+              isBlogPage
+                ? pathname?.startsWith("/en")
+                  ? "/en#about-us"
+                  : "/id#about-us"
+                : "#about-us"
+            }
             className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
               activeSection === "about-us"
                 ? "text-lime-green"
                 : "text-white hover:text-lime-green hover:bg-lime-green/10"
             }`}
           >
-            {t('aboutUs')}
+            {t("aboutUs")}
           </a>
           <a
             ref={servicesRef}
-            href={isBlogPage ? (pathname?.startsWith('/en') ? '/en#services' : '/id#services') : '#services'}
+            href={
+              isBlogPage
+                ? pathname?.startsWith("/en")
+                  ? "/en#services"
+                  : "/id#services"
+                : "#services"
+            }
             className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
               activeSection === "services"
                 ? "text-lime-green"
                 : "text-white hover:text-lime-green hover:bg-lime-green/10"
             }`}
           >
-            {t('services')}
+            {t("services")}
           </a>
           <a
             ref={whyArktikRef}
-            href={isBlogPage ? (pathname?.startsWith('/en') ? '/en#why-arktik' : '/id#why-arktik') : '#why-arktik'}
+            href={
+              isBlogPage
+                ? pathname?.startsWith("/en")
+                  ? "/en#why-arktik"
+                  : "/id#why-arktik"
+                : "#why-arktik"
+            }
             className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
               activeSection === "why-arktik"
                 ? "text-lime-green"
                 : "text-white hover:text-lime-green hover:bg-lime-green/10"
             }`}
           >
-            {t('whyArktik')}
+            {t("whyArktik")}
           </a>
           <a
             ref={portfolioRef}
-            href={isBlogPage ? (pathname?.startsWith('/en') ? '/en#portfolio' : '/id#portfolio') : '#portfolio'}
+            href={
+              isBlogPage
+                ? pathname?.startsWith("/en")
+                  ? "/en#portfolio"
+                  : "/id#portfolio"
+                : "#portfolio"
+            }
             className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
               activeSection === "portfolio"
                 ? "text-lime-green"
                 : "text-white hover:text-lime-green hover:bg-lime-green/10"
             }`}
           >
-            {t('portfolio')}
+            {t("portfolio")}
           </a>
           {isBlogPage ? (
             <Link
               ref={blogRef}
-              href={pathname?.startsWith('/en') ? '/en/blog' : '/id/blog'}
+              href={pathname?.startsWith("/en") ? "/en/blog" : "/id/blog"}
               className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
-                pathname?.startsWith('/en/blog') || pathname?.startsWith('/id/blog')
-                  ? 'text-lime-green bg-lime-green/10'
-                  : 'text-white hover:text-lime-green hover:bg-lime-green/10'
+                pathname?.startsWith("/en/blog") ||
+                pathname?.startsWith("/id/blog")
+                  ? "text-lime-green bg-lime-green/10"
+                  : "text-white hover:text-lime-green hover:bg-lime-green/10"
               }`}
             >
-              {t('blog')}
+              {t("blog")}
             </Link>
           ) : (
             <a
@@ -219,7 +240,7 @@ export function Header() {
                   : "text-white hover:text-lime-green hover:bg-lime-green/10"
               }`}
             >
-              {t('blog')}
+              {t("blog")}
             </a>
           )}
         </nav>
@@ -230,7 +251,9 @@ export function Header() {
             onClick={() => {
               if (isBlogPage) {
                 // Redirect to homepage contact section
-                const homeUrl = pathname?.startsWith('/en') ? '/en#contact' : '/id#contact';
+                const homeUrl = pathname?.startsWith("/en")
+                  ? "/en#contact"
+                  : "/id#contact";
                 window.location.href = homeUrl;
               } else {
                 // Scroll to contact section on current page
@@ -240,7 +263,7 @@ export function Header() {
               }
             }}
           >
-            {t('contact')}
+            {t("contact")}
           </CTAButton>
           <LanguageSwitcher />
         </div>

@@ -41,8 +41,8 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL("https://www.arktik.id"),
-    title: t('common.title'),
-    description: t('common.description'),
+    title: t("common.title"),
+    description: t("common.description"),
     keywords: [
       "custom software development",
       "software development company",
@@ -70,17 +70,18 @@ export async function generateMetadata({
     },
     openGraph: {
       type: "website",
-      locale: locale === 'id' ? "id_ID" : "en_US",
-      url: locale === 'id' ? "https://www.arktik.id" : "https://www.arktik.id/en",
+      locale: locale === "id" ? "id_ID" : "en_US",
+      url:
+        locale === "id" ? "https://www.arktik.id" : "https://www.arktik.id/en",
       siteName: "Arktik",
-      title: t('common.title'),
-      description: t('common.description'),
+      title: t("common.title"),
+      description: t("common.description"),
       images: [
         {
-          url: locale === 'id' ? "/og-id.webp" : "/og-en.webp",
+          url: locale === "id" ? "/assets/og-id.webp" : "/assets/og-en.webp",
           width: 1200,
           height: 630,
-          alt: t('common.title'),
+          alt: t("common.title"),
         },
       ],
       emails: ["hello@arktik.id"],
@@ -89,21 +90,24 @@ export async function generateMetadata({
     twitter: {
       site: "@arktiklabs",
       card: "summary_large_image",
-      title: t('common.title'),
-      description: t('common.description'),
-      images: [locale === 'id' ? "/og-id.webp" : "/og-en.webp"],
+      title: t("common.title"),
+      description: t("common.description"),
+      images: [locale === "id" ? "/assets/og-id.webp" : "/assets/og-en.webp"],
       creator: "@arktiklabs",
     },
-    abstract: t('common.description'),
+    abstract: t("common.description"),
     category: "technology",
     classification: "software development",
     alternates: {
-      canonical: locale === 'id' ? "https://www.arktik.id" : `https://www.arktik.id/${locale}`,
+      canonical:
+        locale === "id"
+          ? "https://www.arktik.id"
+          : `https://www.arktik.id/${locale}`,
       languages: {
-        'id': 'https://www.arktik.id',
-        'en': 'https://www.arktik.id/en',
-        'x-default': 'https://www.arktik.id'
-      }
+        id: "https://www.arktik.id",
+        en: "https://www.arktik.id/en",
+        "x-default": "https://www.arktik.id",
+      },
     },
     icons: {
       icon: [

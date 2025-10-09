@@ -33,7 +33,7 @@ export function HeroSection() {
     <section className="relative">
       <div
         className="absolute inset-0 bg-cover bg-center opacity-80"
-        style={{ backgroundImage: "url('/aurora-bg.webp')" }}
+        style={{ backgroundImage: "url('/assets/aurora-bg.webp')" }}
       />
 
       <div className="absolute inset-0 bg-gradient-to-b from-transparent from-70% to-dark-blue z-[1]" />
@@ -44,11 +44,12 @@ export function HeroSection() {
           <div className="flex items-start justify-between w-full gap-12">
             <div className="max-w-4xl">
               <h1 className="text-4xl lg:text-6xl font-bold leading-tight text-balance font-heading">
-                {t('buildingTitle')} <FlipWords words={words} className="text-lime-green" />{" "}
-                {t('softwareSolutions')}
+                {t("buildingTitle")}{" "}
+                <FlipWords words={words} className="text-lime-green" />{" "}
+                {t("softwareSolutions")}
               </h1>
               <p className="text-lg lg:text-xl text-gray-300 mt-6 leading-relaxed">
-                {t('description')}
+                {t("description")}
               </p>
             </div>
             <div className="hidden lg:block flex-shrink-0">
@@ -75,7 +76,7 @@ export function HeroSection() {
             }}
             className="text-gray-400 text-xs font-light text-center hover:text-lime-green transition-colors duration-300 cursor-pointer font-sans tracking-wide uppercase lg:order-2"
           >
-            {t('scrollToExplore')}
+            {t("scrollToExplore")}
           </button>
           <div className="relative w-px h-12 bg-gradient-to-b from-lime-green via-lime-green/75 to-lime-green/50 overflow-hidden lg:order-1">
             <div

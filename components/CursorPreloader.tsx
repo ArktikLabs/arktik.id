@@ -11,13 +11,13 @@ export function CursorPreloader() {
         style.id = 'custom-cursor-styles'
         style.textContent = `
           html, body, body * {
-            cursor: url('/cursor.svg') 4 4, auto !important;
+            cursor: url('/assets/cursor.svg') 4 4, auto !important;
           }
           
           body a, body button, body [role="button"], body input[type="submit"], body input[type="button"], body .cursor-pointer {
-            cursor: url('/cursor-hover.svg') 8 8, pointer !important;
+            cursor: url('/assets/cursor-hover.svg') 8 8, pointer !important;
           }
-        `
+        `;
         
         document.head.appendChild(style)
       }

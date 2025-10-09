@@ -79,10 +79,10 @@ export default async function PillarPage({ params }: PillarPageProps) {
         <Header />
 
         <BlogHeroSection
-          imageUrl={heroImage ?? '/aurora-bg.webp'}
+          imageUrl={heroImage ?? "/assets/aurora-bg.webp"}
           className="min-h-[320px] md:min-h-[380px]"
           containerClassName="pt-28 pb-16"
-          imageClassName={heroImage ? 'opacity-90' : undefined}
+          imageClassName={heroImage ? "opacity-90" : undefined}
         />
 
         <main className="relative max-w-7xl mx-auto px-6 lg:px-12 py-16">
@@ -90,9 +90,12 @@ export default async function PillarPage({ params }: PillarPageProps) {
           <Breadcrumb
             items={[
               { label: "Blog", href: `/${locale}/blog` },
-              { label: category.title, href: `/${locale}/blog/${categorySlug}` },
-              { label: t('guides'), href: `/${locale}/blog/${categorySlug}` },
-              { label: pillar.fields.title, isActive: true }
+              {
+                label: category.title,
+                href: `/${locale}/blog/${categorySlug}`,
+              },
+              { label: t("guides"), href: `/${locale}/blog/${categorySlug}` },
+              { label: pillar.fields.title, isActive: true },
             ]}
             className="mb-12"
           />
@@ -104,29 +107,31 @@ export default async function PillarPage({ params }: PillarPageProps) {
               <div className="mb-6 flex flex-wrap items-center gap-4 text-sm font-medium text-lime-green">
                 <div className="inline-flex items-center gap-2">
                   <BookOpen className="h-5 w-5" />
-                  <span>{t('completeGuide')}</span>
+                  <span>{t("completeGuide")}</span>
                 </div>
                 <div className="flex items-center gap-2 text-gray-400">
                   <Calendar className="h-4 w-4" />
                   <span>
                     {new Date(pillar.sys.createdAt).toLocaleDateString(
-                      locale === 'id' ? 'id-ID' : 'en-US',
+                      locale === "id" ? "id-ID" : "en-US",
                       {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
                       }
                     )}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 text-gray-400">
                   <Clock className="h-4 w-4" />
-                  <span>{t('readingTime', { minutes: readingTime })}</span>
+                  <span>{t("readingTime", { minutes: readingTime })}</span>
                 </div>
                 {pillar.fields.author?.fields?.name && (
                   <div className="flex items-center gap-2 text-gray-400">
                     <span>by</span>
-                    <span className="text-lime-green">{pillar.fields.author.fields.name}</span>
+                    <span className="text-lime-green">
+                      {pillar.fields.author.fields.name}
+                    </span>
                   </div>
                 )}
               </div>
@@ -146,7 +151,7 @@ export default async function PillarPage({ params }: PillarPageProps) {
             </div>
           </article>
 
-        <div className="mb-16">
+          <div className="mb-16">
             <PostCtaSection
               locale={locale}
               badge={postCtaContent.badge}
@@ -160,7 +165,9 @@ export default async function PillarPage({ params }: PillarPageProps) {
           {/* Related Posts */}
           {relatedPosts.length > 0 && (
             <section>
-              <h2 className="text-3xl font-bold mb-8">{t('relatedArticles')}</h2>
+              <h2 className="text-3xl font-bold mb-8">
+                {t("relatedArticles")}
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {relatedPosts.map((post) => (
                   <BlogPostCard key={post.sys.id} post={post} locale={locale} />
@@ -172,7 +179,7 @@ export default async function PillarPage({ params }: PillarPageProps) {
 
         <FooterSection />
       </div>
-    )
+    );
   } catch (error) {
     console.error('Error loading pillar page:', error)
     notFound()

@@ -12,29 +12,32 @@ export const showcases: Showcase[] = [
   {
     slug: "lenggah",
     title: "Lenggah",
-    description: "Modern e-commerce platform for premium Indonesian fashion and lifestyle products",
+    description:
+      "Modern e-commerce platform for premium Indonesian fashion and lifestyle products",
     link: "https://lenggah.com",
     category: "E-commerce",
     tags: ["E-commerce", "Fashion", "React", "Next.js"],
-    thumbnail: "/portofolio/lenggah.webp"
+    thumbnail: "/assets/portofolio/lenggah.webp",
   },
   {
     slug: "mata-screen-print",
     title: "Mata Screen Print",
-    description: "Professional screen printing services website with portfolio showcase and order management",
+    description:
+      "Professional screen printing services website with portfolio showcase and order management",
     link: "https://matascreenprint.com",
     category: "Business Website",
     tags: ["Business", "Portfolio", "Services", "WordPress"],
-    thumbnail: "/portofolio/matascreenprint.webp"
+    thumbnail: "/assets/portofolio/matascreenprint.webp",
   },
   {
     slug: "serenity-cove",
     title: "Serenity Cove Resort",
-    description: "Sophisticated luxury hotel landing page featuring modern asymmetrical design, scroll animations, and premium user experience",
+    description:
+      "Sophisticated luxury hotel landing page featuring modern asymmetrical design, scroll animations, and premium user experience",
     link: "https://hotel-landing-page-rouge.vercel.app/",
     category: "Web Development",
     tags: ["Hotel", "Luxury", "Landing Page", "Animations"],
-    thumbnail: "/portofolio/serenity-cove.webp"
+    thumbnail: "/assets/portofolio/serenity-cove.webp",
   },
 ];
 

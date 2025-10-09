@@ -43,6 +43,8 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Match internationalized pathnames and portfolio routes
-  matcher: ['/', '/(en|id)/:path*', '/portfolio/:path*']
+  // Match all routes except API routes, static files, and Next.js internals
+  matcher: [
+    '/((?!api|_next/static|_next/image|assets|favicon\\.ico|favicon\\.png|favicon\\.svg|robots.txt|sitemap.xml).*)'
+  ]
 };
