@@ -213,7 +213,11 @@
     "completeGuide": "Panduan Lengkap",
     "guides": "Panduan",
     "relatedArticles": "Artikel Terkait",
-    "readingTime": "{minutes} menit baca"
+    "readingTime": "{minutes} menit baca",
+    "notFound": "Panduan Tidak Ditemukan | Arktik",
+    "blog": "Blog",
+    "partOfGuide": "Bagian dari panduan lengkap kami:",
+    "moreFromCategory": "Lebih banyak dari {category}"
   },
   "postCta": {
     "badge": "Mari Berdiskusi",
@@ -221,6 +225,12 @@
     "description": "Butuh partner yang gesit atau tim yang bisa tumbuh bersama? Kami membantu mengubah ide ambisius menjadi software yang benar-benar bekerja.",
     "primaryCta": "Mulai percakapan",
     "secondaryCta": "Lihat layanan"
+  },
+  "postPage": {
+    "notFound": "Artikel Tidak Ditemukan | Arktik",
+    "blog": "Blog",
+    "partOfGuide": "Bagian dari panduan lengkap kami:",
+    "moreFromCategory": "Lebih banyak dari {category}"
   },
   "footer": {
     "description": "Mengubah ide menjadi produk yang mendorong pertumbuhan bisnis nyata.",

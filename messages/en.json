@@ -213,7 +213,11 @@
     "completeGuide": "Complete Guide",
     "guides": "Guides",
     "relatedArticles": "Related Articles",
-    "readingTime": "{minutes} min read"
+    "readingTime": "{minutes} min read",
+    "notFound": "Guide Not Found | Arktik",
+    "blog": "Blog",
+    "partOfGuide": "Part of our complete guide:",
+    "moreFromCategory": "More from {category}"
   },
   "postCta": {
     "badge": "Let's Talk",
@@ -221,6 +225,12 @@
     "description": "Whether you need a partner to ship fast or a team to scale with you, we help turn ambitious ideas into software that performs.",
     "primaryCta": "Start a conversation",
     "secondaryCta": "Explore services"
+  },
+  "postPage": {
+    "notFound": "Article Not Found | Arktik",
+    "blog": "Blog",
+    "partOfGuide": "Part of our complete guide:",
+    "moreFromCategory": "More from {category}"
   },
   "footer": {
     "description": "Transforming ideas into products that drive real business growth.",

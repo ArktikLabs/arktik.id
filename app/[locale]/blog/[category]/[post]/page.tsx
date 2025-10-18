@@ -5,153 +5,154 @@ import { RichTextRenderer } from '@/components/blog/RichTextRenderer'
 import { BlogPostCard } from '@/components/blog/BlogPostCard'
 import { Header } from '@/components/sections/Header'
 import { FooterSection } from '@/components/sections/FooterSection'
-import { ChevronRight, Calendar, Clock, User, Tag } from 'lucide-react'
-import Link from 'next/link'
-import { PostCtaSection } from '@/components/blog/PostCtaSection'
-import { getTranslations } from 'next-intl/server'
+import { BlogHeroSection } from "@/components/sections/BlogHeroSection";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
+import { Calendar, Clock, User, Tag } from "lucide-react";
+import Link from "next/link";
+import { PostCtaSection } from "@/components/blog/PostCtaSection";
+import { getTranslations } from "next-intl/server";
+import { calculateCombinedReadingTime } from "@/lib/utils/reading-time";
 
 interface BlogPostPageProps {
   params: {
-    locale: string
-    category: string
-    post: string
-  }
+    locale: string;
+    category: string;
+    post: string;
+  };
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const { locale, category: categorySlug, post: postSlug } = await params
-  const post = await getBlogPostBySlug(categorySlug, postSlug, locale)
+export async function generateMetadata({
+  params,
+}: BlogPostPageProps): Promise<Metadata> {
+  const { locale, category: categorySlug, post: postSlug } = await params;
+  const post = await getBlogPostBySlug(categorySlug, postSlug, locale);
+  const postT = await getTranslations("postPage");
 
   if (!post) {
     return {
-      title: 'Article Not Found | Arktik',
-    }
+      title: postT("notFound"),
+    };
   }
 
   return {
     title: post.fields.seoTitle || `${post.fields.title} | Arktik`,
     description: post.fields.seoDescription || post.fields.excerpt,
-  }
+  };
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { locale, category: categorySlug, post: postSlug } = await params
+  const { locale, category: categorySlug, post: postSlug } = await params;
 
   try {
-    const [post, relatedData, postCtaT] = await Promise.all([
+    const [post, relatedData, t, postCtaT, postT] = await Promise.all([
       getBlogPostBySlug(categorySlug, postSlug, locale),
       getBlogPosts({ categorySlug, locale, limit: 3 }),
-      getTranslations('postCta'),
-    ])
+      getTranslations("pillarPage"),
+      getTranslations("postCta"),
+      getTranslations("postPage"),
+    ]);
 
     if (!post) {
-      notFound()
+      notFound();
     }
 
     const filteredRelatedPosts = relatedData.posts.filter(
       (relatedPost) => relatedPost.sys.id !== post.sys.id
-    )
+    );
 
-    const category = post.fields.category.fields
-    const author = post.fields.author?.fields
-    const pillar = post.fields.pillar?.fields
+    const category = post.fields.category.fields;
+    const author = post.fields.author?.fields;
+    const pillar = post.fields.pillar?.fields;
+
+    // Get hero image URL
+    const heroImage = post.fields.featuredImage?.fields.file?.url;
+
+    // Calculate reading time
+    const readingTime = calculateCombinedReadingTime([
+      post.fields.excerpt || "",
+      post.fields.body,
+    ]);
 
     const postCtaContent = {
-      badge: postCtaT('badge'),
-      title: post.fields.ctaTitle ?? postCtaT('title'),
-      description: post.fields.ctaDescription ?? postCtaT('description'),
-      primaryCta: postCtaT('primaryCta'),
-      secondaryCta: postCtaT('secondaryCta'),
-    }
+      badge: postCtaT("badge"),
+      title: post.fields.ctaTitle ?? postCtaT("title"),
+      description: post.fields.ctaDescription ?? postCtaT("description"),
+      primaryCta: postCtaT("primaryCta"),
+      secondaryCta: postCtaT("secondaryCta"),
+    };
 
     return (
       <div className="min-h-screen text-white bg-dark-blue">
         <Header />
 
-        <main className="container mx-auto px-4 py-16">
+        {/* Hero Section */}
+        <BlogHeroSection
+          imageUrl={heroImage ?? "/assets/aurora-bg.webp"}
+          className="min-h-[320px] md:min-h-[380px]"
+          containerClassName="pt-28 pb-16"
+          imageClassName={heroImage ? "opacity-90" : undefined}
+        />
+
+        <main className="relative max-w-7xl mx-auto px-6 lg:px-12 py-16">
           {/* Breadcrumb */}
-          <nav className="flex items-center space-x-2 text-sm text-gray-400 mb-8">
-            <Link href="/blog" className="hover:text-white transition-colors">
-              Blog
-            </Link>
-            <ChevronRight className="w-4 h-4" />
-            <Link
-              href={`/blog/${categorySlug}`}
-              className="hover:text-white transition-colors"
-            >
-              {category.title}
-            </Link>
-            <ChevronRight className="w-4 h-4" />
-            <span className="text-white">{post.fields.title}</span>
-          </nav>
+          <Breadcrumb
+            items={[
+              { label: postT("blog"), href: `/${locale}/blog` },
+              {
+                label: category.title,
+                href: `/${locale}/blog/${categorySlug}`,
+              },
+              { label: post.fields.title, isActive: true },
+            ]}
+            className="mb-12"
+          />
 
           {/* Article */}
-          <article className="max-w-4xl mx-auto">
+          <article className="mb-16">
             <header className="mb-12">
-              {post.fields.featuredImage && (
-                <img
-                  src={post.fields.featuredImage.fields.file?.url}
-                  alt={
-                    post.fields.featuredImage.fields.title || post.fields.title
-                  }
-                  className="w-full h-64 md:h-96 object-cover rounded-lg mb-8"
-                />
-              )}
-
-              <div className="mb-6">
-                <Link
-                  href={`/blog/${categorySlug}`}
-                  className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm font-medium mb-4 transition-colors"
-                >
-                  {category.title}
-                </Link>
-                <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                  {post.fields.title}
-                </h1>
-                <p className="text-xl text-gray-300 mb-6">
-                  {post.fields.excerpt}
-                </p>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-6 text-gray-400 text-sm mb-8">
-                <div className="flex items-center space-x-2">
-                  <Calendar className="w-4 h-4" />
+              <div className="mb-6 flex flex-wrap items-center gap-4 text-sm font-medium text-lime-green">
+                <div className="inline-flex items-center gap-2">
+                  <Link
+                    href={`/blog/${categorySlug}`}
+                    className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm font-medium transition-colors"
+                  >
+                    {category.title}
+                  </Link>
+                </div>
+                <div className="flex items-center gap-2 text-gray-400">
+                  <Calendar className="h-4 w-4" />
                   <span>
-                    {new Date(post.sys.createdAt).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
+                    {new Date(post.sys.createdAt).toLocaleDateString(
+                      locale === "id" ? "id-ID" : "en-US",
+                      {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      }
+                    )}
                   </span>
                 </div>
-
-                {author && (
-                  <div className="flex items-center space-x-2">
+                <div className="flex items-center gap-2 text-gray-400">
+                  <Clock className="h-4 w-4" />
+                  <span>{t("readingTime", { minutes: readingTime })}</span>
+                </div>
+                {author?.name && (
+                  <div className="flex items-center gap-2 text-gray-400">
                     <User className="w-4 h-4" />
                     <span>{author.name}</span>
                   </div>
                 )}
-
-                <div className="flex items-center space-x-2">
-                  <Clock className="w-4 h-4" />
-                  <span>5 min read</span>
-                </div>
               </div>
 
-              {/* Tags */}
-              {post.fields.tags && post.fields.tags.length > 0 && (
-                <div className="flex items-center space-x-2 mb-8">
-                  <Tag className="w-4 h-4 text-gray-400" />
-                  <div className="flex flex-wrap gap-2">
-                    {post.fields.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="bg-gray-800 text-gray-300 px-2 py-1 rounded text-sm"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+              {/* Title */}
+              <h1 className="mb-6 text-4xl font-bold leading-tight text-balance font-heading md:text-5xl lg:text-6xl">
+                {post.fields.title}
+              </h1>
+
+              {/* Excerpt/Introduction */}
+              {post.fields.excerpt && (
+                <div className="prose prose-xl prose-invert mb-12">
+                  {post.fields.excerpt}
                 </div>
               )}
 
@@ -159,7 +160,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {pillar && (
                 <div className="bg-blue-900/30 border border-blue-700 rounded-lg p-4 mb-8">
                   <p className="text-sm text-blue-300 mb-2">
-                    Part of our complete guide:
+                    {postT("partOfGuide")}
                   </p>
                   <Link
                     href={`/blog/${categorySlug}/guides/${pillar.slug}`}
@@ -172,9 +173,26 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </header>
 
             {/* Content */}
-            <div className="prose prose-lg prose-invert max-w-none mb-16">
+            <div className="prose prose-lg prose-invert max-w-none">
               <RichTextRenderer content={post.fields.body} />
             </div>
+
+            {/* Tags */}
+            {post.fields.tags && post.fields.tags.length > 0 && (
+              <div className="flex items-center space-x-2 mb-8">
+                <Tag className="w-4 h-4 text-gray-400" />
+                <div className="flex flex-wrap gap-2">
+                  {post.fields.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="bg-gray-800 text-gray-300 px-2 py-1 rounded text-sm"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Author Bio */}
             {author && (
@@ -196,7 +214,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             )}
           </article>
 
-          <div className="max-w-4xl mx-auto mb-16">
+          {/* Call-to-Action Section */}
+          <div className="mb-16">
             <PostCtaSection
               locale={locale}
               badge={postCtaContent.badge}
@@ -209,9 +228,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           {/* Related Posts */}
           {filteredRelatedPosts.length > 0 && (
-            <section className="max-w-6xl mx-auto">
+            <section>
               <h2 className="text-3xl font-bold mb-8">
-                More from {category.title}
+                {postT("moreFromCategory", { category: category.title })}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredRelatedPosts.map((relatedPost) => (
@@ -226,7 +245,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       </div>
     );
   } catch (error) {
-    console.error('Error loading blog post:', error)
-    notFound()
+    console.error("Error loading blog post:", error);
+    notFound();
   }
 }

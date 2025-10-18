@@ -7,9 +7,8 @@ import { BlogPostCard } from '@/components/blog/BlogPostCard'
 import { Header } from '@/components/sections/Header'
 import { FooterSection } from '@/components/sections/FooterSection'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
-import { Calendar, Clock, BookOpen } from 'lucide-react'
-import { calculateCombinedReadingTime } from '@/lib/utils/reading-time'
-import Link from 'next/link'
+import { Calendar, Clock, BookOpen, User } from "lucide-react";
+import { calculateCombinedReadingTime } from "@/lib/utils/reading-time";
 import { BlogHeroSection } from '@/components/sections/BlogHeroSection'
 import { PostCtaSection } from '@/components/blog/PostCtaSection'
 
@@ -24,10 +23,11 @@ interface PillarPageProps {
 export async function generateMetadata({ params }: PillarPageProps): Promise<Metadata> {
   const { locale, category: categorySlug, pillar: pillarSlug } = await params
   const pillar = await getPillarPageBySlug(categorySlug, pillarSlug, locale)
+  const t = await getTranslations("pillarPage");
 
   if (!pillar) {
     return {
-      title: 'Guide Not Found | Arktik',
+      title: t("notFound"),
     }
   }
 
@@ -89,7 +89,7 @@ export default async function PillarPage({ params }: PillarPageProps) {
           {/* Breadcrumb */}
           <Breadcrumb
             items={[
-              { label: "Blog", href: `/${locale}/blog` },
+              { label: t("blog"), href: `/${locale}/blog` },
               {
                 label: category.title,
                 href: `/${locale}/blog/${categorySlug}`,
@@ -128,7 +128,7 @@ export default async function PillarPage({ params }: PillarPageProps) {
                 </div>
                 {pillar.fields.author?.fields?.name && (
                   <div className="flex items-center gap-2 text-gray-400">
-                    <span>by</span>
+                    <User className="w-4 h-4" />
                     <span className="text-lime-green">
                       {pillar.fields.author.fields.name}
                     </span>
