@@ -91,7 +91,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {post.fields.featuredImage && (
                 <img
                   src={post.fields.featuredImage.fields.file?.url}
-                  alt={post.fields.featuredImage.fields.title || post.fields.title}
+                  alt={
+                    post.fields.featuredImage.fields.title || post.fields.title
+                  }
                   className="w-full h-64 md:h-96 object-cover rounded-lg mb-8"
                 />
               )}
@@ -115,10 +117,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <div className="flex items-center space-x-2">
                   <Calendar className="w-4 h-4" />
                   <span>
-                    {new Date(post.sys.createdAt).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
+                    {new Date(post.sys.createdAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
                     })}
                   </span>
                 </div>
@@ -156,7 +158,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {/* Pillar Link */}
               {pillar && (
                 <div className="bg-blue-900/30 border border-blue-700 rounded-lg p-4 mb-8">
-                  <p className="text-sm text-blue-300 mb-2">Part of our complete guide:</p>
+                  <p className="text-sm text-blue-300 mb-2">
+                    Part of our complete guide:
+                  </p>
                   <Link
                     href={`/blog/${categorySlug}/guides/${pillar.slug}`}
                     className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
@@ -172,11 +176,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <RichTextRenderer content={post.fields.body} />
             </div>
 
-          {/* Author Bio */}
-          {author && (
-            <div className="bg-gray-900 rounded-lg p-6 mb-16">
-              <div className="flex items-start space-x-4">
-                {author.avatar && (
+            {/* Author Bio */}
+            {author && (
+              <div className="bg-gray-900 rounded-lg p-6 mb-16">
+                <div className="flex items-start space-x-4">
+                  {author.avatar && (
                     <img
                       src={author.avatar.fields.file?.url}
                       alt={author.name}
@@ -185,30 +189,30 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   )}
                   <div>
                     <h3 className="text-xl font-bold mb-2">{author.name}</h3>
-                    {author.bio && (
-                      <p className="text-gray-300">{author.bio}</p>
-                    )}
+                    {author.bio && <RichTextRenderer content={author.bio} />}
                   </div>
+                </div>
               </div>
-            </div>
-          )}
-        </article>
+            )}
+          </article>
 
-        <div className="max-w-4xl mx-auto mb-16">
-          <PostCtaSection
-            locale={locale}
-            badge={postCtaContent.badge}
-            title={postCtaContent.title}
-            description={postCtaContent.description}
-            primaryCta={postCtaContent.primaryCta}
-            secondaryCta={postCtaContent.secondaryCta}
-          />
-        </div>
+          <div className="max-w-4xl mx-auto mb-16">
+            <PostCtaSection
+              locale={locale}
+              badge={postCtaContent.badge}
+              title={postCtaContent.title}
+              description={postCtaContent.description}
+              primaryCta={postCtaContent.primaryCta}
+              secondaryCta={postCtaContent.secondaryCta}
+            />
+          </div>
 
-        {/* Related Posts */}
+          {/* Related Posts */}
           {filteredRelatedPosts.length > 0 && (
             <section className="max-w-6xl mx-auto">
-              <h2 className="text-3xl font-bold mb-8">More from {category.title}</h2>
+              <h2 className="text-3xl font-bold mb-8">
+                More from {category.title}
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredRelatedPosts.map((relatedPost) => (
                   <BlogPostCard key={relatedPost.sys.id} post={relatedPost} />
@@ -220,7 +224,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         <FooterSection />
       </div>
-    )
+    );
   } catch (error) {
     console.error('Error loading blog post:', error)
     notFound()
