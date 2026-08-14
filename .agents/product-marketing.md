@@ -1,6 +1,6 @@
 # Product Marketing Context
 
-**Document version:** v3
+**Document version:** v4
 **Last updated:** 2026-08-14
 
 > **Provenance.** Drafted from the codebase (`design.md`, both locale message
@@ -100,8 +100,49 @@ impact"*. Nav is Services / Work / Contact; publishes "Featured Insights".
 > Falls short for this buyer on: no visible cost model, agency-scale process
 > implies account management between client and engineer.
 
+**Nore Inovasi** (nore.co.id) — full-service Indonesian IT provider: consulting,
+websites, information systems, mobile apps, **digital marketing**, and system
+maintenance. Positioning pillars are literally *"Easy · Inovative · Affordable"*.
+Headlines: *"Let us do the work, so you can focus on what matters"* and *"We Don't
+Just Build Projects. We Solve Problems."* Nav carries Portfolio and Insights.
+Claims "Affordable" but shows no pricing.
+*Profiled from their live site on 2026-08-14 — homepage only.*
+
+> **Two distinct tensions here, and they pull opposite ways.**
+>
+> **Price.** Nore competes on affordability. Arktik must not follow — the studio's
+> stated position is that custom software is expensive and should be the right
+> call, and that it quotes what the work costs rather than what wins the deal. If
+> a prospect is choosing on price, Nore is a legitimate answer and Arktik should
+> say so; that refusal is the "We say no" differentiator working as intended.
+>
+> **Delegation vs visibility.** "Let us do the work, so you can focus on what
+> matters" sells *not having to look*. Arktik sells the opposite — weekly demos, a
+> preview link from week one, decisions written down. Same buyer instinct
+> (*tidak mau repot*), opposite answer. Note the overlap: Arktik's own "Running it
+> after launch" serves that instinct too, but as an **optional service after
+> ownership transfers**, not as the shape of the whole relationship. Keep that
+> distinction sharp in copy or the two blur.
+>
+> Falls short for this buyer on: "Affordable" with no published pricing is the
+> same cost opacity Arktik attacks; broad scope including digital marketing means
+> software is one line of many, not the craft.
+
 **Metatech** (metatech.id) — named by the founders. ⚠ **Not profiled** — the domain
 did not resolve from two networks on 2026-08-14. Confirm the URL, then profile.
+
+### Positioning map — where each one sits
+
+| | Competes on | Buyer promise | Arktik's counter |
+|---|---|---|---|
+| **Antikode** | Polish, scale, brand | "Seamless experiences, real impact" | Verifiable mechanisms beat adjectives |
+| **Nore** | Price, breadth, convenience | "Let us handle it, affordably" | We quote what it costs; you watch it get built |
+| **Freelancers** | Cost, speed | "Cheap and quick" | Documentation, continuity, handover |
+| **Off-the-shelf** | Zero build cost | "It already exists" | We'll send you there when it fits |
+
+**The open lane:** none of the named competitors publishes a cost model or a
+stage-gated commitment. Cost certainty *before* committing is the least contested
+ground Arktik holds — and it is the one thing the buyer most fears getting wrong.
 
 ### Secondary
 Freelancers and small dev collectives — fall short on documentation, continuity,
@@ -260,6 +301,10 @@ GTM (GTM-WDNKG95C) and Vercel Analytics are installed; `lead_form_start` and
 
 ## Changelog
 *Newest first. One line per revision: what changed and why.*
+- v4 (2026-08-14) — Added Nore Inovasi (competes on price and breadth, and sells
+  delegation where Arktik sells visibility). Added a positioning map across all
+  four competitor types; named cost certainty before committing as the least
+  contested ground Arktik holds.
 - v3 (2026-08-14) — Closed Metrics and Testimonials as deliberate choices, not
   gaps. Recorded "why customers choose us" as founder-stated trust, with a
   claim→mechanism table so downstream skills show trust instead of asserting it.
