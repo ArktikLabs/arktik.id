@@ -1,7 +1,7 @@
-"use client"
-import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
-import { cn } from "@/lib/utils"
+"use client";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 /* Hallmark · design-system: design.md v2
  *
@@ -29,64 +29,81 @@ export const FlipWords = ({
   duration = 3000,
   className,
 }: {
-  words: string[]
-  duration?: number
-  className?: string
+  words: string[];
+  duration?: number;
+  className?: string;
 }) => {
-  const [currentWordIndex, setCurrentWordIndex] = useState(0)
-  const [currentText, setCurrentText] = useState("")
-  const [isTyping, setIsTyping] = useState(true)
-  const [showCursor, setShowCursor] = useState(true)
-  const [reducedMotion, setReducedMotion] = useState(false)
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [currentText, setCurrentText] = useState("");
+  const [isTyping, setIsTyping] = useState(true);
+  const [showCursor, setShowCursor] = useState(true);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
-  const currentWord = words[currentWordIndex]
-  const longestWord = words.reduce((a, b) => (a.length > b.length ? a : b), "")
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
-    setReducedMotion(mq.matches)
-    const onChange = () => setReducedMotion(mq.matches)
-    mq.addEventListener("change", onChange)
-    return () => mq.removeEventListener("change", onChange)
-  }, [])
+  const currentWord = words[currentWordIndex];
+  const longestWord = words.reduce((a, b) => (a.length > b.length ? a : b), "");
 
   useEffect(() => {
-    if (reducedMotion) return
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const onChange = () => setReducedMotion(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion) return;
     if (isTyping) {
       if (currentText.length < currentWord.length) {
         const timeout = setTimeout(() => {
-          setCurrentText(currentWord.slice(0, currentText.length + 1))
-        }, 100)
-        return () => clearTimeout(timeout)
+          setCurrentText(currentWord.slice(0, currentText.length + 1));
+        }, 100);
+        return () => clearTimeout(timeout);
       }
-      const timeout = setTimeout(() => setIsTyping(false), duration)
-      return () => clearTimeout(timeout)
+      const timeout = setTimeout(() => setIsTyping(false), duration);
+      return () => clearTimeout(timeout);
     }
     if (currentText.length > 0) {
       const timeout = setTimeout(() => {
-        setCurrentText(currentText.slice(0, -1))
-      }, 50)
-      return () => clearTimeout(timeout)
+        setCurrentText(currentText.slice(0, -1));
+      }, 50);
+      return () => clearTimeout(timeout);
     }
-    setCurrentWordIndex((prev) => (prev + 1) % words.length)
-    setIsTyping(true)
-  }, [currentText, currentWord, isTyping, duration, words.length, reducedMotion])
+    setCurrentWordIndex((prev) => (prev + 1) % words.length);
+    setIsTyping(true);
+  }, [
+    currentText,
+    currentWord,
+    isTyping,
+    duration,
+    words.length,
+    reducedMotion,
+  ]);
 
   useEffect(() => {
-    if (reducedMotion) return
-    const cursorInterval = setInterval(() => setShowCursor((p) => !p), 500)
-    return () => clearInterval(cursorInterval)
-  }, [reducedMotion])
+    if (reducedMotion) return;
+    const cursorInterval = setInterval(() => setShowCursor((p) => !p), 500);
+    return () => clearInterval(cursorInterval);
+  }, [reducedMotion]);
 
   if (reducedMotion) {
-    return <span className={className}>{words[0]}</span>
+    return <span className={className}>{words[0]}</span>;
   }
 
   return (
     <span className={cn("relative inline-block", className)}>
       {/* Animated layer is decorative — a screen reader would otherwise read a
-        * half-typed word. The accessible text is the sizer span below. */}
-      <span className="absolute left-0 top-0" aria-hidden="true">
+       * half-typed word. The accessible text is the sizer span below.
+       *
+       * whitespace-nowrap is load-bearing. This span is absolutely positioned,
+       * so its shrink-to-fit width is CAPPED BY ITS CONTAINING BLOCK — the
+       * relative wrapper, which the sizer sizes. On the longest phrase the box
+       * is exactly the phrase's width, so the trailing cursor spilled past it
+       * and, with white-space:normal, wrapped INSIDE the box: the headline
+       * showed "surprise invoice" over two rows. */}
+      <span
+        className="absolute left-0 top-0 whitespace-nowrap"
+        aria-hidden="true"
+      >
         {currentText}
         <motion.span
           animate={{ opacity: showCursor ? 1 : 0 }}
@@ -97,11 +114,18 @@ export const FlipWords = ({
         </motion.span>
       </span>
       {/* Reserves the box from real font metrics. Do not replace with a width
-        * in ch. Hidden from assistive tech because the LONGEST phrase is an
-        * arbitrary thing to read aloud — the canonical first word is exposed
-        * separately below, so the headline reads as one sentence. */}
-      <span className="invisible" aria-hidden="true">{longestWord}</span>
+       * in ch. The trailing "|" is part of the reservation: the animated layer
+       * always renders a cursor, so a box sized to the bare phrase is one
+       * cursor too narrow and the nowrap text above would overflow into the
+       * hero's overflow-hidden and clip.
+       *
+       * Hidden from assistive tech because the LONGEST phrase is an arbitrary
+       * thing to read aloud — the canonical first word is exposed separately
+       * below, so the headline reads as one sentence. */}
+      <span className="invisible whitespace-nowrap" aria-hidden="true">
+        {longestWord}|
+      </span>
       <span className="sr-only">{words[0]}</span>
     </span>
-  )
-}
+  );
+};
