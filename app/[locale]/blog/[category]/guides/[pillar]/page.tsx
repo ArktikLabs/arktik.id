@@ -81,13 +81,12 @@ export default async function PillarPage({ params }: PillarPageProps) {
         <Header />
 
         <BlogHeroSection
-          imageUrl={heroImage ?? "/assets/aurora-bg.webp"}
-          className="min-h-[320px] md:min-h-[380px]"
+          imageUrl={heroImage}
+          className={heroImage ? "min-h-[320px] md:min-h-[380px]" : undefined}
           containerClassName="pt-28 pb-16"
-          imageClassName={heroImage ? "opacity-90" : undefined}
         />
 
-        <main className="relative mx-auto max-w-7xl px-6 py-16 lg:px-12">
+        <main id="main" className="relative mx-auto max-w-7xl px-6 py-16 lg:px-12">
           {/* Breadcrumb is page chrome, not document content — it stays at
             * container width. Inside the 64ch column its four levels truncated
             * to "Bl… › AI, Automation & Innovati… › Guid… › …". */}

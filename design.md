@@ -152,11 +152,17 @@ with the row above it tightens to `--space-xl`; a family boundary opens to
 
 ## Per-page allowances
 
-- **Marketing** MAY use enrichment: the interactive demo (Tier-A, hand-built) and
-  the showcase screenshots. **The aurora photograph is retired from the homepage
-  hero** — it was the most generic asset on the page and it pulled the palette
-  back toward the blue carbon exists to replace. It survives on the blog masthead,
-  where nothing rests on it.
+- **Marketing** MAY use enrichment: the showcase screenshots. **The aurora
+  photograph is retired outright** (2026-08-14) — generic, and it pulled the
+  palette back toward the blue carbon exists to replace. It briefly survived on
+  the blog masthead; that was wrong twice over. Composited through
+  `opacity-80` + a `carbon/30` tint + a 160px bottom fade + the text scrim it
+  rendered as a near-black band, and it cost 186KB on the LCP path because the
+  masthead loads `priority`. "Nothing rests on it" was an argument for deleting
+  it. `BlogHeroSection` now takes an optional `imageUrl` with **no default**: a
+  masthead renders only when the content supplies a real `featuredImage`.
+  The Tier-A interactive demo is also gone — it had been unreferenced since the
+  v2 hero, while still emitting a foreign palette into the CSS bundle.
 - **Content** pages: typography only. No enrichment.
 - **Showcase** pages: the work's own screenshots are the enrichment. Nothing added.
 
@@ -167,9 +173,11 @@ with the row above it tightens to `--space-xl`; a family boundary opens to
 - Archivo + Instrument Sans + Geist Mono, by token, never by literal.
 - The CTA voice — pill radius, padding rhythm, verb-first copy.
 - The N12 banner+retract nav and the Ft4 dense colophon footer.
-- **Honest copy.** No invented metrics, durations, client names or testimonials.
-  The Process section's durations render "to confirm" until real values are
-  passed to `<ProcessSection durations={...} />`.
+- **Honest copy.** No invented metrics, client names or testimonials.
+  The Process section's durations were confirmed by the client on 2026-08-14 and
+  now live in `messages/*.json` (`process.stages.*.duration`) so they translate.
+  They are commitments, not estimates — blank a value to fall back to "to
+  confirm" rather than publish one you cannot hold to.
 - The section-head pattern: display heading with a drawn accent underline
   beneath the first line — stacked vertically, never a two-column tag-left head.
 

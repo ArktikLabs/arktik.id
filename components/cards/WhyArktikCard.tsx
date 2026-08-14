@@ -1,8 +1,9 @@
 import { LucideIcon } from "lucide-react"
 
 /* Hallmark · design-system: design.md
- * The `isLarge` variant is the page's one light surface — brand #C0D6EB, kept as
- * --color-paper-invert. The compact variant is a hairline row, not a card.
+ * The `isLarge` variant is the page's one light surface — bone
+ * (--color-paper-invert), never #fff. The compact variant is a hairline row,
+ * not a card.
  * Removed from both: the gradient fill, the rounded icon tile, hover:scale,
  * the slate glow shadow, and the three simultaneous text-colour transitions. */
 
@@ -21,7 +22,7 @@ export function WhyArktikCard({
 }: WhyArktikCardProps) {
   if (isLarge) {
     return (
-      <div className="rounded-xl bg-bone p-8 lg:p-10">
+      <div className="rounded-card bg-bone p-8 lg:p-10">
         <Icon
           className="h-7 w-7 text-ink-invert"
           aria-hidden="true"

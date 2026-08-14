@@ -83,7 +83,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
           </div>
         </BlogHeroSection>
 
-        <main className="mx-auto max-w-7xl px-6 lg:px-12">
+        <main id="main" className="mx-auto max-w-7xl px-6 lg:px-12">
           {pillars.length > 0 && (
             <section className="pb-20 pt-4">
               <div className="section-head mb-2">

@@ -118,14 +118,14 @@ export const LinkPreview = ({
                   },
                 }}
                 exit={{ opacity: 0, y: 20, scale: 0.6 }}
-                className="shadow-xl rounded-xl relative z-[9999]"
+                className="relative z-[9999] rounded-card"
                 style={{
                   x: translateX,
                 }}
               >
                 <a
                   href={url}
-                  className="block p-1 bg-bone border-2 border-transparent shadow rounded-xl hover:border-neutral-200 dark:hover:border-neutral-800"
+                  className="block rounded-card border-2 border-transparent bg-bone p-1 hover:border-rule-strong"
                   style={{ fontSize: 0 }}
                 >
                   <img

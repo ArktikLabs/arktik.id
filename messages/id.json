@@ -1,7 +1,8 @@
 {
   "common": {
     "title": "Arktik — software kustom, prosesnya terbuka",
-    "description": "Studio software di Indonesia. Anda selalu tahu apa yang sedang dibangun, berapa biayanya, dan kapan selesainya — dan semuanya berakhir atas nama Anda."
+    "description": "Studio software di Indonesia. Anda selalu tahu apa yang sedang dibangun, berapa biayanya, dan kapan selesainya — dan semuanya berakhir atas nama Anda.",
+    "skipToContent": "Lewati ke konten"
   },
   "header": {
     "aboutUs": "Tentang",
@@ -11,7 +12,8 @@
     "blog": "Tulisan",
     "contact": "Mulai proyek",
     "banner": "Anda berbicara langsung dengan engineer-nya, bukan account manager",
-    "bannerLink": "hello@arktik.id"
+    "bannerLink": "hello@arktik.id",
+    "menu": "Menu"
   },
   "hero": {
     "description": "Anda menyepakati lingkup dan biayanya sebelum setiap tahap dimulai, melihat software yang sudah berfungsi setiap minggu, dan memiliki kode serta seluruh akun sejak hari pertama.",
@@ -154,14 +156,12 @@
     "description": "Yang kami pelajari tentang membangun sendiri versus membeli jadi, biaya kepemilikan yang sebenarnya, dan apa yang biasanya membuat proyek software gagal.",
     "viewAll": "Semua tulisan",
     "completeGuides": "Panduan",
-    "latestArticles": "Terbaru",
-    "completeGuideLabel": "Panduan"
+    "latestArticles": "Terbaru"
   },
   "blogPage": {
     "title": "Tulisan | Arktik",
     "description": "Membangun sendiri versus membeli jadi, berapa biaya sebenarnya memiliki software, dan apa yang biasanya membuat proyek gagal.",
     "hero": {
-      "badge": "Tulisan",
       "title": "Catatan dari pekerjaan",
       "description": "Membangun sendiri versus membeli jadi, berapa biaya sebenarnya memiliki software, dan apa yang biasanya membuat proyek gagal. Ditulis sambil kami mengalaminya, bukan dipesan untuk mengisi blog."
     },

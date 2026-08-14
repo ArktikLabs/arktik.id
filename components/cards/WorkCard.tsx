@@ -37,7 +37,7 @@ export function WorkCard({
     return (
       <Link
         href={href ?? "#"}
-        className="group relative isolate flex h-96 flex-col justify-between overflow-hidden rounded-xl p-5"
+        className="group relative isolate flex h-96 flex-col justify-between overflow-hidden rounded-card p-5"
       >
         <Image
           src={imageSrc}
@@ -86,7 +86,7 @@ export function WorkCard({
   };
 
   return (
-    <div className="flex h-full min-h-[18rem] flex-col justify-between gap-8 rounded-xl border border-rule bg-paper-2 p-6">
+    <div className="flex h-full min-h-[18rem] flex-col justify-between gap-8 rounded-card border border-rule bg-paper-2 p-6">
       <div>
         <h3 className="font-heading text-xl font-bold text-ink md:text-2xl">
           {title}

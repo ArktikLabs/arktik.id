@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /* Hallmark · macrostructure: 05 Workbench · design-system: design.md
  * Workbench pages are "small, functional — they don't shout", so the chrome
@@ -13,24 +13,24 @@
  *   · The viewport toggle is a real radiogroup now — it had no pressed state
  *     for assistive tech, only a native title tooltip. */
 
-import { useState } from 'react';
-import { Link } from '@/i18n/routing';
-import { useTranslations } from 'next-intl';
-import Image from 'next/image';
-import { Smartphone, Tablet, Monitor, ArrowUpRight } from 'lucide-react';
-import { ShowcaseViewer } from './ShowcaseViewer';
+import { useState } from "react";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+import { Smartphone, Tablet, Monitor, ArrowUpRight } from "lucide-react";
+import { ShowcaseViewer } from "./ShowcaseViewer";
 
 interface ShowcaseContainerProps {
   title: string;
   link: string;
 }
 
-type ViewportType = 'mobile' | 'tablet' | 'desktop';
+type ViewportType = "mobile" | "tablet" | "desktop";
 
 const VIEWPORTS = [
-  { key: 'mobile', Icon: Smartphone },
-  { key: 'tablet', Icon: Tablet },
-  { key: 'desktop', Icon: Monitor },
+  { key: "mobile", Icon: Smartphone },
+  { key: "tablet", Icon: Tablet },
+  { key: "desktop", Icon: Monitor },
 ] as const;
 
 function ViewportControls({
@@ -40,12 +40,12 @@ function ViewportControls({
   activeViewport: ViewportType;
   onViewportChange: (viewport: ViewportType) => void;
 }) {
-  const t = useTranslations('showcase');
+  const t = useTranslations("showcase");
 
   return (
     <div
       role="radiogroup"
-      aria-label={t('viewingIn')}
+      aria-label={t("viewingIn")}
       className="flex rounded-pill bg-paper-3 p-1"
     >
       {VIEWPORTS.map(({ key, Icon }) => {
@@ -60,8 +60,8 @@ function ViewportControls({
             onClick={() => onViewportChange(key)}
             className={`rounded-pill p-2 transition-colors duration-200 ${
               isActive
-                ? 'bg-lime-green text-carbon'
-                : 'text-ink-2 hover:text-ink'
+                ? "bg-lime-green text-carbon"
+                : "text-ink-2 hover:text-ink"
             }`}
           >
             <Icon className="h-4 w-4" aria-hidden="true" />
@@ -73,8 +73,8 @@ function ViewportControls({
 }
 
 export function ShowcaseContainer({ title, link }: ShowcaseContainerProps) {
-  const [activeViewport, setActiveViewport] = useState<ViewportType>('desktop');
-  const t = useTranslations('showcase');
+  const [activeViewport, setActiveViewport] = useState<ViewportType>("desktop");
+  const t = useTranslations("showcase");
 
   return (
     <div className="min-h-screen w-full bg-paper">
@@ -102,7 +102,7 @@ export function ShowcaseContainer({ title, link }: ShowcaseContainerProps) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 whitespace-nowrap rounded-pill bg-lime-green px-4 py-2 text-sm font-semibold text-carbon transition-colors duration-200 hover:bg-lime-green/90"
             >
-              {t('visitLive')}
+              {t("visitLive")}
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
             </a>
 
@@ -114,13 +114,13 @@ export function ShowcaseContainer({ title, link }: ShowcaseContainerProps) {
         </div>
       </header>
 
-      <div className="pt-24">
+      <main id="main" className="pt-24">
         <ShowcaseViewer
           title={title}
           link={link}
           activeViewport={activeViewport}
         />
-      </div>
+      </main>
     </div>
   );
 }

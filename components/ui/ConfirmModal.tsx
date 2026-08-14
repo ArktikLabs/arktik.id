@@ -62,7 +62,7 @@ export function ConfirmModal({
         className="absolute inset-0 bg-paper/80 backdrop-blur-sm"
         onClick={onCancel}
       />
-      <div className="relative w-full max-w-lg rounded-xl border border-rule bg-paper-2 text-ink shadow-xl">
+      <div className="relative w-full max-w-lg rounded-card border border-rule bg-paper-2 text-ink">
         <div className="px-6 py-5">
           <h3 id="confirm-modal-title" className="text-lg font-semibold">
             {title}
@@ -89,7 +89,7 @@ export function ConfirmModal({
               ref={confirmRef}
               onClick={onConfirm}
               disabled={!!confirmDisabled}
-              className={`bg-lime-green text-slate-900 hover:bg-lime-green/90 generate_lead_modal_confirm${locale ? `_${locale}` : ''}`}
+              className={`bg-lime-green text-carbon hover:bg-lime-green/90 generate_lead_modal_confirm${locale ? `_${locale}` : ''}`}
             >
               {confirmText}
             </Button>

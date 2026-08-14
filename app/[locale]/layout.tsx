@@ -6,10 +6,14 @@ import { Analytics } from "@vercel/analytics/next";
 import { Suspense } from "react";
 import { CursorPreloader } from "@/components/CursorPreloader";
 import { GoogleTagManager } from "@next/third-parties/google";
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, setRequestLocale } from 'next-intl/server';
-import { routing } from '../../i18n/routing';
-import { redirect } from 'next/navigation';
+import { NextIntlClientProvider } from "next-intl";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
+import { routing } from "../../i18n/routing";
+import { redirect } from "next/navigation";
 import "../globals.css";
 
 const archivo = Archivo({
@@ -25,14 +29,14 @@ const instrumentSans = Instrument_Sans({
 });
 
 export async function generateMetadata({
-  params
+  params,
 }: {
-  params: Promise<{locale: string}>;
+  params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  const {locale} = await params;
+  const { locale } = await params;
   const messages = await getMessages();
   const t = (key: string) => {
-    const keys = key.split('.');
+    const keys = key.split(".");
     let current: any = messages;
     for (const k of keys) {
       current = current?.[k];
@@ -122,33 +126,34 @@ export async function generateMetadata({
 }
 
 export const viewport: Viewport = {
-  themeColor: "#012233",
+  themeColor: "#090E0A",
 };
 
 export function generateStaticParams() {
-  return routing.locales.map((locale: string) => ({locale}));
+  return routing.locales.map((locale: string) => ({ locale }));
 }
 
 export default async function LocaleLayout({
   children,
-  params
+  params,
 }: {
   children: React.ReactNode;
-  params: Promise<{locale: string}>;
+  params: Promise<{ locale: string }>;
 }) {
-  const {locale} = await params;
+  const { locale } = await params;
 
   // Enable static rendering for server components
   setRequestLocale(locale);
 
   // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale as any)) {
-    redirect('/');
+    redirect("/");
   }
 
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
+  const t = await getTranslations("common");
 
   return (
     <html lang={locale} data-scroll-behavior="smooth">
@@ -159,6 +164,16 @@ export default async function LocaleLayout({
         className={`${instrumentSans.className} ${archivo.variable} ${instrumentSans.variable} ${GeistMono.variable}`}
       >
         <NextIntlClientProvider messages={messages}>
+          {/* WCAG 2.4.1 Bypass Blocks. The header is fixed and carries a
+           * banner, five nav links, a language toggle and a CTA — without
+           * this, every keyboard pass tabs through all of it before reaching
+           * content, on every navigation. Invisible until focused. */}
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-pill focus:bg-lime-green focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-carbon"
+          >
+            {t("skipToContent")}
+          </a>
           <CursorPreloader />
           <Suspense fallback={null}>{children}</Suspense>
           <Analytics />

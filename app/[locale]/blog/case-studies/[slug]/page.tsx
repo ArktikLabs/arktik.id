@@ -1,4 +1,6 @@
 /* Hallmark · macrostructure: 02 Long Document · design-system: design.md */
+import Image from "next/image";
+import { toAbsoluteUrl } from "@/lib/utils/contentful";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getCaseStudyBySlug, getCaseStudies } from "@/lib/services/contentful";
@@ -73,7 +75,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       <div className="min-h-screen bg-paper text-ink">
         <Header />
 
-        <main className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
+        <main id="main" className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
           {/* Breadcrumb — was a hand-rolled nav with unprefixed hrefs while the
            * two sibling article routes used <Breadcrumb>. Container width, so
            * its labels don't truncate inside the document column. */}
@@ -105,12 +107,17 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 )}
 
                 {caseStudy.fields.featuredImage && (
-                  <img
-                    src={caseStudy.fields.featuredImage.fields.file?.url}
+                  <Image
+                    src={toAbsoluteUrl(
+                      caseStudy.fields.featuredImage.fields.file?.url,
+                    )}
                     alt={
                       caseStudy.fields.featuredImage.fields.title ||
                       caseStudy.fields.title
                     }
+                    width={1200}
+                    height={640}
+                    sizes="(max-width: 768px) 100vw, 64ch"
                     className="mb-8 h-64 w-full rounded-card object-cover md:h-80"
                   />
                 )}

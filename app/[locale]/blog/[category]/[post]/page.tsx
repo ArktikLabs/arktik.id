@@ -86,13 +86,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         {/* Hero Section */}
         <BlogHeroSection
-          imageUrl={heroImage ?? "/assets/aurora-bg.webp"}
-          className="min-h-[320px] md:min-h-[380px]"
+          imageUrl={heroImage}
+          className={heroImage ? "min-h-[320px] md:min-h-[380px]" : undefined}
           containerClassName="pt-28 pb-16"
-          imageClassName={heroImage ? "opacity-90" : undefined}
         />
 
-        <main className="relative mx-auto max-w-7xl px-6 py-16 lg:px-12">
+        <main id="main" className="relative mx-auto max-w-7xl px-6 py-16 lg:px-12">
           {/* Breadcrumb is page chrome, not document content — container width,
             * or its labels truncate inside the 64ch column. */}
           <Breadcrumb

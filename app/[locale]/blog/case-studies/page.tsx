@@ -47,7 +47,7 @@ export default async function CaseStudiesPage({ params }: CaseStudiesPageProps) 
           </div>
         </BlogHeroSection>
 
-        <main className="relative mx-auto max-w-7xl px-6 py-16 lg:px-12">
+        <main id="main" className="relative mx-auto max-w-7xl px-6 py-16 lg:px-12">
           <Breadcrumb
             items={[
               { label: 'Blog', href: `/${locale}/blog` },

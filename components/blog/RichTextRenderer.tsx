@@ -1,16 +1,20 @@
 /* Hallmark · design-system: design.md */
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { BLOCKS, INLINES, Document } from '@contentful/rich-text-types'
-import { ReactNode } from 'react'
+import Image from "next/image";
+import { toAbsoluteUrl } from "@/lib/utils/contentful";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { BLOCKS, INLINES, Document } from "@contentful/rich-text-types";
+import { ReactNode } from "react";
 
 interface RichTextRendererProps {
-  content: Document
+  content: Document;
 }
 
 const options = {
   renderNode: {
     [BLOCKS.HEADING_1]: (node: any, children: ReactNode) => (
-      <h1 className="font-heading text-3xl font-bold mb-6 mt-10 first:mt-0">{children}</h1>
+      <h1 className="font-heading text-3xl font-bold mb-6 mt-10 first:mt-0">
+        {children}
+      </h1>
     ),
     [BLOCKS.HEADING_2]: (node: any, children: ReactNode) => (
       <h2 className="font-heading text-2xl font-bold mb-4 mt-10">{children}</h2>
@@ -25,10 +29,14 @@ const options = {
       <p className="mb-5 leading-relaxed text-ink-2">{children}</p>
     ),
     [BLOCKS.UL_LIST]: (node: any, children: ReactNode) => (
-      <ul className="mb-5 ml-6 list-outside list-disc space-y-2 text-ink-2 marker:text-lime-green">{children}</ul>
+      <ul className="mb-5 ml-6 list-outside list-disc space-y-2 text-ink-2 marker:text-lime-green">
+        {children}
+      </ul>
     ),
     [BLOCKS.OL_LIST]: (node: any, children: ReactNode) => (
-      <ol className="mb-5 ml-6 list-outside list-decimal space-y-2 text-ink-2 marker:text-lime-green">{children}</ol>
+      <ol className="mb-5 ml-6 list-outside list-decimal space-y-2 text-ink-2 marker:text-lime-green">
+        {children}
+      </ol>
     ),
     [BLOCKS.LIST_ITEM]: (node: any, children: ReactNode) => (
       <li className="pl-2">{children}</li>
@@ -40,17 +48,23 @@ const options = {
     ),
     [BLOCKS.HR]: () => <hr className="my-8 border-rule" />,
     [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
-      const { file, title } = node.data.target.fields
-      if (file?.contentType?.startsWith('image/')) {
+      const { file, title } = node.data.target.fields;
+      if (file?.contentType?.startsWith("image/")) {
+        /* Contentful ships real dimensions on the asset, so next/image gets
+         * intrinsic sizing rather than a layout-shifting guess. */
+        const dims = file.details?.image;
         return (
-          <img
-            src={file.url}
-            alt={title || ''}
-            className="w-full h-auto rounded-lg my-6"
+          <Image
+            src={toAbsoluteUrl(file.url)}
+            alt={title || ""}
+            width={dims?.width ?? 1200}
+            height={dims?.height ?? 675}
+            sizes="(max-width: 768px) 100vw, 64ch"
+            className="my-6 h-auto w-full rounded-card"
           />
-        )
+        );
       }
-      return null
+      return null;
     },
     [INLINES.HYPERLINK]: (node: any, children: ReactNode) => (
       <a
@@ -63,8 +77,8 @@ const options = {
       </a>
     ),
   },
-}
+};
 
 export function RichTextRenderer({ content }: RichTextRendererProps) {
-  return <div>{documentToReactComponents(content, options)}</div>
+  return <div>{documentToReactComponents(content, options)}</div>;
 }

@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import { CTAButton } from "@/components/ui/cta-button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Mail, MessageCircle } from "lucide-react"
+import { CTAButton } from "@/components/ui/cta-button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Mail, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { ConfirmModal } from "@/components/ui/ConfirmModal";
 import { useTranslations, useLocale } from "next-intl";
 
 export function ContactSection() {
-  const t = useTranslations('contact')
-  const locale = useLocale()
+  const t = useTranslations("contact");
+  const locale = useLocale();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -25,7 +25,7 @@ export function ContactSection() {
   const [confirmOpen, setConfirmOpen] = useState(false);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -74,21 +74,21 @@ export function ContactSection() {
   };
 
   const buildWhatsappMessage = () => {
-    return `${t('whatsapp.greeting')}
+    return `${t("whatsapp.greeting")}
 
-${t('whatsapp.nameLabel')}: ${formData.name}
-${t('whatsapp.emailLabel')}: ${formData.email}
-${t('whatsapp.phoneLabel')}: ${formData.phone}
-${t('whatsapp.companyLabel')}: ${formData.company}
+${t("whatsapp.nameLabel")}: ${formData.name}
+${t("whatsapp.emailLabel")}: ${formData.email}
+${t("whatsapp.phoneLabel")}: ${formData.phone}
+${t("whatsapp.companyLabel")}: ${formData.company}
 
-${t('whatsapp.messageLabel')}: ${formData.message}`;
+${t("whatsapp.messageLabel")}: ${formData.message}`;
   };
 
   const handleConfirm = ({ isModal = false }) => {
     if (isSubmitting) return;
     const whatsappMessage = buildWhatsappMessage();
     const whatsappUrl = `https://wa.me/6285117697889?text=${encodeURIComponent(
-      whatsappMessage
+      whatsappMessage,
     )}`;
 
     // First-party capture (no PII to GA): fire-and-forget
@@ -161,13 +161,11 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
         <div className="mb-12">
           <div className="section-head mb-6">
             <h2 className="font-heading text-3xl font-bold text-ink lg:text-4xl">
-              {t('title')}
+              {t("title")}
             </h2>
             <span className="section-head__rule" aria-hidden="true" />
           </div>
-          <p className="mb-8 text-lg text-ink-2">
-            {t('description')}
-          </p>
+          <p className="mb-8 text-lg text-ink-2">{t("description")}</p>
 
           <div className="flex flex-col gap-6 sm:flex-row">
             <a
@@ -181,7 +179,9 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
               }
             >
               <Mail className="w-5 h-5 text-lime-green group-hover:text-lime-green" />
-              <span className={`contact_email_link_${locale}`}>hello@arktik.id</span>
+              <span className={`contact_email_link_${locale}`}>
+                hello@arktik.id
+              </span>
             </a>
             <a
               href="https://wa.me/6285117697889"
@@ -196,7 +196,9 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
               }
             >
               <MessageCircle className="w-5 h-5 text-lime-green group-hover:text-lime-green" />
-              <span className={`contact_whatsapp_link_${locale}`}>+62 851-1769-7889</span>
+              <span className={`contact_whatsapp_link_${locale}`}>
+                +62 851-1769-7889
+              </span>
             </a>
           </div>
         </div>
@@ -207,30 +209,45 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
               {/* Left Column - Personal Info */}
               <div className="grid grid-rows-[auto_auto_1fr] gap-8">
                 <div>
+                  {/* Real labels, visually hidden. Placeholder-as-label fails
+                   * WCAG 1.3.1 / 3.3.2 — it vanishes on the first keystroke and
+                   * gives autofill nothing to anchor to. */}
+                  <label htmlFor="contact-name" className="sr-only">
+                    {t("form.namePlaceholder")}
+                  </label>
                   <Input
                     type="text"
+                    id="contact-name"
                     name="name"
-                    placeholder={t('form.namePlaceholder')}
+                    placeholder={t("form.namePlaceholder")}
                     value={formData.name}
                     onChange={handleInputChange}
                     className="rounded-none border-0 border-b-2 border-rule bg-transparent px-0 pb-2 text-ink placeholder:text-ink-3 focus-visible:border-lime-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-green"
                   />
                 </div>
                 <div>
+                  <label htmlFor="contact-email" className="sr-only">
+                    {t("form.emailPlaceholder")}
+                  </label>
                   <Input
                     type="email"
+                    id="contact-email"
                     name="email"
-                    placeholder={t('form.emailPlaceholder')}
+                    placeholder={t("form.emailPlaceholder")}
                     value={formData.email}
                     onChange={handleInputChange}
                     className="rounded-none border-0 border-b-2 border-rule bg-transparent px-0 pb-2 text-ink placeholder:text-ink-3 focus-visible:border-lime-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-green"
                   />
                 </div>
                 <div className="flex items-end">
+                  <label htmlFor="contact-phone" className="sr-only">
+                    {t("form.phonePlaceholder")}
+                  </label>
                   <Input
                     type="tel"
+                    id="contact-phone"
                     name="phone"
-                    placeholder={t('form.phonePlaceholder')}
+                    placeholder={t("form.phonePlaceholder")}
                     value={formData.phone}
                     onChange={handleInputChange}
                     className="rounded-none border-0 border-b-2 border-rule bg-transparent px-0 pb-2 text-ink placeholder:text-ink-3 focus-visible:border-lime-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-green"
@@ -241,19 +258,27 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
               {/* Right Column - Project Info */}
               <div className="grid grid-rows-[auto_1fr] gap-8">
                 <div>
+                  <label htmlFor="contact-company" className="sr-only">
+                    {t("form.companyPlaceholder")}
+                  </label>
                   <Input
                     type="text"
+                    id="contact-company"
                     name="company"
-                    placeholder={t('form.companyPlaceholder')}
+                    placeholder={t("form.companyPlaceholder")}
                     value={formData.company}
                     onChange={handleInputChange}
                     className="rounded-none border-0 border-b-2 border-rule bg-transparent px-0 pb-2 text-ink placeholder:text-ink-3 focus-visible:border-lime-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-green"
                   />
                 </div>
                 <div className="flex flex-col">
+                  <label htmlFor="contact-message" className="sr-only">
+                    {t("form.messagePlaceholder")}
+                  </label>
                   <Textarea
+                    id="contact-message"
                     name="message"
-                    placeholder={t('form.messagePlaceholder')}
+                    placeholder={t("form.messagePlaceholder")}
                     value={formData.message}
                     onChange={handleInputChange}
                     className="min-h-[48px] flex-grow resize-none overflow-y-auto rounded-none border-0 border-b-2 border-rule bg-transparent px-0 pb-2 text-ink placeholder:text-ink-3 focus-visible:border-lime-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-green"
@@ -271,7 +296,7 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
                 aria-disabled={isSubmitting}
                 className={`generate_lead_cta_${locale}`}
               >
-                {t('form.sendButton')}
+                {t("form.sendButton")}
               </CTAButton>
             </div>
           </form>
@@ -282,9 +307,11 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
           onCancel={handleCancel}
           onConfirm={() => handleConfirm({ isModal: true })}
           confirmDisabled={isSubmitting}
-          title={t('modal.title')}
-          description={t('modal.description')}
-          confirmText={isSubmitting ? t('modal.confirmingText') : t('modal.confirmText')}
+          title={t("modal.title")}
+          description={t("modal.description")}
+          confirmText={
+            isSubmitting ? t("modal.confirmingText") : t("modal.confirmText")
+          }
           locale={locale}
         >
           {buildWhatsappMessage()}

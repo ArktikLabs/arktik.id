@@ -30,7 +30,7 @@ export default async function Home({ params }: HomeProps) {
   return (
     <div className="min-h-screen bg-paper text-ink">
       <Header />
-      <main>
+      <main id="main">
         <HeroSection />
         <WorksSection />
         {/* Stage durations live in messages/*.json (process.stages.*.duration)

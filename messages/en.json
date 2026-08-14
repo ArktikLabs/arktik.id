@@ -1,7 +1,8 @@
 {
   "common": {
     "title": "Arktik — custom software, built in the open",
-    "description": "A software studio in Indonesia. You always know what is being built, what it costs, and when it lands — and everything ends up in your name."
+    "description": "A software studio in Indonesia. You always know what is being built, what it costs, and when it lands — and everything ends up in your name.",
+    "skipToContent": "Skip to content"
   },
   "header": {
     "aboutUs": "About",
@@ -11,7 +12,8 @@
     "blog": "Writing",
     "contact": "Start a project",
     "banner": "You talk to the engineers, not an account manager",
-    "bannerLink": "hello@arktik.id"
+    "bannerLink": "hello@arktik.id",
+    "menu": "Menu"
   },
   "hero": {
     "description": "You agree the scope and the price before each stage starts, see working software every week, and own the code and every account from day one.",
@@ -154,14 +156,12 @@
     "description": "What we have learned about build-versus-buy, the real cost of ownership, and what actually goes wrong in software projects.",
     "viewAll": "All writing",
     "completeGuides": "Guides",
-    "latestArticles": "Recent",
-    "completeGuideLabel": "Guide"
+    "latestArticles": "Recent"
   },
   "blogPage": {
     "title": "Writing | Arktik",
     "description": "Build versus buy, what software actually costs to own, and what goes wrong in projects — written up as we hit it.",
     "hero": {
-      "badge": "Writing",
       "title": "Notes from the work",
       "description": "Build versus buy, what software actually costs to own, and what goes wrong in projects. Written up as we hit it, not commissioned for a blog."
     },
