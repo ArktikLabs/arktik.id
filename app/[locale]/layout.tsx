@@ -1,6 +1,7 @@
 import type React from "react";
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Funnel_Sans } from "next/font/google";
+import { Archivo, Instrument_Sans } from "next/font/google";
+import { GeistMono } from "geist/font/mono";
 import { Analytics } from "@vercel/analytics/next";
 import { Suspense } from "react";
 import { CursorPreloader } from "@/components/CursorPreloader";
@@ -11,16 +12,16 @@ import { routing } from '../../i18n/routing';
 import { redirect } from 'next/navigation';
 import "../globals.css";
 
-const bricolageGrotesque = Bricolage_Grotesque({
+const archivo = Archivo({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-bricolage-grotesque",
+  variable: "--font-archivo",
 });
 
-const funnelSans = Funnel_Sans({
+const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-funnel-sans",
+  variable: "--font-instrument-sans",
 });
 
 export async function generateMetadata({
@@ -155,7 +156,7 @@ export default async function LocaleLayout({
         <GoogleTagManager gtmId="GTM-WDNKG95C" />
       </head>
       <body
-        className={`${funnelSans.className} ${bricolageGrotesque.variable} ${funnelSans.variable}`}
+        className={`${instrumentSans.className} ${archivo.variable} ${instrumentSans.variable} ${GeistMono.variable}`}
       >
         <NextIntlClientProvider messages={messages}>
           <CursorPreloader />

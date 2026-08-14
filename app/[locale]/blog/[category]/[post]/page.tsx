@@ -82,7 +82,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     };
 
     return (
-      <div className="min-h-screen text-white bg-dark-blue">
+      <div className="min-h-screen bg-paper text-ink">
         <Header />
 
         {/* Hero Section */}
@@ -114,12 +114,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <div className="inline-flex items-center gap-2">
                   <Link
                     href={`/blog/${categorySlug}`}
-                    className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm font-medium transition-colors"
+                    className="label-mono inline-block rounded-full border border-rule-strong px-3 py-1 text-ink-2 transition-colors duration-200 hover:border-lime-green hover:text-lime-green"
                   >
                     {category.title}
                   </Link>
                 </div>
-                <div className="flex items-center gap-2 text-gray-400">
+                <div className="flex items-center gap-2 text-ink-3">
                   <Calendar className="h-4 w-4" />
                   <span>
                     {new Date(post.sys.createdAt).toLocaleDateString(
@@ -132,12 +132,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     )}
                   </span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-400">
+                <div className="flex items-center gap-2 text-ink-3">
                   <Clock className="h-4 w-4" />
                   <span>{t("readingTime", { minutes: readingTime })}</span>
                 </div>
                 {author?.name && (
-                  <div className="flex items-center gap-2 text-gray-400">
+                  <div className="flex items-center gap-2 text-ink-3">
                     <User className="w-4 h-4" />
                     <span>{author.name}</span>
                   </div>
@@ -145,26 +145,26 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </div>
 
               {/* Title */}
-              <h1 className="mb-6 text-4xl font-bold leading-tight text-balance font-heading md:text-5xl lg:text-6xl">
+              <h1 className="mb-6 max-w-[18ch] text-balance font-heading text-4xl font-bold leading-[1.05] md:text-5xl lg:text-6xl">
                 {post.fields.title}
               </h1>
 
               {/* Excerpt/Introduction */}
               {post.fields.excerpt && (
-                <div className="prose prose-xl prose-invert mb-12">
+                <div className="prose prose-xl prose-invert max-w-[62ch] mb-12">
                   {post.fields.excerpt}
                 </div>
               )}
 
               {/* Pillar Link */}
               {pillar && (
-                <div className="bg-blue-900/30 border border-blue-700 rounded-lg p-4 mb-8">
-                  <p className="text-sm text-blue-300 mb-2">
+                <div className="mb-8 rounded-xl border border-rule bg-paper-2 p-5">
+                  <p className="label-mono mb-2">
                     {postT("partOfGuide")}
                   </p>
                   <Link
                     href={`/blog/${categorySlug}/guides/${pillar.slug}`}
-                    className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
+                    className="text-lime-green hover:text-lime-green/80 font-medium transition-colors"
                   >
                     {pillar.title} →
                   </Link>
@@ -173,19 +173,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </header>
 
             {/* Content */}
-            <div className="prose prose-lg prose-invert max-w-none">
+            <div className="prose prose-lg prose-invert max-w-[68ch]">
               <RichTextRenderer content={post.fields.body} />
             </div>
 
             {/* Tags */}
             {post.fields.tags && post.fields.tags.length > 0 && (
               <div className="flex items-center space-x-2 mb-8">
-                <Tag className="w-4 h-4 text-gray-400" />
+                <Tag className="w-4 h-4 text-ink-3" />
                 <div className="flex flex-wrap gap-2">
                   {post.fields.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="bg-gray-800 text-gray-300 px-2 py-1 rounded text-sm"
+                      className="bg-paper-2 text-ink-2 px-2 py-1 rounded text-sm"
                     >
                       {tag}
                     </span>
@@ -196,7 +196,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             {/* Author Bio */}
             {author && (
-              <div className="bg-gray-900 rounded-lg p-6 mb-16">
+              <div className="bg-paper rounded-lg p-6 mb-16">
                 <div className="flex items-start space-x-4">
                   {author.avatar && (
                     <img

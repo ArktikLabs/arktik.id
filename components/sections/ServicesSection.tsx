@@ -1,14 +1,18 @@
 import { ServiceCard } from "@/components/cards/ServiceCard"
-import { Code, Compass, Sparkles, DraftingCompass } from "lucide-react"
-import { Underline } from "@/components/ui/underline";
+import { Code, Compass, Sparkles, DraftingCompass, LifeBuoy } from "lucide-react"
 import { useTranslations } from "next-intl";
+
+/* Hallmark · F3 tabular spec sheet · macrostructure: Split Studio
+ * design-system: design.md
+ * Was a 4-up equal card grid — one of four consecutive equal grids on this page.
+ * Now a spec sheet: rows, hairline-separated, no boxes. Technical tone. */
 
 export function ServicesSection() {
   const t = useTranslations('services')
 
-  // Convert object to array for features
-  const featuresObj = t.raw('customDevelopment.features') as Record<string, string>;
-  const features = Object.values(featuresObj);
+  const features = Object.values(
+    t.raw('customDevelopment.features') as Record<string, string>
+  );
 
   const services = [
     {
@@ -32,27 +36,31 @@ export function ServicesSection() {
       title: t('design.title'),
       description: t('design.description'),
     },
+    {
+      icon: LifeBuoy,
+      title: t('operations.title'),
+      description: t('operations.description'),
+    },
   ];
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <section id="services" className="px-6 pt-20 pb-0 lg:px-12">
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold font-heading mb-2">{t('title')}</h2>
-          <Underline />
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service, index) => (
-            <ServiceCard
-              key={index}
-              icon={service.icon}
-              title={service.title}
-              description={service.description}
-              features={service.features}
-            />
-          ))}
-        </div>
-      </section>
-    </div>
+    <section id="services" className="mx-auto max-w-7xl px-6 py-20 lg:px-12 lg:py-24">
+      <div className="section-head mb-10">
+        <h2 className="font-heading text-3xl font-bold lg:text-4xl">{t('title')}</h2>
+        <span className="section-head__rule" aria-hidden="true" />
+      </div>
+
+      <div className="border-b border-rule">
+        {services.map((service) => (
+          <ServiceCard
+            key={service.title}
+            icon={service.icon}
+            title={service.title}
+            description={service.description}
+            features={service.features}
+          />
+        ))}
+      </div>
+    </section>
   );
 }

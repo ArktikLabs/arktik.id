@@ -47,7 +47,7 @@ export function ShowcaseViewer({ title, link, activeViewport = 'desktop' }: Show
       {/* iframe Container */}
       <div className="flex-1 flex justify-center items-center p-4">
         <div
-          className="bg-gray-800 rounded-lg overflow-hidden shadow-xl transition-all duration-300 ease-out"
+          className="bg-paper-2 rounded-lg overflow-hidden shadow-xl transition-colors duration-300 ease-out"
           style={{
             width: Math.min(currentSize.width, windowSize.width - 50),
             maxWidth: '100%',
@@ -55,20 +55,22 @@ export function ShowcaseViewer({ title, link, activeViewport = 'desktop' }: Show
             maxHeight: 'calc(100vh - 100px)'
           }}
         >
-          {/* Browser Chrome */}
-          <div className="bg-gray-700 px-4 py-2 flex items-center border-b border-gray-600 relative">
-            <div className="flex gap-2">
-              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-            </div>
-            <div className="absolute inset-x-0 flex justify-center pointer-events-none">
-              <span className="text-xs text-gray-300 truncate max-w-[60%]">{link}</span>
-            </div>
+          {/* Typographic frame. The iframe below is a real live site, so it gets
+            * a label — but not hand-drawn macOS traffic lights. The reader
+            * already has real browser chrome around this page. */}
+          <div className="flex items-center justify-between gap-3 border-b border-rule bg-paper px-4 py-2.5">
+            <span className="label-mono truncate">{link}</span>
+            <span
+              className="h-1.5 w-1.5 shrink-0 rounded-full bg-lime-green"
+              aria-hidden="true"
+            />
           </div>
 
           {/* iframe */}
           <div
+            /* Deliberately NOT a design token: this is the loading ground behind
+             * a third-party site in an iframe. Tinting it brand-blue makes the
+             * client's own site look mis-coloured while it loads. */
             className="relative bg-white"
             style={{
               height: Math.min(currentSize.height, windowSize.height - 140),

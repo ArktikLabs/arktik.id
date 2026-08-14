@@ -32,15 +32,15 @@ export default async function CaseStudiesPage({ params }: CaseStudiesPageProps) 
     const { caseStudies } = await getCaseStudies({ locale })
 
     return (
-      <div className="min-h-screen bg-dark-blue text-white">
+      <div className="min-h-screen bg-paper text-ink">
         <Header />
 
         <BlogHeroSection>
           <div className="max-w-3xl">
-            <h1 className="text-4xl font-bold leading-tight text-balance font-heading lg:text-6xl">
+            <h1 className="text-balance font-heading text-4xl font-bold leading-[1.05] lg:text-6xl">
               {t('hero.title')}
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-gray-300 lg:text-xl">
+            <p className="mt-6 text-lg leading-relaxed text-ink-2 lg:text-xl">
               {t('hero.description')}
             </p>
           </div>
@@ -58,7 +58,7 @@ export default async function CaseStudiesPage({ params }: CaseStudiesPageProps) 
           {/* Case Studies Grid */}
           {caseStudies.length > 0 ? (
             <section>
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                 {caseStudies.map((caseStudy) => (
                   <CaseStudyCard key={caseStudy.sys.id} caseStudy={caseStudy} />
                 ))}
@@ -67,16 +67,16 @@ export default async function CaseStudiesPage({ params }: CaseStudiesPageProps) 
           ) : (
             <section className="py-24 text-center">
               <div className="mx-auto max-w-lg">
-                <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-gray-800">
-                  <FileX className="h-12 w-12 text-gray-400" />
+                <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border border-rule bg-paper-2">
+                  <FileX className="h-9 w-9 text-ink-3" aria-hidden="true" />
                 </div>
-                <h2 className="mb-4 text-3xl font-bold">{t('emptyState.title')}</h2>
-                <p className="mb-8 text-lg leading-relaxed text-gray-400">
+                <h2 className="font-heading text-3xl font-bold">{t('emptyState.title')}</h2>
+                <p className="mb-8 mt-4 text-lg leading-relaxed text-ink-2">
                   {t('emptyState.description')}
                 </p>
                 <Link
                   href={`/${locale}/blog`}
-                  className="inline-flex items-center space-x-2 rounded-lg bg-lime-green px-6 py-3 font-medium text-dark-blue transition-colors hover:bg-lime-green/90"
+                  className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-lime-green px-6 py-3 font-medium text-ink-invert transition-colors duration-200 hover:bg-lime-green/90"
                 >
                   <ArrowLeft className="h-4 w-4" />
                   <span>{t('emptyState.backToBlog')}</span>

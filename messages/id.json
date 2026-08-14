@@ -1,119 +1,122 @@
 {
   "common": {
-    "title": "Arktik - Partner Teknologi untuk Pertumbuhan Bisnis Anda",
-    "description": "Perusahaan pengembangan software profesional dengan 7+ tahun pengalaman mengubah teknologi menjadi pertumbuhan bisnis melalui solusi web, mobile & backend yang dikirim secara global."
+    "title": "Arktik — software kustom, prosesnya terbuka",
+    "description": "Studio software di Indonesia. Anda selalu tahu apa yang sedang dibangun, berapa biayanya, dan kapan selesainya — dan semuanya berakhir atas nama Anda."
   },
   "header": {
-    "aboutUs": "Tentang kami",
-    "services": "Layanan kami",
-    "whyArktik": "Mengapa Arktik?",
-    "portfolio": "Karya kami",
-    "blog": "Blog",
-    "contact": "Hubungi kami"
+    "aboutUs": "Tentang",
+    "process": "Proses",
+    "services": "Layanan",
+    "portfolio": "Karya",
+    "blog": "Tulisan",
+    "contact": "Mulai proyek",
+    "banner": "Anda berbicara langsung dengan engineer-nya, bukan account manager",
+    "bannerLink": "hello@arktik.id"
   },
   "hero": {
-    "buildingTitle": "Menciptakan software",
-    "softwareSolutions": "yang berkualitas",
+    "description": "Anda menyepakati lingkup dan biayanya sebelum setiap tahap dimulai, melihat software yang sudah berfungsi setiap minggu, dan memiliki kode serta seluruh akun sejak hari pertama.",
+    "headlineLead": "Software kustom,",
+    "headlineConnector": "tanpa",
     "flipWords": {
-      "0": "scalable",
-      "1": "andal",
-      "2": "inovatif",
-      "3": "kustom",
-      "4": "modern",
-      "5": "aman"
-    },
-    "description": "Perusahaan pengembangan software terdepan yang menghadirkan sistem web, mobile, dan backend end-to-end secara global, tepat waktu.",
-    "scrollToExplore": "Gulir untuk menjelajah"
+      "0": "black box",
+      "1": "scope creep",
+      "2": "tagihan mendadak",
+      "3": "vendor lock-in"
+    }
   },
   "aboutUs": {
-    "quoteText": "95% produk baru gagal mencapai target — bukan karena idenya, tapi karena eksekusi yang buruk",
-    "quoteSource": "MIT Professional Programs: Mengapa 95% Produk Baru Meleset dari Target",
-    "mainDescription": "Di Arktik, kami percaya bahwa setiap ide layak mendapat eksekusi yang lebih baik. Itulah mengapa kami tidak hanya membangun software — kami bermitra dengan Anda untuk menggabungkan strategi, desain, dan engineering, mengubah visi Anda menjadi produk yang benar-benar berfungsi dan menghasilkan hasil yang terukur.",
+    "quoteText": "95% produk baru gagal mencapai sasaran — bukan karena idenya, tetapi karena eksekusinya",
+    "quoteSource": "MIT Professional Programs: Why 95% of New Products Miss the Mark",
+    "mainDescription": "Software jarang gagal karena idenya. Yang membuatnya gagal adalah eksekusi. Eksekusi adalah soal proses, dan proses itulah bagian yang kami jaga ketat.",
     "whoWeAre": {
-      "title": "Siapa Kami",
-      "description1": "Kami adalah perusahaan pengembangan software dengan para builder, strategis, desainer, dan engineer yang telah menghabiskan lebih dari 7 tahun menciptakan solusi software yang memberdayakan jutaan orang dan bisnis di seluruh dunia.",
-      "description2": "Namun lebih dari itu, kami adalah kolaborator. Kami percaya bahwa solusi terbaik lahir dari mendengarkan, memahami, dan membangun bersama."
+      "title": "Siapa kami",
+      "description1": "Studio kecil di Indonesia yang membangun software kustom untuk bisnis yang sudah tidak lagi cukup ditangani spreadsheet dan tools siap pakai.",
+      "description2": "Tim sengaja dijaga tetap kecil. Hanya dengan begitu, orang yang menyusun rencana proyek Anda masih orang yang sama yang membangunnya tiga bulan kemudian."
     },
     "howWeWork": {
-      "title": "Cara Kami Bekerja",
-      "description1": "Dalam setiap proyek, kami tidak hanya menghadirkan kedalaman teknis tetapi juga empati, inklusivitas, dan komitmen bersama terhadap tujuan Anda.",
-      "description2": "Kami bekerja dengan setara, inklusif, dan penuh rasa ingin tahu untuk mendorong batas-batas kemampuan software bagi bisnis dan orang-orang di baliknya.",
-      "description3": "Pengalaman global kami selama 7+ tahun membuat kami tahu apa yang berhasil — dan kami membawa pengetahuan itu ke dalam setiap kolaborasi."
+      "title": "Cara kami berpikir",
+      "description1": "Terbuka, dan tertulis. Alasan di balik sebuah keputusan lebih berharga setahun kemudian daripada keputusan itu sendiri.",
+      "description2": "Kami lebih memilih mengatakan sejak awal jika sebuah ide kurang tepat, daripada tetap membangunnya dengan sopan lalu menyaksikannya gagal.",
+      "description3": "Menyepakati setiap tahap di awal berarti Anda bisa berhenti kapan pun tanpa perdebatan."
     },
     "whatWeBelieve": {
-      "title": "Apa yang Kami Yakini",
+      "title": "Yang kami percaya",
       "values": {
         "collaboration": {
-          "title": "Kolaborasi Utama",
-          "description": "Kami berkreasi bersama mitra kami, membangun solusi bersama-sama, untuk kesuksesan bersama."
+          "title": "Teknologi yang terbukti",
+          "description": "Perangkat yang banyak dipakai dan didukung dengan baik. Yang menarik seharusnya produk Anda, bukan teknologi yang kami pilih."
         },
         "expertise": {
-          "title": "Keahlian dengan Empati",
-          "description": "Puluhan tahun pengalaman dikombinasikan dengan pemahaman mendalam tentang kebutuhan manusia dan bisnis."
+          "title": "Alasan yang tercatat",
+          "description": "Jika kami tidak bisa menjelaskan alasannya, berarti pekerjaannya belum selesai."
         },
         "impact": {
-          "title": "Dampak Berskala",
-          "description": "Kami menciptakan teknologi tangguh yang dipercaya oleh jutaan orang di seluruh dunia."
+          "title": "Kecil dan senior",
+          "description": "Tidak ada lapisan antara Anda dan orang yang menulis kodenya."
         },
         "innovation": {
-          "title": "Inovasi Inklusif",
-          "description": "Mendorong batas-batas sambil tetap berpijak pada kesetaraan dan kepemilikan bersama."
+          "title": "Estimasi yang jujur",
+          "description": "Kami memberi angka sesuai biaya pekerjaannya, bukan sesuai yang memenangkan tender."
         }
       }
     }
   },
   "services": {
-    "title": "Layanan Kami",
+    "title": "Yang kami bangun",
     "customDevelopment": {
-      "title": "Custom Software Development",
-      "description": "Aplikasi web dan mobile yang disesuaikan untuk berkembang dengan pertumbuhan bisnis Anda — dari konsep hingga deployment, kami menciptakan solusi software yang disukai pengguna dan diandalkan bisnis.",
+      "title": "Aplikasi web dan mobile",
+      "description": "Hal-hal yang digunakan setiap hari — portal pelanggan, sistem pemesanan, sistem internal, toko online. Dibangun dengan teknologi yang sudah terbukti dan banyak dipakai, sehingga orang berikutnya cepat memahaminya.",
       "features": {
-        "0": "Website yang mengonversi dan berkembang dengan bisnis Anda",
-        "1": "Aplikasi mobile yang disukai dan dikunjungi kembali pengguna",
-        "2": "Software kustom yang berkembang dengan kesuksesan Anda"
+        "0": "Website dan aplikasi web",
+        "1": "Aplikasi iOS dan Android",
+        "2": "Sistem internal dan integrasi"
       }
     },
     "consulting": {
-      "title": "Konsultasi dan Pengembangan Teknologi",
-      "description": "Dari konsultasi strategis hingga pengembangan dan dukungan, kami membantu Anda memecahkan masalah bisnis dengan teknologi yang tepat, memastikan investasi teknologi Anda memberikan ROI nyata dan menjaga bisnis Anda siap untuk masa depan."
+      "title": "Konsultasi teknis",
+      "description": "Peninjauan, pendapat kedua, atau perencanaan. Berguna jika tim Anda sudah ada dan perlu memastikan apa yang berjalan sekarang akan bertahan, atau menentukan apa yang dibangun berikutnya."
     },
     "aiAutomation": {
-      "title": "Solusi AI & Otomasi",
-      "description": "Dari chatbot hingga predictive analytics, kami mengimplementasikan solusi berbasis AI yang mengotomatisasi tugas, mengungkap insights, dan memberikan keunggulan kompetitif bagi bisnis Anda — membebaskan tim Anda untuk fokus pada hal yang paling penting."
+      "title": "Otomasi dan AI",
+      "description": "Menghilangkan pekerjaan manual — mengolah dokumen, menyortir permintaan, membuat ringkasan, asisten internal. Jika cukup dengan spreadsheet, kami akan mengatakannya."
     },
     "design": {
-      "title": "Brand Design dan UI/UX",
-      "description": "Kami menciptakan antarmuka intuitif yang mengubah pengunjung menjadi pelanggan — meningkatkan usability, mengurangi churn, dan meningkatkan kepuasan untuk mendorong hasil bisnis Anda."
+      "title": "Desain produk",
+      "description": "Tampilan dan alurnya, untuk produk yang benar-benar dibangun. Dikirim sebagai layar yang berfungsi, bukan PDF."
+    },
+    "operations": {
+      "title": "Menjalankannya setelah rilis",
+      "description": "Hosting, monitoring, perbaikan, dan perubahan kecil yang muncul begitu produknya dipakai orang. Untuk tim yang tidak mau repot mengurus itu sendiri. Biaya bulanan, bisa dihentikan kapan saja, dan semua akun tetap atas nama Anda."
     }
   },
   "whyArktik": {
-    "title": "Mengapa Arktik?",
+    "title": "Kenapa kami",
     "mainCard": {
-      "title": "Kami Mengubah Teknologi Menjadi Pertumbuhan Bisnis",
-      "description": "Sementara yang lain membangun fitur, kami membangun kesuksesan dengan menyelaraskan setiap solusi dengan tujuan Anda untuk menghasilkan hasil terukur yang berarti."
+      "title": "Sengaja kecil.",
+      "description": "Yang datang saat presentasi adalah yang mengerjakan. Tidak ada pergantian orang setelah kesepakatan, dan tidak ada yang dialihkan ke pihak ketiga."
     },
     "features": {
       "globalExperience": {
-        "title": "Pengalaman Global",
-        "description": "Dengan lebih dari 7 tahun memimpin produk, engineering, dan desain di perusahaan teknologi kelas dunia, kami bermitra dengan Anda untuk membawa keahlian ini ke bisnis Anda dan mengangkatnya ke level berikutnya."
+        "title": "Tujuh tahun di dalam tim produk",
+        "description": "Sebelum studio ini, kami menghabiskan tujuh tahun membangun dan merilis produk di perusahaan teknologi mapan. Proses di halaman ini berasal dari sana."
       },
       "endToEnd": {
-        "title": "Keahlian End-to-End",
-        "description": "Kami mengelola siklus hidup produk lengkap dari peluncuran hingga optimisasi dan scaling karena pertumbuhan Anda tidak berhenti di rilis."
+        "title": "Kami lanjut jika Anda menginginkannya",
+        "description": "Banyak klien memang tidak mau repot menjalankannya sendiri, dan kami dengan senang hati mengambil alih — hosting, support, dan tahap berikutnya, disepakati dengan cara yang sama seperti sebelumnya. Bedanya, Anda memilih itu, bukan terjebak di dalamnya."
       },
       "tailored": {
-        "title": "Solusi yang Disesuaikan",
-        "description": "Setiap bisnis unik. Kami membangun solusi kustom yang sesuai dengan tujuan Anda, baik Anda startup yang bergerak cepat atau perusahaan besar."
+        "title": "Kami berani mengatakan tidak",
+        "description": "Jika masalah Anda cukup diselesaikan dengan tools yang sudah ada, kami akan mengatakannya dan menunjukkan yang mana. Software kustom itu mahal, jadi harus benar-benar keputusan yang tepat."
       },
       "proven": {
-        "title": "Dampak Terbukti",
-        "description": "Dari memberdayakan usaha kecil hingga menskalakan platform lintas negara, kami menghasilkan hasil dengan fokus customer-first yang sama setiap waktu."
+        "title": "Dibangun untuk bisa diserahkan ke orang lain",
+        "description": "Teknologi yang sudah terbukti, struktur yang lazim, dan alasannya tercatat bersama kodenya. Entah yang melanjutkan nanti tim Anda, studio lain, atau kami setahun kemudian, tidak ada yang bergantung pada isi kepala satu orang."
       }
     }
   },
   "contact": {
-    "title": "Siap mengubah ide Anda menjadi kenyataan?",
-    "description": "Mari jelajahi bagaimana kami dapat mengubah visi Anda menjadi kesuksesan yang terukur.",
+    "title": "Ceritakan apa yang sedang Anda bangun.",
+    "description": "Beberapa kalimat sudah cukup untuk memulai. Langkah pertamanya adalah obrolan untuk memetakan kebutuhan Anda — tanpa biaya, tanpa presentasi penjualan — dan Anda bisa berhenti di situ sambil membawa rencananya.",
     "form": {
       "namePlaceholder": "Nama Anda",
       "emailPlaceholder": "Email Anda",
@@ -138,28 +141,29 @@
     }
   },
   "works": {
-    "title": "Karya Kami",
+    "title": "Yang sudah kami kerjakan",
     "cta": {
-      "title": "Ini Bisa Jadi Milik Anda",
-      "description": "Ide Anda layak mendapat eksekusi yang lebih baik. Mari kita ubah menjadi software kustom yang mendorong pertumbuhan nyata. Dari konsep hingga peluncuran, kami akan membangun kisah sukses Anda.",
-      "buttonText": "Mulai Sekarang"
-    }
+      "title": "Mulai dari yang kecil.",
+      "description": "Pekerjaan pertama tidak harus langsung produk utuh. Pilih satu hal terkecil yang benar-benar merugikan — satu proses, satu koneksi antar sistem, satu layar yang menyulitkan tim Anda. Kami sepakati apa yang perlu dikerjakan, bangun, lalu serahkan. Jika hasilnya baik, lanjut ke bagian berikutnya.",
+      "buttonText": "Mulai dari yang kecil"
+    },
+    "subtitle": "Disepakati, diselesaikan, dan diserahkan lengkap — kode, akun, dan seluruh password atas nama Anda. Sebagian klien melanjutkannya sendiri. Sebagian lagi tetap menyerahkannya kepada kami."
   },
   "blog": {
-    "title": "Wawasan Terbaru",
-    "description": "Temukan pemikiran terbaru kami tentang teknologi, strategi, dan pertumbuhan bisnis",
-    "viewAll": "Lihat Semua Artikel",
-    "completeGuides": "Panduan Lengkap",
-    "latestArticles": "Artikel Terbaru",
-    "completeGuideLabel": "Panduan Lengkap"
+    "title": "Tulisan",
+    "description": "Yang kami pelajari tentang membangun sendiri versus membeli jadi, biaya kepemilikan yang sebenarnya, dan apa yang biasanya membuat proyek software gagal.",
+    "viewAll": "Semua tulisan",
+    "completeGuides": "Panduan",
+    "latestArticles": "Terbaru",
+    "completeGuideLabel": "Panduan"
   },
   "blogPage": {
-    "title": "Blog | Arktik",
-    "description": "Wawasan tentang strategi digital, pengembangan software, dan solusi teknologi.",
+    "title": "Tulisan | Arktik",
+    "description": "Membangun sendiri versus membeli jadi, berapa biaya sebenarnya memiliki software, dan apa yang biasanya membuat proyek gagal.",
     "hero": {
-      "badge": "Pusat Pengetahuan",
-      "title": "Wawasan & Keahlian",
-      "description": "Temukan yang terbaru dalam strategi digital, pengembangan software, dan solusi teknologi yang mendorong pertumbuhan bisnis."
+      "badge": "Tulisan",
+      "title": "Catatan dari pekerjaan",
+      "description": "Membangun sendiri versus membeli jadi, berapa biaya sebenarnya memiliki software, dan apa yang biasanya membuat proyek gagal. Ditulis sambil kami mengalaminya, bukan dipesan untuk mengisi blog."
     },
     "stats": {
       "articles": "Artikel",
@@ -167,52 +171,56 @@
       "categories": "Kategori"
     },
     "categories": {
-      "title": "Jelajahi Berdasarkan Kategori",
-      "subtitle": "Telusuri konten kami yang diorganisir berdasarkan topik dan area keahlian."
+      "title": "Telusuri per topik",
+      "subtitle": "Semua yang pernah kami tulis, dikelompokkan berdasarkan pokok bahasannya."
     },
     "guides": {
-      "title": "Panduan Lengkap",
-      "subtitle": "Panduan mendalam yang mencakup topik dari awal hingga akhir."
+      "title": "Panduan",
+      "subtitle": "Yang panjang. Satu topik dibahas tuntas, supaya Anda tidak perlu merangkainya sendiri dari enam artikel terpisah."
     },
     "articles": {
-      "title": "Artikel Terbaru",
-      "subtitle": "Wawasan dan update terbaru dari tim ahli kami."
+      "title": "Terbaru",
+      "subtitle": "Tulisan pendek, biasanya dibuat tepat setelah kejadian yang memicunya."
     }
   },
   "caseStudiesPage": {
     "metadata": {
-      "title": "Studi Kasus | Arktik",
-      "description": "Kisah kolaborasi dan produk yang kami bangun untuk mendorong pertumbuhan bisnis."
+      "title": "Studi kasus | Arktik",
+      "description": "Proyek yang ditulis lengkap — apa masalahnya, apa yang kami putuskan, dan apa yang berubah setelahnya."
     },
     "hero": {
-      "title": "Studi Kasus",
-      "description": "Pelajari bagaimana kami bermitra dengan tim untuk merancang, membangun, dan menumbuhkan produk digital yang memberikan hasil terukur."
+      "title": "Studi kasus",
+      "description": "Proyek yang ditulis apa adanya: apa masalahnya ternyata, apa yang kami putuskan dan kenapa, serta apa yang berubah setelah produknya jalan."
     },
     "emptyState": {
-      "title": "Studi kasus segera hadir",
-      "description": "Kami sedang menyiapkan cerita detail tentang bagaimana kami membantu mitra mencapai sukses. Kunjungi kembali nanti atau jelajahi insight lain di blog.",
-      "backToBlog": "Kembali ke Blog"
+      "title": "Belum ada yang diterbitkan",
+      "description": "Pekerjaan klien bukan milik kami untuk diceritakan sebelum mereka mengizinkan, dan izin itu masih kami urus. Sementara ini, tulisan kami adalah versi paling jujur tentang cara kami bekerja.",
+      "backToBlog": "Baca tulisan kami"
     }
   },
   "cards": {
     "project": "Proyek",
     "anonymous": "Anonim",
-    "completeGuide": "Panduan Lengkap",
-    "learnMore": "Pelajari lebih lanjut"
+    "completeGuide": "Panduan",
+    "learnMore": "Baca selengkapnya",
+    "caseStudy": "Studi kasus",
+    "readCaseStudy": "Baca studi kasusnya",
+    "results": "Hasil",
+    "client": "Klien"
   },
   "categoryPage": {
-    "completeGuides": "Panduan Lengkap",
+    "completeGuides": "Panduan",
     "articles": "Artikel",
     "emptyState": {
-      "title": "Belum Ada Konten",
-      "description": "Kami belum menerbitkan artikel atau panduan untuk kategori ini. Nantikan pembaruan!",
-      "backToBlog": "Kembali ke Blog"
+      "title": "Belum ada isinya",
+      "description": "Kami belum menulis apa pun di kategori ini. Kategori lain isinya lebih banyak.",
+      "backToBlog": "Semua tulisan"
     }
   },
   "pillarPage": {
-    "completeGuide": "Panduan Lengkap",
+    "completeGuide": "Panduan",
     "guides": "Panduan",
-    "relatedArticles": "Artikel Terkait",
+    "relatedArticles": "Bacaan terkait",
     "readingTime": "{minutes} menit baca",
     "notFound": "Panduan Tidak Ditemukan | Arktik",
     "blog": "Blog",
@@ -220,11 +228,11 @@
     "moreFromCategory": "Lebih banyak dari {category}"
   },
   "postCta": {
-    "badge": "Mari Berdiskusi",
-    "title": "Siap membangun produk berikutnya?",
-    "description": "Butuh partner yang gesit atau tim yang bisa tumbuh bersama? Kami membantu mengubah ide ambisius menjadi software yang benar-benar bekerja.",
-    "primaryCta": "Mulai percakapan",
-    "secondaryCta": "Lihat layanan"
+    "badge": "Langkah berikutnya",
+    "title": "Punya kebutuhan serupa?",
+    "description": "Obrolan pertama gratis dan tanpa presentasi jualan. Kami bantu petakan apa yang sebenarnya Anda butuhkan, dan rencananya tetap milik Anda — mau lanjut bersama kami atau tidak.",
+    "primaryCta": "Mulai proyek",
+    "secondaryCta": "Lihat yang kami bangun"
   },
   "postPage": {
     "notFound": "Artikel Tidak Ditemukan | Arktik",
@@ -233,8 +241,8 @@
     "moreFromCategory": "Lebih banyak dari {category}"
   },
   "footer": {
-    "description": "Mengubah ide menjadi produk yang mendorong pertumbuhan bisnis nyata.",
-    "copyright": "© {year} Arktik. Semua hak dilindungi."
+    "description": "Studio software di Indonesia. Aplikasi web dan mobile kustom, dikerjakan terbuka dan diserahkan atas nama Anda.",
+    "copyright": "© {year} Arktik. Seluruh hak cipta dilindungi."
   },
   "showcase": {
     "viewport": {
@@ -244,5 +252,57 @@
     },
     "viewingIn": "Sedang melihat dalam mode",
     "mode": ""
+  },
+  "caseStudyPage": {
+    "client": "Klien",
+    "category": "Kategori",
+    "challenge": "Tantangan",
+    "solution": "Solusi",
+    "results": "Hasil"
+  },
+  "process": {
+    "title": "Cara kami bekerja",
+    "description": "Empat tahap. Apa yang dikerjakan dan berapa biayanya disepakati sebelum setiap tahap dimulai, sehingga Anda bisa berhenti kapan saja — atau melanjutkan ke kebutuhan berikutnya.",
+    "durationLabel": "Perkiraan waktu",
+    "tbd": "menyusul",
+    "stages": {
+      "discovery": {
+        "title": "Discovery",
+        "duration": "1–2 minggu",
+        "description": "Kami mencari tahu masalah yang sebenarnya, siapa penggunanya, dan apa saja batasannya — sebelum ada satu baris kode. Anda mendapat rencana tertulis dan harga pasti, dan itu tetap milik Anda, baik melanjutkan bersama kami maupun tidak."
+      },
+      "design": {
+        "title": "Desain",
+        "duration": "2–3 minggu",
+        "description": "Kami tentukan bersama tampilannya dan cara membangunnya. Anda meninjau layar sungguhan di browser Anda, bukan slide."
+      },
+      "build": {
+        "title": "Development",
+        "duration": "dari 6 minggu",
+        "description": "Dikirim bertahap dan langsung bisa digunakan. Ada demo yang berfungsi setiap minggu, dan tautan pribadi yang bisa Anda buka kapan saja untuk melihat perkembangannya."
+      },
+      "handover": {
+        "title": "Serah terima",
+        "duration": "1 minggu",
+        "description": "Kode, dokumentasi, dan seluruh password serta akun dipastikan menjadi milik Anda. Dari sini, sebagian klien menjalankannya sendiri dan sebagian lagi menyerahkannya kembali kepada kami. Anda yang memilih, dan itulah alasan tiga tahap sebelumnya dikerjakan dengan cara ini."
+      }
+    }
+  },
+  "commitments": {
+    "title": "Komitmen kami",
+    "items": {
+      "scope": {
+        "title": "Disepakati sebelum mulai",
+        "description": "Apa yang Anda dapat dan berapa biayanya ditulis sebelum setiap tahap dimulai. Tidak ada negosiasi ulang di tengah jalan."
+      },
+      "ownership": {
+        "title": "Semuanya menjadi milik Anda",
+        "description": "Kode, server, domain, dan seluruh akun atas nama Anda sejak hari pertama — bukan atas nama kami."
+      },
+      "access": {
+        "title": "Bicara dengan yang membangun",
+        "description": "Anda berhubungan langsung dengan orang yang menulis software-nya. Tidak ada perantara."
+      }
+    }
   }
 }

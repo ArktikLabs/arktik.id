@@ -1,83 +1,88 @@
 import Link from 'next/link'
-import { Calendar, Building, CheckCircle, ArrowRight } from 'lucide-react'
+import Image from 'next/image'
+import { Building, ArrowUpRight } from 'lucide-react'
 import { CaseStudyEntry } from '@/lib/types/contentful'
-import { getPlainTextFromRichText } from '@/lib/utils/contentful'
+import { getPlainTextFromRichText, getImageUrl } from '@/lib/utils/contentful'
+import { useTranslations, useLocale } from 'next-intl'
+
+/* Hallmark · design-system: design.md
+ * Two fixes beyond the visual layer:
+ *   1. It shipped a SECOND accent hue (green-400/600/900) alongside the brand
+ *      chartreuse. One accent per system — repointed to the token.
+ *   2. Every label was hardcoded English inside an id/en app. Now translated.
+ * Also: the whole card is one link target instead of three competing ones. */
 
 interface CaseStudyCardProps {
   caseStudy: CaseStudyEntry
 }
 
 export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
+  const t = useTranslations('cards')
+  const locale = useLocale()
+
+  const { slug, title, featuredImage, clientName, challenge, results } =
+    caseStudy.fields
+  const imageUrl = getImageUrl(featuredImage)
+  const summary = getPlainTextFromRichText(challenge)
+  const outcome = getPlainTextFromRichText(results)
+
   return (
-    <article className="bg-gradient-to-br from-green-900/20 to-blue-900/20 border border-green-700/50 rounded-lg overflow-hidden hover:border-green-500/70 transition-all duration-300 group">
-      {caseStudy.fields.featuredImage && (
-        <div className="relative overflow-hidden">
-          <img
-            src={caseStudy.fields.featuredImage.fields.file?.url}
-            alt={caseStudy.fields.featuredImage.fields.title || caseStudy.fields.title}
-            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent" />
-          <div className="absolute top-4 left-4">
-            <span className="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-              Case Study
+    <article className="group overflow-hidden rounded-xl border border-rule bg-paper-2 transition-colors duration-200 hover:border-rule-strong">
+      <Link href={`/${locale}/blog/case-studies/${slug}`} className="block">
+        {imageUrl && (
+          <div className="relative h-48 w-full">
+            <Image
+              src={imageUrl}
+              alt=""
+              aria-hidden="true"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover object-center"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-t from-paper-2 to-transparent"
+            />
+            <span className="label-mono absolute left-4 top-4 rounded-full bg-lime-green px-2.5 py-1 text-ink-invert">
+              {t('caseStudy')}
             </span>
-          </div>
-        </div>
-      )}
-
-      <div className="p-6">
-        {/* Title */}
-        <h3 className="text-xl font-bold mb-3 line-clamp-2 group-hover:text-green-400 transition-colors">
-          <Link href={`/blog/case-studies/${caseStudy.fields.slug}`}>
-            {caseStudy.fields.title}
-          </Link>
-        </h3>
-
-        {/* Challenge/Solution Preview */}
-        <p className="text-gray-300 mb-4 line-clamp-3">
-          {getPlainTextFromRichText(caseStudy.fields.challenge) || 'Case study details coming soon...'}
-        </p>
-
-        {/* Project Details */}
-        <div className="space-y-2 mb-4">
-          {caseStudy.fields.clientName && (
-            <div className="flex items-center space-x-2 text-sm text-gray-400">
-              <Building className="w-4 h-4 text-green-400" />
-              <span>{caseStudy.fields.clientName}</span>
-            </div>
-          )}
-
-          {caseStudy.fields.category && (
-            <div className="flex items-center space-x-2 text-sm text-gray-400">
-              <Calendar className="w-4 h-4 text-green-400" />
-              <span>{caseStudy.fields.category.fields?.title}</span>
-            </div>
-          )}
-        </div>
-
-        {/* Results Preview */}
-        {caseStudy.fields.results && (
-          <div className="mb-4">
-            <div className="flex items-center space-x-2 text-sm text-green-400 mb-2">
-              <CheckCircle className="w-4 h-4" />
-              <span>Results:</span>
-            </div>
-            <p className="text-sm text-gray-300 line-clamp-2">
-              {getPlainTextFromRichText(caseStudy.fields.results) || 'Results available in full case study'}
-            </p>
           </div>
         )}
 
-        {/* CTA */}
-        <Link
-          href={`/blog/case-studies/${caseStudy.fields.slug}`}
-          className="inline-flex items-center space-x-2 text-green-400 hover:text-green-300 font-medium transition-colors group/link"
-        >
-          <span>Read Case Study</span>
-          <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-        </Link>
-      </div>
+        <div className="p-6">
+          <h3 className="line-clamp-2 font-heading text-xl font-bold text-ink transition-colors duration-200 group-hover:text-lime-green">
+            {title}
+          </h3>
+
+          {summary && (
+            <p className="mt-3 line-clamp-3 leading-relaxed text-ink-2">
+              {summary}
+            </p>
+          )}
+
+          <dl className="mt-5 space-y-2">
+            {clientName && (
+              <div className="flex items-center gap-2">
+                <dt className="sr-only">{t('client')}</dt>
+                <Building className="h-4 w-4 shrink-0 text-lime-green" aria-hidden="true" />
+                <dd className="label-mono">{clientName}</dd>
+              </div>
+            )}
+
+            {outcome && (
+              <div>
+                <dt className="label-mono text-lime-green">{t('results')}</dt>
+                <dd className="mt-1 line-clamp-2 text-sm text-ink-2">{outcome}</dd>
+              </div>
+            )}
+          </dl>
+
+          <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-lime-green">
+            {t('readCaseStudy')}
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </span>
+        </div>
+      </Link>
     </article>
   )
 }

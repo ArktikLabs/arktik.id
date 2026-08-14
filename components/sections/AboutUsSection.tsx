@@ -4,15 +4,21 @@ import { LinkPreview } from "@/components/ui/link-preview";
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 
+/* Hallmark · T3 single huge quote → three-column story · design-system: design.md
+ * The MIT pull-quote is the strongest borrowed credibility on the page, so it
+ * keeps the centred treatment. Everything below it is left-aligned — the old
+ * `text-center lg:text-left` flip-flop made the column heads jump on resize.
+ * Straight quotes replaced with typographic ones. */
+
+const MIT_URL =
+  "https://professionalprograms.mit.edu/blog/design/why-95-of-new-products-miss-the-mark-and-how-yours-can-avoid-the-same-fate/";
+
 export function AboutUsSection() {
   const t = useTranslations('aboutUs')
 
-  // Prefetch the screenshot for faster loading
+  // Warm the microlink screenshot so the hover preview isn't a blank card.
   useEffect(() => {
-    const mitUrl = "https://professionalprograms.mit.edu/blog/design/why-95-of-new-products-miss-the-mark-and-how-yours-can-avoid-the-same-fate/";
-    const screenshotUrl = `https://api.microlink.io/?url=${encodeURIComponent(mitUrl)}&screenshot=true&meta=false&embed=screenshot.url&colorScheme=dark&viewport.isMobile=true&viewport.deviceScaleFactor=1&viewport.width=900&viewport.height=540`;
-
-    // Create invisible image to prefetch
+    const screenshotUrl = `https://api.microlink.io/?url=${encodeURIComponent(MIT_URL)}&screenshot=true&meta=false&embed=screenshot.url&colorScheme=dark&viewport.isMobile=true&viewport.deviceScaleFactor=1&viewport.width=900&viewport.height=540`;
     const img = new Image();
     img.src = screenshotUrl;
   }, []);
@@ -40,114 +46,94 @@ export function AboutUsSection() {
     },
   ];
 
+  const columns = [
+    {
+      title: t('whoWeAre.title'),
+      paragraphs: [t('whoWeAre.description1'), t('whoWeAre.description2')],
+    },
+    {
+      title: t('howWeWork.title'),
+      paragraphs: [
+        t('howWeWork.description1'),
+        t('howWeWork.description2'),
+        t('howWeWork.description3'),
+      ],
+    },
+  ];
+
   return (
-    <div className="max-w-7xl mx-auto">
-      <section id="about-us" className="px-6 pt-20 pb-0 lg:px-12">
-        {/* Quote Hero */}
-        <div className="text-center mb-20">
-          <h2 className="text-3xl lg:text-5xl font-bold leading-tight mb-4 text-white font-heading">
-            <span className="text-lime-green">"</span>
-            <LinkPreview
-              url="https://professionalprograms.mit.edu/blog/design/why-95-of-new-products-miss-the-mark-and-how-yours-can-avoid-the-same-fate/"
-              className="text-font hover:text-lime-green/80 transition-colors duration-200 cursor-pointer"
-              width={300}
-              height={180}
-            >
-              {t('quoteText')}<sup>*</sup>
-            </LinkPreview>
-            <span className="text-lime-green">"</span>
-          </h2>
-          <div className="text-xs text-gray-500 mb-5">
-            *
-            <LinkPreview
-              url="https://professionalprograms.mit.edu/blog/design/why-95-of-new-products-miss-the-mark-and-how-yours-can-avoid-the-same-fate/"
-              className="text-gray-500 hover:text-lime-green transition-colors duration-200 ml-1"
-              width={300}
-              height={180}
-            >
-              {t('quoteSource')}
-            </LinkPreview>
-          </div>
-          <div className="max-w-4xl mx-auto">
-            <p className="text-lg lg:text-xl text-gray-300 leading-relaxed">
-              {t('mainDescription')}
-            </p>
-          </div>
-        </div>
+    <section
+      id="about-us"
+      className="mx-auto max-w-7xl px-6 pb-20 pt-28 lg:px-12 lg:pb-24 lg:pt-32"
+    >
+      {/* Borrowed credibility, front and centre. */}
+      <figure className="mx-auto mb-20 max-w-4xl text-center">
+        <blockquote className="font-heading text-3xl font-bold leading-tight lg:text-5xl">
+          <span className="text-lime-green">&ldquo;</span>
+          <LinkPreview
+            url={MIT_URL}
+            className="text-ink transition-colors duration-200 hover:text-lime-green"
+            width={300}
+            height={180}
+          >
+            {t('quoteText')}
+          </LinkPreview>
+          <span className="text-lime-green">&rdquo;</span>
+        </blockquote>
+        <figcaption className="mt-5">
+          <LinkPreview
+            url={MIT_URL}
+            className="label-mono transition-colors duration-200 hover:text-lime-green"
+            width={300}
+            height={180}
+          >
+            {t('quoteSource')}
+          </LinkPreview>
+        </figcaption>
+      </figure>
 
-        {/* Three Column Story Layout */}
-        <div className="grid lg:grid-cols-3 gap-12 lg:gap-16 mb-20 relative">
-          {/* Who We Are */}
-          <div className="space-y-6 pb-8 lg:pb-0 border-b lg:border-b-0 border-gray-700">
-            <div className="text-center lg:text-left mb-6">
-              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-2 font-heading">
-                {t('whoWeAre.title')}
-              </h3>
-              <div className="w-3/4 h-[2px] bg-lime-green mx-auto lg:mx-0"></div>
-            </div>
-            <p className="text-gray-300 leading-relaxed">
-              {t('whoWeAre.description1')}
-            </p>
-            <p className="text-gray-300 leading-relaxed">
-              {t('whoWeAre.description2')}
-            </p>
-          </div>
+      <p className="mx-auto mb-20 max-w-3xl text-center text-lg leading-relaxed text-ink-2 lg:text-xl">
+        {t('mainDescription')}
+      </p>
 
-          {/* Vertical Separator 1 */}
-          <div className="hidden lg:block absolute left-1/3 top-0 bottom-0 w-[1px] bg-gray-700 transform -translate-x-1/2"></div>
-
-          {/* How We Work */}
-          <div className="space-y-6 pb-8 lg:pb-0 border-b lg:border-b-0 border-gray-700">
-            <div className="text-center lg:text-left mb-6">
-              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-2 font-heading">
-                {t('howWeWork.title')}
-              </h3>
-              <div className="w-3/4 h-[2px] bg-lime-green mx-auto lg:mx-0"></div>
-            </div>
-            <p className="text-gray-300 leading-relaxed">
-              {t('howWeWork.description1')}
-            </p>
-            <p className="text-gray-300 leading-relaxed">
-              {t('howWeWork.description2')}
-            </p>
-            <p className="text-gray-300 leading-relaxed">
-              {t('howWeWork.description3')}
-            </p>
-          </div>
-
-          {/* Vertical Separator 2 */}
-          <div className="hidden lg:block absolute left-2/3 top-0 bottom-0 w-[1px] bg-gray-700 transform -translate-x-1/2"></div>
-
-          {/* What We Believe */}
-          <div className="space-y-6">
-            <div className="text-center lg:text-left mb-6">
-              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-2 font-heading">
-                {t('whatWeBelieve.title')}
-              </h3>
-              <div className="w-3/4 h-[2px] bg-lime-green mx-auto lg:mx-0"></div>
-            </div>
-            <div className="space-y-4">
-              {values.map((value, index) => (
-                <div key={index} className="group">
-                  <div className="flex items-start gap-3">
-                    <div className="flex-shrink-0 mt-1">
-                      <value.icon className="w-5 h-5 text-lime-green" />
-                    </div>
-                    <div>
-                      <h4 className="text-white font-semibold mb-1">
-                        {value.title}
-                      </h4>
-                      <p className="text-gray-400 text-sm leading-relaxed">
-                        {value.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
+      <div className="grid gap-12 lg:grid-cols-3 lg:gap-14">
+        {columns.map((column) => (
+          <div key={column.title} className="border-t border-rule pt-6">
+            <h3 className="font-heading text-2xl font-bold text-ink lg:text-3xl">
+              {column.title}
+            </h3>
+            <div className="mt-5 space-y-4">
+              {column.paragraphs.map((paragraph, index) => (
+                <p key={index} className="leading-relaxed text-ink-2">
+                  {paragraph}
+                </p>
               ))}
             </div>
           </div>
+        ))}
+
+        <div className="border-t border-rule pt-6">
+          <h3 className="font-heading text-2xl font-bold text-ink lg:text-3xl">
+            {t('whatWeBelieve.title')}
+          </h3>
+          <dl className="mt-5 space-y-5">
+            {values.map((value) => (
+              <div key={value.title} className="flex items-start gap-3">
+                <value.icon
+                  className="mt-1 h-4 w-4 shrink-0 text-lime-green"
+                  aria-hidden="true"
+                />
+                <div>
+                  <dt className="font-semibold text-ink">{value.title}</dt>
+                  <dd className="mt-1 text-sm leading-relaxed text-ink-3">
+                    {value.description}
+                  </dd>
+                </div>
+              </div>
+            ))}
+          </dl>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }

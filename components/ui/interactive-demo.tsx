@@ -562,13 +562,12 @@ export function InteractiveDemo() {
             </Card>
           ) : (
             <Card className="bg-slate-800 border-slate-600 h-96 overflow-hidden animate-in slide-in-from-bottom-4 duration-700 shadow-2xl">
-              <div className="p-3 border-b border-slate-600 flex items-center gap-2 bg-slate-900">
-                <div className="flex gap-1">
-                  <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                  <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                  <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                </div>
-                <div className="text-xs text-slate-400 ml-2">{selectedScenario.app.url}</div>
+              {/* Typographic frame, not re-drawn browser chrome. The traffic-light
+                * dots + URL pill that used to live here are a named AI tell: the
+                * user already has a real browser around this page. */}
+              <div className="flex items-center justify-between gap-3 border-b border-slate-600 bg-slate-900 px-4 py-3">
+                <span className="label-mono truncate">{selectedScenario.app.url}</span>
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-lime-green" aria-hidden="true" />
               </div>
               
               <div className="p-6 bg-gradient-to-br from-slate-900 to-slate-800 h-full">
@@ -1799,7 +1798,7 @@ export function InteractiveDemo() {
               <Button
                 onClick={handlePlay}
                 size="sm"
-                className="w-10 h-10 rounded-full bg-lime-400 text-slate-900 hover:bg-lime-300 shadow-lg transition-all duration-200"
+                className="w-10 h-10 rounded-full bg-lime-400 text-slate-900 hover:bg-lime-300 shadow-lg transition-colors duration-200"
               >
                 <Play className="w-4 h-4" />
               </Button>
@@ -1814,7 +1813,7 @@ export function InteractiveDemo() {
               <Button
                 onClick={handleNewDemo}
                 size="sm"
-                className="w-10 h-10 rounded-full bg-slate-700 text-white hover:bg-slate-600 shadow-lg transition-all duration-200 animate-in fade-in"
+                className="w-10 h-10 rounded-full bg-slate-700 text-white hover:bg-slate-600 shadow-lg transition-colors duration-200 animate-in fade-in"
               >
                 <RotateCcw className="w-4 h-4" />
               </Button>

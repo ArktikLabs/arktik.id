@@ -1,0 +1,129 @@
+/* Hallmark · genre: modern-minimal · theme: custom "carbon, bone, one hot accent"
+ * design-system: design.md · v2 (2026-08-13)
+ * paper oklch(15.5% 0.012 150) #090E0A · accent oklch(94.3% 0.192 120) #DDFE55 (LOCKED)
+ * axes: dark paper / grotesk-sans display / chromatic-other accent
+ *
+ * Why carbon and not the old #012233: chartreuse sits at hue 120, the old blue
+ * ground at 236 — 116 degrees apart and both chromatic, so they competed and the
+ * page read muddy. Every neutral here is tinted a whisper toward 150 (the
+ * accent's own neighbourhood), so the ground agrees with the lime instead of
+ * fighting it. Nothing is zero-chroma; pure grey reads synthetic.
+ *
+ * Single source of truth. Raw hex / oklch literals in component files are slop.
+ */
+
+:root {
+  /* ---- Colour · carbon surfaces ---------------------------------------- */
+  /* Elevation is LIGHTNESS, never a coloured glow. */
+  --color-paper: oklch(15.5% 0.012 150); /* #090E0A */
+  --color-paper-2: oklch(20.5% 0.014 150); /* #131914 elevated */
+  --color-paper-3: oklch(26.5% 0.016 150); /* #202821 top elevation */
+
+  /* ---- Colour · bone (light sections) ----------------------------------- */
+  /* Never #fff — pure white reads flat and synthetic (slop gate 7). */
+  --color-paper-invert: oklch(96% 0.008 100); /* #F3F2EC bone */
+  --color-paper-invert-2: oklch(91% 0.009 100); /* #E5E3DA */
+
+  /* ---- Colour · ink ----------------------------------------------------- */
+  --color-ink: oklch(97% 0.006 150); /* #F2F6F3 */
+  --color-ink-2: oklch(74.5% 0.012 150); /* body copy on carbon */
+  --color-ink-3: oklch(63% 0.012 150); /* captions, meta — 5.6:1 on paper.
+                                     * 56.5% measured 4.30:1 and failed gate 40;
+                                     * every .label-mono in the app uses this. */
+  --color-ink-invert: oklch(18% 0.012 150); /* ink on bone */
+  --color-ink-invert-2: oklch(42% 0.012 150);
+
+  /* ---- Colour · accent · LOCKED · ≤5% of any viewport ------------------- */
+  --color-accent: oklch(94.3% 0.192 120); /* #DDFE55 — brand, do not change */
+  --color-accent-ink: oklch(15.5% 0.012 150); /* label on accent fill */
+  --color-accent-dim: oklch(94.3% 0.192 120 / 0.16);
+  --color-focus: oklch(94.3% 0.192 120);
+
+  /* ---- Colour · structure ----------------------------------------------- */
+  --color-rule: oklch(28.5% 0.014 150);
+  --color-rule-strong: oklch(38% 0.016 150);
+  --color-scrim: oklch(10% 0.01 150);
+
+  /* ---- Type -------------------------------------------------------------
+   * Archivo carries display: wide, institutional letterforms buy the authority
+   * a new firm can't yet buy with client logos. Instrument Sans is narrower and
+   * humanist, so the pairing contrasts on WIDTH, not just weight.
+   */
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-display-s: clamp(2rem, 3.5vw + 0.75rem, 3.25rem);
+  --text-display: clamp(2.75rem, 6vw + 0.5rem, 5.5rem);
+
+  --tracking-display: -0.03em;
+  --tracking-mono: 0.1em;
+
+  /* ---- Space · 4pt ------------------------------------------------------ */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4.5rem;
+  --space-3xl: 7rem;
+  --page-gutter: 1.5rem;
+
+  /* ---- Structure -------------------------------------------------------- */
+  --rule-hair: 1px;
+  --radius-card: 0.875rem;
+  --radius-input: 0.375rem;
+  --radius-pill: 999px;
+
+  /* N12 banner + retracting nav */
+  --banner-h: 40px;
+  --bar-h: 68px;
+
+  /* ---- Motion ----------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-instant: 120ms;
+  --dur-short: 220ms;
+  --dur-medium: 360ms;
+
+  /* ---- shadcn/ui bridge · bare HSL triplets (the config wraps in hsl()) -- */
+  /* Derived from the OKLCH surfaces above, not eyeballed — the two layers must
+   * name the same colours or the system drifts apart on the first edit. */
+  --background: 132 22% 5%; /* = --color-paper */
+  --foreground: 135 18% 96%; /* = --color-ink */
+  --card: 130 14% 9%; /* = --color-paper-2 */
+  --card-foreground: 135 18% 96%;
+  --popover: 130 14% 9%;
+  --popover-foreground: 135 18% 96%;
+  --primary: 72 99% 66%; /* = --color-accent */
+  --primary-foreground: 132 22% 5%;
+  --secondary: 128 11% 14%; /* = --color-paper-3 */
+  --secondary-foreground: 135 18% 96%;
+  --muted: 130 14% 9%;
+  --muted-foreground: 130 4% 52%; /* = --color-ink-3 */
+  --accent: 72 99% 66%;
+  --accent-foreground: 132 22% 5%;
+  --destructive: 8 72% 58%;
+  --destructive-foreground: 135 18% 96%;
+  --border: 129 9% 16%; /* = --color-rule */
+  --input: 129 9% 16%;
+  --ring: 72 99% 66%;
+  --radius: 0.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-instant: 0ms;
+    --dur-short: 120ms;
+    --dur-medium: 150ms;
+  }
+}

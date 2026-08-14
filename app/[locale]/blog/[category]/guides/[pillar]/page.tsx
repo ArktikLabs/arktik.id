@@ -75,7 +75,7 @@ export default async function PillarPage({ params }: PillarPageProps) {
     }
 
     return (
-      <div className="min-h-screen text-white bg-dark-blue">
+      <div className="min-h-screen bg-paper text-ink">
         <Header />
 
         <BlogHeroSection
@@ -109,7 +109,7 @@ export default async function PillarPage({ params }: PillarPageProps) {
                   <BookOpen className="h-5 w-5" />
                   <span>{t("completeGuide")}</span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-400">
+                <div className="flex items-center gap-2 text-ink-3">
                   <Calendar className="h-4 w-4" />
                   <span>
                     {new Date(pillar.sys.createdAt).toLocaleDateString(
@@ -122,12 +122,12 @@ export default async function PillarPage({ params }: PillarPageProps) {
                     )}
                   </span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-400">
+                <div className="flex items-center gap-2 text-ink-3">
                   <Clock className="h-4 w-4" />
                   <span>{t("readingTime", { minutes: readingTime })}</span>
                 </div>
                 {pillar.fields.author?.fields?.name && (
-                  <div className="flex items-center gap-2 text-gray-400">
+                  <div className="flex items-center gap-2 text-ink-3">
                     <User className="w-4 h-4" />
                     <span className="text-lime-green">
                       {pillar.fields.author.fields.name}
@@ -135,18 +135,18 @@ export default async function PillarPage({ params }: PillarPageProps) {
                   </div>
                 )}
               </div>
-              <h1 className="mb-6 text-4xl font-bold leading-tight text-balance font-heading md:text-5xl lg:text-6xl">
+              <h1 className="mb-6 max-w-[18ch] text-balance font-heading text-4xl font-bold leading-[1.05] md:text-5xl lg:text-6xl">
                 {pillar.fields.title}
               </h1>
               {pillar.fields.introduction && (
-                <div className="prose prose-xl prose-invert mb-12 border-b border-gray-700 pb-8">
+                <div className="prose prose-xl prose-invert max-w-[62ch] mb-12 border-b border-rule pb-8">
                   <RichTextRenderer content={pillar.fields.introduction} />
                 </div>
               )}
             </header>
 
             {/* Main Content */}
-            <div className="prose prose-lg prose-invert max-w-none">
+            <div className="prose prose-lg prose-invert max-w-[68ch]">
               <RichTextRenderer content={pillar.fields.body} />
             </div>
           </article>

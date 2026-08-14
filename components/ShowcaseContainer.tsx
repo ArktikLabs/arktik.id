@@ -17,13 +17,13 @@ function ViewportControls({ activeViewport, onViewportChange }: {
   onViewportChange: (viewport: ViewportType) => void;
 }) {
   return (
-    <div className="flex bg-white/10 backdrop-blur-sm rounded-full p-1">
+    <div className="flex bg-paper-3 backdrop-blur-sm rounded-full p-1">
       <button
         onClick={() => onViewportChange('mobile')}
-        className={`p-2 rounded-full transition-all duration-200 ${
+        className={`p-2 rounded-full transition-colors duration-200 ${
           activeViewport === 'mobile'
-            ? 'bg-lime-green text-dark-blue'
-            : 'text-white/70 hover:text-white hover:bg-white/10'
+            ? 'bg-lime-green text-carbon'
+            : 'text-ink/70 hover:text-ink hover:bg-paper-3'
         }`}
         title="Mobile View"
       >
@@ -33,10 +33,10 @@ function ViewportControls({ activeViewport, onViewportChange }: {
       </button>
       <button
         onClick={() => onViewportChange('tablet')}
-        className={`p-2 rounded-full transition-all duration-200 ${
+        className={`p-2 rounded-full transition-colors duration-200 ${
           activeViewport === 'tablet'
-            ? 'bg-lime-green text-dark-blue'
-            : 'text-white/70 hover:text-white hover:bg-white/10'
+            ? 'bg-lime-green text-carbon'
+            : 'text-ink/70 hover:text-ink hover:bg-paper-3'
         }`}
         title="Tablet View"
       >
@@ -46,10 +46,10 @@ function ViewportControls({ activeViewport, onViewportChange }: {
       </button>
       <button
         onClick={() => onViewportChange('desktop')}
-        className={`p-2 rounded-full transition-all duration-200 ${
+        className={`p-2 rounded-full transition-colors duration-200 ${
           activeViewport === 'desktop'
-            ? 'bg-lime-green text-dark-blue'
-            : 'text-white/70 hover:text-white hover:bg-white/10'
+            ? 'bg-lime-green text-carbon'
+            : 'text-ink/70 hover:text-ink hover:bg-paper-3'
         }`}
         title="Desktop View"
       >
@@ -65,9 +65,9 @@ export function ShowcaseContainer({ title, link }: ShowcaseContainerProps) {
   const [activeViewport, setActiveViewport] = useState<ViewportType>('desktop');
 
   return (
-    <div className="min-h-screen w-full bg-dark-blue">
+    <div className="min-h-screen w-full bg-carbon">
       {/* Header matching Header.tsx styling */}
-      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-dark-blue/30 backdrop-blur-lg backdrop-saturate-180 border-b border-white/8">
+      <header className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 bg-carbon/30 backdrop-blur-lg backdrop-saturate-180 border-b border-white/8">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-6 lg:px-12">
           <Link
             href="/"
@@ -84,14 +84,14 @@ export function ShowcaseContainer({ title, link }: ShowcaseContainerProps) {
           </Link>
 
           <div className="flex items-center gap-6">
-            <h1 className="text-lg font-bricolage-grotesque font-semibold text-white">{title}</h1>
+            <h1 className="text-lg font-bricolage-grotesque font-semibold text-ink">{title}</h1>
 
             <div className="flex items-center gap-3">
               <a
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-lime-green hover:bg-lime-green/90 text-dark-blue px-4 py-2 rounded-full text-sm font-medium transition-all duration-200"
+                className="inline-flex items-center gap-2 bg-lime-green hover:bg-lime-green/90 text-carbon px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200"
               >
                 Visit Live
                 <svg

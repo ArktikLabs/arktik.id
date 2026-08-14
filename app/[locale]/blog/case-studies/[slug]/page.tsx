@@ -36,10 +36,11 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   const { locale, slug } = await params
 
   try {
-    const [caseStudy, related, postCtaT] = await Promise.all([
+    const [caseStudy, related, postCtaT, csT] = await Promise.all([
       getCaseStudyBySlug(slug, locale),
       getCaseStudies({ locale, limit: 3 }),
-      getTranslations('postCta'),
+      getTranslations("postCta"),
+      getTranslations("caseStudyPage"),
     ])
 
     if (!caseStudy) {
@@ -62,24 +63,24 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
     }
 
     return (
-      <div className="min-h-screen text-white bg-dark-blue">
+      <div className="min-h-screen bg-paper text-ink">
         <Header />
 
         <main className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
           {/* Breadcrumb */}
-          <nav className="flex items-center space-x-2 text-sm text-gray-400 mb-8">
-            <Link href="/blog" className="hover:text-white transition-colors">
+          <nav className="flex items-center space-x-2 text-sm text-ink-3 mb-8">
+            <Link href="/blog" className="hover:text-ink transition-colors">
               Blog
             </Link>
             <ChevronRight className="w-4 h-4" />
             <Link
               href="/blog/case-studies"
-              className="hover:text-white transition-colors"
+              className="hover:text-ink transition-colors"
             >
               Case Studies
             </Link>
             <ChevronRight className="w-4 h-4" />
-            <span className="text-white">{caseStudy.fields.title}</span>
+            <span className="text-ink">{caseStudy.fields.title}</span>
           </nav>
 
           {/* Case Study */}
@@ -94,14 +95,14 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               )}
 
               <div className="mb-6">
-                <span className="inline-block bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium mb-4">
+                <span className="label-mono mb-4 inline-block rounded-full bg-lime-green px-3 py-1 text-ink-invert">
                   Case Study
                 </span>
                 <h1 className="text-4xl md:text-5xl font-bold mb-4">
                   {caseStudy.fields.title}
                 </h1>
                 {caseStudy.fields.challenge && (
-                  <div className="text-xl text-gray-300 mb-6">
+                  <div className="text-xl text-ink-2 mb-6">
                     <RichTextRenderer content={caseStudy.fields.challenge} />
                   </div>
                 )}
@@ -110,20 +111,20 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               {/* Project Details */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 {caseStudy.fields.clientName && (
-                  <div className="bg-gray-900 rounded-lg p-4">
+                  <div className="bg-paper rounded-lg p-4">
                     <div className="flex items-center space-x-2 mb-2">
-                      <Building className="w-4 h-4 text-blue-400" />
-                      <span className="text-sm text-gray-400">Client</span>
+                      <Building className="w-4 h-4 text-lime-green" />
+                      <span className="label-mono">{csT("client")}</span>
                     </div>
                     <p className="font-medium">{caseStudy.fields.clientName}</p>
                   </div>
                 )}
 
                 {caseStudy.fields.category && (
-                  <div className="bg-gray-900 rounded-lg p-4">
+                  <div className="bg-paper rounded-lg p-4">
                     <div className="flex items-center space-x-2 mb-2">
-                      <Calendar className="w-4 h-4 text-blue-400" />
-                      <span className="text-sm text-gray-400">Category</span>
+                      <Calendar className="w-4 h-4 text-lime-green" />
+                      <span className="label-mono">{csT("category")}</span>
                     </div>
                     <p className="font-medium">{caseStudy.fields.category.fields?.title}</p>
                   </div>
@@ -134,8 +135,8 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             {/* Solution */}
             {caseStudy.fields.solution && (
               <section className="mb-12">
-                <h2 className="text-3xl font-bold mb-6">Solution</h2>
-                <div className="prose prose-lg prose-invert max-w-none">
+                <h2 className="mb-6 font-heading text-3xl font-bold">{csT("solution")}</h2>
+                <div className="prose prose-lg prose-invert max-w-[68ch]">
                   <RichTextRenderer content={caseStudy.fields.solution} />
                 </div>
               </section>
@@ -144,9 +145,9 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             {/* Results */}
             {caseStudy.fields.results && (
               <section className="mb-16">
-                <h2 className="text-3xl font-bold mb-6">Results</h2>
-                <div className="bg-gradient-to-r from-green-900/30 to-blue-900/30 border border-green-700/50 rounded-lg p-6">
-                  <div className="prose prose-lg prose-invert max-w-none">
+                <h2 className="mb-6 font-heading text-3xl font-bold">{csT("results")}</h2>
+                <div className="rounded-xl border border-rule bg-paper-2 p-6">
+                  <div className="prose prose-lg prose-invert max-w-[68ch]">
                     <RichTextRenderer content={caseStudy.fields.results} />
                   </div>
                 </div>
@@ -173,7 +174,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 {filteredRelated.map((cs) => (
                   <div
                     key={cs.sys.id}
-                    className="bg-gray-900 rounded-lg overflow-hidden hover:bg-gray-800 transition-colors"
+                    className="bg-paper rounded-lg overflow-hidden hover:bg-paper-2 transition-colors"
                   >
                     {cs.fields.featuredImage && (
                       <img
@@ -184,10 +185,10 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                     )}
                     <div className="p-6">
                       <h3 className="text-xl font-bold mb-2">{cs.fields.title}</h3>
-                      <p className="text-gray-300 mb-4">{cs.fields.excerpt}</p>
+                      <p className="text-ink-2 mb-4">{cs.fields.excerpt}</p>
                       <Link
                         href={`/blog/case-studies/${cs.fields.slug}`}
-                        className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
+                        className="text-lime-green hover:text-lime-green/80 font-medium transition-colors"
                       >
                         Read Case Study →
                       </Link>

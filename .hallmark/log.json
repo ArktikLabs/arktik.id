@@ -1,0 +1,29 @@
+[
+  {
+    "date": "2026-08-13",
+    "scope": "app",
+    "genre": "modern-minimal",
+    "macrostructure": "Bento Grid (marketing) \u00b7 Ecosystem Index (content) \u00b7 Portfolio Grid + Workbench (showcase)",
+    "theme": "custom",
+    "theme_axes": "dark paper / grotesk-sans display / chromatic-other accent",
+    "vibe": "carbon, bone, one hot accent",
+    "nav": "N12 banner + retract",
+    "footer": "Ft4 dense colophon",
+    "enrichment": "interactive demo + showcase screenshots (aurora retired from hero)",
+    "designed_as_app": true,
+    "brief": "arktik.id v2 \u2014 new firm, thin portfolio, stealth founders; design carries the trust"
+  },
+  {
+    "date": "2026-08-13",
+    "scope": "app",
+    "genre": "atmospheric",
+    "macrostructure": "Split Studio (marketing) \u00b7 Ecosystem Index (content) \u00b7 Portfolio Grid + Workbench (showcase)",
+    "theme": "Aurora (brand-anchored)",
+    "theme_axes": "dark paper / grotesk-sans display / chromatic-other accent",
+    "nav": "N5 floating pill",
+    "footer": "Ft5 statement",
+    "enrichment": "aurora photograph (supplied asset) + hand-built interactive demo",
+    "designed_as_app": true,
+    "brief": "arktik.id \u00b7 software house \u00b7 redesign app/ for client conversion"
+  }
+]

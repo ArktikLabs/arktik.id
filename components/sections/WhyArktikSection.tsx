@@ -1,7 +1,11 @@
 import { WhyArktikCard } from "@/components/cards/WhyArktikCard"
 import { Globe, Infinity, Puzzle, TrendingUp, Rocket } from "lucide-react"
-import { Underline } from "@/components/ui/underline";
 import { useTranslations } from "next-intl";
+
+/* Hallmark · Split Studio diptych · design-system: design.md
+ * Was a full-width card above a 2-up grid of four identical cards.
+ * Now one diptych: the claim (light surface, left) against its four supports
+ * (hairline rows, right). Flipped direction versus the row above it. */
 
 export function WhyArktikSection() {
   const t = useTranslations('whyArktik')
@@ -30,31 +34,34 @@ export function WhyArktikSection() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <section id="why-arktik" className="px-6 pt-20 pb-0 lg:px-12">
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold font-heading mb-2">{t('title')}</h2>
-          <Underline />
-        </div>
+    <section
+      id="why-arktik"
+      className="mx-auto max-w-7xl px-6 pb-24 pt-8 lg:px-12 lg:pb-28"
+    >
+      <div className="section-head mb-10">
+        <h2 className="font-heading text-3xl font-bold lg:text-4xl">{t('title')}</h2>
+        <span className="section-head__rule" aria-hidden="true" />
+      </div>
 
-        <WhyArktikCard
-          icon={Rocket}
-          title={t('mainCard.title')}
-          description={t('mainCard.description')}
-          isLarge={true}
-        />
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {features.map((feature, index) => (
+      <div className="diptych is-flipped items-start">
+        <div className="border-b border-rule">
+          {features.map((feature) => (
             <WhyArktikCard
-              key={index}
+              key={feature.title}
               icon={feature.icon}
               title={feature.title}
               description={feature.description}
             />
           ))}
         </div>
-      </section>
-    </div>
+
+        <WhyArktikCard
+          icon={Rocket}
+          title={t('mainCard.title')}
+          description={t('mainCard.description')}
+          isLarge
+        />
+      </div>
+    </section>
   );
 }

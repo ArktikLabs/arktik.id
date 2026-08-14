@@ -8,7 +8,17 @@ import { PillarCard } from '@/components/blog/PillarCard'
 import { Header } from '@/components/sections/Header'
 import { FooterSection } from '@/components/sections/FooterSection'
 import { BlogHeroSection } from '@/components/sections/BlogHeroSection'
-import { BookOpen, Users, Calendar } from 'lucide-react'
+
+/* Hallmark · macrostructure: 20 Ecosystem Index · design-system: design.md
+ * designed-as-app
+ * Was three identical lg:grid-cols-3 card grids stacked, which made the three
+ * surfaces (guides / articles / categories) read as one undifferentiated wall.
+ * Ecosystem Index needs the surfaces to LOOK like different surfaces:
+ *   guides     → cards, they are destinations
+ *   articles   → cards, but a denser 2-up feed
+ *   categories → an index list, it is navigation
+ * The stat row uses real counts derived from the fetched data — no invented
+ * metrics anywhere on this page. */
 
 interface BlogPageProps {
   params: { locale: string }
@@ -40,91 +50,103 @@ export default async function BlogPage({ params }: BlogPageProps) {
     }
 
     const stats = [
-      { icon: Users, count: recentPosts.length, label: t('stats.articles') },
-      { icon: BookOpen, count: pillars.length, label: t('stats.guides') },
-      { icon: Calendar, count: categories.length, label: t('stats.categories') },
+      { count: recentPosts.length, label: t('stats.articles') },
+      { count: pillars.length, label: t('stats.guides') },
+      { count: categories.length, label: t('stats.categories') },
     ].filter((stat) => stat.count > 0)
 
     return (
-      <div className="min-h-screen text-white bg-dark-blue">
+      <div className="min-h-screen bg-paper text-ink">
         <Header />
 
         <BlogHeroSection>
           <div className="max-w-4xl">
-            <h1 className="text-4xl font-bold leading-tight text-balance font-heading lg:text-6xl">
+            <h1 className="text-balance font-heading text-4xl font-bold leading-[1.05] lg:text-6xl">
               {t('hero.title')}
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-gray-300 lg:text-xl">
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-2 lg:text-xl">
               {t('hero.description')}
             </p>
+
             {stats.length > 0 && (
-              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-gray-400 sm:flex-nowrap">
-                {stats.map(({ icon: Icon, count, label }) => (
-                  <div key={label} className="flex items-center gap-2">
-                    <Icon className="h-4 w-4" />
-                    <span>
-                      {count} {label}
-                    </span>
+              <dl className="mt-10 flex flex-wrap gap-x-10 gap-y-4">
+                {stats.map(({ count, label }) => (
+                  <div key={label}>
+                    <dt className="label-mono">{label}</dt>
+                    <dd className="mt-1 font-heading text-2xl font-bold tabular-nums text-ink">
+                      {count}
+                    </dd>
                   </div>
                 ))}
-              </div>
+              </dl>
             )}
           </div>
         </BlogHeroSection>
 
-        <main className="relative max-w-7xl mx-auto px-6 lg:px-12 py-16">
+        <main className="mx-auto max-w-7xl px-6 lg:px-12">
+          {pillars.length > 0 && (
+            <section className="pb-20 pt-4">
+              <div className="section-head mb-2">
+                <h2 className="font-heading text-3xl font-bold md:text-4xl">
+                  {t('guides.title')}
+                </h2>
+                <span className="section-head__rule" aria-hidden="true" />
+              </div>
+              <p className="mb-10 max-w-2xl text-ink-2">{t('guides.subtitle')}</p>
 
-            {/* Complete Guides Section - Featured First */}
-            {pillars.length > 0 && (
-              <section className="mb-20">
-                <div className="flex items-center justify-between mb-12">
-                  <div>
-                    <h2 className="text-3xl md:text-4xl font-bold mb-2">{t('guides.title')}</h2>
-                    <p className="text-gray-400">{t('guides.subtitle')}</p>
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {pillars.slice(0, 6).map((pillar) => (
-                    <PillarCard key={pillar.sys.id} pillar={pillar} categorySlug={pillar.fields.category?.fields?.slug || ''} locale={locale} />
-                  ))}
-                </div>
-              </section>
-            )}
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+                {pillars.slice(0, 6).map((pillar) => (
+                  <PillarCard
+                    key={pillar.sys.id}
+                    pillar={pillar}
+                    categorySlug={pillar.fields.category?.fields?.slug || ''}
+                    locale={locale}
+                  />
+                ))}
+              </div>
+            </section>
+          )}
 
-            {/* Recent Posts Section */}
-            {recentPosts.length > 0 && (
-              <section className="mb-20">
-                <div className="flex items-center justify-between mb-12">
-                  <div>
-                    <h2 className="text-3xl md:text-4xl font-bold mb-2">{t('articles.title')}</h2>
-                    <p className="text-gray-400">{t('articles.subtitle')}</p>
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {recentPosts.map((post) => (
-                    <BlogPostCard key={post.sys.id} post={post} locale={locale} />
-                  ))}
-                </div>
-              </section>
-            )}
+          {recentPosts.length > 0 && (
+            <section className="border-t border-rule pb-20 pt-16">
+              <div className="section-head mb-2">
+                <h2 className="font-heading text-3xl font-bold md:text-4xl">
+                  {t('articles.title')}
+                </h2>
+                <span className="section-head__rule" aria-hidden="true" />
+              </div>
+              <p className="mb-10 max-w-2xl text-ink-2">{t('articles.subtitle')}</p>
 
-            {/* Categories Section - Browse & Discovery */}
-            {categories.length > 0 && (
-              <section className="mb-16">
-                <div className="flex items-center justify-between mb-12">
-                  <div>
-                    <h2 className="text-3xl md:text-4xl font-bold mb-2">{t('categories.title')}</h2>
-                    <p className="text-gray-400">{t('categories.subtitle')}</p>
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {categories.map((category) => (
-                    <CategoryCard key={category.sys.id} category={category} locale={locale} />
-                  ))}
-                </div>
-              </section>
-            )}
-          </main>
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                {recentPosts.map((post) => (
+                  <BlogPostCard key={post.sys.id} post={post} locale={locale} />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {categories.length > 0 && (
+            <section className="border-t border-rule pb-24 pt-16">
+              <div className="section-head mb-2">
+                <h2 className="font-heading text-3xl font-bold md:text-4xl">
+                  {t('categories.title')}
+                </h2>
+                <span className="section-head__rule" aria-hidden="true" />
+              </div>
+              <p className="mb-6 max-w-2xl text-ink-2">{t('categories.subtitle')}</p>
+
+              <div className="grid grid-cols-1 gap-x-12 border-b border-rule md:grid-cols-2">
+                {categories.map((category) => (
+                  <CategoryCard
+                    key={category.sys.id}
+                    category={category}
+                    locale={locale}
+                  />
+                ))}
+              </div>
+            </section>
+          )}
+        </main>
 
         <FooterSection />
       </div>

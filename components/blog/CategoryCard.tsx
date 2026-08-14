@@ -3,47 +3,49 @@ import { Folder } from 'lucide-react'
 import { CategoryEntry } from '@/lib/types/contentful'
 import { getPlainTextFromRichText, getAssetUrl } from '@/lib/utils/contentful'
 
+/* Hallmark · design-system: design.md
+ * Was bg-gray-900 / border-gray-700 — an off-palette neutral that belongs to no
+ * theme. Now paper-2 on a hairline, with a single hover signal. */
+
 interface CategoryCardProps {
   category: CategoryEntry
   locale?: string
 }
 
 export function CategoryCard({ category, locale }: CategoryCardProps) {
-  // Safely extract fields with fallbacks
   const { title, slug, icon, description } = category?.fields || {}
   const iconUrl = getAssetUrl(icon)
 
   if (!title || !slug) {
-    return null // Don't render if essential fields are missing
+    return null
   }
 
   return (
     <Link
       href={`/${locale}/blog/${slug}`}
-      className="bg-gray-900 rounded-lg p-6 hover:bg-gray-800 transition-all duration-300 group border border-gray-700 hover:border-lime-green/50"
+      className="group flex items-start gap-4 border-t border-rule py-6 transition-colors duration-200 hover:border-rule-strong"
     >
-      <div className="flex items-center mb-4">
-        <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gray-800 group-hover:bg-gray-700 transition-colors mr-3">
-          {iconUrl ? (
-            <img
-              src={iconUrl}
-              alt={`${title} icon`}
-              className="w-6 h-6 rounded object-contain"
-            />
-          ) : (
-            <Folder className="w-4 h-4 text-lime-green" />
-          )}
-        </div>
-        <h3 className="text-xl font-bold group-hover:text-lime-green transition-colors">
+      {iconUrl ? (
+        <img
+          src={iconUrl}
+          alt=""
+          aria-hidden="true"
+          className="mt-1 h-5 w-5 shrink-0 rounded object-contain"
+        />
+      ) : (
+        <Folder className="mt-1 h-4 w-4 shrink-0 text-lime-green" aria-hidden="true" />
+      )}
+
+      <div className="min-w-0">
+        <h3 className="font-heading text-lg font-semibold text-ink transition-colors duration-200 group-hover:text-lime-green">
           {title}
         </h3>
+        {description && (
+          <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-ink-2">
+            {getPlainTextFromRichText(description)}
+          </p>
+        )}
       </div>
-
-      {description && (
-        <p className="text-gray-400 line-clamp-3 group-hover:text-gray-300 transition-colors">
-          {getPlainTextFromRichText(description)}
-        </p>
-      )}
     </Link>
   )
 }

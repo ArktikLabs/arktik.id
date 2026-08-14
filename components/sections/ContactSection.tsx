@@ -4,7 +4,6 @@ import { CTAButton } from "@/components/ui/cta-button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, MessageCircle } from "lucide-react"
-import { Underline } from "@/components/ui/underline";
 import { useState } from "react";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { ConfirmModal } from "@/components/ui/ConfirmModal";
@@ -157,23 +156,23 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
 
   // Removed focus-based starter; now handled in handleInputChange
   return (
-    <div className="max-w-7xl mx-auto">
-      <section id="contact" className="px-6 py-20 lg:px-12">
+    <div className="mx-auto max-w-7xl">
+      <section id="contact" className="px-6 pb-24 pt-16 lg:px-12 lg:pb-28">
         <div className="mb-12">
-          <div className="mb-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-white font-heading mb-2">
+          <div className="section-head mb-6">
+            <h2 className="font-heading text-3xl font-bold text-ink lg:text-4xl">
               {t('title')}
             </h2>
-            <Underline />
+            <span className="section-head__rule" aria-hidden="true" />
           </div>
-          <p className="text-gray-400 text-lg mb-8">
+          <p className="mb-8 text-lg text-ink-2">
             {t('description')}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6">
+          <div className="flex flex-col gap-6 sm:flex-row">
             <a
               href="mailto:hello@arktik.id"
-              className="flex items-center gap-3 text-white hover:text-lime-green transition-colors duration-200 group"
+              className="group flex items-center gap-3 text-ink transition-colors duration-200 hover:text-lime-green"
               onClick={() =>
                 sendGTMEvent({
                   event: "contact_click_email",
@@ -188,7 +187,7 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
               href="https://wa.me/6285117697889"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 text-white hover:text-lime-green transition-colors duration-200 group"
+              className="group flex items-center gap-3 text-ink transition-colors duration-200 hover:text-lime-green"
               onClick={() =>
                 sendGTMEvent({
                   event: "contact_click_whatsapp",
@@ -214,7 +213,7 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
                     placeholder={t('form.namePlaceholder')}
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="bg-transparent border-0 border-b-2 border-gray-600 rounded-none text-white placeholder:text-gray-400 focus:border-lime-green focus:ring-0 px-0 pb-2"
+                    className="rounded-none border-0 border-b-2 border-rule bg-transparent px-0 pb-2 text-ink placeholder:text-ink-3 focus-visible:border-lime-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-green"
                   />
                 </div>
                 <div>
@@ -224,7 +223,7 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
                     placeholder={t('form.emailPlaceholder')}
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="bg-transparent border-0 border-b-2 border-gray-600 rounded-none text-white placeholder:text-gray-400 focus:border-lime-green focus:ring-0 px-0 pb-2"
+                    className="rounded-none border-0 border-b-2 border-rule bg-transparent px-0 pb-2 text-ink placeholder:text-ink-3 focus-visible:border-lime-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-green"
                   />
                 </div>
                 <div className="flex items-end">
@@ -234,7 +233,7 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
                     placeholder={t('form.phonePlaceholder')}
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="bg-transparent border-0 border-b-2 border-gray-600 rounded-none text-white placeholder:text-gray-400 focus:border-lime-green focus:ring-0 px-0 pb-2"
+                    className="rounded-none border-0 border-b-2 border-rule bg-transparent px-0 pb-2 text-ink placeholder:text-ink-3 focus-visible:border-lime-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-green"
                   />
                 </div>
               </div>
@@ -248,7 +247,7 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
                     placeholder={t('form.companyPlaceholder')}
                     value={formData.company}
                     onChange={handleInputChange}
-                    className="bg-transparent border-0 border-b-2 border-gray-600 rounded-none text-white placeholder:text-gray-400 focus:border-lime-green focus:ring-0 px-0 pb-2"
+                    className="rounded-none border-0 border-b-2 border-rule bg-transparent px-0 pb-2 text-ink placeholder:text-ink-3 focus-visible:border-lime-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-green"
                   />
                 </div>
                 <div className="flex flex-col">
@@ -257,7 +256,7 @@ ${t('whatsapp.messageLabel')}: ${formData.message}`;
                     placeholder={t('form.messagePlaceholder')}
                     value={formData.message}
                     onChange={handleInputChange}
-                    className="bg-transparent border-0 border-b-2 border-gray-600 rounded-none text-white placeholder:text-gray-400 focus:border-lime-green focus:ring-0 resize-none px-0 pb-2 overflow-y-auto flex-grow min-h-[48px]"
+                    className="min-h-[48px] flex-grow resize-none overflow-y-auto rounded-none border-0 border-b-2 border-rule bg-transparent px-0 pb-2 text-ink placeholder:text-ink-3 focus-visible:border-lime-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-green"
                   />
                 </div>
               </div>

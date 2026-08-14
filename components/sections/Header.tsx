@@ -1,273 +1,180 @@
 "use client"
 
 import { CTAButton } from "@/components/ui/cta-button"
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { useTranslations } from "next-intl"
 import { usePathname } from "next/navigation"
 import { LanguageSwitcher } from "@/components/ui/language-switcher"
 
+/* Hallmark · nav: N12 banner + retracting bar · design-system: design.md v2
+ *
+ * Previous build was N5 floating pill; rotated per the diversification rule.
+ * N12 earns its place rather than being decoration: the banner carries a live
+ * availability line, which is genuine trust content for a firm with no client
+ * logos — it says someone is home and answering. One line, one dismiss, and the
+ * top tier is never a second row of nav links.
+ *
+ * Scroll down past the fold and the header translates up by --banner-h so the
+ * bar docks clean; scroll up and it returns. Dismiss zeroes --banner-h on the
+ * root so scroll-padding reflows with no leftover gap. */
+
+const SECTIONS = ["portfolio", "process", "services", "about-us", "blog"] as const
+
 export function Header() {
   const t = useTranslations('header')
   const pathname = usePathname()
-  const [scrollProgress, setScrollProgress] = useState(0)
-  const [activeSection, setActiveSection] = useState('')
-  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 })
 
-  const aboutUsRef = useRef<HTMLAnchorElement>(null);
-  const servicesRef = useRef<HTMLAnchorElement>(null);
-  const whyArktikRef = useRef<HTMLAnchorElement>(null);
-  const portfolioRef = useRef<HTMLAnchorElement>(null);
-  const blogRef = useRef<HTMLAnchorElement>(null);
+  const [activeSection, setActiveSection] = useState<string>("")
+  const [compact, setCompact] = useState(false)
+  const [dismissed, setDismissed] = useState(false)
+  const lastY = useRef(0)
 
-  // Check if we're on a blog page
   const isBlogPage = pathname?.includes('/blog')
+  const localePrefix = pathname?.startsWith("/en") ? "/en" : "/id"
 
   useEffect(() => {
-    const handleScroll = () => {
-      const heroHeight = window.innerHeight;
-      const scrollY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY
+      if (y < 48) setCompact(false)
+      else if (y > lastY.current) setCompact(true)
+      else setCompact(false)
+      lastY.current = y
 
-      // Calculate progress within hero section (0 to 1)
-      const progress = Math.min(scrollY / (heroHeight - 100), 1);
-      setScrollProgress(progress);
-
-      // Detect active section
-      const sections = ["about-us", "services", "why-arktik", "portfolio", "blog"];
-      const scrollPosition = scrollY + 100; // Add offset for header
-
-      let currentSection = "";
-
-      sections.forEach((sectionId) => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + offsetHeight
-          ) {
-            currentSection = sectionId;
-          }
+      if (isBlogPage) return
+      const probe = y + 140
+      let current = ""
+      for (const id of SECTIONS) {
+        const el = document.getElementById(id)
+        if (el && probe >= el.offsetTop && probe < el.offsetTop + el.offsetHeight) {
+          current = id
         }
-      });
-
-      setActiveSection(currentSection);
-
-      // Update indicator position based on active section
-      let activeRef: React.RefObject<HTMLAnchorElement> | null = null;
-      switch (currentSection) {
-        case "about-us":
-          activeRef = aboutUsRef;
-          break;
-        case "services":
-          activeRef = servicesRef;
-          break;
-        case "why-arktik":
-          activeRef = whyArktikRef;
-          break;
-        case "portfolio":
-          activeRef = portfolioRef;
-          break;
-        case "blog":
-          activeRef = blogRef;
-          break;
       }
+      setActiveSection(current)
+    }
 
-      if (activeRef?.current) {
-        const rect = activeRef.current.getBoundingClientRect();
-        const navRect =
-          activeRef.current.parentElement?.getBoundingClientRect();
-        if (navRect) {
-          setIndicatorStyle({
-            left: rect.left - navRect.left,
-            width: rect.width,
-            opacity: 1,
-          });
-        }
-      } else {
-        setIndicatorStyle((prev) => ({ ...prev, opacity: 0 }));
-      }
-    };
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [isBlogPage])
 
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleScroll); // Recalculate on resize
+  const dismiss = () => {
+    document.documentElement.style.setProperty("--banner-h", "0px")
+    setDismissed(true)
+  }
 
-    // Initial calculation
-    setTimeout(handleScroll, 100);
+  const hrefFor = (id: string) => (isBlogPage ? `${localePrefix}#${id}` : `#${id}`)
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
-  }, []);
+  const links = [
+    { id: "portfolio", label: t("portfolio") },
+    { id: "process", label: t("process") },
+    { id: "services", label: t("services") },
+    { id: "about-us", label: t("aboutUs") },
+  ]
 
-  // Calculate dynamic opacity and blur based on scroll progress
-  const backgroundOpacity = scrollProgress > 0 ? Math.min(scrollProgress * 0.3, 0.3) : 0 // Starts at 0, goes to 0.3
-  const blurAmount = scrollProgress > 0 ? Math.round(scrollProgress * 20) : 0 // Starts at 0, goes to 20px blur
-  const borderOpacity = Math.max(0, Math.min((scrollProgress - 0.1) * 2, 0.08)) // Smooth transition from 10% to 50% scroll
+  const goToContact = () => {
+    if (isBlogPage) window.location.href = `${localePrefix}#contact`
+    else document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
+  }
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+      className="fixed inset-x-0 top-0 z-50 transition-transform duration-300 ease-out"
       style={{
-        backgroundColor:
-          scrollProgress > 0
-            ? `rgba(10, 10, 10, ${backgroundOpacity})`
-            : "transparent",
-        backdropFilter:
-          scrollProgress > 0 ? `blur(${blurAmount}px) saturate(180%)` : "none",
-        WebkitBackdropFilter:
-          scrollProgress > 0 ? `blur(${blurAmount}px) saturate(180%)` : "none",
-        borderLeft: `1px solid rgba(255, 255, 255, ${borderOpacity})`,
-        borderRight: `1px solid rgba(255, 255, 255, ${borderOpacity})`,
-        borderBottom: `1px solid rgba(255, 255, 255, ${borderOpacity})`,
-        borderTop: "none",
-        boxShadow:
-          scrollProgress > 0.4
-            ? "0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05)"
-            : "none",
+        transform:
+          compact && !dismissed ? "translateY(calc(var(--banner-h) * -1))" : "none",
       }}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-6 lg:px-12">
-        <Link href="/" className="cursor-pointer" aria-label="Go to homepage">
-          <Image
-            src="/assets/logo.svg"
-            alt="arktik"
-            width={0}
-            height={40}
-            className="h-9 w-auto"
-          />
-        </Link>
-        <nav className="hidden md:flex items-center space-x-8 h-8 relative">
-          {/* Animated background indicator */}
-          <div
-            className="absolute bg-lime-green/20 rounded-full h-10 transition-all duration-500 ease-out"
-            style={{
-              left: `${indicatorStyle.left}px`,
-              width: `${indicatorStyle.width}px`,
-              opacity: indicatorStyle.opacity,
-            }}
-          />
-          <a
-            ref={aboutUsRef}
-            href={
-              isBlogPage
-                ? pathname?.startsWith("/en")
-                  ? "/en#about-us"
-                  : "/id#about-us"
-                : "#about-us"
-            }
-            className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
-              activeSection === "about-us"
-                ? "text-lime-green"
-                : "text-white hover:text-lime-green hover:bg-lime-green/10"
-            }`}
+      {!dismissed && (
+        <div
+          className="flex items-center justify-center gap-3 bg-lime-green px-4"
+          style={{ height: "var(--banner-h)" }}
+        >
+          {/* A fact, not a slogan. An availability claim ("taking projects for
+            * Q1") would be inventing something about the business; the contact
+            * channel is verifiable and does the same trust job. Swap the
+            * `header.banner` string for a real availability line when you have
+            * one. */}
+          <p
+            className="truncate font-mono text-xs uppercase tracking-[0.1em]"
+            style={{ color: "var(--color-accent-ink)" }}
           >
-            {t("aboutUs")}
-          </a>
-          <a
-            ref={servicesRef}
-            href={
-              isBlogPage
-                ? pathname?.startsWith("/en")
-                  ? "/en#services"
-                  : "/id#services"
-                : "#services"
-            }
-            className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
-              activeSection === "services"
-                ? "text-lime-green"
-                : "text-white hover:text-lime-green hover:bg-lime-green/10"
-            }`}
-          >
-            {t("services")}
-          </a>
-          <a
-            ref={whyArktikRef}
-            href={
-              isBlogPage
-                ? pathname?.startsWith("/en")
-                  ? "/en#why-arktik"
-                  : "/id#why-arktik"
-                : "#why-arktik"
-            }
-            className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
-              activeSection === "why-arktik"
-                ? "text-lime-green"
-                : "text-white hover:text-lime-green hover:bg-lime-green/10"
-            }`}
-          >
-            {t("whyArktik")}
-          </a>
-          <a
-            ref={portfolioRef}
-            href={
-              isBlogPage
-                ? pathname?.startsWith("/en")
-                  ? "/en#portfolio"
-                  : "/id#portfolio"
-                : "#portfolio"
-            }
-            className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
-              activeSection === "portfolio"
-                ? "text-lime-green"
-                : "text-white hover:text-lime-green hover:bg-lime-green/10"
-            }`}
-          >
-            {t("portfolio")}
-          </a>
-          {isBlogPage ? (
-            <Link
-              ref={blogRef}
-              href={pathname?.startsWith("/en") ? "/en/blog" : "/id/blog"}
-              className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
-                pathname?.startsWith("/en/blog") ||
-                pathname?.startsWith("/id/blog")
-                  ? "text-lime-green bg-lime-green/10"
-                  : "text-white hover:text-lime-green hover:bg-lime-green/10"
-              }`}
-            >
-              {t("blog")}
-            </Link>
-          ) : (
+            {t("banner")}{" "}
             <a
-              ref={blogRef}
-              href="#blog"
-              className={`px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium relative z-10 ${
-                activeSection === "blog"
-                  ? "text-lime-green"
-                  : "text-white hover:text-lime-green hover:bg-lime-green/10"
-              }`}
+              href="mailto:hello@arktik.id"
+              className="underline underline-offset-2"
             >
-              {t("blog")}
+              {t("bannerLink")}
             </a>
-          )}
-        </nav>
-        <div className="flex items-center gap-2 sm:gap-3">
-          <CTAButton
-            variant="small"
-            className="text-sm"
-            onClick={() => {
-              if (isBlogPage) {
-                // Redirect to homepage contact section
-                const homeUrl = pathname?.startsWith("/en")
-                  ? "/en#contact"
-                  : "/id#contact";
-                window.location.href = homeUrl;
-              } else {
-                // Scroll to contact section on current page
-                document
-                  .getElementById("contact")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }
-            }}
+          </p>
+          <button
+            type="button"
+            onClick={dismiss}
+            aria-label="Dismiss"
+            className="shrink-0 rounded-full px-1 text-lg leading-none opacity-60 transition-opacity hover:opacity-100"
+            style={{ color: "var(--color-accent-ink)" }}
           >
-            {t("contact")}
-          </CTAButton>
-          <LanguageSwitcher />
+            &times;
+          </button>
+        </div>
+      )}
+
+      <div
+        className="border-b border-rule bg-carbon/80 backdrop-blur-xl backdrop-saturate-150"
+        style={{ height: "var(--bar-h)" }}
+      >
+        <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-4 px-6 lg:px-12">
+          <Link href="/" aria-label="Go to homepage" className="shrink-0">
+            <Image
+              src="/assets/logo.svg"
+              alt="arktik"
+              width={0}
+              height={32}
+              className="h-7 w-auto"
+            />
+          </Link>
+
+          <nav aria-label="Primary" className="hidden lg:block">
+            <ul className="flex items-center gap-1">
+              {links.map(({ id, label }) => (
+                <li key={id}>
+                  <a
+                    href={hrefFor(id)}
+                    aria-current={activeSection === id ? "true" : undefined}
+                    className={`whitespace-nowrap rounded-full px-3 py-2 text-sm transition-colors duration-200 ${
+                      activeSection === id
+                        ? "text-lime-green"
+                        : "text-ink-2 hover:text-ink"
+                    }`}
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))}
+              <li>
+                <Link
+                  href={isBlogPage ? `${localePrefix}/blog` : "#blog"}
+                  className={`whitespace-nowrap rounded-full px-3 py-2 text-sm transition-colors duration-200 ${
+                    activeSection === "blog" || isBlogPage
+                      ? "text-lime-green"
+                      : "text-ink-2 hover:text-ink"
+                  }`}
+                >
+                  {t("blog")}
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
+          <div className="flex shrink-0 items-center gap-2">
+            <LanguageSwitcher />
+            <CTAButton variant="small" onClick={goToContact}>
+              {t("contact")}
+            </CTAButton>
+          </div>
         </div>
       </div>
     </header>
-  );
+  )
 }

@@ -52,7 +52,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     }
 
     return (
-      <div className="min-h-screen text-white bg-dark-blue">
+      <div className="min-h-screen bg-paper text-ink">
         <Header />
 
         <BlogHeroSection>
@@ -71,7 +71,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             </div>
 
             {category.fields.description && (
-              <div className="max-w-3xl text-lg leading-relaxed text-gray-300 lg:text-xl">
+              <div className="max-w-3xl text-lg leading-relaxed text-ink-2 lg:text-xl">
                 {typeof category.fields.description === 'string'
                   ? category.fields.description
                   : <RichTextRenderer content={category.fields.description} />
@@ -91,11 +91,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             className="mb-8"
           />
 
-          {/* Pillar Pages Section */}
+          {/* Guides — destinations, so they stay as cards. */}
           {pillars.length > 0 && (
             <section className="mb-16">
-              <h2 className="text-3xl font-bold mb-8">{t('completeGuides')}</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="section-head mb-8">
+                <h2 className="font-heading text-3xl font-bold">{t('completeGuides')}</h2>
+                <span className="section-head__rule" aria-hidden="true" />
+              </div>
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {pillars.map((pillar) => (
                   <PillarCard
                     key={pillar.sys.id}
@@ -108,11 +111,16 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             </section>
           )}
 
-          {/* Blog Posts Section */}
+          {/* Articles — a feed, so a denser 2-up. Different surface, different
+            * treatment; three identical 3-up grids is what made this page read
+            * as one undifferentiated wall. */}
           {posts.length > 0 && (
-            <section>
-              <h2 className="text-3xl font-bold mb-8">{t('articles')}</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <section className="border-t border-rule pt-14">
+              <div className="section-head mb-8">
+                <h2 className="font-heading text-3xl font-bold">{t('articles')}</h2>
+                <span className="section-head__rule" aria-hidden="true" />
+              </div>
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                 {posts.map((post) => (
                   <BlogPostCard key={post.sys.id} post={post} locale={locale} />
                 ))}
@@ -125,30 +133,28 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             <section className="text-center py-24">
               <div className="max-w-lg mx-auto">
                 {/* Category Icon */}
-                <div className="w-24 h-24 mx-auto mb-6 bg-gray-800 rounded-full flex items-center justify-center">
+                <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border border-rule bg-paper-2">
                   {getAssetUrl(category.fields.icon) ? (
                     <img
                       src={getAssetUrl(category.fields.icon)}
-                      alt={`${category.fields.title} icon`}
-                      className="w-12 h-12 rounded object-contain"
+                      alt=""
+                      aria-hidden="true"
+                      className="h-10 w-10 rounded object-contain"
                     />
                   ) : (
-                    <FileX className="w-12 h-12 text-gray-400" />
+                    <FileX className="h-9 w-9 text-ink-3" aria-hidden="true" />
                   )}
                 </div>
 
-                {/* Empty State Title */}
-                <h2 className="text-3xl font-bold mb-4">{t('emptyState.title')}</h2>
+                <h2 className="font-heading text-3xl font-bold">{t('emptyState.title')}</h2>
 
-                {/* Empty State Message */}
-                <p className="text-gray-400 mb-8 text-lg leading-relaxed">
+                <p className="mb-8 mt-4 text-lg leading-relaxed text-ink-2">
                   {t('emptyState.description')}
                 </p>
 
-                {/* Back to Blog Button */}
                 <Link
                   href={`/${locale}/blog`}
-                  className="inline-flex items-center space-x-2 bg-lime-green hover:bg-lime-green/90 text-dark-blue font-medium px-6 py-3 rounded-lg transition-colors"
+                  className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-lime-green px-6 py-3 font-medium text-ink-invert transition-colors duration-200 hover:bg-lime-green/90"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   <span>{t('emptyState.backToBlog')}</span>

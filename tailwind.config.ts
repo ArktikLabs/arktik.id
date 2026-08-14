@@ -14,25 +14,61 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: [
-          "var(--font-funnel-sans)",
+          "var(--font-instrument-sans)",
           "ui-sans-serif",
           "system-ui",
           "sans-serif",
         ],
         heading: [
-          "var(--font-bricolage-grotesque)",
+          "var(--font-archivo)",
           "ui-sans-serif",
           "system-ui",
           "sans-serif",
+        ],
+        mono: [
+          "var(--font-geist-mono)",
+          "ui-monospace",
+          "SFMono-Regular",
+          "monospace",
         ],
       },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        "dark-blue": "#012233",
+
+        /* Hallmark semantic scale — see tokens.css / design.md.
+         * Elevation on dark is lightness, never a coloured glow. */
+        paper: {
+          DEFAULT: "var(--color-paper)",
+          2: "var(--color-paper-2)",
+          3: "var(--color-paper-3)",
+          invert: "var(--color-paper-invert)",
+        },
+        ink: {
+          DEFAULT: "var(--color-ink)",
+          2: "var(--color-ink-2)",
+          3: "var(--color-ink-3)",
+          invert: "var(--color-ink-invert)",
+          "invert-2": "var(--color-ink-invert-2)",
+        },
+        rule: {
+          DEFAULT: "var(--color-rule)",
+          strong: "var(--color-rule-strong)",
+        },
+
+        /* Literal mirrors of the token surfaces, so Tailwind's `/opacity`
+         * modifier keeps working (var() colours can't take an alpha modifier).
+         * `lime-green` is the locked brand accent — do not change its value. */
         "lime-green": "#DDFE55",
-        "service-blue": "#10425D",
-        "why-blue": "#C0D6EB",
+        carbon: {
+          DEFAULT: "#090E0A",
+          2: "#131914",
+          3: "#202821",
+        },
+        bone: {
+          DEFAULT: "#F3F2EC",
+          2: "#E5E3DA",
+        },
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",

@@ -1,6 +1,10 @@
-import { Card, CardContent } from "@/components/ui/card"
 import { LucideIcon } from "lucide-react"
-import { cn } from "@/lib/utils"
+
+/* Hallmark · design-system: design.md
+ * The `isLarge` variant is the page's one light surface — brand #C0D6EB, kept as
+ * --color-paper-invert. The compact variant is a hairline row, not a card.
+ * Removed from both: the gradient fill, the rounded icon tile, hover:scale,
+ * the slate glow shadow, and the three simultaneous text-colour transitions. */
 
 interface WhyArktikCardProps {
   icon: LucideIcon
@@ -9,40 +13,35 @@ interface WhyArktikCardProps {
   isLarge?: boolean
 }
 
-export function WhyArktikCard({ icon: Icon, title, description, isLarge = false }: WhyArktikCardProps) {
+export function WhyArktikCard({
+  icon: Icon,
+  title,
+  description,
+  isLarge = false,
+}: WhyArktikCardProps) {
   if (isLarge) {
     return (
-      <Card className="bg-gradient-to-br from-why-blue via-why-blue/95 to-slate-100/50 border-slate-300/50 mb-6 md:mb-8 transition-all duration-500 hover:shadow-2xl hover:shadow-slate-400/30 group cursor-pointer hover:border-slate-400/50 hover:scale-[1.02] transform-gpu relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-slate-300/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <CardContent className="p-6 md:p-8 text-left md:text-center relative z-10">
-          <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-slate-800 to-slate-600 rounded-xl mb-4 md:mb-6 md:mx-auto flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg">
-            <Icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
-          </div>
-          <h3 className="text-xl md:text-2xl font-semibold md:font-bold mb-3 md:mb-4 text-slate-900 font-heading group-hover:text-slate-800 transition-colors duration-300">
-            {title}
-          </h3>
-          <p className="text-slate-700 text-sm md:text-base leading-relaxed md:max-w-3xl md:mx-auto group-hover:text-slate-600 transition-colors duration-300">
-            {description}
-          </p>
-        </CardContent>
-      </Card>
+      <div className="rounded-xl bg-bone p-8 lg:p-10">
+        <Icon
+          className="h-7 w-7 text-ink-invert"
+          aria-hidden="true"
+          strokeWidth={1.5}
+        />
+        <h3 className="mt-6 font-heading text-2xl font-bold text-ink-invert lg:text-3xl">
+          {title}
+        </h3>
+        <p className="mt-4 leading-relaxed text-ink-invert-2">{description}</p>
+      </div>
     )
   }
 
   return (
-    <Card className="bg-gradient-to-br from-why-blue via-why-blue/95 to-slate-100/50 border-slate-300/50 transition-all duration-500 hover:shadow-2xl hover:shadow-slate-400/30 group cursor-pointer hover:border-slate-400/50 hover:scale-[1.02] transform-gpu relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-slate-300/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      <CardContent className="p-6 relative z-10">
-        <div className="w-10 h-10 bg-gradient-to-br from-slate-800 to-slate-600 rounded-lg mb-4 flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
-          <Icon className="w-5 h-5 text-white" />
-        </div>
-        <h3 className="text-xl font-semibold mb-3 text-slate-900 font-heading group-hover:text-slate-800 transition-colors duration-300">
-          {title}
-        </h3>
-        <p className="text-slate-700 text-sm leading-relaxed group-hover:text-slate-600 transition-colors duration-300">
-          {description}
-        </p>
-      </CardContent>
-    </Card>
+    <div className="group border-t border-rule py-6 transition-colors duration-200 hover:border-rule-strong">
+      <h3 className="flex items-center gap-3 font-heading text-lg font-semibold text-ink">
+        <Icon className="h-4 w-4 shrink-0 text-lime-green" aria-hidden="true" />
+        {title}
+      </h3>
+      <p className="mt-2 text-sm leading-relaxed text-ink-2">{description}</p>
+    </div>
   )
 }

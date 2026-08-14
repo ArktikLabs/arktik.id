@@ -59,19 +59,19 @@ export function ConfirmModal({
       aria-labelledby="confirm-modal-title"
     >
       <div
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+        className="absolute inset-0 bg-paper/80 backdrop-blur-sm"
         onClick={onCancel}
       />
-      <div className="relative w-full max-w-lg rounded-xl border border-gray-700 bg-slate-900 text-white shadow-xl">
+      <div className="relative w-full max-w-lg rounded-xl border border-rule bg-paper-2 text-ink shadow-xl">
         <div className="px-6 py-5">
           <h3 id="confirm-modal-title" className="text-lg font-semibold">
             {title}
           </h3>
           {description ? (
-            <p className="mt-1 text-sm text-gray-400">{description}</p>
+            <p className="mt-1 text-sm text-ink-3">{description}</p>
           ) : null}
           {children ? (
-            <div className="mt-4 rounded-md border border-gray-800 bg-slate-950/40 p-3 text-sm text-gray-300 max-h-64 overflow-auto whitespace-pre-wrap">
+            <div className="mt-4 rounded-md border border-rule bg-paper p-3 text-sm text-ink-2 max-h-64 overflow-auto whitespace-pre-wrap">
               {children}
             </div>
           ) : null}
@@ -80,7 +80,7 @@ export function ConfirmModal({
               type="button"
               variant="outline"
               onClick={onCancel}
-              className={`border-gray-700 text-gray-200 hover:bg-slate-800 generate_lead_modal_cancel${locale ? `_${locale}` : ''}`}
+              className={`border-rule text-ink-2 hover:bg-paper-3 generate_lead_modal_cancel${locale ? `_${locale}` : ''}`}
             >
               {cancelText}
             </Button>

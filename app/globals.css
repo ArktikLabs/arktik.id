@@ -1,76 +1,236 @@
+@import "../tokens.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@custom-variant dark (&:is(.dark *));
-
-:root {
-  /* Font variables - simplified approach */
-    --font-sans: var(--font-funnel-sans);
-    --font-heading: var(--font-bricolage-grotesque);
-  
-    /* Color variables */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
+/* Hallmark · genre: modern-minimal · macrostructure: Bento Grid (marketing) ·
+ * design-system: design.md v2 · designed-as-app
+ * theme: custom "carbon, bone, one hot accent" · accent #DDFE55 LOCKED
+ * nav: N12 banner+retract · footer: Ft4 dense colophon
+ * tone: technical · audience: founders/CTOs sourcing a build partner
+ * brief: new firm, minimal portfolio, stealth founders — the design carries the
+ *   trust that client logos and named people normally would
+ * pre-emit critique: P5 H5 E4 S5 R4 V5
+ *
+ * All tokens live in ../tokens.css. Do not declare colours here.
+ */
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
+
+  html,
+  body {
+    overflow-x: clip; /* clip, not hidden — hidden kills position:sticky */
+  }
+
   html {
     scroll-behavior: smooth;
     overscroll-behavior: none;
-    scroll-padding-top: 30px; /* Account for sticky header height + some padding */
+    scroll-padding-top: calc(var(--banner-h) + var(--bar-h) + 1rem);
   }
+
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
     overscroll-behavior: none;
   }
-    /* Font application via Tailwind classes */
-    .font-heading,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-family: var(--font-bricolage-grotesque);
-    }
-  
-    .font-sans {
-      font-family: var(--font-funnel-sans);
-    }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .font-heading {
+    font-family: var(--font-display);
+    font-style: normal; /* roman only — italic headers are a top AI tell */
+    letter-spacing: var(--tracking-display);
+    overflow-wrap: anywhere;
+    min-width: 0;
+  }
+
+  .font-sans {
+    font-family: var(--font-body);
+  }
+
+  /* Focus rings appear INSTANTLY and are never transitioned. */
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+    transition: none;
+  }
 }
 
+@layer components {
+  /* ---- Section head — vertical stack only. The tag-left / heading-right
+     two-column head is banned (gate 54). ------------------------------------ */
+  .section-head {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2xs);
+  }
+
+  .section-head__rule {
+    width: 3.5rem;
+    height: 2px;
+    background: var(--color-accent);
+  }
+
+  /* Small technical label — mono, tracked, muted. Labels a value, never a
+     section, so it can't drift into an eyebrow on every block. */
+  .label-mono {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--color-ink-3);
+  }
+
+  /* ---- Bento grid — the density primitive -------------------------------
+     Rhythm comes from SIZE VARIATION, not from uniform cards. Tracks are
+     minmax(0,1fr) so image-bearing tiles can't blow out the viewport. */
+  .bento {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-sm);
+  }
+
+  @media (min-width: 40rem) {
+    .bento {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .bento {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    .cell-2 { grid-column: span 2; }
+    .cell-3 { grid-column: span 3; }
+    .cell-4 { grid-column: span 4; }
+    .cell-6 { grid-column: span 6; }
+    .cell-tall { grid-row: span 2; }
+  }
+
+  .tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    padding: var(--space-md);
+    border: var(--rule-hair) solid var(--color-rule);
+    border-radius: var(--radius-card);
+    background: var(--color-paper-2);
+    /* one hover signal: the rule warms. no scale, no glow. */
+    transition: border-color var(--dur-short) var(--ease-out);
+  }
+
+  @media (min-width: 64rem) {
+    .tile {
+      padding: var(--space-lg);
+    }
+  }
+
+  a.tile:hover,
+  .tile:focus-within {
+    border-color: var(--color-rule-strong);
+  }
+
+  .tile--accent {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-accent-ink);
+  }
+
+  .tile--bone {
+    background: var(--color-paper-invert);
+    border-color: var(--color-paper-invert-2);
+    color: var(--color-ink-invert);
+  }
+
+  .tile--quiet {
+    background: transparent;
+  }
+
+  /* ---- Step sequence (F4) — the process section --------------------------
+     Numbering is legitimate here: the stages are genuinely ordinal. This is
+     the only numbered device on the page. */
+  .steps {
+    display: grid;
+    gap: var(--space-md);
+    counter-reset: step;
+  }
+
+  @media (min-width: 64rem) {
+    .steps {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+    border-top: 2px solid var(--color-rule);
+    padding-top: var(--space-sm);
+    transition: border-color var(--dur-short) var(--ease-out);
+  }
+
+  .step:hover {
+    border-color: var(--color-accent);
+  }
+
+  .step__n {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-mono);
+    color: var(--color-accent);
+  }
+
+  /* ---- Scrim over photography ------------------------------------------- */
+  .img-scrim {
+    background-image: linear-gradient(
+      to top,
+      color-mix(in oklch, var(--color-scrim) 90%, transparent) 0%,
+      color-mix(in oklch, var(--color-scrim) 55%, transparent) 45%,
+      color-mix(in oklch, var(--color-scrim) 25%, transparent) 100%
+    );
+    transition: opacity var(--dur-short) var(--ease-out);
+  }
+
+  .group:hover .img-scrim {
+    opacity: 0.85;
+  }
+
+  /* ---- Reveal — fade only, one shot -------------------------------------- */
+  .reveal {
+    opacity: 0;
+    animation: hm-fade var(--dur-medium) var(--ease-out) forwards;
+  }
+
+  .reveal-late {
+    animation-delay: 70ms;
+  }
+
+  @keyframes hm-fade {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .reveal-late {
+      animation: none;
+      opacity: 1;
+    }
+  }
+}

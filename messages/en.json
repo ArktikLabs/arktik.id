@@ -1,119 +1,122 @@
 {
   "common": {
-    "title": "Arktik - Custom Software Development Company",
-    "description": "Professional software development company with 7+ years turning technology into business growth through web, mobile & backend solutions delivered globally."
+    "title": "Arktik — custom software, built in the open",
+    "description": "A software studio in Indonesia. You always know what is being built, what it costs, and when it lands — and everything ends up in your name."
   },
   "header": {
-    "aboutUs": "About us",
-    "services": "Our services",
-    "whyArktik": "Why Arktik?",
-    "portfolio": "Our works",
-    "blog": "Blog",
-    "contact": "Contact us"
+    "aboutUs": "About",
+    "process": "Process",
+    "services": "Services",
+    "portfolio": "Work",
+    "blog": "Writing",
+    "contact": "Start a project",
+    "banner": "You talk to the engineers, not an account manager",
+    "bannerLink": "hello@arktik.id"
   },
   "hero": {
-    "buildingTitle": "Building",
-    "softwareSolutions": "software solutions",
+    "description": "You agree the scope and the price before each stage starts, see working software every week, and own the code and every account from day one.",
+    "headlineLead": "Custom software,",
+    "headlineConnector": "without the",
     "flipWords": {
-      "0": "scalable",
-      "1": "reliable",
-      "2": "innovative",
-      "3": "custom",
-      "4": "modern",
-      "5": "secure"
-    },
-    "description": "Leading software development company delivering end-to-end web, mobile, and backend systems globally, on time.",
-    "scrollToExplore": "Scroll to explore"
+      "0": "black box",
+      "1": "scope creep",
+      "2": "surprise invoice",
+      "3": "lock-in"
+    }
   },
   "aboutUs": {
     "quoteText": "95% of new products miss the mark — not because of the idea, but because of poor execution",
     "quoteSource": "MIT Professional Programs: Why 95% of New Products Miss the Mark",
-    "mainDescription": "At Arktik, we believe ideas deserve better execution. That's why we don't just build software — we partner with you to combine strategy, design, and engineering, transforming your vision into products that actually work and drive measurable results.",
+    "mainDescription": "Software rarely fails on the idea. It fails on execution. Execution is a process problem, and process is the part we are strict about.",
     "whoWeAre": {
-      "title": "Who We Are",
-      "description1": "We are a software development company with builders, strategists, designers, and engineers who have spent over 7 years creating software solutions that power millions of people and businesses worldwide.",
-      "description2": "But more than that, we are collaborators. We believe the best solutions come from listening, understanding, and building together."
+      "title": "Who we are",
+      "description1": "A small studio in Indonesia building custom software for businesses that have outgrown their spreadsheets and off-the-shelf tools.",
+      "description2": "We keep the team small deliberately. It is the only way the person who planned your project is still the person building it three months later."
     },
     "howWeWork": {
-      "title": "How We Work",
-      "description1": "With every project, we bring not only technical depth but also empathy, inclusivity, and a shared commitment to your goals.",
-      "description2": "We work equally, inclusively, and with curiosity to push the boundaries of what software can do for businesses and the people behind them.",
-      "description3": "Our 7+ years of global experience means we know what works — and we bring that knowledge into every collaboration."
+      "title": "How we think",
+      "description1": "Openly, and in writing. The reasoning behind a decision is worth more a year later than the decision itself.",
+      "description2": "We would rather tell you something is a bad idea early than build it politely and watch it fail.",
+      "description3": "Agreeing each stage up front means you can stop after any of them without an argument."
     },
     "whatWeBelieve": {
-      "title": "What We Believe",
+      "title": "What we believe",
       "values": {
         "collaboration": {
-          "title": "Collaboration First",
-          "description": "We co-create with our partners, building solutions together, for mutual success."
+          "title": "Proven technology",
+          "description": "Widely used, well-supported tools. The interesting part should be your product, not the technology we picked."
         },
         "expertise": {
-          "title": "Expertise with Empathy",
-          "description": "Decades of experience combined with deep understanding of people and business needs."
+          "title": "Reasons written down",
+          "description": "If we cannot explain why we did something, we have not finished the work."
         },
         "impact": {
-          "title": "Impact at Scale",
-          "description": "We craft resilient technology trusted by millions worldwide."
+          "title": "Small and senior",
+          "description": "No layer between you and the person writing the code."
         },
         "innovation": {
-          "title": "Inclusive Innovation",
-          "description": "Pushing boundaries while staying grounded in equality and shared ownership."
+          "title": "Honest estimates",
+          "description": "We quote what the work costs, not what wins the deal."
         }
       }
     }
   },
   "services": {
-    "title": "Our Services",
+    "title": "What we build",
     "customDevelopment": {
-      "title": "Custom Software Development",
-      "description": "Tailored web and mobile applications built to scale with your business growth — from concept to deployment, we create software solutions that users love and businesses rely on.",
+      "title": "Web and mobile applications",
+      "description": "Things people use every day — customer portals, booking systems, internal systems, online shops. Built on proven, widely used technology, so the next person to work on it can pick it up quickly.",
       "features": {
-        "0": "Websites that convert and grow with your business",
-        "1": "Mobile apps that users love and return to",
-        "2": "Custom software that scales with your success"
+        "0": "Websites and web apps",
+        "1": "iOS and Android apps",
+        "2": "Internal systems and integrations"
       }
     },
     "consulting": {
-      "title": "Technology Consulting and Development",
-      "description": "From strategic consulting to development and support, we help you solve business problems with the right technologies, ensuring your technology investments deliver real ROI and keep your business ready for what's next."
+      "title": "Technical consulting",
+      "description": "A review, a second opinion, or a plan. Useful when you already have a team and need to know whether what you have will hold up, or what to build next."
     },
     "aiAutomation": {
-      "title": "AI & Automation Solutions",
-      "description": "From chatbots to predictive analytics, we implement AI-driven solutions that automate tasks, unlock insights, and give your business a competitive edge — freeing your team to focus on what matters most."
+      "title": "Automation and AI",
+      "description": "Taking the manual work out — handling documents, sorting requests, summarising, internal assistants. If a spreadsheet would do the job, we will say so."
     },
     "design": {
-      "title": "Brand Design and UI/UX",
-      "description": "We craft intuitive interfaces that convert visitors into customers — improving usability, reducing churn, and increasing satisfaction to drive your business results."
+      "title": "Product design",
+      "description": "How it looks and how it flows, for things that actually get built. Delivered as real working screens, not a PDF."
+    },
+    "operations": {
+      "title": "Running it after launch",
+      "description": "Hosting, monitoring, fixes, and the small changes that come up once real people are using it. For teams who would rather not take that on. Priced monthly, cancel whenever, and the accounts stay in your name throughout."
     }
   },
   "whyArktik": {
-    "title": "Why Arktik?",
+    "title": "Why us",
     "mainCard": {
-      "title": "We Turn Technology Into Business Growth",
-      "description": "While others build features, we build success aligning every solution with your goals to deliver measurable results that matter."
+      "title": "Small on purpose.",
+      "description": "You get the people who did the pitch. Nobody is swapped out after signing, and nothing is subcontracted."
     },
     "features": {
       "globalExperience": {
-        "title": "Global Experience",
-        "description": "With over 7 years leading product, engineering, and design in world-class tech companies, we partner with you to bring this expertise to your business and elevate it to the next level."
+        "title": "Seven years inside product teams",
+        "description": "Before this studio we spent seven years building and shipping product at established technology companies. That is where the process on this page comes from."
       },
       "endToEnd": {
-        "title": "End-to-End Expertise",
-        "description": "We manage the full product lifecycle from launch to optimization and scaling because your growth doesn't stop at release."
+        "title": "We stay if you want us to",
+        "description": "Plenty of clients would rather not run it themselves, and we are happy to — hosting, support, and whatever comes next, agreed the same way as everything else. The difference is that you are choosing it, not stuck with it."
       },
       "tailored": {
-        "title": "Tailored Solutions",
-        "description": "Every business is unique. We build custom solutions that fit your goals, whether you're a fast-moving startup or a large enterprise."
+        "title": "We say no",
+        "description": "If an off-the-shelf tool solves your problem, we will tell you and point you at it. Custom software is expensive and it should be the right call."
       },
       "proven": {
-        "title": "Proven Impact",
-        "description": "From empowering small businesses to scaling platforms across countries, we deliver results with the same customer-first focus every time."
+        "title": "Built to be handed to someone else",
+        "description": "Proven tools, conventional structure, and the reasoning recorded alongside the code. Whether the next person is your team, another studio, or us in a year, nothing depends on what is only in someone's head."
       }
     }
   },
   "contact": {
-    "title": "Ready to transform your idea into reality?",
-    "description": "Let's explore how we can transform your vision into measurable success.",
+    "title": "Tell us what you're building.",
+    "description": "A few sentences is enough to start. The first step is a call to work out what you need — no charge, no sales deck — and you can stop there with the plan in hand.",
     "form": {
       "namePlaceholder": "Your name",
       "emailPlaceholder": "Your email",
@@ -138,28 +141,29 @@
     }
   },
   "works": {
-    "title": "Our Works",
+    "title": "Selected work",
     "cta": {
-      "title": "This Could Be Yours",
-      "description": "Your idea deserves better execution. Let's transform it into custom software that drives real growth. From concept to launch, we'll build your success story.",
-      "buttonText": "Get Started"
-    }
+      "title": "Start small.",
+      "description": "The first job does not have to be the whole product. Pick the smallest thing that is genuinely costing you — one process, one connection between systems, one screen people fight with. We agree what it takes, build it, and hand it over. If that went well, we do the next one.",
+      "buttonText": "Start small"
+    },
+    "subtitle": "Agreed, delivered, and handed over in full — the code, the accounts, and every password in your name. Some clients take it from there. Others keep us running it."
   },
   "blog": {
-    "title": "Latest Insights",
-    "description": "Discover our latest thinking on technology, strategy, and business growth",
-    "viewAll": "View All Articles",
-    "completeGuides": "Complete Guides",
-    "latestArticles": "Latest Articles",
-    "completeGuideLabel": "Complete Guide"
+    "title": "Writing",
+    "description": "What we have learned about build-versus-buy, the real cost of ownership, and what actually goes wrong in software projects.",
+    "viewAll": "All writing",
+    "completeGuides": "Guides",
+    "latestArticles": "Recent",
+    "completeGuideLabel": "Guide"
   },
   "blogPage": {
-    "title": "Blog | Arktik",
-    "description": "Insights on digital strategy, software development, and technology solutions.",
+    "title": "Writing | Arktik",
+    "description": "Build versus buy, what software actually costs to own, and what goes wrong in projects — written up as we hit it.",
     "hero": {
-      "badge": "Knowledge Hub",
-      "title": "Insights & Expertise",
-      "description": "Discover the latest in digital strategy, software development, and technology solutions that drive business growth."
+      "badge": "Writing",
+      "title": "Notes from the work",
+      "description": "Build versus buy, what software actually costs to own, and what goes wrong in projects. Written up as we hit it, not commissioned for a blog."
     },
     "stats": {
       "articles": "Articles",
@@ -167,52 +171,56 @@
       "categories": "Categories"
     },
     "categories": {
-      "title": "Explore by Category",
-      "subtitle": "Browse our content organized by topics and expertise areas."
+      "title": "Browse by topic",
+      "subtitle": "Everything we have written, grouped by what it is about."
     },
     "guides": {
-      "title": "Complete Guides",
-      "subtitle": "In-depth guides that cover topics from start to finish."
+      "title": "Guides",
+      "subtitle": "The long ones. A whole topic covered end to end, so you do not have to assemble it from six separate articles."
     },
     "articles": {
-      "title": "Latest Articles",
-      "subtitle": "Fresh insights and updates from our team of experts."
+      "title": "Recent",
+      "subtitle": "Shorter pieces, usually written straight after the thing that prompted them."
     }
   },
   "caseStudiesPage": {
     "metadata": {
-      "title": "Case Studies | Arktik",
-      "description": "In-depth looks at the partnerships and products we've built to unlock growth."
+      "title": "Case studies | Arktik",
+      "description": "Projects written up in full — what the problem was, what we decided, and what changed afterwards."
     },
     "hero": {
-      "title": "Case Studies",
-      "description": "Explore how we partner with teams to design, build, and scale digital products that create measurable results."
+      "title": "Case studies",
+      "description": "Projects written up properly: what the problem turned out to be, what we decided and why, and what changed once it shipped."
     },
     "emptyState": {
-      "title": "Case studies coming soon",
-      "description": "We're preparing detailed stories to show how we help partners succeed. Check back soon or browse more insights on the blog.",
-      "backToBlog": "Back to Blog"
+      "title": "Nothing published yet",
+      "description": "Our clients' work is not ours to write about until they say so, and we are still getting those permissions. Until then, the writing is the honest version of how we work.",
+      "backToBlog": "Read the writing"
     }
   },
   "cards": {
     "project": "Project",
     "anonymous": "Anonymous",
-    "completeGuide": "Complete Guide",
-    "learnMore": "Learn more"
+    "completeGuide": "Guide",
+    "learnMore": "Read more",
+    "caseStudy": "Case study",
+    "readCaseStudy": "Read the case study",
+    "results": "Results",
+    "client": "Client"
   },
   "categoryPage": {
-    "completeGuides": "Complete Guides",
+    "completeGuides": "Guides",
     "articles": "Articles",
     "emptyState": {
-      "title": "No Content Yet",
-      "description": "We haven't published any articles or guides for this category yet. Stay tuned for updates!",
-      "backToBlog": "Back to Blog"
+      "title": "Nothing here yet",
+      "description": "We have not written anything in this category so far. The other categories have more in them.",
+      "backToBlog": "All writing"
     }
   },
   "pillarPage": {
-    "completeGuide": "Complete Guide",
+    "completeGuide": "Guide",
     "guides": "Guides",
-    "relatedArticles": "Related Articles",
+    "relatedArticles": "Related reading",
     "readingTime": "{minutes} min read",
     "notFound": "Guide Not Found | Arktik",
     "blog": "Blog",
@@ -220,11 +228,11 @@
     "moreFromCategory": "More from {category}"
   },
   "postCta": {
-    "badge": "Let's Talk",
-    "title": "Ready to build your next product?",
-    "description": "Whether you need a partner to ship fast or a team to scale with you, we help turn ambitious ideas into software that performs.",
-    "primaryCta": "Start a conversation",
-    "secondaryCta": "Explore services"
+    "badge": "Next step",
+    "title": "Have something like this to build?",
+    "description": "The first call is free and there is no deck. We work out what you actually need, and the plan is yours to keep whether you hire us or not.",
+    "primaryCta": "Start a project",
+    "secondaryCta": "See what we build"
   },
   "postPage": {
     "notFound": "Article Not Found | Arktik",
@@ -233,7 +241,7 @@
     "moreFromCategory": "More from {category}"
   },
   "footer": {
-    "description": "Transforming ideas into products that drive real business growth.",
+    "description": "A software studio in Indonesia. Custom web and mobile applications, built in the open and handed over in your name.",
     "copyright": "© {year} Arktik. All rights reserved."
   },
   "showcase": {
@@ -244,5 +252,57 @@
     },
     "viewingIn": "Viewing in",
     "mode": "mode"
+  },
+  "caseStudyPage": {
+    "client": "Client",
+    "category": "Category",
+    "challenge": "Challenge",
+    "solution": "Solution",
+    "results": "Results"
+  },
+  "process": {
+    "title": "How we work",
+    "description": "Four stages. What is included and what it costs are agreed before each one starts, so you can stop after any of them — or carry on with the next thing.",
+    "durationLabel": "Typical duration",
+    "tbd": "to confirm",
+    "stages": {
+      "discovery": {
+        "title": "Discovery",
+        "description": "We work out the real problem, who uses it, and what limits us — before anyone writes code. You end up with a written plan and a fixed price, and it is yours to keep whether you continue with us or not.",
+        "duration": "1–2 weeks"
+      },
+      "design": {
+        "title": "Design",
+        "description": "We decide how it looks and how it is built, together. You review real screens in your browser, not slides.",
+        "duration": "2–3 weeks"
+      },
+      "build": {
+        "title": "Build",
+        "description": "Delivered in pieces you can actually use. A working demo every week, and a private link you can open any time to see where it is.",
+        "duration": "from 6 weeks"
+      },
+      "handover": {
+        "title": "Handover",
+        "description": "The code, the documentation, and every password and account are confirmed as yours. From here some clients run it themselves and others keep us on to do it. You are choosing which, and that is the whole point of doing the first three stages this way.",
+        "duration": "1 week"
+      }
+    }
+  },
+  "commitments": {
+    "title": "What we commit to",
+    "items": {
+      "scope": {
+        "title": "Agreed before we start",
+        "description": "What you get and what it costs are put in writing before each stage begins. No renegotiating halfway through."
+      },
+      "ownership": {
+        "title": "Everything ends up yours",
+        "description": "The code, the servers, the domain, and every account are in your name from the first day — not ours."
+      },
+      "access": {
+        "title": "Talk to the people building it",
+        "description": "You deal directly with the people writing the software. Nobody relays messages on our behalf."
+      }
+    }
   }
 }
