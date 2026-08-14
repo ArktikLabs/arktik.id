@@ -1,7 +1,7 @@
 {
   "common": {
     "title": "Arktik — software kustom, prosesnya terbuka",
-    "description": "Studio software di Indonesia. Anda selalu tahu apa yang sedang dibangun, berapa biayanya, dan kapan selesainya — dan semuanya berakhir atas nama Anda.",
+    "description": "Studio software di Indonesia. Anda urus bisnisnya, kami urus pengembangannya — biaya disepakati sebelum tiap tahap, semuanya atas nama Anda sejak hari pertama.",
     "skipToContent": "Lewati ke konten"
   },
   "header": {
@@ -16,7 +16,7 @@
     "menu": "Menu"
   },
   "hero": {
-    "description": "Anda menyepakati lingkup dan biayanya sebelum setiap tahap dimulai, melihat software yang sudah berfungsi setiap minggu, dan memiliki kode serta seluruh akun sejak hari pertama.",
+    "description": "Serahkan pengembangannya kepada kami, supaya Anda bisa mengurus bisnis — bukan proyeknya. Biayanya disepakati sebelum setiap tahap dimulai, software yang berfungsi hadir setiap minggu, dan kode serta seluruh akun atas nama Anda sejak hari pertama.",
     "headlineLead": "Software kustom,",
     "headlineConnector": "tanpa",
     "flipWords": {
@@ -95,7 +95,7 @@
     "title": "Kenapa kami",
     "mainCard": {
       "title": "Sengaja kecil.",
-      "description": "Yang datang saat presentasi adalah yang mengerjakan. Tidak ada pergantian orang setelah kesepakatan, dan tidak ada yang dialihkan ke pihak ketiga."
+      "description": "Yang datang saat presentasi adalah yang mengerjakan. Tidak ada pergantian orang setelah kesepakatan, dan tidak ada yang dialihkan ke pihak ketiga — jadi cukup satu percakapan, bukan berlapis-lapis."
     },
     "features": {
       "globalExperience": {
@@ -263,7 +263,7 @@
   },
   "process": {
     "title": "Cara kami bekerja",
-    "description": "Empat tahap. Apa yang dikerjakan dan berapa biayanya disepakati sebelum setiap tahap dimulai, sehingga Anda bisa berhenti kapan saja — atau melanjutkan ke kebutuhan berikutnya.",
+    "description": "Empat tahap, masing-masing disepakati sebelum dimulai — jadi satu-satunya yang perlu Anda putuskan adalah lanjut atau berhenti.",
     "durationLabel": "Perkiraan waktu",
     "tbd": "menyusul",
     "stages": {
@@ -280,7 +280,7 @@
       "build": {
         "title": "Development",
         "duration": "dari 6 minggu",
-        "description": "Dikirim bertahap dan langsung bisa digunakan. Ada demo yang berfungsi setiap minggu, dan tautan pribadi yang bisa Anda buka kapan saja untuk melihat perkembangannya."
+        "description": "Dikirim bertahap dalam bagian yang benar-benar bisa dipakai. Demo yang berfungsi setiap minggu, dan tautan pribadi yang bisa dibuka kapan saja — Anda tidak harus mengawasi prosesnya, tapi selalu bisa."
       },
       "handover": {
         "title": "Serah terima",
