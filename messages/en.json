@@ -223,7 +223,7 @@
     "relatedArticles": "Related reading",
     "readingTime": "{minutes} min read",
     "notFound": "Guide Not Found | Arktik",
-    "blog": "Blog",
+    "blog": "Writing",
     "partOfGuide": "Part of our complete guide:",
     "moreFromCategory": "More from {category}"
   },
@@ -235,7 +235,7 @@
   },
   "postPage": {
     "notFound": "Article Not Found | Arktik",
-    "blog": "Blog",
+    "blog": "Writing",
     "partOfGuide": "Part of our complete guide:",
     "moreFromCategory": "More from {category}"
   },

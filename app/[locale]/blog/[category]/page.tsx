@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { graph, breadcrumbs } from "@/lib/seo/schema";
 import {
   getCategoryBySlug,
   getBlogPosts,
@@ -54,11 +56,12 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const { locale, category: categorySlug } = await params;
 
   try {
-    const [category, { posts }, pillars, t] = await Promise.all([
+    const [category, { posts }, pillars, t, blogT] = await Promise.all([
       getCategoryBySlug(categorySlug, locale),
       getBlogPosts({ categorySlug, locale }),
       getPillarPages(categorySlug, locale),
       getTranslations("categoryPage"),
+      getTranslations("blog"),
     ]);
 
     if (!category) {
@@ -67,6 +70,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
     return (
       <div className="min-h-screen bg-paper text-ink">
+        <JsonLd
+          data={graph(
+            breadcrumbs(locale, [
+              { name: blogT("title"), path: "blog" },
+              { name: category.fields.title },
+            ]),
+          )}
+        />
         <Header />
 
         <BlogHeroSection>
@@ -99,11 +110,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           </div>
         </BlogHeroSection>
 
-        <main id="main" className="relative max-w-7xl mx-auto px-6 lg:px-12 py-16">
+        <main
+          id="main"
+          className="relative max-w-7xl mx-auto px-6 lg:px-12 py-16"
+        >
           {/* Breadcrumb */}
           <Breadcrumb
             items={[
-              { label: "Blog", href: `/${locale}/blog` },
+              { label: blogT("title"), href: `/${locale}/blog` },
               { label: category.fields.title, isActive: true },
             ]}
             className="mb-8"

@@ -223,7 +223,7 @@
     "relatedArticles": "Bacaan terkait",
     "readingTime": "{minutes} menit baca",
     "notFound": "Panduan Tidak Ditemukan | Arktik",
-    "blog": "Blog",
+    "blog": "Tulisan",
     "partOfGuide": "Bagian dari panduan lengkap kami:",
     "moreFromCategory": "Lebih banyak dari {category}"
   },
@@ -235,7 +235,7 @@
   },
   "postPage": {
     "notFound": "Artikel Tidak Ditemukan | Arktik",
-    "blog": "Blog",
+    "blog": "Tulisan",
     "partOfGuide": "Bagian dari panduan lengkap kami:",
     "moreFromCategory": "Lebih banyak dari {category}"
   },

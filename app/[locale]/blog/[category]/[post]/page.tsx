@@ -11,6 +11,9 @@ import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import Link from "next/link";
 import { PostCtaSection } from "@/components/blog/PostCtaSection";
 import { getTranslations } from "next-intl/server";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { toAbsoluteUrl } from "@/lib/utils/contentful";
+import { graph, article, breadcrumbs } from "@/lib/seo/schema";
 import { calculateCombinedReadingTime } from "@/lib/utils/reading-time";
 
 interface BlogPostPageProps {
@@ -82,6 +85,25 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
     return (
       <div className="min-h-screen bg-paper text-ink">
+        <JsonLd
+          data={graph(
+            article({
+              locale,
+              path: `blog/${categorySlug}/${postSlug}`,
+              headline: post.fields.title,
+              description: post.fields.excerpt,
+              image: heroImage ? toAbsoluteUrl(heroImage) : undefined,
+              datePublished: post.sys.createdAt,
+              dateModified: post.sys.updatedAt,
+              authorName: author?.name,
+            }),
+            breadcrumbs(locale, [
+              { name: postT("blog"), path: "blog" },
+              { name: category.title, path: `blog/${categorySlug}` },
+              { name: post.fields.title },
+            ]),
+          )}
+        />
         <Header />
 
         {/* Hero Section */}
@@ -91,9 +113,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           containerClassName="pt-28 pb-16"
         />
 
-        <main id="main" className="relative mx-auto max-w-7xl px-6 py-16 lg:px-12">
+        <main
+          id="main"
+          className="relative mx-auto max-w-7xl px-6 py-16 lg:px-12"
+        >
           {/* Breadcrumb is page chrome, not document content — container width,
-            * or its labels truncate inside the 64ch column. */}
+           * or its labels truncate inside the 64ch column. */}
           <Breadcrumb
             items={[
               { label: postT("blog"), href: `/${locale}/blog` },

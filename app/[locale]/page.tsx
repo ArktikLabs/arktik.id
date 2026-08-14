@@ -1,13 +1,16 @@
-import { Header } from "@/components/sections/Header"
-import { HeroSection } from "@/components/sections/HeroSection"
-import { WorksSection } from "@/components/sections/WorksSection"
-import { ProcessSection } from "@/components/sections/ProcessSection"
-import { ServicesSection } from "@/components/sections/ServicesSection"
-import { WhyArktikSection } from "@/components/sections/WhyArktikSection"
-import { AboutUsSection } from "@/components/sections/AboutUsSection"
-import { BlogSection } from "@/components/sections/BlogSection"
-import { ContactSection } from "@/components/sections/ContactSection"
-import { FooterSection } from "@/components/sections/FooterSection"
+import { Header } from "@/components/sections/Header";
+import { HeroSection } from "@/components/sections/HeroSection";
+import { WorksSection } from "@/components/sections/WorksSection";
+import { ProcessSection } from "@/components/sections/ProcessSection";
+import { ServicesSection } from "@/components/sections/ServicesSection";
+import { WhyArktikSection } from "@/components/sections/WhyArktikSection";
+import { AboutUsSection } from "@/components/sections/AboutUsSection";
+import { BlogSection } from "@/components/sections/BlogSection";
+import { ContactSection } from "@/components/sections/ContactSection";
+import { FooterSection } from "@/components/sections/FooterSection";
+import { getTranslations } from "next-intl/server";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { graph, organization, website } from "@/lib/seo/schema";
 
 /* Hallmark · macrostructure: 01 Bento Grid · design-system: design.md v2
  *
@@ -22,20 +25,31 @@ import { FooterSection } from "@/components/sections/FooterSection"
  * firm with a thin portfolio and founders who stay anonymous. */
 
 interface HomeProps {
-  params: { locale: string }
+  params: { locale: string };
 }
 
 export default async function Home({ params }: HomeProps) {
-  const { locale } = await params
+  const { locale } = await params;
+  const t = await getTranslations("common");
+
   return (
     <div className="min-h-screen bg-paper text-ink">
+      {/* Publisher identity lives here, on the homepage, rather than in the
+       * layout — repeating a full Organization block on every route adds bytes
+       * without adding signal. Article pages reference it by @id. */}
+      <JsonLd
+        data={graph(
+          organization(locale, t("description")),
+          website(locale, t("title"), t("description")),
+        )}
+      />
       <Header />
       <main id="main">
         <HeroSection />
         <WorksSection />
         {/* Stage durations live in messages/*.json (process.stages.*.duration)
-          * so they translate. Every one is a PROMISE you have to keep — change
-          * any you cannot hold to, or blank it to show "to confirm". */}
+         * so they translate. Every one is a PROMISE you have to keep — change
+         * any you cannot hold to, or blank it to show "to confirm". */}
         <ProcessSection />
         <ServicesSection />
         <WhyArktikSection />

@@ -11,6 +11,8 @@ import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { PostCtaSection } from "@/components/blog/PostCtaSection";
 import { CaseStudyCard } from "@/components/blog/CaseStudyCard";
 import { getTranslations } from "next-intl/server";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { graph, article, breadcrumbs } from "@/lib/seo/schema";
 
 interface CaseStudyPageProps {
   params: {
@@ -73,6 +75,26 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
     return (
       <div className="min-h-screen bg-paper text-ink">
+        <JsonLd
+          data={graph(
+            article({
+              locale,
+              path: `blog/case-studies/${slug}`,
+              headline: caseStudy.fields.title,
+              description: caseStudy.fields.excerpt,
+              image: caseStudy.fields.featuredImage?.fields.file?.url
+                ? toAbsoluteUrl(caseStudy.fields.featuredImage.fields.file.url)
+                : undefined,
+              datePublished: caseStudy.sys.createdAt,
+              dateModified: caseStudy.sys.updatedAt,
+            }),
+            breadcrumbs(locale, [
+              { name: blogT("title"), path: "blog" },
+              { name: csPageT("hero.title"), path: "blog/case-studies" },
+              { name: caseStudy.fields.title },
+            ]),
+          )}
+        />
         <Header />
 
         <main id="main" className="max-w-7xl mx-auto px-6 lg:px-12 py-16">

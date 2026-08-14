@@ -11,6 +11,9 @@ import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { calculateCombinedReadingTime } from "@/lib/utils/reading-time";
 import { BlogHeroSection } from "@/components/sections/BlogHeroSection";
 import { PostCtaSection } from "@/components/blog/PostCtaSection";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { toAbsoluteUrl } from "@/lib/utils/contentful";
+import { graph, article, breadcrumbs } from "@/lib/seo/schema";
 
 interface PillarPageProps {
   params: {
@@ -78,6 +81,26 @@ export default async function PillarPage({ params }: PillarPageProps) {
 
     return (
       <div className="min-h-screen bg-paper text-ink">
+        <JsonLd
+          data={graph(
+            article({
+              locale,
+              path: `blog/${categorySlug}/guides/${pillarSlug}`,
+              headline: pillar.fields.title,
+              description: pillar.fields.seoDescription,
+              image: heroImage ? toAbsoluteUrl(heroImage) : undefined,
+              datePublished: pillar.sys.createdAt,
+              dateModified: pillar.sys.updatedAt,
+              authorName: pillar.fields.author?.fields?.name,
+            }),
+            breadcrumbs(locale, [
+              { name: t("blog"), path: "blog" },
+              { name: category.title, path: `blog/${categorySlug}` },
+              { name: t("guides"), path: `blog/${categorySlug}` },
+              { name: pillar.fields.title },
+            ]),
+          )}
+        />
         <Header />
 
         <BlogHeroSection
@@ -86,10 +109,13 @@ export default async function PillarPage({ params }: PillarPageProps) {
           containerClassName="pt-28 pb-16"
         />
 
-        <main id="main" className="relative mx-auto max-w-7xl px-6 py-16 lg:px-12">
+        <main
+          id="main"
+          className="relative mx-auto max-w-7xl px-6 py-16 lg:px-12"
+        >
           {/* Breadcrumb is page chrome, not document content — it stays at
-            * container width. Inside the 64ch column its four levels truncated
-            * to "Bl… › AI, Automation & Innovati… › Guid… › …". */}
+           * container width. Inside the 64ch column its four levels truncated
+           * to "Bl… › AI, Automation & Innovati… › Guid… › …". */}
           <Breadcrumb
             items={[
               { label: t("blog"), href: `/${locale}/blog` },
