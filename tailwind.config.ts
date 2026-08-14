@@ -122,6 +122,15 @@ const config: Config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        card: "var(--radius-card)",
+        pill: "var(--radius-pill)",
+      },
+      maxWidth: {
+        measure: "var(--measure)",
+      },
+      lineHeight: {
+        display: "var(--leading-display)",
+        prose: "var(--leading-prose)",
       },
       keyframes: {
         "accordion-down": {

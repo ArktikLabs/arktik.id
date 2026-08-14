@@ -84,6 +84,17 @@
   --radius-input: 0.375rem;
   --radius-pill: 999px;
 
+  /* The document column. One measure for the whole article — meta, headline,
+   * lede and body all share it, so both edges align. Content routes were
+   * shipping raw max-w-[68ch] / max-w-[62ch] / max-w-[18ch] arbitrary values
+   * that produced five different left-aligned widths on one page. */
+  --measure: 64ch;
+  --leading-prose: 1.7;
+
+  /* Display leading is 0.95 — see Typography above. The article routes were
+   * running 1.05, which is body leading on display type. */
+  --leading-display: 0.95;
+
   /* N12 banner + retracting nav */
   --banner-h: 40px;
   --bar-h: 68px;

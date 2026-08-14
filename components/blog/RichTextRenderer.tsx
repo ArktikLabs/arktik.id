@@ -1,3 +1,4 @@
+/* Hallmark · design-system: design.md */
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES, Document } from '@contentful/rich-text-types'
 import { ReactNode } from 'react'

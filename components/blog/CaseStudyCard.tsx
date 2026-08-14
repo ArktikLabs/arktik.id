@@ -27,7 +27,7 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
   const outcome = getPlainTextFromRichText(results)
 
   return (
-    <article className="group overflow-hidden rounded-xl border border-rule bg-paper-2 transition-colors duration-200 hover:border-rule-strong">
+    <article className="group overflow-hidden rounded-card border border-rule bg-paper-2 transition-colors duration-200 hover:border-rule-strong">
       <Link href={`/${locale}/blog/case-studies/${slug}`} className="block">
         {imageUrl && (
           <div className="relative h-48 w-full">

@@ -228,7 +228,6 @@
     "moreFromCategory": "More from {category}"
   },
   "postCta": {
-    "badge": "Next step",
     "title": "Have something like this to build?",
     "description": "The first call is free and there is no deck. We work out what you actually need, and the plan is yours to keep whether you hire us or not.",
     "primaryCta": "Start a project",
@@ -251,14 +250,16 @@
       "desktop": "Desktop"
     },
     "viewingIn": "Viewing in",
-    "mode": "mode"
+    "mode": "mode",
+    "visitLive": "Visit the live site"
   },
   "caseStudyPage": {
     "client": "Client",
     "category": "Category",
     "challenge": "Challenge",
     "solution": "Solution",
-    "results": "Results"
+    "results": "Results",
+    "moreCaseStudies": "More case studies"
   },
   "process": {
     "title": "How we work",

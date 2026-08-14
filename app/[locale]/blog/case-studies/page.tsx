@@ -1,3 +1,4 @@
+/* Hallmark · macrostructure: 20 Ecosystem Index · design-system: design.md */
 import Link from 'next/link'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -37,7 +38,7 @@ export default async function CaseStudiesPage({ params }: CaseStudiesPageProps) 
 
         <BlogHeroSection>
           <div className="max-w-3xl">
-            <h1 className="text-balance font-heading text-4xl font-bold leading-[1.05] lg:text-6xl">
+            <h1 className="text-balance font-heading text-4xl font-bold leading-display lg:text-6xl lg:leading-display">
               {t('hero.title')}
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-ink-2 lg:text-xl">

@@ -1,3 +1,4 @@
+/* Hallmark · macrostructure: 20 Ecosystem Index · design-system: design.md */
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'

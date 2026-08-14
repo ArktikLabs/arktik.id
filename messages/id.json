@@ -228,7 +228,6 @@
     "moreFromCategory": "Lebih banyak dari {category}"
   },
   "postCta": {
-    "badge": "Langkah berikutnya",
     "title": "Punya kebutuhan serupa?",
     "description": "Obrolan pertama gratis dan tanpa presentasi jualan. Kami bantu petakan apa yang sebenarnya Anda butuhkan, dan rencananya tetap milik Anda — mau lanjut bersama kami atau tidak.",
     "primaryCta": "Mulai proyek",
@@ -251,14 +250,16 @@
       "desktop": "Desktop"
     },
     "viewingIn": "Sedang melihat dalam mode",
-    "mode": ""
+    "mode": "",
+    "visitLive": "Kunjungi situsnya"
   },
   "caseStudyPage": {
     "client": "Klien",
     "category": "Kategori",
     "challenge": "Tantangan",
     "solution": "Solusi",
-    "results": "Hasil"
+    "results": "Hasil",
+    "moreCaseStudies": "Studi kasus lainnya"
   },
   "process": {
     "title": "Cara kami bekerja",

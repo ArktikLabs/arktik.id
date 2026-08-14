@@ -1,13 +1,13 @@
-import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
-import { getBlogPostBySlug, getBlogPosts } from '@/lib/services/contentful'
-import { RichTextRenderer } from '@/components/blog/RichTextRenderer'
-import { BlogPostCard } from '@/components/blog/BlogPostCard'
-import { Header } from '@/components/sections/Header'
-import { FooterSection } from '@/components/sections/FooterSection'
+/* Hallmark · macrostructure: 02 Long Document · design-system: design.md */
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { getBlogPostBySlug, getBlogPosts } from "@/lib/services/contentful";
+import { RichTextRenderer } from "@/components/blog/RichTextRenderer";
+import { BlogPostCard } from "@/components/blog/BlogPostCard";
+import { Header } from "@/components/sections/Header";
+import { FooterSection } from "@/components/sections/FooterSection";
 import { BlogHeroSection } from "@/components/sections/BlogHeroSection";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
-import { Calendar, Clock, User, Tag } from "lucide-react";
 import Link from "next/link";
 import { PostCtaSection } from "@/components/blog/PostCtaSection";
 import { getTranslations } from "next-intl/server";
@@ -57,7 +57,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     }
 
     const filteredRelatedPosts = relatedData.posts.filter(
-      (relatedPost) => relatedPost.sys.id !== post.sys.id
+      (relatedPost) => relatedPost.sys.id !== post.sys.id,
     );
 
     const category = post.fields.category.fields;
@@ -74,7 +74,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     ]);
 
     const postCtaContent = {
-      badge: postCtaT("badge"),
       title: post.fields.ctaTitle ?? postCtaT("title"),
       description: post.fields.ctaDescription ?? postCtaT("description"),
       primaryCta: postCtaT("primaryCta"),
@@ -93,8 +92,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           imageClassName={heroImage ? "opacity-90" : undefined}
         />
 
-        <main className="relative max-w-7xl mx-auto px-6 lg:px-12 py-16">
-          {/* Breadcrumb */}
+        <main className="relative mx-auto max-w-7xl px-6 py-16 lg:px-12">
+          {/* Breadcrumb is page chrome, not document content — container width,
+            * or its labels truncate inside the 64ch column. */}
           <Breadcrumb
             items={[
               { label: postT("blog"), href: `/${locale}/blog` },
@@ -107,118 +107,104 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             className="mb-12"
           />
 
-          {/* Article */}
-          <article className="mb-16">
-            <header className="mb-12">
-              <div className="mb-6 flex flex-wrap items-center gap-4 text-sm font-medium text-lime-green">
-                <div className="inline-flex items-center gap-2">
+          <div className="mx-auto max-w-measure">
+            {/* Article */}
+            <article className="mb-16">
+              <header className="mb-12">
+                {/* Long Document meta is one typographic line, not four
+                 * icon-decorated chips. The icons were generic-blog voice and
+                 * carried no information the words don't. */}
+                <p className="label-mono mb-6 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-ink-3">
                   <Link
                     href={`/blog/${categorySlug}`}
-                    className="label-mono inline-block rounded-full border border-rule-strong px-3 py-1 text-ink-2 transition-colors duration-200 hover:border-lime-green hover:text-lime-green"
+                    className="text-ink-2 underline-offset-4 transition-colors duration-200 hover:text-lime-green hover:underline"
                   >
                     {category.title}
                   </Link>
-                </div>
-                <div className="flex items-center gap-2 text-ink-3">
-                  <Calendar className="h-4 w-4" />
+                  <span aria-hidden="true">·</span>
                   <span>
                     {new Date(post.sys.createdAt).toLocaleDateString(
                       locale === "id" ? "id-ID" : "en-US",
-                      {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      }
+                      { year: "numeric", month: "long", day: "numeric" },
                     )}
                   </span>
-                </div>
-                <div className="flex items-center gap-2 text-ink-3">
-                  <Clock className="h-4 w-4" />
+                  <span aria-hidden="true">·</span>
                   <span>{t("readingTime", { minutes: readingTime })}</span>
-                </div>
-                {author?.name && (
-                  <div className="flex items-center gap-2 text-ink-3">
-                    <User className="w-4 h-4" />
-                    <span>{author.name}</span>
-                  </div>
+                  {author?.name && (
+                    <>
+                      <span aria-hidden="true">·</span>
+                      <span>{author.name}</span>
+                    </>
+                  )}
+                </p>
+
+                {/* Title */}
+                <h1 className="mb-6 text-balance font-heading text-4xl font-bold leading-display md:text-5xl md:leading-display lg:text-6xl lg:leading-display">
+                  {post.fields.title}
+                </h1>
+
+                {/* Lede — sized as a standfirst, not body copy. */}
+                {post.fields.excerpt && (
+                  <p className="mb-10 text-lg leading-prose text-ink-2 md:text-xl">
+                    {post.fields.excerpt}
+                  </p>
                 )}
+
+                {/* Was a bordered paper-2 card. Long Document's button voice is a
+                 * typographic link inside the prose — the box was the loudest
+                 * thing above the fold and it only carried one link. */}
+                {pillar && (
+                  <p className="border-t border-rule pt-6 text-ink-3">
+                    {postT("partOfGuide")}{" "}
+                    <Link
+                      href={`/blog/${categorySlug}/guides/${pillar.slug}`}
+                      className="text-lime-green underline underline-offset-4 transition-colors duration-200 hover:text-ink"
+                    >
+                      {pillar.title}
+                    </Link>
+                  </p>
+                )}
+              </header>
+
+              {/* Content */}
+              <div className="leading-prose">
+                <RichTextRenderer content={post.fields.body} />
               </div>
 
-              {/* Title */}
-              <h1 className="mb-6 max-w-[18ch] text-balance font-heading text-4xl font-bold leading-[1.05] md:text-5xl lg:text-6xl">
-                {post.fields.title}
-              </h1>
-
-              {/* Excerpt/Introduction */}
-              {post.fields.excerpt && (
-                <div className="prose prose-xl prose-invert max-w-[62ch] mb-12">
-                  {post.fields.excerpt}
-                </div>
-              )}
-
-              {/* Pillar Link */}
-              {pillar && (
-                <div className="mb-8 rounded-xl border border-rule bg-paper-2 p-5">
-                  <p className="label-mono mb-2">
-                    {postT("partOfGuide")}
-                  </p>
-                  <Link
-                    href={`/blog/${categorySlug}/guides/${pillar.slug}`}
-                    className="text-lime-green hover:text-lime-green/80 font-medium transition-colors"
-                  >
-                    {pillar.title} →
-                  </Link>
-                </div>
-              )}
-            </header>
-
-            {/* Content */}
-            <div className="prose prose-lg prose-invert max-w-[68ch]">
-              <RichTextRenderer content={post.fields.body} />
-            </div>
-
-            {/* Tags */}
-            {post.fields.tags && post.fields.tags.length > 0 && (
-              <div className="flex items-center space-x-2 mb-8">
-                <Tag className="w-4 h-4 text-ink-3" />
-                <div className="flex flex-wrap gap-2">
-                  {post.fields.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="bg-paper-2 text-ink-2 px-2 py-1 rounded text-sm"
-                    >
+              {/* Tags — chips became a typographic run. The gap is the divider. */}
+              {post.fields.tags && post.fields.tags.length > 0 && (
+                <p className="label-mono mt-12 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-t border-rule pt-6 text-ink-3">
+                  {post.fields.tags.map((tag: string, i: number) => (
+                    <span key={tag}>
+                      {i > 0 && (
+                        <span aria-hidden="true" className="pr-3">
+                          ·
+                        </span>
+                      )}
                       {tag}
                     </span>
                   ))}
-                </div>
-              </div>
-            )}
+                </p>
+              )}
 
-            {/* Author Bio */}
-            {author && (
-              <div className="bg-paper rounded-lg p-6 mb-16">
-                <div className="flex items-start space-x-4">
-                  {author.avatar && (
-                    <img
-                      src={author.avatar.fields.file?.url}
-                      alt={author.name}
-                      className="w-16 h-16 rounded-full"
-                    />
+              {/* Author — de-boxed. A rule and a name, sized as a colophon. */}
+              {author && (
+                <footer className="mt-12 border-t border-rule pt-6">
+                  <p className="label-mono mb-2 text-ink-3">{author.name}</p>
+                  {author.bio && (
+                    <div className="leading-prose text-ink-2">
+                      <RichTextRenderer content={author.bio} />
+                    </div>
                   )}
-                  <div>
-                    <h3 className="text-xl font-bold mb-2">{author.name}</h3>
-                    {author.bio && <RichTextRenderer content={author.bio} />}
-                  </div>
-                </div>
-              </div>
-            )}
-          </article>
+                </footer>
+              )}
+            </article>
+          </div>
 
           {/* Call-to-Action Section */}
           <div className="mb-16">
             <PostCtaSection
               locale={locale}
-              badge={postCtaContent.badge}
               title={postCtaContent.title}
               description={postCtaContent.description}
               primaryCta={postCtaContent.primaryCta}
@@ -229,7 +215,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Related Posts */}
           {filteredRelatedPosts.length > 0 && (
             <section>
-              <h2 className="text-3xl font-bold mb-8">
+              <h2 className="mb-8 font-heading text-3xl font-bold leading-display">
                 {postT("moreFromCategory", { category: category.title })}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

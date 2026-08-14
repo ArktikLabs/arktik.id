@@ -1,9 +1,57 @@
 [
   {
+    "date": "2026-08-14",
+    "scope": "page",
+    "target": "/showcase/[slug]",
+    "genre": "modern-minimal",
+    "macrostructure": "05 Workbench",
+    "theme": "custom",
+    "theme_axes": "dark paper / grotesk-sans display / chromatic-other accent",
+    "enrichment": "the work's own live site (showcase allowance)",
+    "designed_as_app": true,
+    "brief": "showcase viewer redesign — dead font-bricolage-grotesque class, hardcoded English chrome, raw border-white/8, and a toggle with no pressed state"
+  },
+  {
+    "date": "2026-08-14",
+    "scope": "page",
+    "target": "/blog/case-studies/[slug]",
+    "genre": "modern-minimal",
+    "macrostructure": "02 Long Document",
+    "theme": "custom",
+    "theme_axes": "dark paper / grotesk-sans display / chromatic-other accent",
+    "enrichment": "none (typography only)",
+    "designed_as_app": true,
+    "brief": "case-study detail redesign — hand-rolled breadcrumb swapped for <Breadcrumb>, max-w-4xl to document measure, results de-boxed; completes the Long Document family"
+  },
+  {
+    "date": "2026-08-14",
+    "scope": "page",
+    "target": "/blog/[category]/guides/[pillar]",
+    "genre": "modern-minimal",
+    "macrostructure": "02 Long Document",
+    "theme": "custom",
+    "theme_axes": "dark paper / grotesk-sans display / chromatic-other accent",
+    "enrichment": "none (typography only)",
+    "designed_as_app": true,
+    "brief": "pillar guide redesign — matches the post route; icon meta row replaced with one Guide kicker + typographic meta line"
+  },
+  {
+    "date": "2026-08-14",
+    "scope": "page",
+    "target": "/blog/[category]/[post]",
+    "genre": "modern-minimal",
+    "macrostructure": "02 Long Document",
+    "theme": "custom",
+    "theme_axes": "dark paper / grotesk-sans display / chromatic-other accent",
+    "enrichment": "none (typography only)",
+    "designed_as_app": true,
+    "brief": "post route redesign — boxed-card furniture replaced with Long Document typographic voice; document column centred at 64ch"
+  },
+  {
     "date": "2026-08-13",
     "scope": "app",
     "genre": "modern-minimal",
-    "macrostructure": "Bento Grid (marketing) \u00b7 Ecosystem Index (content) \u00b7 Portfolio Grid + Workbench (showcase)",
+    "macrostructure": "Bento Grid (marketing) · Ecosystem Index (content) · Portfolio Grid + Workbench (showcase)",
     "theme": "custom",
     "theme_axes": "dark paper / grotesk-sans display / chromatic-other accent",
     "vibe": "carbon, bone, one hot accent",
@@ -11,19 +59,19 @@
     "footer": "Ft4 dense colophon",
     "enrichment": "interactive demo + showcase screenshots (aurora retired from hero)",
     "designed_as_app": true,
-    "brief": "arktik.id v2 \u2014 new firm, thin portfolio, stealth founders; design carries the trust"
+    "brief": "arktik.id v2 — new firm, thin portfolio, stealth founders; design carries the trust"
   },
   {
     "date": "2026-08-13",
     "scope": "app",
     "genre": "atmospheric",
-    "macrostructure": "Split Studio (marketing) \u00b7 Ecosystem Index (content) \u00b7 Portfolio Grid + Workbench (showcase)",
+    "macrostructure": "Split Studio (marketing) · Ecosystem Index (content) · Portfolio Grid + Workbench (showcase)",
     "theme": "Aurora (brand-anchored)",
     "theme_axes": "dark paper / grotesk-sans display / chromatic-other accent",
     "nav": "N5 floating pill",
     "footer": "Ft5 statement",
     "enrichment": "aurora photograph (supplied asset) + hand-built interactive demo",
     "designed_as_app": true,
-    "brief": "arktik.id \u00b7 software house \u00b7 redesign app/ for client conversion"
+    "brief": "arktik.id · software house · redesign app/ for client conversion"
   }
 ]

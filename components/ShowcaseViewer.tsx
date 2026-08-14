@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
 
 interface ShowcaseViewerProps {
   title: string;
@@ -47,7 +46,7 @@ export function ShowcaseViewer({ title, link, activeViewport = 'desktop' }: Show
       {/* iframe Container */}
       <div className="flex-1 flex justify-center items-center p-4">
         <div
-          className="bg-paper-2 rounded-lg overflow-hidden shadow-xl transition-colors duration-300 ease-out"
+          className="overflow-hidden rounded-card border border-rule bg-paper-2"
           style={{
             width: Math.min(currentSize.width, windowSize.width - 50),
             maxWidth: '100%',

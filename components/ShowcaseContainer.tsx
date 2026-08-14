@@ -1,9 +1,24 @@
 'use client';
 
+/* Hallmark · macrostructure: 05 Workbench · design-system: design.md
+ * Workbench pages are "small, functional — they don't shout", so the chrome
+ * here stays a thin instrument bar and the client's live site is the content.
+ * What changed:
+ *   · The title carried `font-bricolage-grotesque` — a class defined nowhere,
+ *     naming the face design.md retired for Archivo. It was silently falling
+ *     back to body font. Now font-heading.
+ *   · "Visit Live" and the three viewport tooltips were hardcoded English on a
+ *     bilingual site, while showcase.viewport.* already existed unused.
+ *   · border-white/8 was a raw colour on a token-locked project.
+ *   · The viewport toggle is a real radiogroup now — it had no pressed state
+ *     for assistive tech, only a native title tooltip. */
+
 import { useState } from 'react';
 import { Link } from '@/i18n/routing';
-import { ShowcaseViewer } from './ShowcaseViewer';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import { Smartphone, Tablet, Monitor, ArrowUpRight } from 'lucide-react';
+import { ShowcaseViewer } from './ShowcaseViewer';
 
 interface ShowcaseContainerProps {
   title: string;
@@ -12,114 +27,94 @@ interface ShowcaseContainerProps {
 
 type ViewportType = 'mobile' | 'tablet' | 'desktop';
 
-function ViewportControls({ activeViewport, onViewportChange }: {
+const VIEWPORTS = [
+  { key: 'mobile', Icon: Smartphone },
+  { key: 'tablet', Icon: Tablet },
+  { key: 'desktop', Icon: Monitor },
+] as const;
+
+function ViewportControls({
+  activeViewport,
+  onViewportChange,
+}: {
   activeViewport: ViewportType;
   onViewportChange: (viewport: ViewportType) => void;
 }) {
+  const t = useTranslations('showcase');
+
   return (
-    <div className="flex bg-paper-3 backdrop-blur-sm rounded-full p-1">
-      <button
-        onClick={() => onViewportChange('mobile')}
-        className={`p-2 rounded-full transition-colors duration-200 ${
-          activeViewport === 'mobile'
-            ? 'bg-lime-green text-carbon'
-            : 'text-ink/70 hover:text-ink hover:bg-paper-3'
-        }`}
-        title="Mobile View"
-      >
-        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M17 19H7V5h10v14zm-1-16H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
-        </svg>
-      </button>
-      <button
-        onClick={() => onViewportChange('tablet')}
-        className={`p-2 rounded-full transition-colors duration-200 ${
-          activeViewport === 'tablet'
-            ? 'bg-lime-green text-carbon'
-            : 'text-ink/70 hover:text-ink hover:bg-paper-3'
-        }`}
-        title="Tablet View"
-      >
-        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M21 4H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-1 12H4V6h16v10z"/>
-        </svg>
-      </button>
-      <button
-        onClick={() => onViewportChange('desktop')}
-        className={`p-2 rounded-full transition-colors duration-200 ${
-          activeViewport === 'desktop'
-            ? 'bg-lime-green text-carbon'
-            : 'text-ink/70 hover:text-ink hover:bg-paper-3'
-        }`}
-        title="Desktop View"
-      >
-        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 12H4V4h16v10z"/>
-        </svg>
-      </button>
+    <div
+      role="radiogroup"
+      aria-label={t('viewingIn')}
+      className="flex rounded-pill bg-paper-3 p-1"
+    >
+      {VIEWPORTS.map(({ key, Icon }) => {
+        const isActive = activeViewport === key;
+        return (
+          <button
+            key={key}
+            type="button"
+            role="radio"
+            aria-checked={isActive}
+            aria-label={t(`viewport.${key}`)}
+            onClick={() => onViewportChange(key)}
+            className={`rounded-pill p-2 transition-colors duration-200 ${
+              isActive
+                ? 'bg-lime-green text-carbon'
+                : 'text-ink-2 hover:text-ink'
+            }`}
+          >
+            <Icon className="h-4 w-4" aria-hidden="true" />
+          </button>
+        );
+      })}
     </div>
   );
 }
 
 export function ShowcaseContainer({ title, link }: ShowcaseContainerProps) {
   const [activeViewport, setActiveViewport] = useState<ViewportType>('desktop');
+  const t = useTranslations('showcase');
 
   return (
-    <div className="min-h-screen w-full bg-carbon">
-      {/* Header matching Header.tsx styling */}
-      <header className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 bg-carbon/30 backdrop-blur-lg backdrop-saturate-180 border-b border-white/8">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-6 lg:px-12">
-          <Link
-            href="/"
-            className="cursor-pointer"
-            aria-label="Go to homepage"
-          >
-            <Image
-              src="/assets/logo.svg"
-              alt="arktik"
-              width={0}
-              height={40}
-              className="h-9 w-auto"
-            />
-          </Link>
-
-          <div className="flex items-center gap-6">
-            <h1 className="text-lg font-bricolage-grotesque font-semibold text-ink">{title}</h1>
-
-            <div className="flex items-center gap-3">
-              <a
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-lime-green hover:bg-lime-green/90 text-carbon px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200"
-              >
-                Visit Live
-                <svg
-                  className="w-3 h-3"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                  />
-                </svg>
-              </a>
-
-              <ViewportControls
-                activeViewport={activeViewport}
-                onViewportChange={setActiveViewport}
+    <div className="min-h-screen w-full bg-paper">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-rule bg-paper/80 backdrop-blur-lg">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-4 lg:px-12">
+          <div className="flex min-w-0 items-center gap-4">
+            <Link href="/" aria-label="Go to homepage" className="shrink-0">
+              <Image
+                src="/assets/logo.svg"
+                alt="arktik"
+                width={0}
+                height={32}
+                className="h-7 w-auto"
               />
-            </div>
+            </Link>
+            <h1 className="truncate font-heading text-lg font-bold text-ink">
+              {title}
+            </h1>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 whitespace-nowrap rounded-pill bg-lime-green px-4 py-2 text-sm font-semibold text-carbon transition-colors duration-200 hover:bg-lime-green/90"
+            >
+              {t('visitLive')}
+              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+            </a>
+
+            <ViewportControls
+              activeViewport={activeViewport}
+              onViewportChange={setActiveViewport}
+            />
           </div>
         </div>
       </header>
 
-      {/* Full-width Showcase Viewer with top padding for fixed header */}
-      <div className="pt-20">
+      <div className="pt-24">
         <ShowcaseViewer
           title={title}
           link={link}

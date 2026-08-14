@@ -24,7 +24,7 @@ export function PillarCard({ pillar, categorySlug, locale }: PillarCardProps) {
   return (
     <Link
       href={`/${locale}/blog/${categorySlug}/guides/${pillar.fields.slug}`}
-      className="group relative isolate flex h-80 flex-col justify-between overflow-hidden rounded-xl border border-rule bg-paper-2 p-5"
+      className="group relative isolate flex h-80 flex-col justify-between overflow-hidden rounded-card border border-rule bg-paper-2 p-5"
     >
       {imageUrl && (
         <>
