@@ -1,10 +1,14 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://arktik.id/sitemap.xml
+# Sitemap — must match the canonical host (www), which every canonical,
+# hreflang and og:url on the site uses.
+Sitemap: https://www.arktik.id/sitemap.xml
 
-# Block sensitive paths
+# Block only what is genuinely private.
+#
+# /_next/ is deliberately NOT blocked: it holds the CSS, JS and fonts Google
+# needs to render the page. Blocking it breaks rendering, mobile-friendliness
+# and Core Web Vitals assessment.
 Disallow: /api/
-Disallow: /_next/
 Disallow: /admin/

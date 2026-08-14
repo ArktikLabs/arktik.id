@@ -21,6 +21,24 @@ export function localeUrl(locale: string, path = ""): string {
   );
 }
 
+/* Per-page canonical + hreflang.
+ *
+ * The root layout set `alternates.canonical` once per locale, and because
+ * metadata inherits, EVERY route claimed the locale root as its canonical —
+ * so every post, guide, category and case study was telling Google to index
+ * the homepage instead of itself. A canonical must always be self-referencing.
+ * Call this in each route's generateMetadata with that route's own path. */
+export function alternatesFor(locale: string, path = "") {
+  return {
+    canonical: localeUrl(locale, path),
+    languages: {
+      id: localeUrl("id", path),
+      en: localeUrl("en", path),
+      "x-default": localeUrl("id", path),
+    },
+  };
+}
+
 /** The publisher identity. Only fields we can actually stand behind. */
 export function organization(locale: string, description: string) {
   return {

@@ -1,5 +1,6 @@
 /* Hallmark · macrostructure: 02 Long Document · design-system: design.md */
 import { Metadata } from "next";
+import { alternatesFor } from "@/lib/seo/schema";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { getPillarPageBySlug, getBlogPosts } from "@/lib/services/contentful";
@@ -37,6 +38,10 @@ export async function generateMetadata({
   }
 
   return {
+    alternates: alternatesFor(
+      locale,
+      `blog/${categorySlug}/guides/${pillarSlug}`,
+    ),
     title: pillar.fields.seoTitle || `${pillar.fields.title} | Arktik`,
     description:
       pillar.fields.seoDescription || `Complete guide: ${pillar.fields.title}`,

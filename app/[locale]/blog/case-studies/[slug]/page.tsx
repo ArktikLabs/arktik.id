@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { toAbsoluteUrl } from "@/lib/utils/contentful";
 import { Metadata } from "next";
+import { alternatesFor } from "@/lib/seo/schema";
 import { notFound } from "next/navigation";
 import { getCaseStudyBySlug, getCaseStudies } from "@/lib/services/contentful";
 import { RichTextRenderer } from "@/components/blog/RichTextRenderer";
@@ -34,6 +35,7 @@ export async function generateMetadata({
   }
 
   return {
+    alternates: alternatesFor(locale, `blog/case-studies/${slug}`),
     title:
       caseStudy.fields.seoTitle ||
       `${caseStudy.fields.title} | Arktik Case Studies`,
