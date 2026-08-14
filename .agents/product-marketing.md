@@ -1,14 +1,14 @@
 # Product Marketing Context
 
-**Document version:** v2
+**Document version:** v3
 **Last updated:** 2026-08-14
 
-> **Draft status.** Auto-drafted from the codebase (`design.md`, `messages/en.json`,
-> `messages/id.json`, route structure) — not from customer interviews. Sections
-> marked **⚠ NEEDS REAL INPUT** are deliberately empty: filling them from
-> inference would fabricate customer language and proof, which both `design.md`
-> and this studio's own positioning forbid. Everything else is traceable to
-> shipped copy or the locked design system.
+> **Provenance.** Drafted from the codebase (`design.md`, both locale message
+> files, route structure) and confirmed with the founders on 2026-08-14.
+> Two things are known-unknown by decision rather than by omission: there is **no
+> voice-of-customer data**, and the studio publishes **no metrics or testimonials**
+> on purpose. Do not fill either from inference — see those sections. Everything
+> else is traceable to shipped copy or the locked design system.
 
 ## Product Overview
 **One-liner:** Custom software, without the black box.
@@ -133,7 +133,24 @@ day-one ownership are mechanisms the client can verify.
 **Why that's better:** It removes the buyer's largest risk (being stranded mid-build
 or afterwards) without asking them to trust a claim they can't evaluate.
 
-**Why customers choose us:** ⚠ **NEEDS REAL INPUT** — no win/loss data exists.
+**Why customers choose us:** Trust — stated by the founders (2026-08-14). No
+win/loss interviews exist, so this is self-assessed rather than customer-reported.
+
+**How to use that in copy — important.** "Trustworthy" is what every agency
+claims, so asserting it is worthless; this studio wins because it makes trust
+*checkable*. Never write "we are trustworthy". Write the mechanism that would let
+someone verify it without taking your word:
+
+| Instead of claiming | Show the mechanism |
+|---|---|
+| "You can trust us" | Price and scope agreed in writing before each stage; stop after any stage |
+| "We're transparent" | A working demo every week and a private preview link from week one |
+| "No lock-in" | Code, servers, domain and accounts in your name from day one |
+| "We're honest" | We will tell you to buy the off-the-shelf tool when it fits |
+| "Senior team" | You talk to the engineers; nothing subcontracted, nobody swapped |
+
+Every one of those is falsifiable, which is what makes it persuasive to a buyer
+who cannot evaluate the technical work.
 
 ## Objections
 | Objection | Response |
@@ -156,13 +173,22 @@ off-the-shelf tool that no longer fits, or a previous build that went badly.
 something that never ships.
 
 ## Customer Language
-**⚠ NEEDS REAL INPUT — this section is currently inference, not verbatim.**
-No customer interviews, sales calls, or support tickets have been mined. Populate
-from real transcripts before using this for copy; invented "customer language" is
-worse than none, because it reads plausible and is wrong.
+**Status: not collected, and no source currently available** (confirmed with the
+founders, 2026-08-14). There are no interview transcripts, and this is not a
+pending task — treat the two fields below as genuinely unknown.
 
-**How they describe the problem:** _(to capture — likely in Indonesian)_
-**How they describe us:** _(to capture)_
+**Do not fabricate them.** Any downstream skill that wants voice-of-customer must
+work from the *words-to-use / words-to-avoid* lists below, which are real (they
+come from the shipped bilingual copy), rather than inventing quotes. A plausible
+invented verbatim is worse than an empty field, because it silently steers every
+piece of copy that reads it.
+
+**If a source ever opens up:** the contact form opens WhatsApp, so inbound lead
+threads are a real corpus of customer language in Indonesian, already in the
+founders' possession — no scheduling required.
+
+**How they describe the problem:** _unknown_
+**How they describe us:** _unknown_
 
 **Words to use** (established in the copy pass, both locales):
 Plain and concrete — "agreed", "handed over", "in your name", "working software",
@@ -195,17 +221,20 @@ or testimonial (`design.md`, "Honest copy").
 **Personality:** Candid · precise · unshowy · senior · disciplined.
 
 ## Proof Points
-**Metrics:** ⚠ **NEEDS REAL INPUT.** The studio publishes no performance metrics by
-design — `design.md` forbids invented ones, and no real ones have been supplied.
-Do not add any without a source.
+**Metrics:** None, and that is a settled decision — not a gap (founders, 2026-08-14).
+The studio publishes no performance metrics. `design.md` forbids invented ones, and
+the design is explicitly built to carry trust that proof content usually carries.
+Do not add a metric to any page without a real, attributable source.
 
 **Customers:** Three delivered projects — Lenggah (e-commerce), Mata Screen Print
 (business site), Serenity Cove (hotel landing page). All three are presented as
 delivered and handed over; closed at the founders' direction on 2026-08-14.
 
-**Testimonials:** None. ⚠ Founders are deliberately anonymous and there are no
-client logos or quotes; `design.md` states the design carries the trust that
-content usually would.
+**Testimonials:** None, by choice (founders, 2026-08-14). Founders are deliberately
+anonymous and there are no client logos or quotes. `design.md` states the design
+carries the trust that content usually would. The `/blog/case-studies` route
+therefore ships an honest empty state rather than filler — that copy is doing real
+work and should not be replaced with placeholder studies.
 
 **Value themes:**
 | Theme | Proof |
@@ -231,6 +260,10 @@ GTM (GTM-WDNKG95C) and Vercel Analytics are installed; `lead_form_start` and
 
 ## Changelog
 *Newest first. One line per revision: what changed and why.*
+- v3 (2026-08-14) — Closed Metrics and Testimonials as deliberate choices, not
+  gaps. Recorded "why customers choose us" as founder-stated trust, with a
+  claim→mechanism table so downstream skills show trust instead of asserting it.
+  Marked customer language as unavailable rather than pending.
 - v2 (2026-08-14) — Competitive Landscape: added Antikode (profiled from their live
   site; the differentiation against them is tonal as well as operational) and
   Metatech (named, unreachable, unprofiled). Closed the Serenity Cove flag in
