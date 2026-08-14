@@ -1,6 +1,6 @@
 # Product Marketing Context
 
-**Document version:** v1
+**Document version:** v2
 **Last updated:** 2026-08-14
 
 > **Draft status.** Auto-drafted from the codebase (`design.md`, `messages/en.json`,
@@ -83,16 +83,34 @@ and — when a build goes wrong — the sunk cost plus starting over.
 evaluate technically. The whole site is built to defuse that specific fear.
 
 ## Competitive Landscape
-**⚠ NEEDS REAL INPUT — no competitor research has been done.** The categories below
-are inferred from positioning; no specific competitors have been named or profiled.
 
-**Direct:** Indonesian software houses and digital agencies — fall short on
-transparency and continuity (swapped teams, subcontracting, invisible progress).
-**Secondary:** Freelancers and small dev collectives — fall short on documentation,
-continuity, and handover.
-**Indirect:** Off-the-shelf SaaS and no-code — fall short only once the business
-outgrows them, which is precisely when this buyer appears. Note: Arktik
-*deliberately* sends people back to this option when it fits ("We say no").
+### Direct — named by the founders as who they're compared against
+
+**Antikode** (antikode.com) — "Digital Customer Experience & Development Agency".
+Positions on scale and polish: *"Leading in Designing and Developing Seamless
+Digital Experiences"*, *"design, development, and strategy that drive real
+impact"*. Nav is Services / Work / Contact; publishes "Featured Insights".
+*Profiled from their live site on 2026-08-14 — homepage copy only, not a deep audit.*
+
+> **The gap is tonal as much as operational.** Antikode speaks the established-agency
+> register — "seamless", "drive real impact", "leading" — which is precisely the
+> vocabulary Arktik's v2 copy pass removed. Against them, Arktik is the
+> anti-agency: named mechanisms (staged fixed price, day-one ownership, weekly
+> demos) instead of adjectives. Do not compete on polish; compete on verifiability.
+> Falls short for this buyer on: no visible cost model, agency-scale process
+> implies account management between client and engineer.
+
+**Metatech** (metatech.id) — named by the founders. ⚠ **Not profiled** — the domain
+did not resolve from two networks on 2026-08-14. Confirm the URL, then profile.
+
+### Secondary
+Freelancers and small dev collectives — fall short on documentation, continuity,
+and handover.
+
+### Indirect
+Off-the-shelf SaaS and no-code — fall short only once the business outgrows them,
+which is precisely when this buyer appears. Note: Arktik *deliberately* sends
+people back to this option when it fits ("We say no").
 
 ## Differentiation
 **Key differentiators:**
@@ -182,11 +200,8 @@ design — `design.md` forbids invented ones, and no real ones have been supplie
 Do not add any without a source.
 
 **Customers:** Three delivered projects — Lenggah (e-commerce), Mata Screen Print
-(business site), Serenity Cove (hotel landing page).
-⚠ **Serenity Cove links to a `vercel.app` subdomain**, unlike the other two, which
-have real client domains. Confirm whether it is client work or a self-initiated
-demo — `works.subtitle` currently claims all three were "agreed, delivered, and
-handed over in full."
+(business site), Serenity Cove (hotel landing page). All three are presented as
+delivered and handed over; closed at the founders' direction on 2026-08-14.
 
 **Testimonials:** None. ⚠ Founders are deliberately anonymous and there are no
 client logos or quotes; `design.md` states the design carries the trust that
@@ -216,6 +231,10 @@ GTM (GTM-WDNKG95C) and Vercel Analytics are installed; `lead_form_start` and
 
 ## Changelog
 *Newest first. One line per revision: what changed and why.*
+- v2 (2026-08-14) — Competitive Landscape: added Antikode (profiled from their live
+  site; the differentiation against them is tonal as well as operational) and
+  Metatech (named, unreachable, unprofiled). Closed the Serenity Cove flag in
+  Proof Points at the founders' direction.
 - v1 (2026-08-14) — Initial context, auto-drafted from `design.md`, both locale
   message files, and the v2 copy pass. Customer language, competitors, win/loss
   and metrics left explicitly empty rather than inferred.
