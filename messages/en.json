@@ -1,7 +1,7 @@
 {
   "common": {
     "title": "Arktik — custom software, built in the open",
-    "description": "A software studio in Indonesia. You always know what is being built, what it costs, and when it lands — and everything ends up in your name.",
+    "description": "A software studio in Indonesia. Leave the building to us and get on with the business — the price agreed before each stage, and everything in your name from day one.",
     "skipToContent": "Skip to content"
   },
   "header": {
@@ -16,7 +16,7 @@
     "menu": "Menu"
   },
   "hero": {
-    "description": "You agree the scope and the price before each stage starts, see working software every week, and own the code and every account from day one.",
+    "description": "Leave the building to us, so you can run the business instead of the project. The price is agreed before each stage starts, working software arrives every week, and the code and every account are in your name from day one.",
     "headlineLead": "Custom software,",
     "headlineConnector": "without the",
     "flipWords": {
@@ -95,7 +95,7 @@
     "title": "Why us",
     "mainCard": {
       "title": "Small on purpose.",
-      "description": "You get the people who did the pitch. Nobody is swapped out after signing, and nothing is subcontracted."
+      "description": "You get the people who did the pitch. Nobody is swapped out after signing and nothing is subcontracted — so it is one conversation, not a chain of them."
     },
     "features": {
       "globalExperience": {
@@ -263,7 +263,7 @@
   },
   "process": {
     "title": "How we work",
-    "description": "Four stages. What is included and what it costs are agreed before each one starts, so you can stop after any of them — or carry on with the next thing.",
+    "description": "Four stages, each agreed before it starts — so the only thing you ever have to decide is whether to keep going.",
     "durationLabel": "Typical duration",
     "tbd": "to confirm",
     "stages": {
@@ -279,7 +279,7 @@
       },
       "build": {
         "title": "Build",
-        "description": "Delivered in pieces you can actually use. A working demo every week, and a private link you can open any time to see where it is.",
+        "description": "Delivered in pieces you can actually use. A working demo every week, and a private link you can open any time — you don’t have to watch it being built, you just always can.",
         "duration": "from 6 weeks"
       },
       "handover": {
