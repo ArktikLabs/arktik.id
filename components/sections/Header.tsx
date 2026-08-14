@@ -197,7 +197,14 @@ export function Header() {
 
           <div className="flex shrink-0 items-center gap-2">
             <LanguageSwitcher />
-            <CTAButton variant="small" onClick={goToContact}>
+            {/* The 133px CTA pushed the menu button off the bar below 414px —
+             * measured at 380px against a 373px viewport, and overflow-x:clip
+             * hid it rather than scrolling. It moves into the panel instead. */}
+            <CTAButton
+              variant="small"
+              onClick={goToContact}
+              className="hidden sm:inline-flex"
+            >
               {t("contact")}
             </CTAButton>
 
@@ -243,7 +250,7 @@ export function Header() {
                 </a>
               </li>
             ))}
-            <li>
+            <li className="border-b border-rule last:border-b-0">
               <Link
                 href={isBlogPage ? `${localePrefix}/blog` : "#blog"}
                 onClick={() => setMenuOpen(false)}
@@ -255,6 +262,22 @@ export function Header() {
               >
                 {t("blog")}
               </Link>
+            </li>
+            {/* The CTA is hidden from the bar below sm, so the panel carries it
+             * — otherwise phones lose the primary action entirely. It sits last:
+             * it is an action, not a destination, and shouldn't interrupt the
+             * run of nav links. */}
+            <li className="sm:hidden">
+              <button
+                type="button"
+                onClick={() => {
+                  setMenuOpen(false);
+                  goToContact();
+                }}
+                className="block w-full py-4 text-left text-base font-semibold text-lime-green transition-colors duration-200"
+              >
+                {t("contact")}
+              </button>
             </li>
           </ul>
         </nav>
