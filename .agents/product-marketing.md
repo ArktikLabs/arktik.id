@@ -1,6 +1,6 @@
 # Product Marketing Context
 
-**Document version:** v4
+**Document version:** v5
 **Last updated:** 2026-08-14
 
 > **Provenance.** Drafted from the codebase (`design.md`, both locale message
@@ -128,17 +128,51 @@ Claims "Affordable" but shows no pricing.
 > same cost opacity Arktik attacks; broad scope including digital marketing means
 > software is one line of many, not the craft.
 
-**Metatech** (metatech.id) — named by the founders. ⚠ **Not profiled** — the domain
-did not resolve from two networks on 2026-08-14. Confirm the URL, then profile.
+**Code.id / PT Code Development Indonesia** (code.id) — "Custom Software
+Development Company", Jakarta **and Australia**, **15+ years**. Services span
+custom software, IT outsourcing ("Smartsourcing"), AI and cloud. Also sells its
+own products (Activo asset management, Klaim management, ROCKEYE). Site carries
+Our Projects, Blog, and a Career section. H1: *"Empower Your Business with
+AI-Powered Custom Software – Smarter, Faster, and Built for the Future."*
+No pricing shown. Enterprise/corporate signals throughout.
+*Profiled from their live site on 2026-08-14 — homepage only.*
+
+> **The hardest competitor on paper, and the wrong one to fight head-on.**
+> Code.id has precisely what Arktik lacks: fifteen years, a named legal entity,
+> two countries, a hiring pipeline, a visible project list, and its own shipped
+> products. Any comparison decided on track record or scale is lost before it
+> starts. **Do not try to out-credential them.**
+>
+> The counter is that their strengths carry costs Arktik doesn't have. Scale
+> implies an account layer between buyer and engineer — which is the exact thing
+> `header.banner` attacks ("You talk to the engineers, not an account manager").
+> "IT Outsourcing / Smartsourcing" is a bodies-for-hire model; Arktik sells a
+> fixed-scope outcome per stage. And a company selling its own products has an
+> incentive to steer you toward them, where Arktik's stated position is to send
+> you to an off-the-shelf tool when it fits.
+>
+> **Segment away, don't argue.** Code.id is built for enterprise and corporate
+> buyers with procurement. Arktik's ICP is the SME owner-operator who wants the
+> person building it on the other end of WhatsApp. Those are different buyers;
+> competing for Code.id's is a losing use of a three-project portfolio.
+>
+> Falls short for this buyer on: no cost model, enterprise process overhead,
+> and the same "Empower / AI-Powered / Smarter, Faster" register Arktik removed.
 
 ### Positioning map — where each one sits
 
 | | Competes on | Buyer promise | Arktik's counter |
 |---|---|---|---|
+| **Code.id** | Track record, scale, capability breadth | "15+ years, AI-powered, one-stop" | Segment away — no account layer, small and senior |
 | **Antikode** | Polish, scale, brand | "Seamless experiences, real impact" | Verifiable mechanisms beat adjectives |
 | **Nore** | Price, breadth, convenience | "Let us handle it, affordably" | We quote what it costs; you watch it get built |
 | **Freelancers** | Cost, speed | "Cheap and quick" | Documentation, continuity, handover |
 | **Off-the-shelf** | Zero build cost | "It already exists" | We'll send you there when it fits |
+
+**Pattern across all three named competitors:** every one leads with a capability
+adjective — *seamless*, *affordable*, *AI-powered* — and none publishes a cost
+model or a stop-point. They are differentiated from each other but identical in
+what they ask of the buyer: trust the claim.
 
 **The open lane:** none of the named competitors publishes a cost model or a
 stage-gated commitment. Cost certainty *before* committing is the least contested
@@ -301,6 +335,11 @@ GTM (GTM-WDNKG95C) and Vercel Analytics are installed; `lead_form_start` and
 
 ## Changelog
 *Newest first. One line per revision: what changed and why.*
+- v5 (2026-08-14) — Replaced Metatech (unreachable) with Code.id / PT Code
+  Development Indonesia, the closest category competitor and the strongest on
+  paper: 15+ years, two countries, own products. Guidance is to segment away
+  rather than out-credential. Noted the pattern across all three — every one
+  leads with a capability adjective and none publishes a cost model.
 - v4 (2026-08-14) — Added Nore Inovasi (competes on price and breadth, and sells
   delegation where Arktik sells visibility). Added a positioning map across all
   four competitor types; named cost certainty before committing as the least
