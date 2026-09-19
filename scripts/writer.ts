@@ -31,13 +31,13 @@ const BRIEF_SCHEMA = {
   required: ['title', 'slug', 'thesis', 'searchIntent', 'outline', 'claims', 'cta', 'internalLinks', 'unsplashQuery'],
   properties: {
     title: { type: 'string' },
-    slug: { type: 'string', pattern: '^[a-z0-9][a-z0-9-]{3,80}$' },
+    slug: { type: 'string' }$' },
     thesis: { type: 'string' },
     searchIntent: { type: 'string' },
-    outline: { type: 'array', minItems: 1, maxItems: 8, items: { type: 'object', additionalProperties: false, required: ['h2', 'point'], properties: { h2: { type: 'string' }, point: { type: 'string' } } } },
-    claims: { type: 'array', minItems: 1, maxItems: 5, items: { type: 'object', additionalProperties: false, required: ['claim', 'backing'], properties: { claim: { type: 'string' }, backing: { type: 'string' } } } },
+    outline: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['h2', 'point'], properties: { h2: { type: 'string' }, point: { type: 'string' } } } },
+    claims: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['claim', 'backing'], properties: { claim: { type: 'string' }, backing: { type: 'string' } } } },
     cta: { type: 'object', additionalProperties: false, required: ['framing', 'missingAsset'], properties: { framing: { type: 'string' }, missingAsset: { type: 'boolean' } } },
-    internalLinks: { type: 'array', maxItems: 3, items: { type: 'object', additionalProperties: false, required: ['slug', 'type', 'why'], properties: { slug: { type: 'string' }, type: { type: 'string', enum: ['pillar', 'regular'] }, why: { type: 'string' } } } },
+    internalLinks: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['slug', 'type', 'why'], properties: { slug: { type: 'string' }, type: { type: 'string', enum: ['pillar', 'regular'] }, why: { type: 'string' } } } },
     unsplashQuery: { type: 'string' },
   },
 } as const
