@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { alternatesFor } from "@/lib/seo/schema";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { getPillarPageBySlug, getBlogPosts } from "@/lib/services/contentful";
+import { getPillarPageBySlug, getBlogPosts, getPillarPages } from "@/lib/content";
 import { RichTextRenderer } from "@/components/blog/RichTextRenderer";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
 import { Header } from "@/components/sections/Header";
@@ -13,7 +13,6 @@ import { calculateCombinedReadingTime } from "@/lib/utils/reading-time";
 import { BlogHeroSection } from "@/components/sections/BlogHeroSection";
 import { PostCtaSection } from "@/components/blog/PostCtaSection";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { toAbsoluteUrl } from "@/lib/utils/contentful";
 import { graph, article, breadcrumbs } from "@/lib/seo/schema";
 
 interface PillarPageProps {
@@ -42,10 +41,17 @@ export async function generateMetadata({
       locale,
       `blog/${categorySlug}/guides/${pillarSlug}`,
     ),
-    title: pillar.fields.seoTitle || `${pillar.fields.title} | Arktik`,
+    title: pillar.seoTitle || `${pillar.title} | Arktik`,
     description:
-      pillar.fields.seoDescription || `Complete guide: ${pillar.fields.title}`,
+      pillar.seoDescription || `Complete guide: ${pillar.title}`,
   };
+}
+
+export function generateStaticParams() {
+  return getPillarPages().map((p) => ({
+    category: p.category.slug,
+    pillar: p.slug,
+  }));
 }
 
 export default async function PillarPage({ params }: PillarPageProps) {
@@ -63,23 +69,23 @@ export default async function PillarPage({ params }: PillarPageProps) {
     }
 
     const { posts: relatedPosts } = await getBlogPosts({
-      pillarId: pillar.sys.id,
+      pillarSlug: pillar.slug,
       locale,
       limit: 6,
     });
 
-    const category = pillar.fields.category.fields;
-    const heroImage = pillar.fields.featuredImage?.fields.file?.url;
+    const category = pillar.category;
+    const heroImage = pillar.image;
 
     // Calculate reading time
     const readingTime = calculateCombinedReadingTime([
-      pillar.fields.introduction,
-      pillar.fields.body,
+      pillar.introduction,
+      pillar.body,
     ]);
 
     const postCtaContent = {
-      title: pillar.fields.ctaTitle ?? postCtaT("title"),
-      description: pillar.fields.ctaDescription ?? postCtaT("description"),
+      title: pillar.ctaTitle ?? postCtaT("title"),
+      description: pillar.ctaDescription ?? postCtaT("description"),
       primaryCta: postCtaT("primaryCta"),
       secondaryCta: postCtaT("secondaryCta"),
     };
@@ -91,18 +97,18 @@ export default async function PillarPage({ params }: PillarPageProps) {
             article({
               locale,
               path: `blog/${categorySlug}/guides/${pillarSlug}`,
-              headline: pillar.fields.title,
-              description: pillar.fields.seoDescription,
-              image: heroImage ? toAbsoluteUrl(heroImage) : undefined,
-              datePublished: pillar.sys.createdAt,
-              dateModified: pillar.sys.updatedAt,
-              authorName: pillar.fields.author?.fields?.name,
+              headline: pillar.title,
+              description: pillar.seoDescription,
+              image: heroImage,
+              datePublished: pillar.date,
+              dateModified: pillar.updated,
+              authorName: pillar.author?.name,
             }),
             breadcrumbs(locale, [
               { name: t("blog"), path: "blog" },
               { name: category.title, path: `blog/${categorySlug}` },
               { name: t("guides"), path: `blog/${categorySlug}` },
-              { name: pillar.fields.title },
+              { name: pillar.title },
             ]),
           )}
         />
@@ -129,7 +135,7 @@ export default async function PillarPage({ params }: PillarPageProps) {
                 href: `/${locale}/blog/${categorySlug}`,
               },
               { label: t("guides"), href: `/${locale}/blog/${categorySlug}` },
-              { label: pillar.fields.title, isActive: true },
+              { label: pillar.title, isActive: true },
             ]}
             className="mb-12"
           />
@@ -146,34 +152,34 @@ export default async function PillarPage({ params }: PillarPageProps) {
                 </p>
                 <p className="label-mono mb-6 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-ink-3">
                   <span>
-                    {new Date(pillar.sys.createdAt).toLocaleDateString(
+                    {new Date(pillar.date).toLocaleDateString(
                       locale === "id" ? "id-ID" : "en-US",
                       { year: "numeric", month: "long", day: "numeric" },
                     )}
                   </span>
                   <span aria-hidden="true">·</span>
                   <span>{t("readingTime", { minutes: readingTime })}</span>
-                  {pillar.fields.author?.fields?.name && (
+                  {pillar.author?.name && (
                     <>
                       <span aria-hidden="true">·</span>
-                      <span>{pillar.fields.author.fields.name}</span>
+                      <span>{pillar.author.name}</span>
                     </>
                   )}
                 </p>
                 <h1 className="mb-6 text-balance font-heading text-4xl font-bold leading-display md:text-5xl md:leading-display lg:text-6xl lg:leading-display">
-                  {pillar.fields.title}
+                  {pillar.title}
                 </h1>
                 {/* Lede — a standfirst register, then the rule as the divider. */}
-                {pillar.fields.introduction && (
+                {pillar.introduction && (
                   <div className="border-b border-rule pb-8 text-lg leading-prose text-ink-2 md:text-xl">
-                    <RichTextRenderer content={pillar.fields.introduction} />
+                    <RichTextRenderer content={pillar.introduction} />
                   </div>
                 )}
               </header>
 
               {/* Main Content */}
               <div className="leading-prose">
-                <RichTextRenderer content={pillar.fields.body} />
+                <RichTextRenderer content={pillar.body} />
               </div>
             </article>
           </div>
@@ -196,7 +202,7 @@ export default async function PillarPage({ params }: PillarPageProps) {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {relatedPosts.map((post) => (
-                  <BlogPostCard key={post.sys.id} post={post} locale={locale} />
+                  <BlogPostCard key={post.slug} post={post} locale={locale} />
                 ))}
               </div>
             </section>

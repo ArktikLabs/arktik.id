@@ -1,29 +1,28 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { BookOpen } from 'lucide-react'
-import { PillarPageEntry } from '@/lib/types/contentful'
-import { getImageUrl } from '@/lib/utils/contentful'
+import { Pillar } from '@/lib/types/content'
 import { useTranslations } from "next-intl"
 
 /* Hallmark · design-system: design.md
  * Was an inline background-image div with an Unsplash URL as the no-image
  * fallback — shipping someone else's stock photo as the final design.
- * Now: real next/image when Contentful has one, a token-built surface when it
- * doesn't. Same card voice as WorkCard. */
+ * Now: real next/image when the pillar has a featured image, a token-built
+ * surface when it doesn't. Same card voice as WorkCard. */
 
 interface PillarCardProps {
-  pillar: PillarPageEntry
+  pillar: Pillar
   categorySlug: string
   locale?: string
 }
 
 export function PillarCard({ pillar, categorySlug, locale }: PillarCardProps) {
   const t = useTranslations('cards')
-  const imageUrl = getImageUrl(pillar.fields.featuredImage)
+  const imageUrl = pillar.image
 
   return (
     <Link
-      href={`/${locale}/blog/${categorySlug}/guides/${pillar.fields.slug}`}
+      href={`/${locale}/blog/${categorySlug}/guides/${pillar.slug}`}
       className="group relative isolate flex h-80 flex-col justify-between overflow-hidden rounded-card border border-rule bg-paper-2 p-5"
     >
       {imageUrl && (
@@ -50,13 +49,13 @@ export function PillarCard({ pillar, categorySlug, locale }: PillarCardProps) {
 
       <div>
         <h3 className="line-clamp-3 font-heading text-xl font-bold text-ink transition-colors duration-200 group-hover:text-lime-green md:text-2xl">
-          {pillar.fields.title}
+          {pillar.title}
         </h3>
         <time
-          dateTime={pillar.sys.createdAt}
+          dateTime={pillar.date}
           className="label-mono mt-3 block"
         >
-          {new Date(pillar.sys.createdAt).toLocaleDateString(
+          {new Date(pillar.date).toLocaleDateString(
             locale === 'id' ? 'id-ID' : 'en-US',
             { year: 'numeric', month: 'short' }
           )}

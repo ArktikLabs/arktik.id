@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
-import { getBlogPosts, getPillarPages } from '@/lib/services/contentful'
+import { getBlogPosts, getPillarPages } from '@/lib/content'
 import { PillarCard } from '@/components/blog/PillarCard'
 
 /* Hallmark · 20 Ecosystem Index (homepage slice) · design-system: design.md
@@ -48,9 +48,9 @@ export async function BlogSection({ locale }: BlogSectionProps) {
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
               {pillars.slice(0, 3).map((pillar) => (
                 <PillarCard
-                  key={pillar.sys.id}
+                  key={pillar.slug}
                   pillar={pillar}
-                  categorySlug={pillar.fields.category?.fields?.slug || ''}
+                  categorySlug={pillar.category.slug}
                   locale={locale}
                 />
               ))}
@@ -63,21 +63,20 @@ export async function BlogSection({ locale }: BlogSectionProps) {
             <h3 className="label-mono mb-2">{t('latestArticles')}</h3>
             <ul className="border-b border-rule">
               {posts.slice(0, 4).map((post) => {
-                const categorySlug = post.fields?.category?.fields?.slug
-                const postSlug = post.fields?.slug
-                if (!categorySlug || !postSlug || !post.fields?.title) return null
+                const categorySlug = post.category.slug
+                const postSlug = post.slug
 
                 return (
-                  <li key={post.sys.id}>
+                  <li key={post.slug}>
                     <Link
                       href={`/${locale}/blog/${categorySlug}/${postSlug}`}
                       className="group flex items-baseline justify-between gap-6 border-t border-rule py-5 transition-colors duration-200 hover:border-rule-strong"
                     >
                       <span className="font-heading text-lg font-semibold text-ink transition-colors duration-200 group-hover:text-lime-green md:text-xl">
-                        {post.fields.title}
+                        {post.title}
                       </span>
                       <span className="label-mono flex shrink-0 items-center gap-2">
-                        {new Date(post.sys.createdAt).toLocaleDateString(
+                        {new Date(post.date).toLocaleDateString(
                           locale === 'id' ? 'id-ID' : 'en-US',
                           { year: 'numeric', month: 'short' }
                         )}

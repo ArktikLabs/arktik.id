@@ -2,7 +2,11 @@
 import { Metadata } from "next";
 import { alternatesFor } from "@/lib/seo/schema";
 import { notFound } from "next/navigation";
-import { getBlogPostBySlug, getBlogPosts } from "@/lib/services/contentful";
+import {
+  getBlogPostBySlug,
+  getBlogPosts,
+  getPillarPages,
+} from "@/lib/content";
 import { RichTextRenderer } from "@/components/blog/RichTextRenderer";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
 import { Header } from "@/components/sections/Header";
@@ -13,7 +17,6 @@ import Link from "next/link";
 import { PostCtaSection } from "@/components/blog/PostCtaSection";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { toAbsoluteUrl } from "@/lib/utils/contentful";
 import { graph, article, breadcrumbs } from "@/lib/seo/schema";
 import { calculateCombinedReadingTime } from "@/lib/utils/reading-time";
 
@@ -40,9 +43,16 @@ export async function generateMetadata({
 
   return {
     alternates: alternatesFor(locale, `blog/${categorySlug}/${postSlug}`),
-    title: post.fields.seoTitle || `${post.fields.title} | Arktik`,
-    description: post.fields.seoDescription || post.fields.excerpt,
+    title: post.seoTitle || `${post.title} | Arktik`,
+    description: post.seoDescription || post.excerpt,
   };
+}
+
+export function generateStaticParams() {
+  return getBlogPosts({ limit: 1000 }).posts.map((p) => ({
+    category: p.category.slug,
+    post: p.slug,
+  }));
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
@@ -62,25 +72,27 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     }
 
     const filteredRelatedPosts = relatedData.posts.filter(
-      (relatedPost) => relatedPost.sys.id !== post.sys.id,
+      (relatedPost) => relatedPost.slug !== post.slug,
     );
 
-    const category = post.fields.category.fields;
-    const author = post.fields.author?.fields;
-    const pillar = post.fields.pillar?.fields;
+    const category = post.category;
+    const author = post.author;
+    const pillar = post.pillar
+      ? getPillarPages(undefined, locale).find((p) => p.slug === post.pillar) ?? null
+      : null;
 
     // Get hero image URL
-    const heroImage = post.fields.featuredImage?.fields.file?.url;
+    const heroImage = post.image;
 
     // Calculate reading time
     const readingTime = calculateCombinedReadingTime([
-      post.fields.excerpt || "",
-      post.fields.body,
+      post.excerpt || "",
+      post.body,
     ]);
 
     const postCtaContent = {
-      title: post.fields.ctaTitle ?? postCtaT("title"),
-      description: post.fields.ctaDescription ?? postCtaT("description"),
+      title: post.ctaTitle ?? postCtaT("title"),
+      description: post.ctaDescription ?? postCtaT("description"),
       primaryCta: postCtaT("primaryCta"),
       secondaryCta: postCtaT("secondaryCta"),
     };
@@ -92,17 +104,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             article({
               locale,
               path: `blog/${categorySlug}/${postSlug}`,
-              headline: post.fields.title,
-              description: post.fields.excerpt,
-              image: heroImage ? toAbsoluteUrl(heroImage) : undefined,
-              datePublished: post.sys.createdAt,
-              dateModified: post.sys.updatedAt,
+              headline: post.title,
+              description: post.excerpt,
+              image: heroImage,
+              datePublished: post.date,
+              dateModified: post.updated,
               authorName: author?.name,
             }),
             breadcrumbs(locale, [
               { name: postT("blog"), path: "blog" },
               { name: category.title, path: `blog/${categorySlug}` },
-              { name: post.fields.title },
+              { name: post.title },
             ]),
           )}
         />
@@ -128,7 +140,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 label: category.title,
                 href: `/${locale}/blog/${categorySlug}`,
               },
-              { label: post.fields.title, isActive: true },
+              { label: post.title, isActive: true },
             ]}
             className="mb-12"
           />
@@ -149,7 +161,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </Link>
                   <span aria-hidden="true">·</span>
                   <span>
-                    {new Date(post.sys.createdAt).toLocaleDateString(
+                    {new Date(post.date).toLocaleDateString(
                       locale === "id" ? "id-ID" : "en-US",
                       { year: "numeric", month: "long", day: "numeric" },
                     )}
@@ -166,13 +178,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
                 {/* Title */}
                 <h1 className="mb-6 text-balance font-heading text-4xl font-bold leading-display md:text-5xl md:leading-display lg:text-6xl lg:leading-display">
-                  {post.fields.title}
+                  {post.title}
                 </h1>
 
                 {/* Lede — sized as a standfirst, not body copy. */}
-                {post.fields.excerpt && (
+                {post.excerpt && (
                   <p className="mb-10 text-lg leading-prose text-ink-2 md:text-xl">
-                    {post.fields.excerpt}
+                    {post.excerpt}
                   </p>
                 )}
 
@@ -183,7 +195,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   <p className="border-t border-rule pt-6 text-ink-3">
                     {postT("partOfGuide")}{" "}
                     <Link
-                      href={`/blog/${categorySlug}/guides/${pillar.slug}`}
+                      href={`/${locale}/blog/${pillar.category.slug}/guides/${pillar.slug}`}
                       className="text-lime-green underline underline-offset-4 transition-colors duration-200 hover:text-ink"
                     >
                       {pillar.title}
@@ -194,13 +206,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
               {/* Content */}
               <div className="leading-prose">
-                <RichTextRenderer content={post.fields.body} />
+                <RichTextRenderer content={post.body} />
               </div>
 
               {/* Tags — chips became a typographic run. The gap is the divider. */}
-              {post.fields.tags && post.fields.tags.length > 0 && (
+              {post.tags && post.tags.length > 0 && (
                 <p className="label-mono mt-12 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-t border-rule pt-6 text-ink-3">
-                  {post.fields.tags.map((tag: string, i: number) => (
+                  {post.tags.map((tag: string, i: number) => (
                     <span key={tag}>
                       {i > 0 && (
                         <span aria-hidden="true" className="pr-3">
@@ -246,7 +258,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredRelatedPosts.map((relatedPost) => (
-                  <BlogPostCard key={relatedPost.sys.id} post={relatedPost} />
+                  <BlogPostCard key={relatedPost.slug} post={relatedPost} />
                 ))}
               </div>
             </section>

@@ -1,7 +1,6 @@
 import { ReactNode } from 'react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
-import { toAbsoluteUrl } from '@/lib/utils/contentful'
 
 /* Hallmark · design-system: design.md
  * Shared masthead for every content route. The image is now OPTIONAL and has no
@@ -38,10 +37,7 @@ export function BlogHeroSection({
       {imageUrl && (
         <>
           <Image
-            /* Normalised here, not at the call site: this component is the one
-             * that requires an absolute URL (next/image rejects Contentful's
-             * `//…`), so it owns the constraint rather than trusting callers. */
-            src={toAbsoluteUrl(imageUrl)}
+            src={imageUrl}
             alt=""
             aria-hidden="true"
             fill

@@ -1,48 +1,27 @@
-import { Document } from '@contentful/rich-text-types'
-import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
-
-/**
- * Calculate estimated reading time for rich text content
- * @param content - Contentful rich text document
- * @param wordsPerMinute - Average reading speed (default: 200 words per minute)
- * @returns Reading time in minutes (rounded up to nearest minute)
- */
-export function calculateReadingTime(content: Document, wordsPerMinute: number = 200): number {
-  if (!content) return 0
-
-  try {
-    // Convert rich text to plain text
-    const plainText = documentToPlainTextString(content)
-
-    // Count words (split by whitespace and filter out empty strings)
-    const wordCount = plainText
-      .trim()
-      .split(/\s+/)
-      .filter(word => word.length > 0).length
-
-    // Calculate reading time in minutes and round up
-    const readingTimeMinutes = Math.ceil(wordCount / wordsPerMinute)
-
-    // Ensure minimum of 1 minute
-    return Math.max(1, readingTimeMinutes)
-  } catch (error) {
-    console.error('Error calculating reading time:', error)
-    return 0
-  }
+/* Plain-text view of a Markdown string. Good enough for word counts and
+ * meta descriptions; not a parser. */
+export function markdownToText(md: string | null | undefined): string {
+  if (!md) return ''
+  return md
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '') // images
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1') // links -> text
+    .replace(/^\s*(#{1,6}|>|[-*+]|\d+\.)\s+/gm, '') // headings, quotes, bullets
+    .replace(/^\s*-{3,}\s*$/gm, '') // rules
+    .replace(/(\*\*|\*|`|\b_+|_+\b)/g, '') // emphasis and code marks
+    .replace(/\s+/g, ' ')
+    .trim()
 }
 
-/**
- * Calculate combined reading time for multiple rich text documents
- */
-export function calculateCombinedReadingTime(
-  contents: (Document | null | undefined)[],
-  wordsPerMinute: number = 200
-): number {
-  const totalTime = contents
-    .filter(Boolean)
-    .reduce((total, content) => {
-      return total + calculateReadingTime(content as Document, wordsPerMinute)
-    }, 0)
+export function calculateReadingTime(content: string | null | undefined, wordsPerMinute = 200): number {
+  const words = markdownToText(content).split(' ').filter(Boolean).length
+  if (words === 0) return 0
+  return Math.max(1, Math.ceil(words / wordsPerMinute))
+}
 
-  return Math.max(1, totalTime)
+export function calculateCombinedReadingTime(
+  contents: (string | null | undefined)[],
+  wordsPerMinute = 200,
+): number {
+  const total = contents.reduce((sum, c) => sum + calculateReadingTime(c, wordsPerMinute), 0)
+  return Math.max(1, total)
 }

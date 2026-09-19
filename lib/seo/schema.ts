@@ -108,6 +108,7 @@ export function article({
   authorName?: string;
 }) {
   const url = localeUrl(locale, path);
+  const abs = (u?: string) => (u && u.startsWith("/") ? `${SITE}${u}` : u);
   return {
     "@type": "Article",
     "@id": `${url}#article`,
@@ -116,7 +117,7 @@ export function article({
     /* Article rich results need an image. Falling back to the locale OG card is
      * honest — it is a real image that represents this article — and beats
      * omitting the property. */
-    image: [image || `${SITE}/assets/og-${locale === "en" ? "en" : "id"}.webp`],
+    image: [abs(image) || `${SITE}/assets/og-${locale === "en" ? "en" : "id"}.webp`],
     ...(datePublished ? { datePublished } : {}),
     ...(dateModified ? { dateModified } : {}),
     author: authorName

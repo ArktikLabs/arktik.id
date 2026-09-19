@@ -6,21 +6,11 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { graph, breadcrumbs } from "@/lib/seo/schema";
-import {
-  getCategoryBySlug,
-  getBlogPosts,
-  getPillarPages,
-} from "@/lib/services/contentful";
+import { getCategoryBySlug, getBlogPosts, getPillarPages, getCategories } from "@/lib/content";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
 import { PillarCard } from "@/components/blog/PillarCard";
-import { RichTextRenderer } from "@/components/blog/RichTextRenderer";
 import { Header } from "@/components/sections/Header";
 import { FooterSection } from "@/components/sections/FooterSection";
-import {
-  getPlainTextFromRichText,
-  getAssetUrl,
-  toAbsoluteUrl,
-} from "@/lib/utils/contentful";
 import { FileX, ArrowLeft } from "lucide-react";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import Link from "next/link";
@@ -47,11 +37,15 @@ export async function generateMetadata({
 
   return {
     alternates: alternatesFor(locale, `blog/${categorySlug}`),
-    title: `${category.fields.title} | Arktik Blog`,
+    title: `${category.title} | Arktik Blog`,
     description:
-      getPlainTextFromRichText(category.fields.description) ||
-      `Explore articles about ${category.fields.title}`,
+      category.description ||
+      `Explore articles about ${category.title}`,
   };
+}
+
+export function generateStaticParams() {
+  return getCategories().map((c) => ({ category: c.slug }));
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
@@ -76,7 +70,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           data={graph(
             breadcrumbs(locale, [
               { name: blogT("title"), path: "blog" },
-              { name: category.fields.title },
+              { name: category.title },
             ]),
           )}
         />
@@ -85,9 +79,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         <BlogHeroSection>
           <div className="max-w-4xl">
             <div className="mb-6 flex items-center">
-              {category.fields.icon && (
+              {category.icon && (
                 <Image
-                  src={toAbsoluteUrl(category.fields.icon.fields.file?.url)}
+                  src={category.icon}
                   alt=""
                   aria-hidden="true"
                   width={48}
@@ -96,17 +90,13 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                 />
               )}
               <h1 className="text-4xl font-bold leading-tight text-balance font-heading lg:text-6xl">
-                {category.fields.title}
+                {category.title}
               </h1>
             </div>
 
-            {category.fields.description && (
+            {category.description && (
               <div className="max-w-3xl text-lg leading-relaxed text-ink-2 lg:text-xl">
-                {typeof category.fields.description === "string" ? (
-                  category.fields.description
-                ) : (
-                  <RichTextRenderer content={category.fields.description} />
-                )}
+                {category.description}
               </div>
             )}
           </div>
@@ -120,7 +110,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           <Breadcrumb
             items={[
               { label: blogT("title"), href: `/${locale}/blog` },
-              { label: category.fields.title, isActive: true },
+              { label: category.title, isActive: true },
             ]}
             className="mb-8"
           />
@@ -137,7 +127,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {pillars.map((pillar) => (
                   <PillarCard
-                    key={pillar.sys.id}
+                    key={pillar.slug}
                     pillar={pillar}
                     categorySlug={categorySlug}
                     locale={locale}
@@ -160,7 +150,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               </div>
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                 {posts.map((post) => (
-                  <BlogPostCard key={post.sys.id} post={post} locale={locale} />
+                  <BlogPostCard key={post.slug} post={post} locale={locale} />
                 ))}
               </div>
             </section>
@@ -172,9 +162,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               <div className="max-w-lg mx-auto">
                 {/* Category Icon */}
                 <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border border-rule bg-paper-2">
-                  {getAssetUrl(category.fields.icon) ? (
+                  {category.icon ? (
                     <Image
-                      src={toAbsoluteUrl(getAssetUrl(category.fields.icon)!)}
+                      src={category.icon}
                       alt=""
                       aria-hidden="true"
                       width={40}

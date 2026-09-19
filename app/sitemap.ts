@@ -4,7 +4,7 @@ import {
   getBlogPosts,
   getPillarPages,
   getCaseStudies,
-} from "@/lib/services/contentful";
+} from "@/lib/content";
 import { getAllShowcases } from "@/lib/data/showcases";
 import { localeUrl } from "@/lib/seo/schema";
 
@@ -59,7 +59,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     out.push(...entries(`showcase/${s.slug}`, now, 0.6, "monthly"));
   }
 
-  /* Contentful is fetched per locale because slugs and availability can differ.
+  /* Content is fetched per locale because slugs and availability can differ.
    * A failure here must not take the sitemap down — a partial sitemap still
    * gets the static routes indexed, an exception gets nothing indexed. */
   for (const locale of LOCALES) {
@@ -82,26 +82,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         });
 
       for (const c of categories) {
-        push(`blog/${c.fields.slug}`, c.sys.updatedAt, 0.7);
+        push(`blog/${c.slug}`, undefined, 0.7);
       }
       for (const p of posts) {
-        const cat = p.fields.category?.fields?.slug;
-        if (cat) push(`blog/${cat}/${p.fields.slug}`, p.sys.updatedAt, 0.7);
+        const cat = p.category.slug;
+        if (cat) push(`blog/${cat}/${p.slug}`, p.updated, 0.7);
       }
       for (const p of pillars) {
-        const cat = p.fields.category?.fields?.slug;
+        const cat = p.category.slug;
         if (cat)
           push(
-            `blog/${cat}/guides/${p.fields.slug}`,
-            p.sys.updatedAt,
+            `blog/${cat}/guides/${p.slug}`,
+            p.updated,
             0.9, // pillars are the cluster's entry points
           );
       }
       for (const c of caseStudies) {
-        push(`blog/case-studies/${c.fields.slug}`, c.sys.updatedAt, 0.6);
+        push(`blog/case-studies/${c.slug}`, c.updated, 0.6);
       }
     } catch (err) {
-      console.error(`sitemap: Contentful fetch failed for ${locale}`, err);
+      console.error(`sitemap: content load failed for ${locale}`, err);
     }
   }
 

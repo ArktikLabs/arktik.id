@@ -6,7 +6,7 @@ import {
   getCategories,
   getBlogPosts,
   getPillarPages,
-} from "@/lib/services/contentful";
+} from "@/lib/content";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
 import { CategoryCard } from "@/components/blog/CategoryCard";
 import { PillarCard } from "@/components/blog/PillarCard";
@@ -107,9 +107,9 @@ export default async function BlogPage({ params }: BlogPageProps) {
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {pillars.slice(0, 6).map((pillar) => (
                   <PillarCard
-                    key={pillar.sys.id}
+                    key={pillar.slug}
                     pillar={pillar}
-                    categorySlug={pillar.fields.category?.fields?.slug || ""}
+                    categorySlug={pillar.category.slug}
                     locale={locale}
                   />
                 ))}
@@ -131,7 +131,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                 {recentPosts.map((post) => (
-                  <BlogPostCard key={post.sys.id} post={post} locale={locale} />
+                  <BlogPostCard key={post.slug} post={post} locale={locale} />
                 ))}
               </div>
             </section>
@@ -152,7 +152,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
               <div className="grid grid-cols-1 gap-x-12 border-b border-rule md:grid-cols-2">
                 {categories.map((category) => (
                   <CategoryCard
-                    key={category.sys.id}
+                    key={category.slug}
                     category={category}
                     locale={locale}
                   />

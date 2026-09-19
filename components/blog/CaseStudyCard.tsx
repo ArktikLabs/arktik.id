@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Building, ArrowUpRight } from 'lucide-react'
-import { CaseStudyEntry } from '@/lib/types/contentful'
-import { getPlainTextFromRichText, getImageUrl } from '@/lib/utils/contentful'
+import { CaseStudy } from '@/lib/types/content'
+import { markdownToText } from '@/lib/utils/reading-time'
 import { useTranslations, useLocale } from 'next-intl'
 
 /* Hallmark · design-system: design.md
@@ -13,18 +13,16 @@ import { useTranslations, useLocale } from 'next-intl'
  * Also: the whole card is one link target instead of three competing ones. */
 
 interface CaseStudyCardProps {
-  caseStudy: CaseStudyEntry
+  caseStudy: CaseStudy
 }
 
 export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
   const t = useTranslations('cards')
   const locale = useLocale()
 
-  const { slug, title, featuredImage, clientName, challenge, results } =
-    caseStudy.fields
-  const imageUrl = getImageUrl(featuredImage)
-  const summary = getPlainTextFromRichText(challenge)
-  const outcome = getPlainTextFromRichText(results)
+  const { slug, title, image: imageUrl, clientName, challenge, results } = caseStudy
+  const summary = markdownToText(challenge)
+  const outcome = markdownToText(results)
 
   return (
     <article className="group overflow-hidden rounded-card border border-rule bg-paper-2 transition-colors duration-200 hover:border-rule-strong">

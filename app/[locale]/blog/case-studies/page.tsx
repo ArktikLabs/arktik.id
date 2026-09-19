@@ -7,7 +7,7 @@ import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { graph, breadcrumbs } from "@/lib/seo/schema";
 import { FileX, ArrowLeft } from "lucide-react";
-import { getCaseStudies } from "@/lib/services/contentful";
+import { getCaseStudies } from "@/lib/content";
 import { CaseStudyCard } from "@/components/blog/CaseStudyCard";
 import { Header } from "@/components/sections/Header";
 import { FooterSection } from "@/components/sections/FooterSection";
@@ -81,7 +81,7 @@ export default async function CaseStudiesPage({
             <section>
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                 {caseStudies.map((caseStudy) => (
-                  <CaseStudyCard key={caseStudy.sys.id} caseStudy={caseStudy} />
+                  <CaseStudyCard key={caseStudy.slug} caseStudy={caseStudy} />
                 ))}
               </div>
             </section>

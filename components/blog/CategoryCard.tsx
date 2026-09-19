@@ -1,25 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Folder } from "lucide-react";
-import { CategoryEntry } from "@/lib/types/contentful";
-import {
-  getPlainTextFromRichText,
-  getAssetUrl,
-  toAbsoluteUrl,
-} from "@/lib/utils/contentful";
+import { Category } from "@/lib/types/content";
 
 /* Hallmark · design-system: design.md
  * Was bg-gray-900 / border-gray-700 — an off-palette neutral that belongs to no
  * theme. Now paper-2 on a hairline, with a single hover signal. */
 
 interface CategoryCardProps {
-  category: CategoryEntry;
+  category: Category;
   locale?: string;
 }
 
 export function CategoryCard({ category, locale }: CategoryCardProps) {
-  const { title, slug, icon, description } = category?.fields || {};
-  const iconUrl = getAssetUrl(icon);
+  const { title, slug, icon, description } = category;
+  const iconUrl = icon;
 
   if (!title || !slug) {
     return null;
@@ -32,7 +27,7 @@ export function CategoryCard({ category, locale }: CategoryCardProps) {
     >
       {iconUrl ? (
         <Image
-          src={toAbsoluteUrl(iconUrl)}
+          src={iconUrl}
           alt=""
           aria-hidden="true"
           width={20}
@@ -52,7 +47,7 @@ export function CategoryCard({ category, locale }: CategoryCardProps) {
         </h3>
         {description && (
           <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-ink-2">
-            {getPlainTextFromRichText(description)}
+            {description}
           </p>
         )}
       </div>

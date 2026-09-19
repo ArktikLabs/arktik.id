@@ -1,10 +1,9 @@
 /* Hallmark · macrostructure: 02 Long Document · design-system: design.md */
 import Image from "next/image";
-import { toAbsoluteUrl } from "@/lib/utils/contentful";
 import { Metadata } from "next";
 import { alternatesFor } from "@/lib/seo/schema";
 import { notFound } from "next/navigation";
-import { getCaseStudyBySlug, getCaseStudies } from "@/lib/services/contentful";
+import { getCaseStudyBySlug, getCaseStudies } from "@/lib/content";
 import { RichTextRenderer } from "@/components/blog/RichTextRenderer";
 import { Header } from "@/components/sections/Header";
 import { FooterSection } from "@/components/sections/FooterSection";
@@ -14,6 +13,7 @@ import { CaseStudyCard } from "@/components/blog/CaseStudyCard";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { graph, article, breadcrumbs } from "@/lib/seo/schema";
+import { markdownToText } from "@/lib/utils/reading-time";
 
 interface CaseStudyPageProps {
   params: {
@@ -37,10 +37,17 @@ export async function generateMetadata({
   return {
     alternates: alternatesFor(locale, `blog/case-studies/${slug}`),
     title:
-      caseStudy.fields.seoTitle ||
-      `${caseStudy.fields.title} | Arktik Case Studies`,
-    description: caseStudy.fields.seoDescription || caseStudy.fields.excerpt,
+      caseStudy.seoTitle ||
+      `${caseStudy.title} | Arktik Case Studies`,
+    description:
+      caseStudy.seoDescription ||
+      markdownToText(caseStudy.challenge).slice(0, 160) ||
+      undefined,
   };
+}
+
+export function generateStaticParams() {
+  return getCaseStudies({ limit: 1000 }).caseStudies.map((c) => ({ slug: c.slug }));
 }
 
 export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
@@ -65,12 +72,12 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
     // Filter out current case study
     const filteredRelated = relatedCaseStudies.filter(
-      (cs) => cs.sys.id !== caseStudy.sys.id,
+      (cs) => cs.slug !== caseStudy.slug,
     );
 
     const postCtaContent = {
-      title: caseStudy.fields.ctaTitle ?? postCtaT("title"),
-      description: caseStudy.fields.ctaDescription ?? postCtaT("description"),
+      title: caseStudy.ctaTitle ?? postCtaT("title"),
+      description: caseStudy.ctaDescription ?? postCtaT("description"),
       primaryCta: postCtaT("primaryCta"),
       secondaryCta: postCtaT("secondaryCta"),
     };
@@ -82,18 +89,16 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             article({
               locale,
               path: `blog/case-studies/${slug}`,
-              headline: caseStudy.fields.title,
-              description: caseStudy.fields.excerpt,
-              image: caseStudy.fields.featuredImage?.fields.file?.url
-                ? toAbsoluteUrl(caseStudy.fields.featuredImage.fields.file.url)
-                : undefined,
-              datePublished: caseStudy.sys.createdAt,
-              dateModified: caseStudy.sys.updatedAt,
+              headline: caseStudy.title,
+              description: markdownToText(caseStudy.challenge).slice(0, 160),
+              image: caseStudy.image,
+              datePublished: caseStudy.date,
+              dateModified: caseStudy.updated,
             }),
             breadcrumbs(locale, [
               { name: blogT("title"), path: "blog" },
               { name: csPageT("hero.title"), path: "blog/case-studies" },
-              { name: caseStudy.fields.title },
+              { name: caseStudy.title },
             ]),
           )}
         />
@@ -110,7 +115,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 label: csPageT("hero.title"),
                 href: `/${locale}/blog/case-studies`,
               },
-              { label: caseStudy.fields.title, isActive: true },
+              { label: caseStudy.title, isActive: true },
             ]}
             className="mb-12"
           />
@@ -122,23 +127,18 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 {/* The accent pill said "Case Study" directly under a breadcrumb
                  * ending in Case Studies. Not ordinal content, so no section tag. */}
                 <h1 className="mb-6 text-balance font-heading text-4xl font-bold leading-display md:text-5xl md:leading-display lg:text-6xl lg:leading-display">
-                  {caseStudy.fields.title}
+                  {caseStudy.title}
                 </h1>
-                {caseStudy.fields.challenge && (
+                {caseStudy.challenge && (
                   <div className="mb-10 text-lg leading-prose text-ink-2 md:text-xl">
-                    <RichTextRenderer content={caseStudy.fields.challenge} />
+                    <RichTextRenderer content={caseStudy.challenge} />
                   </div>
                 )}
 
-                {caseStudy.fields.featuredImage && (
+                {caseStudy.image && (
                   <Image
-                    src={toAbsoluteUrl(
-                      caseStudy.fields.featuredImage.fields.file?.url,
-                    )}
-                    alt={
-                      caseStudy.fields.featuredImage.fields.title ||
-                      caseStudy.fields.title
-                    }
+                    src={caseStudy.image}
+                    alt={caseStudy.imageAlt || caseStudy.title}
                     width={1200}
                     height={640}
                     sizes="(max-width: 768px) 100vw, 64ch"
@@ -151,24 +151,24 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                  * three competing card registers — the hairline row is the
                  * pattern the marketing spec sheet already uses. */}
                 <dl className="mb-8 border-t border-rule">
-                  {caseStudy.fields.clientName && (
+                  {caseStudy.clientName && (
                     <div className="flex items-baseline gap-4 border-b border-rule py-3">
                       <dt className="label-mono w-32 shrink-0 text-ink-3">
                         {csT("client")}
                       </dt>
                       <dd className="font-medium">
-                        {caseStudy.fields.clientName}
+                        {caseStudy.clientName}
                       </dd>
                     </div>
                   )}
 
-                  {caseStudy.fields.category && (
+                  {caseStudy.category && (
                     <div className="flex items-baseline gap-4 border-b border-rule py-3">
                       <dt className="label-mono w-32 shrink-0 text-ink-3">
                         {csT("category")}
                       </dt>
                       <dd className="font-medium">
-                        {caseStudy.fields.category.fields?.title}
+                        {caseStudy.category.title}
                       </dd>
                     </div>
                   )}
@@ -176,13 +176,13 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               </header>
 
               {/* Solution */}
-              {caseStudy.fields.solution && (
+              {caseStudy.solution && (
                 <section className="mb-12">
                   <h2 className="mb-6 font-heading text-3xl font-bold leading-display">
                     {csT("solution")}
                   </h2>
                   <div className="leading-prose">
-                    <RichTextRenderer content={caseStudy.fields.solution} />
+                    <RichTextRenderer content={caseStudy.solution} />
                   </div>
                 </section>
               )}
@@ -190,13 +190,13 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               {/* Results — was the last boxed block on the page. Long Document's
                * divider is negative space and a rule, so the payoff section is
                * marked by the rule above it, not by a filled card. */}
-              {caseStudy.fields.results && (
+              {caseStudy.results && (
                 <section className="border-t border-rule pt-10">
                   <h2 className="mb-6 font-heading text-3xl font-bold leading-display">
                     {csT("results")}
                   </h2>
                   <div className="leading-prose">
-                    <RichTextRenderer content={caseStudy.fields.results} />
+                    <RichTextRenderer content={caseStudy.results} />
                   </div>
                 </section>
               )}
@@ -223,7 +223,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                * three hardcoded English strings inside a bilingual route. */}
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {filteredRelated.map((cs) => (
-                  <CaseStudyCard key={cs.sys.id} caseStudy={cs} />
+                  <CaseStudyCard key={cs.slug} caseStudy={cs} />
                 ))}
               </div>
             </section>

@@ -34,3 +34,16 @@
 ## Security & Configuration Tips
 - Environment: Use `.env.local` for secrets; never commit secrets. Client-exposed vars must be prefixed with `NEXT_PUBLIC_`.
 - Assets: Put public files in `public/` and reference with absolute paths (e.g., `/logo.svg`).
+
+## Blog content
+
+Blog content lives in `content/` as Markdown with YAML frontmatter, one file per
+document per locale: `<slug>.id.md` is required, `<slug>.en.md` is optional.
+An `.en.md` replaces the whole document for `/en/`, frontmatter included, so
+copy `image`, `category`, `pillar`, `author` and dates into it.
+Case studies split their body on the exact English headings `## Challenge`,
+`## Solution`, `## Results`; other headings yield empty sections.
+Authors in `content/authors/` are not localised.
+Blog images go in `public/assets/blog/` and are referenced as `/assets/blog/<file>`;
+the intl middleware only skips `/assets`, so an image anywhere else under
+`public/` is rewritten to a locale route and served as HTML.
