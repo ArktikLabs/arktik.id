@@ -89,9 +89,15 @@ in the workflow), same style as the loader tests. Steps per run:
    title, thesis, H2 outline with one line per section, the three to five
    claims the article will make and which product-context proof point or
    `facts` line backs each, CTA framing derived from `goal`, a search intent
-   sentence, a two-word Unsplash query, and a URL slug (lowercase, hyphens,
-   ASCII). A claim with no backing source is not allowed; the brief must
-   omit it.
+   sentence, a two-word Unsplash query, internal links chosen from the
+   published titles and slugs in the same category (the pillar and the
+   closest post), and a URL slug (lowercase, hyphens, ASCII, not already
+   used). A claim with no backing source is not allowed; the brief must
+   omit it. If `goal` names an asset that does not exist (a checklist,
+   template, ebook, or demo), the brief flags it and the CTA framing falls
+   back to a consultation invite, so the article never promises a download
+   that is not there. The brief JSON is printed to the workflow log for
+   every row so a bad article can be traced to its plan.
 4. English writing call. Inputs: the brief, `.agents/product-marketing.md`,
    the honest-copy rule, the copywriting reference notes, two published
    English exemplars of the same `type` (most recent), the structure
