@@ -71,7 +71,8 @@ ctaDescription: string   optional
 ```
 
 Pillar: same as post minus `pillar` and `tags`, plus `introduction: string`
-(Markdown, may be multi-line).
+(Markdown, may be multi-line). `author` is kept because the pillar page shows
+the author name.
 
 Case study: `title`, `date`, `updated`, `clientName`, `category`, `image`,
 `imageAlt`, and the same `seo*` and `cta*` fields. The body holds three
@@ -142,7 +143,7 @@ interface Post {
 }
 interface Pillar {
   slug; title; introduction: string; body: string; date; updated;
-  category: Category; relatedPosts: Post[];
+  category: Category; author?: Author; relatedPosts: Post[];
   image?; imageAlt?; seoTitle?; seoDescription?; ctaTitle?; ctaDescription?
 }
 interface CaseStudy {
@@ -160,9 +161,11 @@ All string fields unless noted. `date` and `updated` are ISO date strings.
 which now takes a Markdown string. Internally it renders with `react-markdown`
 and a `components` map that reproduces today's class names for h1-h4, p, ul,
 ol, li, blockquote, hr, a, and img. Images render through `next/image` with
-`width` and `height` read from the file on disk at build time, or fall back to
-a plain `img` when the path is not local. Links to external hosts open in a
-new tab with `rel="noopener noreferrer"`, matching today's behaviour.
+the same fixed fallback dimensions the current renderer uses (1200 by 675)
+and `h-auto w-full`, so the browser keeps the real aspect ratio once loaded.
+Reading dimensions from disk would need a new dependency and is deferred until
+layout shift is measured to matter. Links open in a new tab with
+`rel="noopener noreferrer"`, matching today's behaviour.
 
 `remark-gfm` is not added. No current content uses tables or task lists.
 
