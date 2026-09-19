@@ -31,7 +31,7 @@ const BRIEF_SCHEMA = {
   required: ['title', 'slug', 'thesis', 'searchIntent', 'outline', 'claims', 'cta', 'internalLinks', 'unsplashQuery'],
   properties: {
     title: { type: 'string' },
-    slug: { type: 'string' }$' },
+    slug: { type: 'string' },
     thesis: { type: 'string' },
     searchIntent: { type: 'string' },
     outline: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['h2', 'point'], properties: { h2: { type: 'string' }, point: { type: 'string' } } } },
