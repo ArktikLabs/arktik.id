@@ -17,7 +17,7 @@ published. Publishing is a git push; Vercel deploys.
   `content/pillars/`. Images live in `public/assets/blog/`. See
   `2026-09-19-local-markdown-content-design.md` and the "Blog content" section
   of `AGENTS.md`.
-- The planner is a Google Sheet with 72 rows across six months, one every two
+- The planner is a Google Sheet with 71 rows across six months, one every two
   days, each bilingual. Columns: Month, Week, Type (Pillar or Regular), Title,
   Category, CTA / Goal, Language, Status, Date.
 - `.agents/product-marketing.md` (v5) holds product overview, personas,
@@ -33,7 +33,7 @@ published. Publishing is a git push; Vercel deploys.
 | Human in the loop | None. Write, commit to `main`, mark published. |
 | Runtime | GitHub Actions on a daily cron, plus manual dispatch. |
 | Case-study rows | Written only when the row's `facts` column is filled; otherwise marked `needs-input`. |
-| Featured image | Unsplash search by keyword, saved into the repo, credit shown on the page. |
+| Featured image | Unsplash search by keyword, hotlinked to the Unsplash CDN per its guidelines, credit shown on the page. |
 | Planner source | Moved into the repo as `content/planner.csv`. The sheet is retired. |
 | Translation | Transcreation. English written first; Indonesian written as its own article for its own reader, with the English visible for tone and claims. |
 | Writing model | `claude-opus-5` for all calls. |
@@ -83,8 +83,10 @@ in the workflow), same style as the loader tests. Steps per run:
 1. Read `content/planner.csv`. Select rows with `status = todo` and
    `date <= today` (UTC). Process them in date order. A manual dispatch may
    pass a title substring to select exactly one row regardless of date.
-2. Case-study gate: if `title` starts with `Case Study` and `facts` is empty,
-   set `status = needs-input` and continue to the next row.
+2. Case-study gate: if `title` starts with `Case Study`, or `category` is
+   `case-studies`, and `facts` is empty, set `status = needs-input` and
+   continue to the next row. Anything in that category is a client story and
+   must not be invented.
 3. Brief call. Ask the model for a language-neutral brief as JSON: refined
    title, thesis, H2 outline with one line per section, the three to five
    claims the article will make and which product-context proof point or
@@ -118,12 +120,14 @@ in the workflow), same style as the loader tests. Steps per run:
    article and confirms both make the same claims.
 7. Image. Query Unsplash search with the brief's query, orientation
    landscape, take the first result, trigger the download endpoint as the
-   API terms require, save the `regular` size to
-   `public/assets/blog/<slug>.jpg`, record `image`, `imageAlt` (the photo's
-   alt description or the title), and `imageCredit` as
-   `{ name, profileUrl, photoUrl }` in frontmatter. If Unsplash fails, the
-   article is written without an image; the cards and hero already handle
-   that.
+   API terms require, and record the photo's hotlink URL (the `regular`
+   size, or `raw` with width and quality parameters) as `image`, with
+   `imageAlt` (the photo's alt description or the title) and `imageCredit`
+   as `{ name, profileUrl, photoUrl }` in frontmatter. Photos are never
+   downloaded into the repo: Unsplash's guidelines require hotlinking to
+   their CDN, so `next.config.mjs` allowlists `images.unsplash.com` for the
+   image optimiser. If Unsplash fails, the article is written without an
+   image; the cards and hero already handle that.
 8. Write `content/<posts|pillars>/<slug>.en.md` and `.id.md` with:
    `date` = run date, `updated` = same, `category`, `author: tika-aurora`,
    and for regular posts `pillar` = the slug of the most recently published
@@ -131,10 +135,11 @@ in the workflow), same style as the loader tests. Steps per run:
    most five.
 9. Sanity check: import `lib/content.ts` and call `getBlogPostBySlug` or
    `getPillarPageBySlug` for both locales. A throw fails the row.
-10. Set the row to `published` with `slug`. Commit the two Markdown files,
-    the image, and the planner with message
-    `content: publish "<title>"`, then push. One commit per row so a bad
-    article reverts alone.
+10. Set the row to `published` with `slug`. Commit the two Markdown files
+    and the planner with message
+    `content: publish "<title>"`, where `<title>` is the refined title from
+    the brief, not the planner's working title, then push. One commit per row
+    so a bad article reverts alone.
 11. On any failure after step 2, set the row to `failed`, commit only the
     planner, push, and exit non-zero so the workflow run is red. Files
     written for that row are removed before the commit.
@@ -189,7 +194,8 @@ and the loader passes it through.
 
 ## Dry run and tests
 
-- `--dry-run` writes the Markdown files and the image to the working tree,
+- `--dry-run` writes the Markdown files to the working tree, skips the
+  Unsplash call (no external side effects or download counts in a preview),
   updates the planner in memory only, and skips commit and push. The
   workflow's `dry_run` input maps to it and uploads the written files as a
   build artifact so they can be read from the run page.

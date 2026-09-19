@@ -1,0 +1,67 @@
+name: Publish due content
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: Publish only the todo row whose title contains this text (ignores date)
+        required: false
+      dry_run:
+        description: Write files as a run artifact, do not commit
+        type: boolean
+        default: false
+  # Enabled in the rollout's last step:
+  # schedule:
+  #   - cron: "0 1 * * *"   # 08:00 Asia/Jakarta
+
+concurrency:
+  group: publish-content
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Content always lands on main, even when the dispatch came from
+          # another branch.
+          ref: main
+          token: ${{ secrets.CONTENT_BOT_TOKEN || secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: |
+          git config user.name "arktik-content-bot"
+          git config user.email "content-bot@arktik.id"
+      - run: pnpm typecheck
+      - name: Publish
+        # Dispatch inputs reach the script through env, never through the
+        # expansion of ${{ }} inside run:, which a crafted title could escape.
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          TITLE: ${{ inputs.title }}
+        run: |
+          ARGS=()
+          if [ "$DRY_RUN" = "true" ]; then ARGS+=(--dry-run); fi
+          if [ -n "$TITLE" ]; then ARGS+=(--title "$TITLE"); fi
+          pnpm publish:due "${ARGS[@]}"
+      - name: Upload dry-run output
+        if: ${{ inputs.dry_run }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: dry-run-content
+          path: |
+            content/posts/*.md
+            content/pillars/*.md

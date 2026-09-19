@@ -12,6 +12,10 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   compress: false, // Disable Next.js compression to avoid double compression with CDN
+  images: {
+    // Pipeline hero photos are hotlinked from Unsplash, as its API terms require.
+    remotePatterns: [{ protocol: 'https', hostname: 'images.unsplash.com', pathname: '/**' }],
+  },
   // The loader reads content/ at request time on dynamic routes; declare it
   // so a refactor of the path helper can't silently drop it from the bundle.
   outputFileTracingIncludes: { '/**': ['./content/**/*.md'] },

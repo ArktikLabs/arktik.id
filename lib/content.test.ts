@@ -81,3 +81,9 @@ test('slug with path characters is rejected', () => {
   assert.equal(content.getBlogPostBySlug('web', '../content.fixtures/posts/pertama', 'id'), null)
   assert.equal(content.getCategoryBySlug('..', 'id'), null)
 })
+
+test('imageCredit passes through', () => {
+  const post = content.getBlogPostBySlug('seo', 'kedua', 'id')
+  assert.deepEqual(post?.imageCredit, { name: 'Ani Foto', profileUrl: 'https://unsplash.com/@anifoto', photoUrl: 'https://unsplash.com/photos/abc123' })
+  assert.equal(content.getBlogPostBySlug('web', 'pertama', 'id')?.imageCredit, undefined)
+})

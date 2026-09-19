@@ -20,6 +20,12 @@ interface SeoCta {
   ctaDescription?: string
 }
 
+export interface ImageCredit {
+  name: string
+  profileUrl: string
+  photoUrl: string
+}
+
 export interface Post extends SeoCta {
   slug: string
   title: string
@@ -32,6 +38,7 @@ export interface Post extends SeoCta {
   author?: Author
   image?: string
   imageAlt?: string
+  imageCredit?: ImageCredit
   tags: string[]
 }
 
@@ -47,6 +54,7 @@ export interface Pillar extends SeoCta {
   relatedPosts: Post[]
   image?: string
   imageAlt?: string
+  imageCredit?: ImageCredit
 }
 
 export interface CaseStudy extends SeoCta {

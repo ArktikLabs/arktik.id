@@ -120,6 +120,17 @@ export default async function PillarPage({ params }: PillarPageProps) {
           containerClassName="pt-28 pb-16"
         />
 
+        {pillar.image && pillar.imageCredit && (
+          <div className="mx-auto max-w-7xl px-6 lg:px-12">
+            <p className="label-mono mt-2 text-ink-3">
+              Photo by{" "}
+              <a href={pillar.imageCredit.profileUrl} rel="noopener noreferrer" target="_blank" className="underline underline-offset-4">{pillar.imageCredit.name}</a>
+              {" "}on{" "}
+              <a href={pillar.imageCredit.photoUrl} rel="noopener noreferrer" target="_blank" className="underline underline-offset-4">Unsplash</a>
+            </p>
+          </div>
+        )}
+
         <main
           id="main"
           className="relative mx-auto max-w-7xl px-6 py-16 lg:px-12"

@@ -7,7 +7,9 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
-    "test": "node --test 'lib/**/*.test.ts'"
+    "test": "node --test '{lib,scripts}/**/*.test.ts'",
+    "typecheck": "tsc --noEmit",
+    "publish:due": "node scripts/publish-due.ts"
   },
   "dependencies": {
     "@next/third-parties": "^15.5.3",
@@ -32,6 +34,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^0.127.0",
     "@types/node": "^22",
     "@types/react": "^18.3.24",
     "@types/react-dom": "^18.3.7",

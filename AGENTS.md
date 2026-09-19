@@ -47,3 +47,15 @@ Authors in `content/authors/` are not localised.
 Blog images go in `public/assets/blog/` and are referenced as `/assets/blog/<file>`;
 the intl middleware only skips `/assets`, so an image anywhere else under
 `public/` is rewritten to a locale route and served as HTML.
+Pipeline hero photos are hotlinked Unsplash CDN URLs stored in frontmatter, not
+files in the repo; `next.config.mjs` allowlists `images.unsplash.com` for them.
+
+The planner is `content/planner.csv`. A GitHub Action (`publish-content.yml`)
+writes due rows on a daily cron: brief, English article, Indonesian
+transcreation, edit pass, Unsplash photo, one commit per article. Rows titled
+"Case Study: ..." are written only when their `facts` column holds real client
+details; otherwise they become `needs-input`. Rows in the `case-studies`
+category are gated the same way whatever their title: a client story is never
+invented. To re-run one row, dispatch the workflow with its title. A `failed`
+row is retried by setting it back to `todo`. A `needs-input` row is retried by
+filling `facts` and setting the status back to `todo`.

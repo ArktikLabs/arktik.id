@@ -127,6 +127,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           containerClassName="pt-28 pb-16"
         />
 
+        {post.image && post.imageCredit && (
+          <div className="mx-auto max-w-7xl px-6 lg:px-12">
+            <p className="label-mono mt-2 text-ink-3">
+              Photo by{" "}
+              <a href={post.imageCredit.profileUrl} rel="noopener noreferrer" target="_blank" className="underline underline-offset-4">{post.imageCredit.name}</a>
+              {" "}on{" "}
+              <a href={post.imageCredit.photoUrl} rel="noopener noreferrer" target="_blank" className="underline underline-offset-4">Unsplash</a>
+            </p>
+          </div>
+        )}
+
         <main
           id="main"
           className="relative mx-auto max-w-7xl px-6 py-16 lg:px-12"

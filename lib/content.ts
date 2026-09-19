@@ -6,7 +6,9 @@ import type { Author, Category, Post, Pillar, CaseStudy } from './types/content.
 /* Content root is read per call, not cached at import, so tests can point
  * different suites at different fixture trees. Reading a dozen files per
  * request is fine for this volume.
- * ponytail: no cache; add a module-level Map keyed by root if builds get slow. */
+ * ponytail: no cache; add a module-level Map keyed by root if builds get slow.
+ * `scripts/publish-due.ts` re-reads content right after writing the files for
+ * a row, so it relies on this module caching nothing. */
 const root = () => process.env.CONTENT_DIR ?? path.join(process.cwd(), 'content')
 
 const DEFAULT_LOCALE = 'id'
@@ -97,6 +99,7 @@ function toPost(doc: Doc, locale?: string): Post {
     author: authorBySlug(d.author),
     image: d.image,
     imageAlt: d.imageAlt,
+    imageCredit: d.imageCredit,
     tags: d.tags ?? [],
     seoTitle: d.seoTitle,
     seoDescription: d.seoDescription,
@@ -143,6 +146,7 @@ function toPillar(doc: Doc, locale?: string): Pillar {
     relatedPosts: getBlogPosts({ pillarSlug: doc.slug, locale, limit: 1000 }).posts,
     image: d.image,
     imageAlt: d.imageAlt,
+    imageCredit: d.imageCredit,
     seoTitle: d.seoTitle,
     seoDescription: d.seoDescription,
     ctaTitle: d.ctaTitle,
