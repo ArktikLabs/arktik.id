@@ -10,9 +10,9 @@ on:
         description: Write files as a run artifact, do not commit
         type: boolean
         default: false
-  # Enabled in the rollout's last step:
-  # schedule:
-  #   - cron: "0 1 * * *"   # 08:00 Asia/Jakarta
+  # Daily. Disable by commenting this block out.
+  schedule:
+    - cron: "0 1 * * *"   # 08:00 Asia/Jakarta
 
 concurrency:
   group: publish-content
