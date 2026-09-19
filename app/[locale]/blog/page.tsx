@@ -105,12 +105,13 @@ export default async function BlogPage({ params }: BlogPageProps) {
               </p>
 
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-                {pillars.slice(0, 6).map((pillar) => (
+                {pillars.slice(0, 6).map((pillar, i) => (
                   <PillarCard
                     key={pillar.slug}
                     pillar={pillar}
                     categorySlug={pillar.category.slug}
                     locale={locale}
+                    priority={i === 0}
                   />
                 ))}
               </div>

@@ -14,9 +14,11 @@ interface PillarCardProps {
   pillar: Pillar
   categorySlug: string
   locale?: string
+  /* Blog index: the first card is the LCP element, so it must not lazy-load. */
+  priority?: boolean
 }
 
-export function PillarCard({ pillar, categorySlug, locale }: PillarCardProps) {
+export function PillarCard({ pillar, categorySlug, locale, priority }: PillarCardProps) {
   const t = useTranslations('cards')
   const imageUrl = pillar.image
 
@@ -32,6 +34,7 @@ export function PillarCard({ pillar, categorySlug, locale }: PillarCardProps) {
             alt=""
             aria-hidden="true"
             fill
+            priority={priority}
             sizes="(max-width: 768px) 100vw, 33vw"
             className="-z-10 object-cover object-center"
           />
