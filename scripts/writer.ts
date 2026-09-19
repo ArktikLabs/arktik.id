@@ -20,7 +20,7 @@ export interface WriterContext {
 export interface Writer {
   brief(ctx: WriterContext): Promise<Brief>
   write(ctx: WriterContext, brief: Brief, locale: 'en' | 'id', english?: Article): Promise<Article>
-  edit(ctx: WriterContext, brief: Brief, locale: 'en' | 'id', draft: Article, english?: Article): Promise<Article>
+  edit(ctx: WriterContext, brief: Brief, locale: 'en' | 'id', draft: Article, english?: Article, notes?: string): Promise<Article>
 }
 
 const MODEL = 'claude-opus-5'
@@ -86,6 +86,22 @@ ${linkLines}
 - Make only the claims in the brief's claims list. No statistics, client names, or outcomes that are not in that list.
 - Quote every frontmatter string value with single quotes (escape an inner single quote by doubling it).
 - Output one Markdown document: YAML frontmatter between --- lines, then the body. No code fences, no commentary.`
+}
+
+/* Measurable AI-writing tells. Density per 1000 words; the orchestrator sends
+ * the offending snippets back to the editor once when a threshold is crossed. */
+export function voiceTells(body: string): { words: number; dashes: number; reversals: string[]; verdicts: string[]; dashPer1k: number } {
+  const words = body.split(/\s+/).filter(Boolean).length || 1
+  const dashes = (body.match(/[\u2013\u2014]/g) ?? []).length
+  const sentences = body.replace(/\n+/g, ' ').split(/(?<=[.!?])\s+/)
+  const reversals: string[] = []
+  const verdicts: string[] = []
+  for (let i = 0; i < sentences.length; i++) {
+    const a = sentences[i], b = sentences[i + 1] ?? ''
+    if (/\b(is|are|was|were|isn't|aren't|bukan|bukanlah)\b[^.]*\bnot\b[^.]*\.$/i.test(a) && /^(It|That|This|Itu|Ini|Yang|Melainkan)\b/.test(b)) reversals.push(`${a} ${b}`)
+    if (/^(That|This|It|The test|None of that|Itu|Ini)\b.{0,45}\.$/.test(a) && a.split(' ').length <= 8 && i > 0 && sentences[i - 1].split(' ').length > 12) verdicts.push(a)
+  }
+  return { words, dashes, reversals, verdicts, dashPer1k: (dashes * 1000) / words }
 }
 
 export function linkHrefs(ctx: WriterContext, brief: Brief, locale: 'en' | 'id'): { slug: string; type: 'pillar' | 'regular'; why: string; href: string }[] {
@@ -173,13 +189,15 @@ Frontmatter keys required: ${frontmatterKeys(ctx.row.type)}. Use the brief's tit
 
 ${structure(ctx.row.type, linkLines)}
 
-Match the voice, length, and formatting of these published exemplars:
+Follow the "Voice rules" in the system context exactly; where an exemplar breaks one of them, the rule wins.
+
+Match the length and formatting of these published exemplars:
 ${exemplars}`
       const raw = await text(client, { ...base, system: system(ctx, 'You are a senior content writer.'), messages: [{ role: 'user', content: prompt }] })
       return parseArticle(raw, ctx.row.type)
     },
 
-    async edit(ctx, brief, locale, draft, english) {
+    async edit(ctx, brief, locale, draft, english, notes) {
       let comparison = ''
       if (locale === 'id') {
         requireEnglish(locale, english)
@@ -197,6 +215,8 @@ Checks, in order:
 4. Frontmatter: excerpt/introduction present; seoTitle under 60 chars; seoDescription under 155 chars; ctaTitle and ctaDescription match the CTA framing.
 5. Internal links: only the hrefs listed below, verbatim.
 ${comparison}
+7. Voice: the system context carries a "Voice rules" list. Treat every listed pattern as a defect. Remove every em-dash and en-dash, every "not X, it is Y" reversal, every one-line verdict, every bold lead-in, every forced triad. Rewrite the sentence rather than deleting the idea.
+${notes ? `\nSpecific violations found by an automated check; fix every one:\n${notes}\n` : ''}
 
 Brief:
 ${JSON.stringify(brief, null, 2)}

@@ -4,7 +4,7 @@ import { execFileSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 import matter from 'gray-matter'
 import { readPlanner, writePlanner, dueRows, isCaseStudy, latestPillarSlug, type Row } from './planner.ts'
-import { createWriter, type Writer, type Article, type Brief, type WriterContext } from './writer.ts'
+import { createWriter, voiceTells, type Writer, type Article, type Brief, type WriterContext } from './writer.ts'
 import { createUnsplash, type ImageSource } from './unsplash.ts'
 
 export interface Deps {
@@ -16,7 +16,7 @@ export interface Deps {
   log: (s: string) => void
 }
 
-const COPY_NOTES = ['copy-frameworks.md', 'natural-transitions.md']
+const COPY_NOTES = ['voice.md', 'copy-frameworks.md', 'natural-transitions.md']
 
 function readIf(file: string) { return fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : '' }
 
@@ -31,10 +31,14 @@ function contextFor(root: string, row: Row, content: Awaited<ReturnType<typeof l
     const items = row.type === 'pillar'
       ? [...content.getPillarPages(undefined, locale)].sort((a, b) => b.date.localeCompare(a.date))
       : content.getBlogPosts({ locale, limit: 1000 }).posts
+    // Prefer the cleanest-voiced published pieces as exemplars, not the newest.
     return items
       .map((p) => readIf(path.join(root, 'content', dir, `${p.slug}.${locale}.md`)))
       .filter(Boolean)
+      .map((t) => ({ t, score: voiceTells(t).dashPer1k + voiceTells(t).reversals.length * 5 }))
+      .sort((a, b) => a.score - b.score)
       .slice(0, 2)
+      .map((x) => x.t)
   }
   const published = [
     ...content.getPillarPages(row.category).map((p) => ({ slug: p.slug, title: p.title, type: 'pillar' as const })),
@@ -64,6 +68,25 @@ function toFile(article: Article, extra: Record<string, unknown>) {
   const fm = { ...article.frontmatter, ...extra }
   for (const k of Object.keys(fm)) if (fm[k] === undefined) delete fm[k]
   return matter.stringify(article.body, fm)
+}
+
+
+/* One extra edit call at most when the measured tells exceed the live posts'
+ * ceiling (about 3 dashes per 1000 words, zero reversals). */
+const DASH_CEILING = 2
+async function voiceGuard(deps: Deps, ctx: WriterContext, brief: Brief, locale: 'en' | 'id', article: Article, english?: Article): Promise<Article> {
+  const t = voiceTells(article.body)
+  if (t.dashPer1k <= DASH_CEILING && t.reversals.length === 0 && t.verdicts.length === 0) return article
+  const notes = [
+    t.dashPer1k > DASH_CEILING ? `- ${t.dashes} dashes in ${t.words} words; remove all of them.` : '',
+    ...t.reversals.map((r) => `- reversal: "${r.slice(0, 160)}"`),
+    ...t.verdicts.map((v) => `- one-line verdict: "${v}"`),
+  ].filter(Boolean).join('\n')
+  deps.log(`voice guard (${locale}): ${t.dashes} dashes, ${t.reversals.length} reversals, ${t.verdicts.length} verdicts; re-editing`)
+  const fixed = await deps.writer.edit(ctx, brief, locale, article, english, notes)
+  const after = voiceTells(fixed.body)
+  deps.log(`voice guard (${locale}) after: ${after.dashes} dashes, ${after.reversals.length} reversals, ${after.verdicts.length} verdicts`)
+  return fixed
 }
 
 export async function run(opts: { dryRun: boolean; titleFilter?: string }, deps: Deps) {
@@ -122,9 +145,9 @@ export async function run(opts: { dryRun: boolean; titleFilter?: string }, deps:
       deps.log(`brief ${brief.slug}: ${JSON.stringify(brief)}`)
 
       const enDraft = await deps.writer.write(ctx, brief, 'en')
-      const en = await deps.writer.edit(ctx, brief, 'en', enDraft)
+      const en = await voiceGuard(deps, ctx, brief, 'en', await deps.writer.edit(ctx, brief, 'en', enDraft))
       const idDraft = await deps.writer.write(ctx, brief, 'id', en)
-      const id = await deps.writer.edit(ctx, brief, 'id', idDraft, en)
+      const id = await voiceGuard(deps, ctx, brief, 'id', await deps.writer.edit(ctx, brief, 'id', idDraft, en), en)
 
       const dir = row.type === 'pillar' ? 'pillars' : 'posts'
       const extra: Record<string, unknown> = { date: deps.today, updated: deps.today, category: row.category, author: 'tika-aurora' }

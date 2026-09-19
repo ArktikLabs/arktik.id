@@ -91,3 +91,15 @@ test('linkHrefs builds locale-correct hrefs', () => {
   const en = linkHrefs(ctx, brief([{ slug: 'panduan', type: 'pillar', why: 'w' }]), 'en')
   assert.equal(en[0].href, '/en/blog/web/guides/panduan/')
 })
+
+test('voiceTells counts dashes and flags reversals and one-line verdicts', async () => {
+  const { voiceTells } = await import('./writer.ts')
+  const body = 'An MVP is not a cheaper build of the whole thing that you wanted. It is a way to find out. ' +
+    'Scoping the whole thing up front asks you to describe every requirement before anyone has used anything at all. That is the whole definition. ' +
+    'Plain sentence — with a dash — and another.'
+  const t = voiceTells(body)
+  assert.equal(t.dashes, 2)
+  assert.equal(t.reversals.length, 1)
+  assert.ok(t.verdicts.includes('That is the whole definition.'))
+  assert.equal(voiceTells('Nothing to see here. Just prose.').reversals.length, 0)
+})
