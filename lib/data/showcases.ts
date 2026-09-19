@@ -39,6 +39,16 @@ export const showcases: Showcase[] = [
     tags: ["Hotel", "Luxury", "Landing Page", "Animations"],
     thumbnail: "/assets/portofolio/serenity-cove.webp",
   },
+  {
+    slug: "mulia-consulting",
+    title: "Mulia Consulting",
+    description:
+      "Bilingual website for an Indonesian HR consulting and talent solutions firm, built around booking a free HR strategy audit",
+    link: "https://www.muliaconsulting.com",
+    category: "Business Website",
+    tags: ["Business", "HR Consulting", "Bilingual", "Next.js"],
+    thumbnail: "/assets/portofolio/mulia-consulting.webp",
+  },
 ];
 
 export function getShowcaseBySlug(slug: string): Showcase | undefined {

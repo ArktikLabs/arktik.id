@@ -301,9 +301,10 @@ The studio publishes no performance metrics. `design.md` forbids invented ones, 
 the design is explicitly built to carry trust that proof content usually carries.
 Do not add a metric to any page without a real, attributable source.
 
-**Customers:** Three delivered projects — Lenggah (e-commerce), Mata Screen Print
-(business site), Serenity Cove (hotel landing page). All three are presented as
-delivered and handed over; closed at the founders' direction on 2026-08-14.
+**Customers:** Four delivered projects — Lenggah (e-commerce), Mata Screen Print
+(business site), Serenity Cove (hotel landing page), Mulia Consulting (HR
+consulting site, added 2026-09-19). The first three are presented as delivered and
+handed over; closed at the founders' direction on 2026-08-14.
 
 **Testimonials:** None, by choice (founders, 2026-08-14). Founders are deliberately
 anonymous and there are no client logos or quotes. `design.md` states the design
@@ -335,6 +336,7 @@ GTM (GTM-WDNKG95C) and Vercel Analytics are installed; `lead_form_start` and
 
 ## Changelog
 *Newest first. One line per revision: what changed and why.*
+- v6 (2026-09-19) — Added Mulia Consulting as a fourth showcase.
 - v5 (2026-08-14) — Replaced Metatech (unreachable) with Code.id / PT Code
   Development Indonesia, the closest category competitor and the strongest on
   paper: 15+ years, two countries, own products. Guidance is to segment away
