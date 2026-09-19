@@ -1,4 +1,4 @@
-# Social distribution: six posts per article through Publer
+# Social distribution: six posts per article through Postiz
 
 Date: 2026-09-20
 Status: approved
@@ -9,7 +9,7 @@ Extends: `2026-09-19-automated-content-pipeline-design.md`,
 
 Every article the pipeline publishes also produces six social posts, each
 in its platform's format and persona, rendered images included, and hands
-them to Publer as scheduled posts over three days. No human step. Same
+them to a self-hosted Postiz instance as scheduled posts over three days. No human step. Same
 GitHub Action, same honesty rule, same voice rules.
 
 ## Accounts and formats
@@ -96,42 +96,56 @@ Rendered in the Action, no image API:
   `imageHeadline` on the same system, 1080 by 1350, shared by LinkedIn and
   Facebook.
 
-PNGs are written to a temp directory, uploaded to Publer, and not committed.
+PNGs are written to a temp directory, uploaded to Postiz, and not committed.
 `playwright` is added as a dev dependency; the workflow installs Chromium.
 
-## Publer integration
+## Postiz integration
 
-`scripts/publer.ts` wraps the Publer REST API with a `Poster` interface so
-tests stub it:
+The founders host Postiz (open source) and connect the six accounts there.
+The pipeline only talks to its public API: base URL `<POSTIZ_URL>/public/v1`,
+API key in the `Authorization` header. Endpoints used, per the public API
+docs: `GET /integrations` to list connected accounts, `POST /upload` for
+each PNG (returns an `id` and `path`), and `POST /posts` with
+`type: "schedule"`, an ISO `date`, and a `posts` array where each item
+targets one integration by id, carries the text and uploaded media, and a
+`settings` object with `__type` set to the platform (`instagram`,
+`facebook`, `linkedin-page`, `x`, `threads`). Instagram carousels use the
+`post_as_images_carousel` setting; X threads are a `posts` array of
+consecutive items on the same integration.
+
+`scripts/postiz.ts` wraps this behind a `Poster` interface so tests stub
+it:
 
 ```
 interface Poster {
-  upload(png: Buffer, name: string): Promise<{ id: string }>
-  schedule(post: { accountId: string; text: string; mediaIds?: string[]; at: string; firstComment?: string }): Promise<{ id: string }>
+  integrations(): Promise<{ id: string; name: string; provider: string }[]>
+  upload(png: Buffer, name: string): Promise<{ id: string; path: string }>
+  schedule(post: { integrationId: string; provider: string; texts: string[]; media?: { id: string; path: string }[]; at: string }): Promise<{ id: string }>
 }
 ```
 
+`texts` holds one entry for a single post and several for an X thread.
 Configuration in `scripts/social/config.json` (committed, no secrets):
-account IDs per platform, posting times, and the founder's personal
-Threads account ID. `PUBLER_API_KEY` is a repository secret.
+integration IDs per platform, posting times, the founder's personal Threads
+integration ID. `POSTIZ_URL` and `POSTIZ_API_KEY` are repository secrets.
 
-**Unverified assumptions**, to be checked in the first task before any
-code depends on them: that the Publer API on the Business plan can create
-Instagram carousels, Threads posts, X threads, and a LinkedIn first
-comment; and the exact endpoint shapes. If a format is not supported over
-the API, that post falls back to Publer's draft state for manual publish
-and the log says so.
+**Unverified assumptions**, checked by the first task against the live
+instance before any code depends on them: the exact `settings` keys per
+provider, whether a LinkedIn or Facebook first comment is exposed over the
+API (if not, the LinkedIn link goes at the end of the post body and the
+log says so), and that the self-hosted instance exposes the public API on
+the same paths as the hosted one.
 
 ## Orchestration
 
 A new step at the end of a successful row in `publish-due.ts`, after the
 push: `distribute(article, brief, deps)`. It never fails the row. Any
-failure logs `social failed: <platform>: <message>` and continues; the
+failure (including Postiz being unreachable) logs `social failed: <platform>: <message>` and continues; the
 planner gains a `social` column recording `scheduled`, `partial`, or
 `failed` so a retry is one dispatch with the title filter.
 
 Dry run generates the JSON and the PNGs into the workflow artifact and
-skips Publer entirely, so the first check is a read of the texts and a look
+skips Postiz entirely, so the first check is a read of the texts and a look
 at the slides.
 
 Re-running social for an already published row: `--social-only "<title>"`
@@ -139,22 +153,24 @@ regenerates and schedules without touching the article.
 
 ## Cost
 
-- Publer Business with five company accounts plus one personal Threads
-  account: about $42 per month at monthly billing, about $35 annual.
+- Postiz self-hosted: no subscription. Hosting is the founders' existing
+  server. The platform developer apps it needs (Meta, LinkedIn, X) are set
+  up by the founders separately; X's API is pay-per-use as of 2026.
 - One medium-effort generation call plus at most one voice re-edit: about
   $0.30 to $0.60 per article.
 - Playwright rendering: free, about one minute of Action time.
 
 ## Rollout
 
-1. Verify the Publer API capabilities with the key, in a script that only
-   lists accounts and media endpoints. Record what is and is not supported
-   in this spec before Task 2 starts.
+1. With `POSTIZ_URL` and `POSTIZ_API_KEY` set, run a script that only
+   calls `GET /integrations` and prints the six accounts with their ids
+   and providers, and probes `POST /upload` with a tiny PNG. Record the
+   real `settings` shapes in this spec before Task 2 starts.
 2. Land generation, rendering, and the dry-run artifact. Dry run on the MVP
    article, read the six texts and the slides.
-3. Land Publer scheduling with every post created in Publer's draft state
-   for the first article; check them in the Publer UI; then switch the
-   config to scheduled.
+3. Land Postiz scheduling with the first article's posts scheduled a week
+   out; check them in the Postiz calendar; then set the config to the
+   normal times.
 4. Cron unchanged.
 
 ## Out of scope
