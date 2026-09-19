@@ -77,7 +77,8 @@ After the per-language edit and the voice guard:
 2. Pass if every score is at least 7 and the average is at least 8, the
    thresholds the copy-editing skill's panel method uses.
 3. Otherwise one revision call with the critiques quoted back, then one
-   re-judge. At most two revision rounds per language.
+   re-judge. One revision round per language (a second did not raise scores
+   in the first live run).
 4. After the cap, publish the best-scoring version and log the final scores.
    A low score is never a failure; it is a signal in the log.
 
@@ -87,10 +88,11 @@ scores be graphed over time from the repo alone.
 
 ### Cost
 
-Per language: one judge call, up to two revision and re-judge pairs. Worst
-case adds six calls per language (the post-revision voice check can add
-one edit), typical case one or two. Judge calls are short output, so the
-cost is mostly cached input.
+Per language: one judge call and at most one revision and re-judge pair,
+plus a post-revision voice check that can add one edit. Measured in the
+first runs: about 25 cents per call at high effort, most of it adaptive
+thinking billed as output. Edits, judges, the Indonesian transcreation, and
+research now run at medium effort; every call logs its usage and cost.
 
 ## Lever 3: opt-in research
 

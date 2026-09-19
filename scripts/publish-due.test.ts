@@ -248,7 +248,7 @@ test('judge cap: after one revision the best-scoring version is kept, row still 
   const r = await run({ dryRun: false }, d)
   assert.deepEqual(r.published, ['new-post'])
   const data = matter(fs.readFileSync(path.join(root, 'content/posts/new-post.en.md'), 'utf8')).data as any
-  // `rounds` is the round the kept scores came from: two ran, round 1 won.
+  // `rounds` is the round the kept scores came from: one revision ran and won.
   assert.deepEqual(data.quality, { owner: 7, ops: 7, developer: 7, voice: 7, rounds: 1 })
 })
 
