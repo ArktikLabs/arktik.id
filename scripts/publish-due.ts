@@ -96,7 +96,7 @@ async function voiceGuard(deps: Deps, ctx: WriterContext, brief: Brief, locale: 
   return fixed
 }
 
-const MAX_ROUNDS = 2
+const MAX_ROUNDS = 1  // a second revision did not raise scores in the first live run; one is the budget
 /* The judge is a quality signal, never a publish gate: any failure here
  * (timeout, refusal, hitting max_tokens on a long article) must fall back
  * to the best article seen so far rather than fail the row. */

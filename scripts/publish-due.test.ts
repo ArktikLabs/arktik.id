@@ -233,14 +233,13 @@ test('judge below threshold triggers one revision, quality lands in frontmatter'
   assert.deepEqual(idData.quality, { owner: 9, ops: 9, developer: 9, voice: 9, rounds: 0 })
 })
 
-test('judge cap: after two revisions the best-scoring version is kept, row still publishes', async () => {
+test('judge cap: after one revision the best-scoring version is kept, row still publishes', async () => {
   const root = scaffold(HEADER + '2026-09-21,regular,New Post,web,Awareness,todo,,,,\n')
   let n = 0
   const w: Writer = {
     ...writerWithJudges(
       { scores: { owner: 5, ops: 6, developer: 6, voice: 6 }, critiques: [{ persona: 'owner', sentence: 'a', problem: 'b', fix: 'c' }] },
-      { scores: { owner: 7, ops: 7, developer: 7, voice: 7 }, critiques: [{ persona: 'ops', sentence: 'a', problem: 'b', fix: 'c' }] },
-      { scores: { owner: 6, ops: 6, developer: 6, voice: 6 }, critiques: [] },
+      { scores: { owner: 7, ops: 7, developer: 7, voice: 7 }, critiques: [{ persona: 'ops', sentence: 'a', problem: 'b', fix: 'c' }] }, // en round 1: cap reached, best so far
       { scores: { owner: 9, ops: 9, developer: 9, voice: 9 }, critiques: [] }, // id
     ),
     edit: async (_c, _b, l, d) => ({ ...d, body: `${d.body}v${++n}\n`.replace(/^v\d+\n/, '') }),

@@ -207,8 +207,21 @@ function requireEnglish(locale: 'en' | 'id', english: Article | undefined): asse
   if (locale === 'id' && !english) throw new Error('Indonesian call requires the English article')
 }
 
-async function text(client: Anthropic, params: Omit<Anthropic.MessageCreateParamsStreaming, 'stream'>): Promise<string> {
+/* Opus 5 list prices per million tokens; thinking is billed as output. */
+const PRICE = { input: 5, cacheRead: 0.5, cacheWrite: 6.25, output: 25 }
+export const spend = { calls: 0, usd: 0 }
+
+export function recordUsage(label: string, msg: Pick<Anthropic.Message, 'usage'>): number {
+  const u = msg.usage
+  const usd = ((u.input_tokens ?? 0) * PRICE.input + (u.cache_read_input_tokens ?? 0) * PRICE.cacheRead + (u.cache_creation_input_tokens ?? 0) * PRICE.cacheWrite + (u.output_tokens ?? 0) * PRICE.output) / 1e6
+  spend.calls++; spend.usd += usd
+  console.log(`usage ${label}: in=${u.input_tokens} cacheRead=${u.cache_read_input_tokens ?? 0} cacheWrite=${u.cache_creation_input_tokens ?? 0} out=${u.output_tokens} ~$${usd.toFixed(3)} (run total ~$${spend.usd.toFixed(2)} over ${spend.calls} calls)`)
+  return usd
+}
+
+async function text(client: Anthropic, params: Omit<Anthropic.MessageCreateParamsStreaming, 'stream'>, label = 'call'): Promise<string> {
   const msg = await client.messages.stream({ ...params, stream: true }).finalMessage()
+  recordUsage(label, msg)
   if (msg.stop_reason === 'refusal') throw new Error(`model refused: ${msg.stop_details?.explanation ?? 'no explanation'}`)
   if (msg.stop_reason === 'max_tokens') throw new Error('model hit max_tokens')
   return msg.content.filter((b): b is Anthropic.TextBlock => b.type === 'text').map((b) => b.text).join('')
@@ -238,7 +251,7 @@ ${hasResearch ? '- A claim may be backed by one of the research URLs, written ex
 - unsplashQuery: two concrete nouns describing a scene, not the topic.
 - outline: 3 to 8 H2 sections. Language-neutral; both an English and an Indonesian article will follow it.
 - notesUsed: the notes you drew on, quoted briefly. notesUnused: the notes you left out and why, in one line each. Both empty when there are no notes.`
-      const raw = await text(client, { ...base, max_tokens: 16000, system: system(ctx, 'You are a content strategist producing a brief.'), messages: [{ role: 'user', content: prompt }], output_config: { effort: 'high', format: { type: 'json_schema', schema: BRIEF_SCHEMA } } })
+      const raw = await text(client, { ...base, max_tokens: 16000, system: system(ctx, 'You are a content strategist producing a brief.'), messages: [{ role: 'user', content: prompt }], output_config: { effort: 'high', format: { type: 'json_schema', schema: BRIEF_SCHEMA } } }, 'brief')
       let brief = JSON.parse(raw) as Brief
       if (!/^[a-z0-9][a-z0-9-]{3,80}$/.test(brief.slug)) throw new Error(`brief slug invalid: ${brief.slug}`)
       if (ctx.usedSlugs.includes(brief.slug)) throw new Error(`brief reused slug ${brief.slug}`)
@@ -279,7 +292,10 @@ Follow the "Voice rules" in the system context exactly; where an exemplar breaks
 
 Match the length and formatting of these published exemplars:
 ${exemplars}`
-      const raw = await text(client, { ...base, system: system(ctx, 'You are a senior content writer.'), messages: [{ role: 'user', content: prompt }] })
+      // The English draft is where deep thinking earns its keep; the Indonesian
+      // transcreation works from a finished text, so medium effort is enough.
+      const effort = locale === 'en' ? 'high' : 'medium'
+      const raw = await text(client, { ...base, output_config: { effort }, system: system(ctx, 'You are a senior content writer.'), messages: [{ role: 'user', content: prompt }] }, `write:${locale}`)
       return parseArticle(raw, ctx.row.type)
     },
 
@@ -312,13 +328,13 @@ Draft:
 ${draftText}
 
 ${structure(ctx.row.type, linkLines, hasSources)}`
-      const raw = await text(client, { ...base, system: system(ctx, 'You are a copy editor.'), messages: [{ role: 'user', content: prompt }] })
+      const raw = await text(client, { ...base, output_config: { effort: 'medium' }, system: system(ctx, 'You are a copy editor.'), messages: [{ role: 'user', content: prompt }] }, `edit:${locale}${notes ? ':revise' : ''}`)
       return parseArticle(raw, ctx.row.type)
     },
 
     async judge(ctx, brief, locale, article) {
       const prompt = `Article (${locale}):\n${matter.stringify(article.body, article.frontmatter)}\n\nBrief thesis: ${brief.thesis}`
-      const raw = await text(client, { ...base, max_tokens: 16000, system: system(ctx, ctx.judgePrompt), messages: [{ role: 'user', content: prompt }], output_config: { effort: 'high', format: { type: 'json_schema', schema: VERDICT_SCHEMA } } })
+      const raw = await text(client, { ...base, max_tokens: 16000, system: system(ctx, ctx.judgePrompt), messages: [{ role: 'user', content: prompt }], output_config: { effort: 'medium', format: { type: 'json_schema', schema: VERDICT_SCHEMA } } }, `judge:${locale}`)
       const parsed = JSON.parse(raw) as Verdict
       const clamp = (n: number) => Math.min(10, Math.max(1, Math.round(n)))
       return {
@@ -339,7 +355,8 @@ Return plain text, one block per source: URL, publisher, date, one-line finding,
       const urls = new Set<string>()
       const textParts: string[] = []
       for (let i = 0; i < 4; i++) {
-        const msg = await client.messages.stream({ model: MODEL, max_tokens: 16000, thinking: { type: 'adaptive' }, tools, messages, system: system(ctx, 'You are a research assistant. Cite only what you actually retrieved.') }).finalMessage()
+        const msg = await client.messages.stream({ model: MODEL, max_tokens: 16000, thinking: { type: 'adaptive' }, output_config: { effort: 'medium' }, tools, messages, system: system(ctx, 'You are a research assistant. Cite only what you actually retrieved.') }).finalMessage()
+        if (msg.usage) recordUsage(`research:${i}`, msg)
         for (const b of msg.content) {
           if (b.type === 'web_search_tool_result' && Array.isArray(b.content)) for (const r of b.content) if (r.type === 'web_search_result') urls.add(r.url)
           if (b.type === 'web_fetch_tool_result' && b.content.type === 'web_fetch_result') urls.add(b.content.url)
