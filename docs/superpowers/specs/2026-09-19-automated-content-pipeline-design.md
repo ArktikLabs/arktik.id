@@ -43,7 +43,7 @@ published. Publishing is a git push; Vercel deploys.
 `content/planner.csv`, UTF-8, header row:
 
 ```
-date,type,title,category,goal,status,slug,facts
+date,type,title,category,goal,status,slug,facts,notes,research
 ```
 
 - `date`: ISO `YYYY-MM-DD`. The day the row becomes due.
@@ -61,6 +61,9 @@ date,type,title,category,goal,status,slug,facts
 - `slug`: empty until published, then the URL slug.
 - `facts`: free text. Real client details for case-study rows. Quoted CSV
   field, may contain newlines.
+- `notes`: free text, the founder's own material for the topic, used first by
+  the brief.
+- `research`: `yes` or empty, runs the opt-in web research step.
 
 ### One-time import
 

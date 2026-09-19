@@ -40,6 +40,7 @@ export interface Post extends SeoCta {
   imageAlt?: string
   imageCredit?: ImageCredit
   tags: string[]
+  quality?: Record<string, number>
 }
 
 export interface Pillar extends SeoCta {
@@ -55,6 +56,7 @@ export interface Pillar extends SeoCta {
   image?: string
   imageAlt?: string
   imageCredit?: ImageCredit
+  quality?: Record<string, number>
 }
 
 export interface CaseStudy extends SeoCta {

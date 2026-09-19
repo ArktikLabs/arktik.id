@@ -105,6 +105,7 @@ function toPost(doc: Doc, locale?: string): Post {
     seoDescription: d.seoDescription,
     ctaTitle: d.ctaTitle,
     ctaDescription: d.ctaDescription,
+    quality: d.quality,
   }
 }
 
@@ -151,6 +152,7 @@ function toPillar(doc: Doc, locale?: string): Pillar {
     seoDescription: d.seoDescription,
     ctaTitle: d.ctaTitle,
     ctaDescription: d.ctaDescription,
+    quality: d.quality,
   }
 }
 

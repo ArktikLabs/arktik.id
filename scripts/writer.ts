@@ -9,26 +9,38 @@ export interface Brief {
   cta: { framing: string; missingAsset: boolean }
   internalLinks: { slug: string; type: 'pillar' | 'regular'; why: string }[]
   unsplashQuery: string
+  notesUsed: string[]
+  notesUnused: string[]
 }
 export interface Article { frontmatter: Record<string, unknown>; body: string }
 export interface WriterContext {
-  row: Row; productContext: string; honestCopyRule: string; copyNotes: string
+  row: Row; productContext: string; honestCopyRule: string; copyNotes: string; notes: string; judgePrompt: string
   exemplars: { en: string[]; id: string[] }
   published: { slug: string; title: string; type: 'pillar' | 'regular' }[]
   usedSlugs: string[]
+  research?: Research
+  log?: (s: string) => void
 }
+export interface Verdict { scores: { owner: number; ops: number; developer: number; voice: number }; critiques: { persona: string; sentence: string; problem: string; fix: string }[] }
+export interface Research { text: string; urls: string[] }
 export interface Writer {
   brief(ctx: WriterContext): Promise<Brief>
   write(ctx: WriterContext, brief: Brief, locale: 'en' | 'id', english?: Article): Promise<Article>
   edit(ctx: WriterContext, brief: Brief, locale: 'en' | 'id', draft: Article, english?: Article, notes?: string): Promise<Article>
+  judge(ctx: WriterContext, brief: Brief, locale: 'en' | 'id', article: Article): Promise<Verdict>
+  research(ctx: WriterContext): Promise<Research>
 }
 
 const MODEL = 'claude-opus-5'
 
+/* Four seats at three critiques each. A longer list is the judge ignoring its
+ * own cap, and every extra line is another instruction the editor must obey. */
+const MAX_CRITIQUES = 12
+
 const BRIEF_SCHEMA = {
   type: 'object',
   additionalProperties: false,
-  required: ['title', 'slug', 'thesis', 'searchIntent', 'outline', 'claims', 'cta', 'internalLinks', 'unsplashQuery'],
+  required: ['title', 'slug', 'thesis', 'searchIntent', 'outline', 'claims', 'cta', 'internalLinks', 'unsplashQuery', 'notesUsed', 'notesUnused'],
   properties: {
     title: { type: 'string' },
     slug: { type: 'string' },
@@ -39,8 +51,70 @@ const BRIEF_SCHEMA = {
     cta: { type: 'object', additionalProperties: false, required: ['framing', 'missingAsset'], properties: { framing: { type: 'string' }, missingAsset: { type: 'boolean' } } },
     internalLinks: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['slug', 'type', 'why'], properties: { slug: { type: 'string' }, type: { type: 'string', enum: ['pillar', 'regular'] }, why: { type: 'string' } } } },
     unsplashQuery: { type: 'string' },
+    notesUsed: { type: 'array', items: { type: 'string' } },
+    notesUnused: { type: 'array', items: { type: 'string' } },
   },
 } as const
+
+const VERDICT_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['scores', 'critiques'],
+  properties: {
+    scores: { type: 'object', additionalProperties: false, required: ['owner', 'ops', 'developer', 'voice'], properties: { owner: { type: 'integer' }, ops: { type: 'integer' }, developer: { type: 'integer' }, voice: { type: 'integer' } } },
+    critiques: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['persona', 'sentence', 'problem', 'fix'], properties: { persona: { type: 'string' }, sentence: { type: 'string' }, problem: { type: 'string' }, fix: { type: 'string' } } } },
+  },
+} as const
+
+export const meanScore = (v: Verdict) => Object.values(v.scores).reduce((a, b) => a + b, 0) / 4
+export const passes = (v: Verdict) => Object.values(v.scores).every((s) => s >= 7) && meanScore(v) >= 8
+export const critiqueNotes = (v: Verdict) => v.critiques.map((c) => `- [${c.persona}] "${c.sentence}": ${c.problem}. Fix: ${c.fix}`).join('\n')
+
+export const URL_RE = /https?:\/\/[^\s)\]}"']+/g
+
+/* A backing is prose, so the URL can sit anywhere in it ("BPS 2025 survey
+ * (https://...)"). Scan the whole string rather than testing its prefix. */
+export function urlsIn(text: string): string[] {
+  return text.match(URL_RE) ?? []
+}
+
+/* Trailing slash, a leading www., and the query string are the only
+ * normalizations; anything else must match what research actually returned. */
+export function normUrl(u: string): string {
+  return u.replace(/\?.*$/, '').replace(/^(https?:\/\/)www\./, '$1').replace(/\/$/, '')
+}
+
+/* A claim citing a URL research never retrieved is worse than no citation at
+ * all, so it is dropped rather than trusted. One bad URL in a backing drops
+ * the claim: the rest of the backing cannot be trusted either. */
+export function citationsAllowed(brief: Brief, urls: string[], log: (s: string) => void): Brief {
+  const allowed = new Set(urls.map(normUrl))
+  const claims = brief.claims.filter((c) => {
+    const found = urlsIn(c.backing)
+    if (found.length === 0) return true
+    if (found.every((u) => allowed.has(normUrl(u)))) return true
+    log(`dropped uncited claim: ${c.claim} (${c.backing})`)
+    return false
+  })
+  return { ...brief, claims }
+}
+
+/* The brief's claims list is enforced before writing, but the writer can still
+ * put a URL in the body that no claim carried. Internal links are relative, so
+ * they never match URL_RE and are left alone. */
+export function stripUncitedLinks(body: string, allowed: string[]): { body: string; stripped: string[] } {
+  const allow = new Set(allowed.map(normUrl))
+  const stripped: string[] = []
+  let out = body
+  for (const url of new Set(urlsIn(body))) {
+    if (allow.has(normUrl(url))) continue
+    stripped.push(url)
+    const escaped = url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    out = out.replace(new RegExp(`\\[([^\\]]*)\\]\\(\\s*${escaped}\\s*\\)`, 'g'), '$1')
+    out = out.split(url).join('')
+  }
+  return { body: out, stripped }
+}
 
 const REQUIRED_KEYS = { regular: ['title', 'excerpt', 'seoTitle', 'seoDescription', 'ctaTitle', 'ctaDescription', 'tags'], pillar: ['title', 'introduction', 'seoTitle', 'seoDescription', 'ctaTitle', 'ctaDescription'] }
 
@@ -72,10 +146,13 @@ export function parseArticle(text: string, type: 'pillar' | 'regular' = 'regular
   return { frontmatter: clampFrontmatter(data, type), body: content.trim() + '\n' }
 }
 
-function structure(type: 'pillar' | 'regular', linkLines: string): string {
+function structure(type: 'pillar' | 'regular', linkLines: string, hasSources: boolean): string {
   const frontmatterRule = type === 'pillar'
     ? 'introduction: one paragraph of 60 to 120 words, plain text; seoTitle under 60; seoDescription under 155; no excerpt, no tags.'
     : 'excerpt under 160 characters, seoTitle under 60, seoDescription under 155, tags: 3 to 5 short phrases.'
+  const sourcesRule = hasSources
+    ? '\n- If any claim\'s backing is a URL, end the article with a "## Sources" section (Indonesian: "## Sumber") listing each cited URL once as a plain Markdown link with the publisher as text, and cite inline with the same link where the claim appears.'
+    : ''
   return `Structure rules:
 - Do not repeat the title in the body. Open with one or two short paragraphs that answer the search intent directly, then use the outline's H2 headings in order.
 - Use exactly the outline's H2 headings, in order.
@@ -84,7 +161,7 @@ ${linkLines}
 - Close with a CTA section that follows the brief's CTA framing; fill ctaTitle and ctaDescription in frontmatter with the same intent.
 - ${frontmatterRule}
 - Make only the claims in the brief's claims list. No statistics, client names, or outcomes that are not in that list.
-- Quote every frontmatter string value with single quotes (escape an inner single quote by doubling it).
+- Quote every frontmatter string value with single quotes (escape an inner single quote by doubling it).${sourcesRule}
 - Output one Markdown document: YAML frontmatter between --- lines, then the body. No code fences, no commentary.`
 }
 
@@ -137,16 +214,18 @@ async function text(client: Anthropic, params: Omit<Anthropic.MessageCreateParam
   return msg.content.filter((b): b is Anthropic.TextBlock => b.type === 'text').map((b) => b.text).join('')
 }
 
-export function createWriter(): Writer {
-  const client = new Anthropic()
+export function createWriter(client: Anthropic = new Anthropic()): Writer {
   const base = { model: MODEL, max_tokens: 64000, thinking: { type: 'adaptive' as const }, output_config: { effort: 'high' as const } }
 
   return {
     async brief(ctx) {
       const published = ctx.published.map((p) => `- ${p.type} "${p.title}" slug=${p.slug}`).join('\n') || '- none yet'
+      const hasResearch = !!ctx.research?.urls.length
       const prompt = `Plan an article. Return JSON only.
 
 Row: type=${ctx.row.type}, category=${ctx.row.category}, working title="${ctx.row.title}", goal="${ctx.row.goal}".
+${ctx.notes ? `Founder notes for this topic (first source for claims; a note beats the product context when they disagree; record such a backing as "founder note: <quote>"):\n<notes>\n${ctx.notes}\n</notes>\n` : 'No founder notes for this topic.\n'}
+${hasResearch ? `Research findings (the only allowed sources for external claims; cite by exact URL in backing):\n<research>\n${ctx.research!.text}\n</research>\n` : ''}
 ${ctx.row.facts ? `Client facts supplied by the founders (the only source for case-study claims):\n${ctx.row.facts}\n` : ''}
 Published in this category (choose internalLinks from these only; prefer the pillar plus the closest post):
 ${published}
@@ -155,17 +234,22 @@ Slugs already used (do not reuse): ${ctx.usedSlugs.join(', ')}
 
 Rules:
 - claims: 3 to 5. Each backing must quote or name the section of the product context (or a line of the client facts) that supports it. If nothing supports a claim, leave it out.
-- cta.missingAsset is true when the goal names a download, checklist, template, ebook, or demo that does not exist. Then framing must fall back to an invitation to talk.
+${hasResearch ? '- A claim may be backed by one of the research URLs, written exactly. Never a URL you did not see above.\n' : ''}- cta.missingAsset is true when the goal names a download, checklist, template, ebook, or demo that does not exist. Then framing must fall back to an invitation to talk.
 - unsplashQuery: two concrete nouns describing a scene, not the topic.
-- outline: 3 to 8 H2 sections. Language-neutral; both an English and an Indonesian article will follow it.`
+- outline: 3 to 8 H2 sections. Language-neutral; both an English and an Indonesian article will follow it.
+- notesUsed: the notes you drew on, quoted briefly. notesUnused: the notes you left out and why, in one line each. Both empty when there are no notes.`
       const raw = await text(client, { ...base, max_tokens: 16000, system: system(ctx, 'You are a content strategist producing a brief.'), messages: [{ role: 'user', content: prompt }], output_config: { effort: 'high', format: { type: 'json_schema', schema: BRIEF_SCHEMA } } })
-      const brief = JSON.parse(raw) as Brief
+      let brief = JSON.parse(raw) as Brief
       if (!/^[a-z0-9][a-z0-9-]{3,80}$/.test(brief.slug)) throw new Error(`brief slug invalid: ${brief.slug}`)
       if (ctx.usedSlugs.includes(brief.slug)) throw new Error(`brief reused slug ${brief.slug}`)
       const knownByType = new Map(ctx.published.map((p) => [p.slug, p.type]))
       brief.internalLinks = brief.internalLinks
         .filter((l) => knownByType.has(l.slug))
         .map((l) => ({ ...l, type: knownByType.get(l.slug)! }))
+      const log = ctx.log ?? console.log
+      const before = brief.claims.length
+      brief = citationsAllowed(brief, ctx.research?.urls ?? [], log)
+      if (brief.claims.length !== before) log(`claims: ${before} -> ${brief.claims.length}`)
       return brief
     },
 
@@ -178,16 +262,18 @@ Rules:
       }
       const links = linkHrefs(ctx, brief, locale)
       const linkLines = links.map((l) => `- Link "${l.why}": href=${l.href}`).join('\n')
+      const hasSources = brief.claims.some((c) => urlsIn(c.backing).length > 0)
       const prompt = `Write the ${locale === 'en' ? 'English' : 'Indonesian'} ${ctx.row.type === 'pillar' ? 'guide' : 'article'}.
 
 Brief:
 ${JSON.stringify(brief, null, 2)}
 
+${ctx.notes ? `Founder notes (use their wording where it is sharper than yours):\n<notes>\n${ctx.notes}\n</notes>\n` : ''}
 ${audience}
 
 Frontmatter keys required: ${frontmatterKeys(ctx.row.type)}. Use the brief's title (translated with intent, not literally, for Indonesian).
 
-${structure(ctx.row.type, linkLines)}
+${structure(ctx.row.type, linkLines, hasSources)}
 
 Follow the "Voice rules" in the system context exactly; where an exemplar breaks one of them, the rule wins.
 
@@ -206,17 +292,18 @@ ${exemplars}`
       const draftText = matter.stringify(draft.body, draft.frontmatter)
       const links = linkHrefs(ctx, brief, locale)
       const linkLines = links.map((l) => `- Link "${l.why}": href=${l.href}`).join('\n')
+      const hasSources = brief.claims.some((c) => urlsIn(c.backing).length > 0)
       const prompt = `Edit this ${locale === 'en' ? 'English' : 'Indonesian'} draft and return the corrected document in the same format.
 
 Checks, in order:
-1. Every factual claim must trace to the brief's claims list. Remove or rephrase anything else. No numbers or names that are not in the list.
+1. Every factual claim must trace to the brief's claims list. A claim whose backing is a URL keeps its inline link; any other external number or name is removed.
 2. Cut filler, hedges, and repetition. Keep the exemplar voice. Do not shorten below roughly 80% of the draft.
 3. Headings must equal the brief's outline H2s, in order.
 4. Frontmatter: excerpt/introduction present; seoTitle under 60 chars; seoDescription under 155 chars; ctaTitle and ctaDescription match the CTA framing.
 5. Internal links: only the hrefs listed below, verbatim.
 ${comparison}
 7. Voice: the system context carries a "Voice rules" list. Treat every listed pattern as a defect. Remove every em-dash and en-dash, every "not X, it is Y" reversal, every one-line verdict, every bold lead-in, every forced triad. Rewrite the sentence rather than deleting the idea.
-${notes ? `\nSpecific violations found by an automated check; fix every one:\n${notes}\n` : ''}
+${notes ? `\n${notes.startsWith('READER CRITIQUES') ? 'Reader critiques. Apply a critique only if it can be fixed within the brief\'s claims list. If a critique asks for a fact, number, or example that is not in the brief, ignore it and say nothing.' : 'Specific violations found by an automated check; fix every one:'}\n${notes}\n` : ''}
 
 Brief:
 ${JSON.stringify(brief, null, 2)}
@@ -224,9 +311,46 @@ ${JSON.stringify(brief, null, 2)}
 Draft:
 ${draftText}
 
-${structure(ctx.row.type, linkLines)}`
+${structure(ctx.row.type, linkLines, hasSources)}`
       const raw = await text(client, { ...base, system: system(ctx, 'You are a copy editor.'), messages: [{ role: 'user', content: prompt }] })
       return parseArticle(raw, ctx.row.type)
+    },
+
+    async judge(ctx, brief, locale, article) {
+      const prompt = `Article (${locale}):\n${matter.stringify(article.body, article.frontmatter)}\n\nBrief thesis: ${brief.thesis}`
+      const raw = await text(client, { ...base, max_tokens: 16000, system: system(ctx, ctx.judgePrompt), messages: [{ role: 'user', content: prompt }], output_config: { effort: 'high', format: { type: 'json_schema', schema: VERDICT_SCHEMA } } })
+      const parsed = JSON.parse(raw) as Verdict
+      const clamp = (n: number) => Math.min(10, Math.max(1, Math.round(n)))
+      return {
+        scores: { owner: clamp(parsed.scores.owner), ops: clamp(parsed.scores.ops), developer: clamp(parsed.scores.developer), voice: clamp(parsed.scores.voice) },
+        critiques: parsed.critiques.slice(0, MAX_CRITIQUES),
+      }
+    },
+
+    async research(ctx) {
+      const prompt = `Find at most five sources that bear on this topic for an Indonesian SME audience: "${ctx.row.title}" (${ctx.row.category}).
+Prefer primary and Indonesian institutional sources (BPS, OJK, Kominfo, Bank Indonesia, KADIN, ministries), then reputable international bodies. Skip vendor blogs and listicles.
+Return plain text, one block per source: URL, publisher, date, one-line finding, and the exact figure or quote if there is one. If nothing credible exists, say "No credible sources found" and stop.`
+      const tools: Anthropic.ToolUnion[] = [
+        { type: 'web_search_20260209', name: 'web_search', max_uses: 5 },
+        { type: 'web_fetch_20260209', name: 'web_fetch', max_uses: 3, max_content_tokens: 12000 },
+      ]
+      const messages: Anthropic.MessageParam[] = [{ role: 'user', content: prompt }]
+      const urls = new Set<string>()
+      const textParts: string[] = []
+      for (let i = 0; i < 4; i++) {
+        const msg = await client.messages.stream({ model: MODEL, max_tokens: 16000, thinking: { type: 'adaptive' }, tools, messages, system: system(ctx, 'You are a research assistant. Cite only what you actually retrieved.') }).finalMessage()
+        for (const b of msg.content) {
+          if (b.type === 'web_search_tool_result' && Array.isArray(b.content)) for (const r of b.content) if (r.type === 'web_search_result') urls.add(r.url)
+          if (b.type === 'web_fetch_tool_result' && b.content.type === 'web_fetch_result') urls.add(b.content.url)
+        }
+        if (msg.stop_reason === 'refusal') return { text: 'Research refused', urls: [] }
+        const chunk = msg.content.filter((b): b is Anthropic.TextBlock => b.type === 'text').map((b) => b.text).join('')
+        if (chunk) textParts.push(chunk)
+        if (msg.stop_reason !== 'pause_turn') return { text: textParts.join('\n\n'), urls: [...urls] }
+        messages.push({ role: 'assistant', content: msg.content })   // resume: the server continues where it paused
+      }
+      return { text: textParts.length ? textParts.join('\n\n') : 'Research paused too many times; no sources.', urls: [...urls] }
     },
   }
 }

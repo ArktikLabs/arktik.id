@@ -59,3 +59,14 @@ category are gated the same way whatever their title: a client story is never
 invented. To re-run one row, dispatch the workflow with its title. A `failed`
 row is retried by setting it back to `todo`. A `needs-input` row is retried by
 filling `facts` and setting the status back to `todo`.
+
+Founder notes: put your own material for a topic in the planner's `notes`
+column or in `content/notes/<slug>.md` (get the path with
+`pnpm publish:due --notes-path "<title>"`). The brief uses notes first.
+Anything you would not publish does not go in a note; notes are committed
+and quoted in workflow logs.
+Research: set the planner's `research` column to `yes` for evidence-led
+rows; citations are limited to URLs the research call returned, and the
+article ends with a Sources list. A dry run of a `research=yes` row still
+performs the live research call. Every article carries `quality` scores
+(owner, ops, developer, voice, 1-10) in frontmatter from the judge loop.

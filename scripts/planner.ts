@@ -1,4 +1,5 @@
 import fs from 'node:fs'
+import path from 'node:path'
 
 export type Status = 'todo' | 'published' | 'needs-input' | 'failed'
 export interface Row {
@@ -10,9 +11,11 @@ export interface Row {
   status: Status
   slug: string
   facts: string
+  notes: string
+  research: string
 }
 
-export const COLUMNS = ['date', 'type', 'title', 'category', 'goal', 'status', 'slug', 'facts'] as const
+export const COLUMNS = ['date', 'type', 'title', 'category', 'goal', 'status', 'slug', 'facts', 'notes', 'research'] as const
 const STATUSES: Status[] = ['todo', 'published', 'needs-input', 'failed']
 const TYPES = ['pillar', 'regular']
 
@@ -48,6 +51,7 @@ export function parseCsv(text: string): Row[] {
     if (!STATUSES.includes(r.status)) throw new Error(`row ${n + 2}: unknown status "${r.status}"`)
     if (!TYPES.includes(r.type)) throw new Error(`row ${n + 2}: unknown type "${r.type}"`)
     if (!/^\d{4}-\d{2}-\d{2}$/.test(r.date)) throw new Error(`row ${n + 2}: date must be YYYY-MM-DD`)
+    if (r.research !== '' && r.research !== 'yes') throw new Error(`row ${n + 2}: research must be "yes" or empty`)
     return r
   })
 }
@@ -69,6 +73,16 @@ export function dueRows(rows: Row[], today: string, titleFilter?: string): Row[]
 }
 
 export const isCaseStudy = (row: Row) => /^case study/i.test(row.title)
+
+export function notesSlug(title: string): string {
+  return title.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 80)
+}
+export const notesPath = (root: string, row: Row) => path.join(root, 'content', 'notes', `${notesSlug(row.title)}.md`)
+export function notesFor(root: string, row: Row): string {
+  const file = notesPath(root, row)
+  const fromFile = fs.existsSync(file) ? fs.readFileSync(file, 'utf8').trim() : ''
+  return [row.notes.trim(), fromFile].filter(Boolean).join('\n\n')
+}
 
 export function addDays(iso: string, days: number): string {
   const d = new Date(`${iso}T00:00:00Z`)

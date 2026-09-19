@@ -87,3 +87,8 @@ test('imageCredit passes through', () => {
   assert.deepEqual(post?.imageCredit, { name: 'Ani Foto', profileUrl: 'https://unsplash.com/@anifoto', photoUrl: 'https://unsplash.com/photos/abc123' })
   assert.equal(content.getBlogPostBySlug('web', 'pertama', 'id')?.imageCredit, undefined)
 })
+
+test('quality passes through', () => {
+  const post = content.getBlogPostBySlug('seo', 'kedua', 'id')
+  assert.deepEqual(post?.quality, { owner: 8, ops: 9, developer: 7, voice: 8, rounds: 1 })
+})

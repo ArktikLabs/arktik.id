@@ -41,7 +41,9 @@ can see the expected name (`pnpm publish:due --notes-path "MVP Development"`).
 
 ### Brief
 
-The brief prompt receives the notes first, before the product context, and
+The brief prompt receives the notes in the user message, ahead of the row
+facts; the product context stays in the cached system block. The prompt
+states that notes take precedence. The prompt
 is told: claims come from the notes first, then from the product context;
 a note that contradicts the product context wins and is reported in the
 brief's `backing` as `founder note`. The brief must state which notes it
@@ -86,8 +88,9 @@ scores be graphed over time from the repo alone.
 ### Cost
 
 Per language: one judge call, up to two revision and re-judge pairs. Worst
-case adds five calls per language, typical case one or two. Judge calls
-are short output, so the cost is mostly cached input.
+case adds six calls per language (the post-revision voice check can add
+one edit), typical case one or two. Judge calls are short output, so the
+cost is mostly cached input.
 
 ## Lever 3: opt-in research
 
@@ -128,8 +131,10 @@ else. The editor enforces it; the code enforces the URL half.
 ### Cost
 
 About $0.20 to $0.30 per researched article: five searches at $10 per
-thousand, roughly 20k result tokens as input, and one extra call. Runtime
-adds one to three minutes.
+thousand, roughly 20k result tokens as input, and one extra call. A
+researched row also pays one extra cache write because the research call
+declares tools. Runtime adds one to three minutes. A dry run of a
+researched row makes the real research call.
 
 ## Rollout
 
