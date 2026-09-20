@@ -12,7 +12,7 @@ on:
         default: false
   # Daily. Disable by commenting this block out.
   schedule:
-    - cron: "0 1 * * *"   # 08:00 Asia/Jakarta
+    - cron: "17 1 * * *"  # 08:17 Asia/Jakarta; off the top of the hour, which GitHub drops most often
 
 concurrency:
   group: publish-content
