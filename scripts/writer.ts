@@ -67,7 +67,9 @@ const VERDICT_SCHEMA = {
 } as const
 
 export const meanScore = (v: Verdict) => Object.values(v.scores).reduce((a, b) => a + b, 0) / 4
-export const passes = (v: Verdict) => Object.values(v.scores).every((s) => s >= 7) && meanScore(v) >= 8
+/* Revise only when a seat is genuinely unhappy. The mean-of-8 rule triggered
+ * revisions that cost about 45 cents and moved no score in the first live run. */
+export const passes = (v: Verdict) => Object.values(v.scores).every((s) => s >= 7)
 export const critiqueNotes = (v: Verdict) => v.critiques.map((c) => `- [${c.persona}] "${c.sentence}": ${c.problem}. Fix: ${c.fix}`).join('\n')
 
 export const URL_RE = /https?:\/\/[^\s)\]}"']+/g
@@ -228,7 +230,11 @@ async function text(client: Anthropic, params: Omit<Anthropic.MessageCreateParam
 }
 
 export function createWriter(client: Anthropic = new Anthropic()): Writer {
-  const base = { model: MODEL, max_tokens: 64000, thinking: { type: 'adaptive' as const }, output_config: { effort: 'high' as const } }
+  /* One effort level for the whole run: effort is part of the prompt-cache key,
+ * so mixing levels rewrote the 14k-token context block mid-run. Medium held
+ * quality in the judged runs and roughly halves thinking spend. */
+const EFFORT = 'medium' as const
+const base = { model: MODEL, max_tokens: 64000, thinking: { type: 'adaptive' as const }, output_config: { effort: EFFORT } }
 
   return {
     async brief(ctx) {
@@ -251,7 +257,7 @@ ${hasResearch ? '- A claim may be backed by one of the research URLs, written ex
 - unsplashQuery: two concrete nouns describing a scene, not the topic.
 - outline: 3 to 8 H2 sections. Language-neutral; both an English and an Indonesian article will follow it.
 - notesUsed: the notes you drew on, quoted briefly. notesUnused: the notes you left out and why, in one line each. Both empty when there are no notes.`
-      const raw = await text(client, { ...base, max_tokens: 16000, system: system(ctx, 'You are a content strategist producing a brief.'), messages: [{ role: 'user', content: prompt }], output_config: { effort: 'high', format: { type: 'json_schema', schema: BRIEF_SCHEMA } } }, 'brief')
+      const raw = await text(client, { ...base, max_tokens: 16000, system: system(ctx, 'You are a content strategist producing a brief.'), messages: [{ role: 'user', content: prompt }], output_config: { effort: EFFORT, format: { type: 'json_schema', schema: BRIEF_SCHEMA } } }, 'brief')
       let brief = JSON.parse(raw) as Brief
       if (!/^[a-z0-9][a-z0-9-]{3,80}$/.test(brief.slug)) throw new Error(`brief slug invalid: ${brief.slug}`)
       if (ctx.usedSlugs.includes(brief.slug)) throw new Error(`brief reused slug ${brief.slug}`)
@@ -292,10 +298,7 @@ Follow the "Voice rules" in the system context exactly; where an exemplar breaks
 
 Match the length and formatting of these published exemplars:
 ${exemplars}`
-      // The English draft is where deep thinking earns its keep; the Indonesian
-      // transcreation works from a finished text, so medium effort is enough.
-      const effort = locale === 'en' ? 'high' : 'medium'
-      const raw = await text(client, { ...base, output_config: { effort }, system: system(ctx, 'You are a senior content writer.'), messages: [{ role: 'user', content: prompt }] }, `write:${locale}`)
+      const raw = await text(client, { ...base, system: system(ctx, 'You are a senior content writer.'), messages: [{ role: 'user', content: prompt }] }, `write:${locale}`)
       return parseArticle(raw, ctx.row.type)
     },
 
@@ -328,13 +331,13 @@ Draft:
 ${draftText}
 
 ${structure(ctx.row.type, linkLines, hasSources)}`
-      const raw = await text(client, { ...base, output_config: { effort: 'medium' }, system: system(ctx, 'You are a copy editor.'), messages: [{ role: 'user', content: prompt }] }, `edit:${locale}${notes ? ':revise' : ''}`)
+      const raw = await text(client, { ...base, system: system(ctx, 'You are a copy editor.'), messages: [{ role: 'user', content: prompt }] }, `edit:${locale}${notes ? ':revise' : ''}`)
       return parseArticle(raw, ctx.row.type)
     },
 
     async judge(ctx, brief, locale, article) {
       const prompt = `Article (${locale}):\n${matter.stringify(article.body, article.frontmatter)}\n\nBrief thesis: ${brief.thesis}`
-      const raw = await text(client, { ...base, max_tokens: 16000, system: system(ctx, ctx.judgePrompt), messages: [{ role: 'user', content: prompt }], output_config: { effort: 'medium', format: { type: 'json_schema', schema: VERDICT_SCHEMA } } }, `judge:${locale}`)
+      const raw = await text(client, { ...base, max_tokens: 16000, system: system(ctx, ctx.judgePrompt), messages: [{ role: 'user', content: prompt }], output_config: { effort: EFFORT, format: { type: 'json_schema', schema: VERDICT_SCHEMA } } }, `judge:${locale}`)
       const parsed = JSON.parse(raw) as Verdict
       const clamp = (n: number) => Math.min(10, Math.max(1, Math.round(n)))
       return {
@@ -355,7 +358,7 @@ Return plain text, one block per source: URL, publisher, date, one-line finding,
       const urls = new Set<string>()
       const textParts: string[] = []
       for (let i = 0; i < 4; i++) {
-        const msg = await client.messages.stream({ model: MODEL, max_tokens: 16000, thinking: { type: 'adaptive' }, output_config: { effort: 'medium' }, tools, messages, system: system(ctx, 'You are a research assistant. Cite only what you actually retrieved.') }).finalMessage()
+        const msg = await client.messages.stream({ model: MODEL, max_tokens: 16000, thinking: { type: 'adaptive' }, output_config: { effort: EFFORT }, tools, messages, system: system(ctx, 'You are a research assistant. Cite only what you actually retrieved.') }).finalMessage()
         if (msg.usage) recordUsage(`research:${i}`, msg)
         for (const b of msg.content) {
           if (b.type === 'web_search_tool_result' && Array.isArray(b.content)) for (const r of b.content) if (r.type === 'web_search_result') urls.add(r.url)

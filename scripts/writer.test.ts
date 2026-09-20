@@ -229,7 +229,7 @@ test('passes and meanScore follow the panel thresholds', () => {
   const v = (a: number, b: number, c: number, d: number): Verdict => ({ scores: { owner: a, ops: b, developer: c, voice: d }, critiques: [] })
   assert.equal(passes(v(8, 8, 8, 8)), true)
   assert.equal(passes(v(9, 9, 9, 6)), false)   // one seat below 7
-  assert.equal(passes(v(7, 7, 7, 8)), false)   // mean 7.25 < 8
+  assert.equal(passes(v(7, 7, 7, 8)), true)    // every seat at least 7 is enough; no mean rule
   assert.equal(meanScore(v(7, 8, 9, 8)), 8)
 })
 test('critiqueNotes formats one line per critique', () => {

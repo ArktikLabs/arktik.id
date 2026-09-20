@@ -74,8 +74,9 @@ After the per-language edit and the voice guard:
 
 1. Judge call: returns JSON `{ scores: { owner, ops, developer, voice },
    critiques: [{ persona, sentence, problem, fix }] }`.
-2. Pass if every score is at least 7 and the average is at least 8, the
-   thresholds the copy-editing skill's panel method uses.
+2. Pass if every score is at least 7. (The copy-editing skill also asks for
+   a mean of 8; that rule triggered revisions that cost about 45 cents and
+   moved no score in the first live run, so it was dropped.)
 3. Otherwise one revision call with the critiques quoted back, then one
    re-judge. One revision round per language (a second did not raise scores
    in the first live run).
