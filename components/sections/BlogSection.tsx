@@ -46,7 +46,9 @@ export async function BlogSection({ locale }: BlogSectionProps) {
           <div className="mb-16">
             <h3 className="label-mono mb-5">{t('completeGuides')}</h3>
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {pillars.slice(0, 3).map((pillar) => (
+              {/* Newest first: the loader sorts guides by title, but the homepage
+               * should surface what was just published. */}
+              {[...pillars].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3).map((pillar) => (
                 <PillarCard
                   key={pillar.slug}
                   pillar={pillar}
