@@ -6,6 +6,7 @@ import matter from 'gray-matter'
 import { readPlanner, writePlanner, dueRows, isCaseStudy, latestPillarSlug, notesFor, notesPath, type Row } from './planner.ts'
 import { createWriter, voiceTells, passes, meanScore, critiqueNotes, stripUncitedLinks, type Writer, type Article, type Brief, type WriterContext } from './writer.ts'
 import { createUnsplash, type ImageSource } from './unsplash.ts'
+import { createCliClient } from './claude-cli.ts'
 
 export interface Deps {
   writer: Writer
@@ -270,7 +271,9 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const t = process.argv.indexOf('--title')
   const key = process.env.UNSPLASH_ACCESS_KEY
   const deps: Deps = {
-    writer: createWriter(),
+    // WRITER=cli runs every model call through the local Claude Code login
+    // (subscription) instead of ANTHROPIC_API_KEY; prompts are unchanged.
+    writer: process.env.WRITER === 'cli' ? createWriter(createCliClient()) : createWriter(),
     images: key ? createUnsplash(key) : { find: async () => null },
     today: new Date().toISOString().slice(0, 10),
     root,
