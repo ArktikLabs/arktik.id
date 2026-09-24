@@ -38,7 +38,7 @@ only thing that differs between calls:
   article, 1,300 to 2,000 characters, hook inside the first 140, no link in
   the body, one line of what Arktik will not do.
 - `instagram.md`: the teacher. Cover slide as a question the reader needs
-  answered, one idea per slide, last slide the CTA with "link in bio".
+  answered, one idea per slide, last slide a save-leaning CTA with "Link di bio".
   Caption under 150 words.
 - `facebook.md`: the neighbour who runs a business. Story first, warmer
   than LinkedIn, the link in the post, 120 to 250 words.
@@ -54,6 +54,17 @@ only thing that differs between calls:
 Every persona file ends with the same three lines: claims only from the
 article's brief; voice rules apply; no invented numbers, clients, or
 outcomes.
+
+**Indonesian register** (amended 2026-09-25 after the first sample read as
+translated). Indonesian posts are written in Indonesian from the article's
+ideas, never translated from the English post or article sentences. Register
+follows the persona: Instagram "kamu", santai-rapi; Facebook "Anda",
+semi-formal spoken; company Threads "kamu", like a group chat; personal
+Threads "aku". A post never mixes "Anda" with "aja/nggak". Everyday English
+loanwords stay in English ("link di bio", not "tautan di bio"). The calque
+list and per-platform samples live in `scripts/prompts/social/indonesian-voice.md`,
+which is included in the generation prompt, and the voice guard flags the
+listed calques.
 
 ## Generation
 

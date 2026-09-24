@@ -30,6 +30,7 @@
 
 Created:
 - `scripts/prompts/social/{linkedin,instagram,facebook,x,threads-company,threads-personal}.md` — personas.
+- `scripts/prompts/social/indonesian-voice.md` — Indonesian register per platform, loanwords, banned calques (exists).
 - `scripts/social/config.json` — integration ids, times, provider settings.
 - `scripts/social/carousel.html`, `scripts/social/card.html` — templates.
 - `scripts/social.ts` — generation, clamping, URL check, voice pass. Pure except the model call, which goes through `Writer`-style injection.
@@ -95,6 +96,7 @@ Rules that always apply:
 - Make only claims that appear in the brief's claims list. No numbers, clients, or outcomes from anywhere else.
 - The voice rules in the system context apply in full.
 - No URL except the article URL, and only where this persona allows a link.
+- Indonesian posts: write in Indonesian first from the article's ideas; never translate English sentences. Keep everyday English loanwords (software, custom, link, budget, update, add-on). No calques: see `scripts/prompts/social/indonesian-voice.md`.
 ```
 `scripts/prompts/social/linkedin.md`:
 ```
@@ -113,20 +115,22 @@ the image card.
 ```
 # Instagram (company): the teacher
 
-Indonesian, formal register, everyday vocabulary. A carousel of 6 to 8
+Indonesian written first, never translated. Pronoun "kamu" (or none),
+santai-rapi: "aja", "nggak", "bikin" are fine, slang is not. A carousel of 6 to 8
 slides. Slide 1 is the cover: a question the reader needs answered, at most
 ten words in `headline`, `body` empty. Slides 2 to N-1: one idea each,
 `headline` at most eight words, `body` at most 35 words. Last slide: the
-CTA, `headline` "Baca selengkapnya", `body` "Tautan di bio." plus one line
+CTA, a save-leaning `headline` (e.g. "Simpan dulu, buka lagi pas butuh"), `body` "Link di bio." plus one line
 of what the reader gets. Caption under 150 words, opens with the cover
-question, ends with "Tautan di bio." No link in the caption. Up to five
+question, ends with "Link di bio." No link in the caption. Up to five
 hashtags in `hashtags.instagram`.
 ```
 `scripts/prompts/social/facebook.md`:
 ```
 # Facebook (company): the neighbour who runs a business
 
-Indonesian, warmer than LinkedIn, story first: start with a situation a
+Indonesian written first, never translated. Pronoun "Anda", semi-formal
+spoken ("saja", "tidak"; never "aja/nggak" next to "Anda"). Warmer than LinkedIn, story first: start with a situation a
 business owner would recognise, then what the article says about it, 120
 to 250 words. The article link belongs at the end of the text as a plain
 URL. No hashtags.
@@ -144,7 +148,8 @@ The article URL goes at the end of the last post only.
 ```
 # Threads (company): the conversation starter
 
-Indonesian, plain speech. One post under 400 characters: a question or a
+Indonesian, plain speech, pronoun "kamu", written like a message in a group
+chat. One post under 400 characters: a question or a
 contrarian take drawn from the article, written to be replied to. No link,
 no hashtags.
 ```
@@ -152,7 +157,7 @@ no hashtags.
 ```
 # Threads (founder's personal account): thinking out loud
 
-Indonesian, first person singular, the founder speaking. Under 400
+Indonesian, first person "aku", santai, the founder speaking. Under 400
 characters. Something the article made them notice about their own work
 or a client conversation, told plainly. Never a pitch, never "we". No link,
 no hashtags.
@@ -431,7 +436,7 @@ test('pngSize reads IHDR', () => {
 test('renders a carousel and a card at 1080x1350', { timeout: 60000 }, async () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'render-'))
   const r = createRenderer()
-  const slides = [{ headline: 'Apa yang sebenarnya dibayar?', body: '', index: 1, total: 3 }, { headline: 'Satu ide', body: 'Isi singkat.', index: 2, total: 3 }, { headline: 'Baca selengkapnya', body: 'Tautan di bio.', index: 3, total: 3 }]
+  const slides = [{ headline: 'Apa yang sebenarnya dibayar?', body: '', index: 1, total: 3 }, { headline: 'Satu ide', body: 'Isi singkat.', index: 2, total: 3 }, { headline: 'Simpan dulu, buka lagi pas butuh', body: 'Link di bio.', index: 3, total: 3 }]
   const files = await r.carousel(slides, dir, 'demo')
   assert.equal(files.length, 3)
   for (const f of files) assert.deepEqual(pngSize(fs.readFileSync(f)), { width: 1080, height: 1350 })
