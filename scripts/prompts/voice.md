@@ -67,6 +67,6 @@ Adapted from the Humanizer pattern list (MIT) and tuned to this blog.
 
 - One idea per paragraph, said once, in the words a founder would use on a
   call. Concrete nouns: the spreadsheet, the invoice, the person who knows.
-- Contractions are fine in English. Indonesian stays in the formal register
-  of the published exemplars but with plain everyday vocabulary.
+- Contractions are fine in English. Indonesian follows `voice-id.md`:
+  "Anda" semi-formal, short sentences, everyday loanwords, no calques.
 - End on the CTA paragraph, not on a moral.

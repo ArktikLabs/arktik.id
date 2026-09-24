@@ -236,3 +236,30 @@ test('critiqueNotes formats one line per critique', () => {
   const n = critiqueNotes({ scores: { owner: 6, ops: 8, developer: 8, voice: 8 }, critiques: [{ persona: 'owner', sentence: 'Costs vary.', problem: 'vague', fix: 'name the stage price rule' }] })
   assert.equal(n, '- [owner] "Costs vary.": vague. Fix: name the stage price rule')
 })
+
+test('idTells counts long sentences and calques, ignoring headings, tables and link targets', async () => {
+  const { idTells } = await import('./writer.ts')
+  const long = Array(31).fill('kata').join(' ') + '.'
+  const body = `## Judul yang sangat panjang ${Array(40).fill('x').join(' ')}\n\n${long} Pendek saja. Ini biaya betulan.\n\n| a | b |\n\n- Baca [panduan](/blog/x/) dalam rangka belajar.\n`
+  const t = idTells(body)
+  assert.equal(t.long.length, 1)
+  assert.equal(t.sentences, 4)
+  assert.deepEqual(t.calques.sort(), ['biaya betulan', 'dalam rangka'])
+})
+
+test('judge adds the bahasa seat only for indonesian with rules loaded', async () => {
+  const seen: any[] = []
+  const reply = (scores: object) => ({ stop_reason: 'end_turn', usage: {}, content: [{ type: 'text', text: JSON.stringify({ scores, critiques: [] }) }] })
+  const client = { messages: { stream: (params: any) => { seen.push(params); return { finalMessage: async () => seen.length === 1 ? reply({ owner: 8, ops: 8, developer: 8, voice: 8, bahasa: 5 }) : reply({ owner: 8, ops: 8, developer: 8, voice: 8 }) } } } }
+  const { passes } = await import('./writer.ts')
+  const w = createWriter(client as unknown as Anthropic)
+  const b = { thesis: 't' } as any
+  const id = await w.judge({ ...ctx, voiceId: 'ATURAN' }, b, 'id', { frontmatter: {}, body: 'x' })
+  assert.equal(id.scores.bahasa, 5)
+  assert.equal(passes(id), false)
+  assert.deepEqual(seen[0].output_config.format.schema.properties.scores.required, ['owner', 'ops', 'developer', 'voice', 'bahasa'])
+  assert.match(seen[0].system[1].text, /bahasa: seorang editor bahasa Indonesia/)
+  const en = await w.judge({ ...ctx, voiceId: 'ATURAN' }, b, 'en', { frontmatter: {}, body: 'x' })
+  assert.equal(en.scores.bahasa, undefined)
+  assert.deepEqual(seen[1].output_config.format.schema.properties.scores.required, ['owner', 'ops', 'developer', 'voice'])
+})

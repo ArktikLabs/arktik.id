@@ -4,7 +4,7 @@ import { execFileSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 import matter from 'gray-matter'
 import { readPlanner, writePlanner, dueRows, isCaseStudy, latestPillarSlug, notesFor, notesPath, type Row } from './planner.ts'
-import { createWriter, voiceTells, passes, meanScore, critiqueNotes, stripUncitedLinks, type Writer, type Article, type Brief, type WriterContext } from './writer.ts'
+import { createWriter, voiceTells, idTells, LONG_SENTENCE, passes, meanScore, critiqueNotes, stripUncitedLinks, type Writer, type Article, type Brief, type WriterContext } from './writer.ts'
 import { createUnsplash, type ImageSource } from './unsplash.ts'
 import { createCliClient } from './claude-cli.ts'
 
@@ -56,6 +56,8 @@ function contextFor(root: string, row: Row, content: Awaited<ReturnType<typeof l
   }).join('\n\n')
   const notes = notesFor(root, row)
   if (!notes) log(`no founder notes for "${row.title}"`)
+  const voiceId = readIf(path.join(prompts, 'voice-id.md'))
+  if (!voiceId) log('Indonesian rules missing: voice-id.md')
   const judgePrompt = readIf(path.join(prompts, 'judge.md'))
   if (!judgePrompt) log('judge prompt missing: judge.md')
   return {
@@ -65,6 +67,7 @@ function contextFor(root: string, row: Row, content: Awaited<ReturnType<typeof l
     copyNotes,
     notes,
     judgePrompt: judgePrompt || 'Score 1-10 per seat: owner, ops, developer, voice.',
+    voiceId,
     exemplars: { en: pick('en'), id: pick('id') },
     published,
     usedSlugs: used,
@@ -80,20 +83,28 @@ function toFile(article: Article, extra: Record<string, unknown>) {
 
 
 /* One extra edit call at most when the measured tells exceed the live posts'
- * ceiling (about 3 dashes per 1000 words, zero reversals). */
+ * ceiling (about 3 dashes per 1000 words, zero reversals). Indonesian also
+ * counts sentences over LONG_SENTENCE words and calques from voice-id.md. */
 const DASH_CEILING = 2
-async function voiceGuard(deps: Deps, ctx: WriterContext, brief: Brief, locale: 'en' | 'id', article: Article, english?: Article): Promise<Article> {
+const LONG_SHARE_CEILING = 0.1
+async function voiceGuard(deps: Deps, ctx: WriterContext, brief: Brief, locale: 'en' | 'id', article: Article, reference?: Article): Promise<Article> {
   const t = voiceTells(article.body)
-  if (t.dashPer1k <= DASH_CEILING && t.reversals.length === 0 && t.verdicts.length === 0) return article
+  const it = locale === 'id' ? idTells(article.body) : { sentences: 1, long: [], calques: [] }
+  const tooLong = it.long.length / Math.max(it.sentences, 1) > LONG_SHARE_CEILING
+  if (t.dashPer1k <= DASH_CEILING && t.reversals.length === 0 && t.verdicts.length === 0 && !tooLong && it.calques.length === 0) return article
   const notes = 'VOICE VIOLATIONS\n' + [
     t.dashPer1k > DASH_CEILING ? `- ${t.dashes} dashes in ${t.words} words; remove all of them.` : '',
     ...t.reversals.map((r) => `- reversal: "${r.slice(0, 160)}"`),
     ...t.verdicts.map((v) => `- one-line verdict: "${v}"`),
+    ...(tooLong ? it.long.map((l) => `- sentence over ${LONG_SENTENCE} words, split it: "${l.slice(0, 200)}"`) : []),
+    ...it.calques.map((c) => `- calque from the Indonesian rules, replace it: "${c}"`),
   ].filter(Boolean).join('\n')
-  deps.log(`voice guard (${locale}): ${t.dashes} dashes, ${t.reversals.length} reversals, ${t.verdicts.length} verdicts; re-editing`)
-  const fixed = await deps.writer.edit(ctx, brief, locale, article, english, notes)
+  const idPart = locale === 'id' ? `, ${it.long.length}/${it.sentences} long sentences, ${it.calques.length} calques` : ''
+  deps.log(`voice guard (${locale}): ${t.dashes} dashes, ${t.reversals.length} reversals, ${t.verdicts.length} verdicts${idPart}; re-editing`)
+  const fixed = await deps.writer.edit(ctx, brief, locale, article, reference, notes)
   const after = voiceTells(fixed.body)
-  deps.log(`voice guard (${locale}) after: ${after.dashes} dashes, ${after.reversals.length} reversals, ${after.verdicts.length} verdicts`)
+  const ia = locale === 'id' ? idTells(fixed.body) : undefined
+  deps.log(`voice guard (${locale}) after: ${after.dashes} dashes, ${after.reversals.length} reversals, ${after.verdicts.length} verdicts${ia ? `, ${ia.long.length}/${ia.sentences} long sentences, ${ia.calques.length} calques` : ''}`)
   return fixed
 }
 
@@ -101,7 +112,7 @@ const MAX_ROUNDS = 1  // a second revision did not raise scores in the first liv
 /* The judge is a quality signal, never a publish gate: any failure here
  * (timeout, refusal, hitting max_tokens on a long article) must fall back
  * to the best article seen so far rather than fail the row. */
-async function qualityLoop(deps: Deps, ctx: WriterContext, brief: Brief, locale: 'en' | 'id', article: Article, english?: Article): Promise<{ article: Article; quality?: Record<string, number> }> {
+async function qualityLoop(deps: Deps, ctx: WriterContext, brief: Brief, locale: 'en' | 'id', article: Article, reference?: Article): Promise<{ article: Article; quality?: Record<string, number> }> {
   let bestV
   try {
     bestV = await deps.writer.judge(ctx, brief, locale, article)
@@ -120,7 +131,7 @@ async function qualityLoop(deps: Deps, ctx: WriterContext, brief: Brief, locale:
     }
     rounds++
     try {
-      current = await deps.writer.edit(ctx, brief, locale, current, english, `READER CRITIQUES\n${notes}`)
+      current = await deps.writer.edit(ctx, brief, locale, current, reference, `READER CRITIQUES\n${notes}`)
       currentV = await deps.writer.judge(ctx, brief, locale, current)
     } catch (e) {
       deps.log(`judge/revision failed (${locale}) round ${rounds}: ${(e as Error).message}; keeping best so far`)
@@ -129,7 +140,7 @@ async function qualityLoop(deps: Deps, ctx: WriterContext, brief: Brief, locale:
     deps.log(`judge (${locale}) round ${rounds}: ${JSON.stringify(currentV.scores)}`)
     if (meanScore(currentV) > meanScore(bestV)) { best = current; bestV = currentV; bestRound = rounds }
   }
-  if (rounds > 0) best = await voiceGuard(deps, ctx, brief, locale, best, english)
+  if (rounds > 0) best = await voiceGuard(deps, ctx, brief, locale, best, reference)
   // `rounds` is the round the kept scores came from, not how many were run.
   return { article: best, quality: { ...bestV.scores, rounds: bestRound } }
 }
@@ -196,14 +207,17 @@ export async function run(opts: { dryRun: boolean; titleFilter?: string }, deps:
       brief = await deps.writer.brief(ctx)
       deps.log(`brief ${brief.slug}: ${JSON.stringify(brief)}`)
 
-      const enDraft = await deps.writer.write(ctx, brief, 'en')
-      const enVoiced = await voiceGuard(deps, ctx, brief, 'en', await deps.writer.edit(ctx, brief, 'en', enDraft))
-      const enQ = await qualityLoop(deps, ctx, brief, 'en', enVoiced)
-      const en = enQ.article
-      const idDraft = await deps.writer.write(ctx, brief, 'id', en)
-      const idVoiced = await voiceGuard(deps, ctx, brief, 'id', await deps.writer.edit(ctx, brief, 'id', idDraft, en), en)
-      const idQ = await qualityLoop(deps, ctx, brief, 'id', idVoiced, en)
+      // Indonesian first, straight from the brief: `.id.md` is the required
+      // locale, and an Indonesian article rendered from English read as a
+      // translation. English is then written from the finished Indonesian.
+      const idDraft = await deps.writer.write(ctx, brief, 'id')
+      const idVoiced = await voiceGuard(deps, ctx, brief, 'id', await deps.writer.edit(ctx, brief, 'id', idDraft))
+      const idQ = await qualityLoop(deps, ctx, brief, 'id', idVoiced)
       const id = idQ.article
+      const enDraft = await deps.writer.write(ctx, brief, 'en', id)
+      const enVoiced = await voiceGuard(deps, ctx, brief, 'en', await deps.writer.edit(ctx, brief, 'en', enDraft, id), id)
+      const enQ = await qualityLoop(deps, ctx, brief, 'en', enVoiced, id)
+      const en = enQ.article
 
       const dir = row.type === 'pillar' ? 'pillars' : 'posts'
       const extra: Record<string, unknown> = { date: deps.today, updated: deps.today, category: row.category, author: 'tika-aurora' }

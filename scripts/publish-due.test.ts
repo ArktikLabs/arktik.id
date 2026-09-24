@@ -215,9 +215,9 @@ test('judge below threshold triggers one revision, quality lands in frontmatter'
   const edits: string[] = []
   const w: Writer = {
     ...writerWithJudges(
+      { scores: { owner: 9, ops: 9, developer: 9, voice: 9 }, critiques: [] },                                                       // id round 0 (id is written first)
       { scores: { owner: 5, ops: 8, developer: 8, voice: 8 }, critiques: [{ persona: 'owner', sentence: 'S', problem: 'P', fix: 'F' }] }, // en round 0
       { scores: { owner: 8, ops: 8, developer: 8, voice: 8 }, critiques: [] },                                                       // en round 1
-      { scores: { owner: 9, ops: 9, developer: 9, voice: 9 }, critiques: [] },                                                       // id round 0
     ),
     edit: async (_c, _b, l, d, _e, notes) => { edits.push(`${l}:${notes ?? ''}`); return d },
   }
@@ -238,9 +238,9 @@ test('judge cap: after one revision the best-scoring version is kept, row still 
   let n = 0
   const w: Writer = {
     ...writerWithJudges(
+      { scores: { owner: 9, ops: 9, developer: 9, voice: 9 }, critiques: [] }, // id (written first)
       { scores: { owner: 5, ops: 6, developer: 6, voice: 6 }, critiques: [{ persona: 'owner', sentence: 'a', problem: 'b', fix: 'c' }] },
       { scores: { owner: 7, ops: 7, developer: 7, voice: 7 }, critiques: [{ persona: 'ops', sentence: 'a', problem: 'b', fix: 'c' }] }, // en round 1: cap reached, best so far
-      { scores: { owner: 9, ops: 9, developer: 9, voice: 9 }, critiques: [] }, // id
     ),
     edit: async (_c, _b, l, d) => ({ ...d, body: `${d.body}v${++n}\n`.replace(/^v\d+\n/, '') }),
   }
@@ -264,4 +264,38 @@ test('judge failure publishes the article unjudged', async () => {
   // Unjudged is absent, not zero: a zero would read as a judged failure.
   assert.equal(data.quality, undefined)
   assert.ok(d.logs.some((l) => /judge failed \(en\)/.test(l)))
+})
+
+test('indonesian is written first from the brief alone; english is written from it', async () => {
+  const root = scaffold(HEADER + '2026-09-21,regular,New Post,web,Awareness,todo,,,,\n')
+  fs.mkdirSync(path.join(root, 'scripts/prompts'), { recursive: true })
+  fs.writeFileSync(path.join(root, 'scripts/prompts/voice-id.md'), 'ATURAN ID')
+  const order: string[] = []
+  let seenVoiceId = ''
+  const w: Writer = {
+    ...okWriter,
+    write: async (ctx, _b, l, ref) => { order.push(`${l}:${ref ? ref.body.trim() : '-'}`); seenVoiceId = ctx.voiceId ?? ''; return article(l) },
+  }
+  await run({ dryRun: true }, deps(root, w))
+  assert.deepEqual(order, ['id:-', 'en:## A\n\nid body'])
+  assert.equal(seenVoiceId, 'ATURAN ID')
+})
+
+test('indonesian voice guard re-edits long sentences and calques once', async () => {
+  const root = scaffold(HEADER + '2026-09-21,regular,New Post,web,Awareness,todo,,,,\n')
+  const long = Array(35).fill('kata').join(' ') + '.'
+  const notes: string[] = []
+  const w: Writer = {
+    ...okWriter,
+    write: async (_c, _b, l) => l === 'id' ? { ...article(l), body: `## A\n\n${long} Ini biaya betulan.\n` } : article(l),
+    edit: async (_c, _b, l, d, _r, n) => { if (n) notes.push(`${l}:${n}`); return l === 'id' && n ? { ...d, body: '## A\n\nKalimat pendek.\n' } : d },
+  }
+  const d = deps(root, w)
+  await run({ dryRun: true }, d)
+  const idNotes = notes.filter((n) => n.startsWith('id:VOICE VIOLATIONS'))
+  assert.equal(idNotes.length, 1)
+  assert.match(idNotes[0], /sentence over 30 words/)
+  assert.match(idNotes[0], /calque .*biaya betulan/)
+  assert.ok(d.logs.some((l) => /voice guard \(id\) after: .*0\/1 long sentences, 0 calques/.test(l)))
+  assert.equal(notes.filter((n) => n.startsWith('en:VOICE')).length, 0)
 })

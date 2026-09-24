@@ -15,18 +15,23 @@ export interface Brief {
 export interface Article { frontmatter: Record<string, unknown>; body: string }
 export interface WriterContext {
   row: Row; productContext: string; honestCopyRule: string; copyNotes: string; notes: string; judgePrompt: string
+  /* scripts/prompts/voice-id.md: Indonesian register, sentence length, banned calques. */
+  voiceId?: string
   exemplars: { en: string[]; id: string[] }
   published: { slug: string; title: string; type: 'pillar' | 'regular' }[]
   usedSlugs: string[]
   research?: Research
   log?: (s: string) => void
 }
-export interface Verdict { scores: { owner: number; ops: number; developer: number; voice: number }; critiques: { persona: string; sentence: string; problem: string; fix: string }[] }
+/* `bahasa` is the Indonesian language seat; it is scored only on Indonesian articles. */
+export interface Verdict { scores: { owner: number; ops: number; developer: number; voice: number; bahasa?: number }; critiques: { persona: string; sentence: string; problem: string; fix: string }[] }
 export interface Research { text: string; urls: string[] }
 export interface Writer {
   brief(ctx: WriterContext): Promise<Brief>
-  write(ctx: WriterContext, brief: Brief, locale: 'en' | 'id', english?: Article): Promise<Article>
-  edit(ctx: WriterContext, brief: Brief, locale: 'en' | 'id', draft: Article, english?: Article, notes?: string): Promise<Article>
+  /* Indonesian is written first, from the brief alone. English is written from
+   * the finished Indonesian article, passed as `reference`. */
+  write(ctx: WriterContext, brief: Brief, locale: 'en' | 'id', reference?: Article): Promise<Article>
+  edit(ctx: WriterContext, brief: Brief, locale: 'en' | 'id', draft: Article, reference?: Article, notes?: string): Promise<Article>
   judge(ctx: WriterContext, brief: Brief, locale: 'en' | 'id', article: Article): Promise<Verdict>
   research(ctx: WriterContext): Promise<Research>
 }
@@ -36,6 +41,7 @@ const MODEL = 'claude-opus-5'
 /* Four seats at three critiques each. A longer list is the judge ignoring its
  * own cap, and every extra line is another instruction the editor must obey. */
 const MAX_CRITIQUES = 12
+const MAX_CRITIQUES_ID = 15  // five seats on Indonesian articles
 
 const BRIEF_SCHEMA = {
   type: 'object',
@@ -56,20 +62,22 @@ const BRIEF_SCHEMA = {
   },
 } as const
 
-const VERDICT_SCHEMA = {
+const SEATS = ['owner', 'ops', 'developer', 'voice'] as const
+const verdictSchema = (seats: readonly string[]) => ({
   type: 'object',
   additionalProperties: false,
   required: ['scores', 'critiques'],
   properties: {
-    scores: { type: 'object', additionalProperties: false, required: ['owner', 'ops', 'developer', 'voice'], properties: { owner: { type: 'integer' }, ops: { type: 'integer' }, developer: { type: 'integer' }, voice: { type: 'integer' } } },
+    scores: { type: 'object', additionalProperties: false, required: [...seats], properties: Object.fromEntries(seats.map((k) => [k, { type: 'integer' }])) },
     critiques: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['persona', 'sentence', 'problem', 'fix'], properties: { persona: { type: 'string' }, sentence: { type: 'string' }, problem: { type: 'string' }, fix: { type: 'string' } } } },
   },
-} as const
+})
 
-export const meanScore = (v: Verdict) => Object.values(v.scores).reduce((a, b) => a + b, 0) / 4
+const seatScores = (v: Verdict) => Object.values(v.scores).filter((s): s is number => typeof s === 'number')
+export const meanScore = (v: Verdict) => { const s = seatScores(v); return s.reduce((a, b) => a + b, 0) / s.length }
 /* Revise only when a seat is genuinely unhappy. The mean-of-8 rule triggered
  * revisions that cost about 45 cents and moved no score in the first live run. */
-export const passes = (v: Verdict) => Object.values(v.scores).every((s) => s >= 7)
+export const passes = (v: Verdict) => seatScores(v).every((s) => s >= 7)
 export const critiqueNotes = (v: Verdict) => v.critiques.map((c) => `- [${c.persona}] "${c.sentence}": ${c.problem}. Fix: ${c.fix}`).join('\n')
 
 export const URL_RE = /https?:\/\/[^\s)\]}"']+/g
@@ -183,6 +191,22 @@ export function voiceTells(body: string): { words: number; dashes: number; rever
   return { words, dashes, reversals, verdicts, dashPer1k: (dashes * 1000) / words }
 }
 
+/* Measurable Indonesian tells: sentences over 30 words (English rhythm carried
+ * over) and calques from voice-id.md that are unambiguous enough to match. */
+export const CALQUES: RegExp[] = [
+  /hari selasa biasa/i, /punya biaya dengan nama/i, /biaya betulan/i, /batas jujur/i, /di ujung hari/i,
+  /membuat perbedaan/i, /dalam rangka/i, /\byang mana\b/i, /\bmelakukan (pengecekan|pembuatan|penyesuaian|pemeriksaan)\b/i,
+  /tautan pratinjau/i, /menyentuh sistem/i,
+]
+export const LONG_SENTENCE = 30
+export function idTells(body: string): { sentences: number; long: string[]; calques: string[] } {
+  const prose = body.split('\n').filter((l) => l.trim() && !/^\s*(#|\||```)/.test(l)).map((l) => l.replace(/^\s*[-*]\s+/, '')).join(' ')
+  const sentences = prose.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1').split(/(?<=[.!?])\s+/).filter((x) => x.trim())
+  const long = sentences.filter((x) => x.split(/\s+/).length > LONG_SENTENCE)
+  const calques = CALQUES.flatMap((re) => { const m = prose.match(re); return m ? [m[0]] : [] })
+  return { sentences: sentences.length, long, calques }
+}
+
 export function linkHrefs(ctx: WriterContext, brief: Brief, locale: 'en' | 'id'): { slug: string; type: 'pillar' | 'regular'; why: string; href: string }[] {
   return brief.internalLinks.map((l) => ({
     ...l,
@@ -203,11 +227,13 @@ function system(ctx: WriterContext, extra: string): Anthropic.TextBlockParam[] {
   ]
 }
 
-/* Called only from the `id` branches, so it never asserts anything about an
- * English call, where `english` is legitimately undefined. */
-function requireEnglish(locale: 'en' | 'id', english: Article | undefined): asserts english is Article {
-  if (locale === 'id' && !english) throw new Error('Indonesian call requires the English article')
+/* Called only from the `en` branches: English is written from the finished
+ * Indonesian article, while Indonesian is legitimately written without one. */
+function requireReference(locale: 'en' | 'id', reference: Article | undefined): asserts reference is Article {
+  if (locale === 'en' && !reference) throw new Error('English call requires the Indonesian article')
 }
+
+const idRules = (ctx: WriterContext) => ctx.voiceId ? `\n\nIndonesian language rules (these win over the exemplars and over any habit carried from English):\n<voice-id>\n${ctx.voiceId}\n</voice-id>` : ''
 
 /* Opus 5 list prices per million tokens; thinking is billed as output. */
 const PRICE = { input: 5, cacheRead: 0.5, cacheWrite: 6.25, output: 25 }
@@ -272,12 +298,12 @@ ${hasResearch ? '- A claim may be backed by one of the research URLs, written ex
       return brief
     },
 
-    async write(ctx, brief, locale, english) {
+    async write(ctx, brief, locale, reference) {
       const exemplars = ctx.exemplars[locale].map((e, i) => `<exemplar n="${i + 1}">\n${e}\n</exemplar>`).join('\n\n')
-      let audience = 'Audience: an English-reading decision maker at a small or mid-sized company, international or Indonesia-based. Examples and references may be global.'
-      if (locale === 'id') {
-        requireEnglish(locale, english)
-        audience = `Audience: pemilik atau pengambil keputusan UKM di Indonesia. This is an original Indonesian article, not a translation. Keep the argument, structure, and claims of the English version, but write for this reader: local examples, institutions, currency (rupiah), and idioms where they fit; the formal register of the exemplars; no sentence-by-sentence rendering of the English.\n\nEnglish version for reference:\n<english>\n${english.body}\n</english>`
+      let audience = `Audience: pemilik atau pengambil keputusan UKM di Indonesia. This is the original article, written directly in Indonesian from the brief. There is no English version yet; do not draft in English in your head and render it. Think in Indonesian: local examples, institutions, rupiah, and situations this reader recognises where they fit the claims.${idRules(ctx)}`
+      if (locale === 'en') {
+        requireReference(locale, reference)
+        audience = `Audience: an English-reading decision maker at a small or mid-sized company, international or Indonesia-based. This is the English edition of the Indonesian article below. Keep its argument, structure, and claims, but write native English for this reader; no sentence-by-sentence rendering of the Indonesian, and swap Indonesia-only examples for ones this reader recognises when the claim allows.\n\nIndonesian original for reference:\n<indonesian>\n${reference.body}\n</indonesian>`
       }
       const links = linkHrefs(ctx, brief, locale)
       const linkLines = links.map((l) => `- Link "${l.why}": href=${l.href}`).join('\n')
@@ -296,17 +322,17 @@ ${structure(ctx.row.type, linkLines, hasSources)}
 
 Follow the "Voice rules" in the system context exactly; where an exemplar breaks one of them, the rule wins.
 
-Match the length and formatting of these published exemplars:
+Match the length and formatting of these published exemplars${locale === 'id' ? ' (length and formatting only: several were translated from English and read stiff, so do not copy their sentence style)' : ''}:
 ${exemplars}`
       const raw = await text(client, { ...base, system: system(ctx, 'You are a senior content writer.'), messages: [{ role: 'user', content: prompt }] }, `write:${locale}`)
       return parseArticle(raw, ctx.row.type)
     },
 
-    async edit(ctx, brief, locale, draft, english, notes) {
-      let comparison = ''
-      if (locale === 'id') {
-        requireEnglish(locale, english)
-        comparison = `6. Compare with the English version: same claims, same sections. Do not make the Indonesian more literal; it must read as native Indonesian in the formal register.\n\n<english>\n${english.body}\n</english>`
+    async edit(ctx, brief, locale, draft, reference, notes) {
+      let comparison = `6. Indonesian language: apply the rules below. Split every sentence over 30 words, replace every calque, keep the "Anda" semi-formal register throughout. Rewrite the sentence rather than deleting the idea.${idRules(ctx)}`
+      if (locale === 'en') {
+        requireReference(locale, reference)
+        comparison = `6. Compare with the Indonesian original: same claims, same sections. Do not make the English more literal; it must read as native English.\n\n<indonesian>\n${reference.body}\n</indonesian>`
       }
       const draftText = matter.stringify(draft.body, draft.frontmatter)
       const links = linkHrefs(ctx, brief, locale)
@@ -337,13 +363,14 @@ ${structure(ctx.row.type, linkLines, hasSources)}`
 
     async judge(ctx, brief, locale, article) {
       const prompt = `Article (${locale}):\n${matter.stringify(article.body, article.frontmatter)}\n\nBrief thesis: ${brief.thesis}`
-      const raw = await text(client, { ...base, max_tokens: 16000, system: system(ctx, ctx.judgePrompt), messages: [{ role: 'user', content: prompt }], output_config: { effort: EFFORT, format: { type: 'json_schema', schema: VERDICT_SCHEMA } } }, `judge:${locale}`)
+      const indonesian = locale === 'id' && !!ctx.voiceId
+      const seats = indonesian ? [...SEATS, 'bahasa'] : [...SEATS]
+      const bahasaSeat = indonesian ? `\n\nFifth seat, Indonesian articles only:\n- bahasa: seorang editor bahasa Indonesia yang memegang aturan di bawah. Setiap kalimat yang terdengar seperti terjemahan dari bahasa Inggris, lebih dari 30 kata, atau keluar dari register "Anda" semi-formal adalah satu kritik; sebutkan kalimatnya dan tulis ulang versi yang wajar sebagai fix. Skor turun seiring jumlahnya. 9 sampai 10: terasa ditulis orang Indonesia. 5 sampai 6: jelas terjemahan.${idRules(ctx)}` : ''
+      const raw = await text(client, { ...base, max_tokens: 16000, system: system(ctx, ctx.judgePrompt + bahasaSeat), messages: [{ role: 'user', content: prompt }], output_config: { effort: EFFORT, format: { type: 'json_schema', schema: verdictSchema(seats) } } }, `judge:${locale}`)
       const parsed = JSON.parse(raw) as Verdict
       const clamp = (n: number) => Math.min(10, Math.max(1, Math.round(n)))
-      return {
-        scores: { owner: clamp(parsed.scores.owner), ops: clamp(parsed.scores.ops), developer: clamp(parsed.scores.developer), voice: clamp(parsed.scores.voice) },
-        critiques: parsed.critiques.slice(0, MAX_CRITIQUES),
-      }
+      const scores = Object.fromEntries(seats.map((k) => [k, clamp((parsed.scores as Record<string, number>)[k])])) as Verdict['scores']
+      return { scores, critiques: parsed.critiques.slice(0, indonesian ? MAX_CRITIQUES_ID : MAX_CRITIQUES) }
     },
 
     async research(ctx) {
