@@ -15,7 +15,7 @@ Indonesian business owner actually say this out loud? If not, rewrite it.
 |---|---|---|---|---|
 | Instagram (company) + Reels | the teacher | **kamu** (or none) | santai-rapi: `aja`, `nggak`, `bikin`, `gimana` OK; no slang (`gaes`, `cuy`, `bestie`) | "Kalau cara kerjanya sama kayak bisnis lain, langganan aja." |
 | Facebook (company) | neighbour who runs a business | **Anda** | semi-formal spoken: `saja`, `tidak`, `sudah`; sentences are short and conversational, not brochure-like | "Banyak pemilik usaha baru sadar setelah tagihannya naik tiap bulan." |
-| Threads (company) | conversation starter | **kamu** | santai, like a group-chat message, ends on a question | "Jujur aja: aplikasi yang kamu langganan sekarang masih ngikutin cara kerja tim, atau tim yang ngikutin aplikasinya?" |
+| Threads (company) | the "admin" (trial, see `threads-admin-persona.md`) | **gw/lu** | santai Jakarta, setup + one punchline, jokes about the situation never about our competence | "Excel kantor lu udah 47 sheet, yang ngerti cuma 3 orang, 1 udah resign? Itu bukan spreadsheet lagi. Itu warisan." |
 | Threads (founder) | founder thinking out loud | **aku** | santai and reflective, first person, no "kami/kita", never selling | "Minggu ini aku nyaranin calon klien buat nggak bikin software. Aneh juga rasanya." |
 | LinkedIn, X | — | English | per spec | — |
 
