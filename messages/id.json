@@ -13,7 +13,8 @@
     "contact": "Mulai proyek",
     "banner": "Anda berbicara langsung dengan engineer-nya, bukan account manager",
     "bannerLink": "hello@arktik.id",
-    "menu": "Menu"
+    "menu": "Menu",
+    "products": "Produk"
   },
   "hero": {
     "description": "Serahkan pengembangannya kepada kami, supaya Anda bisa mengurus bisnis — bukan proyeknya. Biayanya disepakati sebelum setiap tahap dimulai, software yang berfungsi hadir setiap minggu, dan kode serta seluruh akun atas nama Anda sejak hari pertama.",
@@ -241,7 +242,8 @@
   },
   "footer": {
     "description": "Studio software di Indonesia. Aplikasi web dan mobile kustom, dikerjakan terbuka dan diserahkan atas nama Anda.",
-    "copyright": "© {year} Arktik. Seluruh hak cipta dilindungi."
+    "copyright": "© {year} Arktik. Seluruh hak cipta dilindungi.",
+    "productsLabel": "Produk Arktik"
   },
   "showcase": {
     "viewport": {
@@ -304,6 +306,105 @@
         "title": "Bicara dengan yang membangun",
         "description": "Anda berhubungan langsung dengan orang yang menulis software-nya. Tidak ada perantara."
       }
+    }
+  },
+  "products": {
+    "title": "Produk kami",
+    "subtitle": "Selain mengerjakan proyek klien, kami membangun dan menjalankan produk sendiri. Prosesnya sama, hanya saja kliennya kami sendiri.",
+    "label": "Produk Arktik",
+    "items": {
+      "jejakSaham": {
+        "tagline": "Siapa yang masuk, menambah, mengurangi, dan keluar dari saham di BEI.",
+        "description": "Pelacak kepemilikan saham dari publikasi resmi KSEI dan BEI. Perubahan kepemilikan harian ≥5% dan bulanan ≥1%, untuk sekitar 963 saham, 5.663 pemegang, dan 40 grup usaha yang sudah dipetakan.",
+        "more": "Tentang Jejak Saham",
+        "visit": "Buka situsnya"
+      }
+    }
+  },
+  "productPage": {
+    "breadcrumb": "Produk",
+    "visit": "Buka Jejak Saham",
+    "jejakSaham": {
+      "metaTitle": "Jejak Saham: pelacak kepemilikan saham BEI | Arktik",
+      "metaDescription": "Produk Arktik yang melacak siapa memegang, menambah, mengurangi, dan melepas saham di BEI, dari data publik KSEI dan BEI.",
+      "tagline": "Siapa yang masuk, menambah, mengurangi, dan keluar dari saham di BEI.",
+      "intro": "Jejak Saham membaca publikasi kepemilikan dari KSEI dan BEI setiap hari bursa, lalu menyusunnya di satu tempat: siapa memegang saham apa, kapan porsinya berubah, dan grup usaha mana yang ada di baliknya.",
+      "coverageTitle": "Cakupan data",
+      "coverage": {
+        "stocks": {
+          "value": "±963",
+          "label": "saham tercatat"
+        },
+        "holders": {
+          "value": "±5.663",
+          "label": "pemegang saham"
+        },
+        "groups": {
+          "value": "40",
+          "label": "grup usaha dipetakan"
+        },
+        "cadence": {
+          "value": "≥5% · ≥1%",
+          "label": "perubahan harian · bulanan"
+        }
+      },
+      "featuresTitle": "Yang bisa Anda lakukan",
+      "features": {
+        "moves": {
+          "title": "Mutasi kepemilikan",
+          "description": "Setiap perubahan yang dilaporkan: pemegang yang masuk, menambah, mengurangi, atau keluar."
+        },
+        "stock": {
+          "title": "Halaman saham",
+          "description": "Daftar pemegang besar, riwayat porsinya, dan free float untuk tiap saham."
+        },
+        "investor": {
+          "title": "Halaman investor",
+          "description": "Portofolio satu pemegang di semua saham yang tercatat atas namanya."
+        },
+        "groups": {
+          "title": "Peta grup usaha",
+          "description": "Saham anggota tiap grup, plus graf jaringan kepemilikan yang bisa ditelusuri."
+        },
+        "screener": {
+          "title": "Screener",
+          "description": "Menyaring saham dengan menggabungkan data kepemilikan dan fundamental."
+        },
+        "financials": {
+          "title": "Laporan keuangan dan valuasi",
+          "description": "Laporan laba rugi dalam bentuk diagram, plus valuasi historis tiap saham."
+        },
+        "backtest": {
+          "title": "Backtest",
+          "description": "Melihat hasil historis sebuah saringan screener sebelum Anda memakainya."
+        },
+        "watchlist": {
+          "title": "Watchlist dan alert Telegram",
+          "description": "Pantau saham pilihan dan portofolio Anda, dan terima notifikasi saat kepemilikannya berubah."
+        }
+      },
+      "tiers": "Ada versi gratis dan versi Pro.",
+      "shots": {
+        "moves": {
+          "alt": "Daftar mutasi kepemilikan harian di Jejak Saham",
+          "caption": "Mutasi kepemilikan ≥5% dalam satu hari bursa."
+        },
+        "screener": {
+          "alt": "Screener saham BEI di Jejak Saham",
+          "caption": "Screener dengan saringan kepemilikan dan fundamental."
+        },
+        "financials": {
+          "alt": "Diagram alir laporan laba rugi di Jejak Saham",
+          "caption": "Laporan laba rugi sebagai diagram alir, dari pendapatan sampai laba bersih."
+        }
+      },
+      "builtTitle": "Cara kami membangunnya",
+      "built": "Dibangun dan dijalankan oleh Arktik dengan Next.js dan Postgres. Pipeline data mengambil publikasi publik KSEI dan BEI setiap hari bursa, lalu memetakan pemegang ke saham dan ke grup usahanya.",
+      "disclaimer": "Jejak Saham bukan rekomendasi investasi. Tidak berafiliasi dengan BEI, KSEI, atau OJK.",
+      "ctaTitle": "Butuh produk data seperti ini?",
+      "ctaDescription": "Kami membangun sistem yang mengubah data publik atau data internal menjadi alat yang dipakai setiap hari. Ceritakan kebutuhan Anda.",
+      "ctaPrimary": "Mulai proyek",
+      "ctaSecondary": "Lihat yang kami bangun"
     }
   }
 }

@@ -13,7 +13,8 @@
     "contact": "Start a project",
     "banner": "You talk to the engineers, not an account manager",
     "bannerLink": "hello@arktik.id",
-    "menu": "Menu"
+    "menu": "Menu",
+    "products": "Products"
   },
   "hero": {
     "description": "Leave the building to us, so you can run the business instead of the project. The price is agreed before each stage starts, working software arrives every week, and the code and every account are in your name from day one.",
@@ -241,7 +242,8 @@
   },
   "footer": {
     "description": "A software studio in Indonesia. Custom web and mobile applications, built in the open and handed over in your name.",
-    "copyright": "© {year} Arktik. All rights reserved."
+    "copyright": "© {year} Arktik. All rights reserved.",
+    "productsLabel": "Arktik products"
   },
   "showcase": {
     "viewport": {
@@ -304,6 +306,105 @@
         "title": "Talk to the people building it",
         "description": "You deal directly with the people writing the software. Nobody relays messages on our behalf."
       }
+    }
+  },
+  "products": {
+    "title": "Our products",
+    "subtitle": "Besides client work, we build and run products of our own. Same process, except the client is us.",
+    "label": "Arktik product",
+    "items": {
+      "jejakSaham": {
+        "tagline": "Who is buying into, adding to, trimming and exiting stocks on the Indonesia Stock Exchange.",
+        "description": "An ownership tracker built on public KSEI and BEI filings. Daily ownership changes of 5% or more and monthly changes of 1% or more, across about 963 listed stocks, 5,663 holders and 40 mapped business groups.",
+        "more": "About Jejak Saham",
+        "visit": "Visit the site"
+      }
+    }
+  },
+  "productPage": {
+    "breadcrumb": "Products",
+    "visit": "Open Jejak Saham",
+    "jejakSaham": {
+      "metaTitle": "Jejak Saham: IDX stock ownership tracker | Arktik",
+      "metaDescription": "An Arktik product that tracks who holds, adds to, trims and exits stocks on the Indonesia Stock Exchange, from public KSEI and BEI data.",
+      "tagline": "Who is buying into, adding to, trimming and exiting stocks on the Indonesia Stock Exchange.",
+      "intro": "Jejak Saham reads the ownership filings KSEI and BEI publish every trading day and puts them in one place: who holds what, when their stake changed, and which business group sits behind it.",
+      "coverageTitle": "Data coverage",
+      "coverage": {
+        "stocks": {
+          "value": "~963",
+          "label": "listed stocks"
+        },
+        "holders": {
+          "value": "~5,663",
+          "label": "holders"
+        },
+        "groups": {
+          "value": "40",
+          "label": "business groups mapped"
+        },
+        "cadence": {
+          "value": "≥5% · ≥1%",
+          "label": "daily · monthly changes"
+        }
+      },
+      "featuresTitle": "What you can do with it",
+      "features": {
+        "moves": {
+          "title": "Ownership moves",
+          "description": "Every reported change: holders coming in, adding, trimming or exiting."
+        },
+        "stock": {
+          "title": "Stock pages",
+          "description": "Major holders, the history of their stakes, and free float for each stock."
+        },
+        "investor": {
+          "title": "Investor pages",
+          "description": "One holder's portfolio across every stock filed under their name."
+        },
+        "groups": {
+          "title": "Business-group map",
+          "description": "The member stocks of each group, plus an ownership network graph you can explore."
+        },
+        "screener": {
+          "title": "Screener",
+          "description": "Filter stocks on ownership data and fundamentals together."
+        },
+        "financials": {
+          "title": "Financials and valuation",
+          "description": "Income statements drawn as a diagram, plus historical valuation for each stock."
+        },
+        "backtest": {
+          "title": "Backtests",
+          "description": "See how a screen would have performed historically before you rely on it."
+        },
+        "watchlist": {
+          "title": "Watchlist and Telegram alerts",
+          "description": "Follow the stocks and portfolio you care about and get notified when ownership changes."
+        }
+      },
+      "tiers": "There is a free tier and a Pro tier.",
+      "shots": {
+        "moves": {
+          "alt": "Daily ownership moves list in Jejak Saham",
+          "caption": "Ownership changes of 5% or more in one trading day."
+        },
+        "screener": {
+          "alt": "IDX stock screener in Jejak Saham",
+          "caption": "The screener, with ownership and fundamental filters."
+        },
+        "financials": {
+          "alt": "Income statement flow diagram in Jejak Saham",
+          "caption": "An income statement as a flow diagram, from revenue to net profit."
+        }
+      },
+      "builtTitle": "How we built it",
+      "built": "Built and run by Arktik on Next.js and Postgres. Data pipelines ingest the public KSEI and BEI publications every trading day and map each holder to its stocks and business group.",
+      "disclaimer": "Jejak Saham is not investment advice. It is not affiliated with BEI, KSEI or OJK.",
+      "ctaTitle": "Need a data product like this?",
+      "ctaDescription": "We build systems that turn public or internal data into a tool people use every day. Tell us what you need.",
+      "ctaPrimary": "Start a project",
+      "ctaSecondary": "See what we build"
     }
   }
 }

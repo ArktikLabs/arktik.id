@@ -23,6 +23,7 @@ import { LanguageSwitcher } from "@/components/ui/language-switcher";
 
 const SECTIONS = [
   "portfolio",
+  "products",
   "process",
   "services",
   "about-us",
@@ -50,6 +51,8 @@ export function Header() {
   useEffect(() => setMenuOpen(false), [pathname]);
 
   const isBlogPage = pathname?.includes("/blog");
+  // Any route that is not the homepage: section links must go back to "/".
+  const isSubPage = isBlogPage || pathname?.includes("/products");
   const localePrefix = pathname?.startsWith("/en") ? "/en" : "/id";
 
   useEffect(() => {
@@ -60,7 +63,7 @@ export function Header() {
       else setCompact(false);
       lastY.current = y;
 
-      if (isBlogPage) return;
+      if (isSubPage) return;
       const probe = y + 140;
       let current = "";
       for (const id of SECTIONS) {
@@ -79,7 +82,7 @@ export function Header() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [isBlogPage]);
+  }, [isSubPage]);
 
   const dismiss = () => {
     document.documentElement.style.setProperty("--banner-h", "0px");
@@ -87,17 +90,18 @@ export function Header() {
   };
 
   const hrefFor = (id: string) =>
-    isBlogPage ? `${localePrefix}#${id}` : `#${id}`;
+    isSubPage ? `${localePrefix}#${id}` : `#${id}`;
 
   const links = [
     { id: "portfolio", label: t("portfolio") },
+    { id: "products", label: t("products") },
     { id: "process", label: t("process") },
     { id: "services", label: t("services") },
     { id: "about-us", label: t("aboutUs") },
   ];
 
   const goToContact = () => {
-    if (isBlogPage) window.location.href = `${localePrefix}#contact`;
+    if (isSubPage) window.location.href = `${localePrefix}#contact`;
     else
       document
         .getElementById("contact")

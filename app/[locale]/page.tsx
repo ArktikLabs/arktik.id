@@ -1,6 +1,7 @@
 import { Header } from "@/components/sections/Header";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { WorksSection } from "@/components/sections/WorksSection";
+import { ProductsSection } from "@/components/sections/ProductsSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { WhyArktikSection } from "@/components/sections/WhyArktikSection";
@@ -16,6 +17,7 @@ import { graph, organization, website } from "@/lib/seo/schema";
  *
  * Order is the argument the page makes to a buyer who has never heard of you:
  *   work        — you have shipped things
+ *   products    — and you run your own in production
  *   process     — here is exactly what happens, and what it costs
  *   capabilities— here is what we do
  *   why         — here is why us
@@ -47,6 +49,9 @@ export default async function Home({ params }: HomeProps) {
       <main id="main">
         <HeroSection />
         <WorksSection />
+        {/* Products we build and run ourselves — a second kind of proof that
+         * sits right after client work. */}
+        <ProductsSection />
         {/* Stage durations live in messages/*.json (process.stages.*.duration)
          * so they translate. Every one is a PROMISE you have to keep — change
          * any you cannot hold to, or blank it to show "to confirm". */}

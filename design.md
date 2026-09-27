@@ -45,6 +45,11 @@ archetypes.
   Varies on: section-head archetype, card density.
 - **Showcase pages** (`/[locale]/showcase/**`) — **18 · Portfolio Grid** for the
   index; **05 · Workbench** for a single showcase. Varies on: grid span pattern.
+ - **Product pages** (`/[locale]/products/**`) — **05 · Workbench**, same family as
+ a single showcase: Arktik's own products, with their real screenshots as the
+ only enrichment. Copy is scope and features only — no prices, user counts or
+ testimonials. Data lives in `lib/data/products.ts`; copy in
+ `messages/*.json` (`products`, `productPage`).
 
 ### Why Bento Grid for marketing (v2)
 

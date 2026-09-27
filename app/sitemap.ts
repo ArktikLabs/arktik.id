@@ -6,6 +6,7 @@ import {
   getCaseStudies,
 } from "@/lib/content";
 import { getAllShowcases } from "@/lib/data/showcases";
+import { getAllProducts } from "@/lib/data/products";
 import { localeUrl } from "@/lib/seo/schema";
 
 /* The previous sitemap was five hardcoded entries: the homepage plus four
@@ -54,6 +55,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...entries("blog", now, 0.8, "weekly"),
     ...entries("blog/case-studies", now, 0.6, "monthly"),
   ];
+
+  for (const p of getAllProducts()) {
+    out.push(...entries(`products/${p.slug}`, now, 0.7, "monthly"));
+  }
 
   for (const s of getAllShowcases()) {
     out.push(...entries(`showcase/${s.slug}`, now, 0.6, "monthly"));

@@ -1,5 +1,17 @@
 [
   {
+    "date": "2026-09-28",
+    "scope": "page",
+    "target": "/products/[slug] + home ProductsSection",
+    "genre": "modern-minimal",
+    "macrostructure": "05 Workbench",
+    "theme": "custom",
+    "theme_axes": "dark paper / grotesk-sans display / chromatic-other accent",
+    "enrichment": "the product's own screenshots (showcase allowance)",
+    "designed_as_app": true,
+    "brief": "Jejak Saham as an Arktik product: home band after Work, product page, nav + colophon links; no prices, no user counts"
+  },
+  {
     "date": "2026-08-14",
     "scope": "page",
     "target": "/showcase/[slug]",

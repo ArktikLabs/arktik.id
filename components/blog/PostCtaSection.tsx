@@ -34,7 +34,7 @@ export function PostCtaSection({
   return (
     <section
       className={cn(
-        'rounded-card border border-rule bg-paper-2 p-10',
+        'rounded-card border border-rule bg-paper-2 p-6 md:p-10',
         className
       )}
     >
@@ -45,7 +45,7 @@ export function PostCtaSection({
           </h2>
           <p className="mt-3 text-base text-ink-2 md:text-lg">{description}</p>
         </div>
-        <div className="flex flex-shrink-0 gap-3 md:flex-row md:items-center">
+        <div className="flex flex-shrink-0 flex-wrap gap-3 md:flex-row md:items-center">
           <Link
             href={contactHref}
             className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-pill bg-lime-green px-6 py-3 text-sm font-semibold text-carbon transition-colors duration-200 hover:bg-lime-green/90"
