@@ -258,7 +258,13 @@
     },
     "viewingIn": "Viewing in",
     "mode": "mode",
-    "visitLive": "Visit the live site"
+    "visitLive": "Visit the live site",
+    "concept": {
+      "badge": "Design concept",
+      "note": "A design concept built from the client's brief with sample data. Not a live site: prices, specs and contacts inside are not real.",
+      "openDemo": "Open demo",
+      "metaPrefix": "Design concept"
+    }
   },
   "caseStudyPage": {
     "client": "Client",

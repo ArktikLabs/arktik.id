@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
 import { alternatesFor } from "@/lib/seo/schema";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/routing";
-import { getShowcaseBySlug, getAllShowcases } from "@/lib/data/showcases";
+import { getShowcaseBySlug, getAllShowcases, isConcept } from "@/lib/data/showcases";
 import { ShowcaseContainer } from "@/components/ShowcaseContainer";
 
 interface ShowcaseDetailPageProps {
@@ -19,8 +19,11 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const showcase = getShowcaseBySlug(slug);
   if (!showcase) return {};
+  const t = await getTranslations({ locale, namespace: "showcase.concept" });
   return {
-    title: `${showcase.title} | Arktik`,
+    title: isConcept(showcase)
+      ? `${showcase.title} (${t("metaPrefix")}) | Arktik`
+      : `${showcase.title} | Arktik`,
     description: showcase.description,
     alternates: alternatesFor(locale, `showcase/${slug}`),
   };
@@ -45,5 +48,11 @@ export default async function ShowcaseDetailPage({
     notFound();
   }
 
-  return <ShowcaseContainer title={showcase.title} link={showcase.link} />;
+  return (
+    <ShowcaseContainer
+      title={showcase.title}
+      link={showcase.link}
+      concept={isConcept(showcase)}
+    />
+  );
 }

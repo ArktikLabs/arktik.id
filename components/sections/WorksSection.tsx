@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, ShieldCheck, KeyRound, MessageSquare } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
-import { getAllShowcases } from "@/lib/data/showcases";
+import { getAllShowcases, isConcept, type Showcase } from "@/lib/data/showcases";
 
 /* Hallmark · macrostructure: 01 Bento Grid · design-system: design.md v2
  *
@@ -19,8 +19,23 @@ const COMMITMENTS = [
   { key: "access", Icon: MessageSquare },
 ] as const;
 
+/* A concept (design built from a brief, mock data) must never read as a
+ * delivered client site: it carries an outlined, non-accent badge in place
+ * of the section label on every tile it appears in. */
+function ConceptBadge({ label }: { label: string }) {
+  return (
+    <span className="label-mono inline-flex items-center gap-1.5 rounded-pill border border-rule bg-paper/80 px-2.5 py-1 text-ink backdrop-blur">
+      <span className="h-1.5 w-1.5 rounded-full border border-ink-2" aria-hidden="true" />
+      {label}
+    </span>
+  );
+}
+
 export function WorksSection() {
   const t = useTranslations("works");
+  const ts = useTranslations("showcase.concept");
+  const tileLabel = (s: Showcase) =>
+    isConcept(s) ? <ConceptBadge label={ts("badge")} /> : null;
   const tc = useTranslations("commitments");
   const locale = useLocale();
   const showcases = getAllShowcases();
@@ -66,13 +81,15 @@ export function WorksSection() {
             <div aria-hidden="true" className="img-scrim absolute inset-0 -z-10" />
 
             <div className="flex items-start justify-between gap-3 p-6">
-              <span className="label-mono flex items-center gap-2 text-ink">
-                <span
-                  className="h-1.5 w-1.5 rounded-full bg-lime-green"
-                  aria-hidden="true"
-                />
-                {t("title")}
-              </span>
+              {tileLabel(lead) ?? (
+                <span className="label-mono flex items-center gap-2 text-ink">
+                  <span
+                    className="h-1.5 w-1.5 rounded-full bg-lime-green"
+                    aria-hidden="true"
+                  />
+                  {t("title")}
+                </span>
+              )}
               <ArrowUpRight
                 className="h-4 w-4 shrink-0 text-lime-green opacity-70 transition-opacity duration-200 group-hover:opacity-100"
                 aria-hidden="true"
@@ -124,7 +141,11 @@ export function WorksSection() {
               className="-z-10 object-cover object-center"
             />
             <div aria-hidden="true" className="img-scrim absolute inset-0 -z-10" />
-            <span className="label-mono p-5 text-ink">{t("title")}</span>
+            <span className="p-5">
+              {tileLabel(showcase) ?? (
+                <span className="label-mono text-ink">{t("title")}</span>
+              )}
+            </span>
             <h3 className="p-5 font-heading text-xl font-bold text-ink">
               {showcase.title}
             </h3>

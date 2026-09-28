@@ -17,12 +17,14 @@ import { useState } from "react";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { Smartphone, Tablet, Monitor, ArrowUpRight } from "lucide-react";
+import { Smartphone, Tablet, Monitor, ArrowUpRight, Info } from "lucide-react";
 import { ShowcaseViewer } from "./ShowcaseViewer";
 
 interface ShowcaseContainerProps {
   title: string;
   link: string;
+  /** Design concept with mock data, not a live client site. */
+  concept?: boolean;
 }
 
 type ViewportType = "mobile" | "tablet" | "desktop";
@@ -72,7 +74,7 @@ function ViewportControls({
   );
 }
 
-export function ShowcaseContainer({ title, link }: ShowcaseContainerProps) {
+export function ShowcaseContainer({ title, link, concept = false }: ShowcaseContainerProps) {
   const [activeViewport, setActiveViewport] = useState<ViewportType>("desktop");
   const t = useTranslations("showcase");
 
@@ -93,6 +95,11 @@ export function ShowcaseContainer({ title, link }: ShowcaseContainerProps) {
             <h1 className="truncate font-heading text-lg font-bold text-ink">
               {title}
             </h1>
+            {concept && (
+              <span className="label-mono shrink-0 rounded-pill border border-rule px-2.5 py-1 text-ink">
+                {t("concept.badge")}
+              </span>
+            )}
           </div>
 
           <div className="flex items-center gap-3">
@@ -102,7 +109,7 @@ export function ShowcaseContainer({ title, link }: ShowcaseContainerProps) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 whitespace-nowrap rounded-pill bg-lime-green px-4 py-2 text-sm font-semibold text-carbon transition-colors duration-200 hover:bg-lime-green/90"
             >
-              {t("visitLive")}
+              {concept ? t("concept.openDemo") : t("visitLive")}
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
             </a>
 
@@ -114,8 +121,15 @@ export function ShowcaseContainer({ title, link }: ShowcaseContainerProps) {
         </div>
       </header>
 
-      <main id="main" className="pt-24">
+      <main id="main" className={concept ? "pt-36 sm:pt-32" : "pt-24"}>
+        {concept && (
+          <p className="mx-auto flex max-w-3xl items-start gap-2 px-6 text-sm leading-relaxed text-ink-2">
+            <Info className="mt-0.5 h-4 w-4 shrink-0 text-ink-3" aria-hidden="true" />
+            {t("concept.note")}
+          </p>
+        )}
         <ShowcaseViewer
+          concept={concept}
           title={title}
           link={link}
           activeViewport={activeViewport}

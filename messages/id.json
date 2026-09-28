@@ -258,7 +258,13 @@
     },
     "viewingIn": "Sedang melihat dalam mode",
     "mode": "",
-    "visitLive": "Kunjungi situsnya"
+    "visitLive": "Kunjungi situsnya",
+    "concept": {
+      "badge": "Konsep desain",
+      "note": "Konsep desain dari brief klien, diisi data contoh. Bukan situs live: harga, spesifikasi, dan kontak di dalamnya tidak nyata.",
+      "openDemo": "Buka demo",
+      "metaPrefix": "Konsep desain"
+    }
   },
   "caseStudyPage": {
     "client": "Klien",

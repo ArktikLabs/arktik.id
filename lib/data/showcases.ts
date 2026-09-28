@@ -6,6 +6,10 @@ export interface Showcase {
   category?: string;
   tags?: string[];
   thumbnail?: string;
+  /** "live" (default): a delivered client site. "concept": a design prototype
+   * built from a client brief with mock data. It is NOT a live site, so every
+   * surface must label it and link to the demo, never "visit the site". */
+  kind?: "live" | "concept";
 }
 
 export const showcases: Showcase[] = [
@@ -49,7 +53,20 @@ export const showcases: Showcase[] = [
     tags: ["Business", "HR Consulting", "Bilingual", "Next.js"],
     thumbnail: "/assets/portofolio/mulia-consulting.webp",
   },
+  {
+    slug: "aion-tulungagung",
+    title: "AION Tulungagung",
+    description:
+      "Design concept for an electric-car dealer: model catalogue, on-page credit simulator and WhatsApp booking, built from the client's brief with sample data",
+    link: "https://preview.arktik.id/aion-tulungagung/",
+    category: "Design Concept",
+    tags: ["Automotive", "Dealer", "Credit Simulator", "Static"],
+    thumbnail: "/assets/portofolio/aion-tulungagung.webp",
+    kind: "concept",
+  },
 ];
+
+export const isConcept = (s: Showcase) => s.kind === "concept";
 
 export function getShowcaseBySlug(slug: string): Showcase | undefined {
   return showcases.find((showcase) => showcase.slug === slug);

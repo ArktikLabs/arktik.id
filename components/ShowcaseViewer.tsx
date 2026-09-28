@@ -6,12 +6,13 @@ interface ShowcaseViewerProps {
   title: string;
   link: string;
   activeViewport?: ViewportType;
+  concept?: boolean;
 }
 
 type ViewportType = 'mobile' | 'tablet' | 'desktop';
 
 
-export function ShowcaseViewer({ title, link, activeViewport = 'desktop' }: ShowcaseViewerProps) {
+export function ShowcaseViewer({ title, link, activeViewport = 'desktop', concept = false }: ShowcaseViewerProps) {
   const [windowSize, setWindowSize] = useState({ width: 1440, height: 900 });
 
   const viewportSizes = {
@@ -51,7 +52,7 @@ export function ShowcaseViewer({ title, link, activeViewport = 'desktop' }: Show
             width: Math.min(currentSize.width, windowSize.width - 50),
             maxWidth: '100%',
             height: Math.min(currentSize.height + 40, windowSize.height - 100),
-            maxHeight: 'calc(100vh - 100px)'
+            maxHeight: concept ? 'calc(100vh - 160px)' : 'calc(100vh - 100px)'
           }}
         >
           {/* Typographic frame. The iframe below is a real live site, so it gets
@@ -59,8 +60,10 @@ export function ShowcaseViewer({ title, link, activeViewport = 'desktop' }: Show
             * already has real browser chrome around this page. */}
           <div className="flex items-center justify-between gap-3 border-b border-rule bg-paper px-4 py-2.5">
             <span className="label-mono truncate">{link}</span>
+            {/* Filled lime dot = live client site. A concept gets a hollow dot:
+              * the same slot, visibly "not live". */}
             <span
-              className="h-1.5 w-1.5 shrink-0 rounded-full bg-lime-green"
+              className={`h-1.5 w-1.5 shrink-0 rounded-full ${concept ? "border border-ink-3" : "bg-lime-green"}`}
               aria-hidden="true"
             />
           </div>
@@ -73,7 +76,7 @@ export function ShowcaseViewer({ title, link, activeViewport = 'desktop' }: Show
             className="relative bg-white"
             style={{
               height: Math.min(currentSize.height, windowSize.height - 140),
-              maxHeight: 'calc(100vh - 140px)'
+              maxHeight: concept ? 'calc(100vh - 200px)' : 'calc(100vh - 140px)'
             }}
           >
             <iframe
