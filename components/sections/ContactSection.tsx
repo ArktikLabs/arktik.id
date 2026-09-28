@@ -6,8 +6,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { sendGTMEvent } from "@next/third-parties/google";
-import { ConfirmModal } from "@/components/ui/ConfirmModal";
 import { useTranslations, useLocale } from "next-intl";
+import { Link } from "@/i18n/routing";
 
 export function ContactSection() {
   const t = useTranslations("contact");
@@ -21,8 +21,8 @@ export function ContactSection() {
     message: "",
   });
   const [leadStarted, setLeadStarted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [error, setError] = useState("");
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -53,106 +53,66 @@ export function ContactSection() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // The form is sent from the site itself (stored on Arktik's server, team notified on Telegram). WhatsApp is
+  // offered afterwards as an optional faster channel instead of being the only path, so no lead depends on the
+  // visitor pressing send inside another app.
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isSubmitting) return;
-    const hasContent = [
-      formData.name,
-      formData.email,
-      formData.phone,
-      formData.company,
-      formData.message,
-    ].some((v) => v.trim().length > 0);
-
-    if (!hasContent) {
-      // Ask confirmation only if the form is essentially empty
-      setConfirmOpen(true);
-      return;
-    }
-    // If the user filled something, proceed without extra friction
-    handleConfirm({ isModal: false });
-  };
-
-  const buildWhatsappMessage = () => {
-    return `${t("whatsapp.greeting")}
-
-${t("whatsapp.nameLabel")}: ${formData.name}
-${t("whatsapp.emailLabel")}: ${formData.email}
-${t("whatsapp.phoneLabel")}: ${formData.phone}
-${t("whatsapp.companyLabel")}: ${formData.company}
-
-${t("whatsapp.messageLabel")}: ${formData.message}`;
-  };
-
-  const handleConfirm = ({ isModal = false }) => {
-    if (isSubmitting) return;
-    const whatsappMessage = buildWhatsappMessage();
-    const whatsappUrl = `https://wa.me/6285117697889?text=${encodeURIComponent(
-      whatsappMessage,
-    )}`;
-
-    // First-party capture (no PII to GA): fire-and-forget
+    if (status === "sending") return;
+    const website = String(new FormData(e.currentTarget).get("website") ?? "");
+    const eventId =
+      typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : undefined;
+    setStatus("sending");
+    setError("");
     try {
-      const eventId =
-        typeof crypto !== "undefined" && "randomUUID" in crypto
-          ? crypto.randomUUID()
-          : undefined;
-      const payload = {
-        ...formData,
-        source: "contact_whatsapp",
-        page:
-          typeof window !== "undefined" ? window.location.pathname : undefined,
-        referrer:
-          typeof document !== "undefined" ? document.referrer : undefined,
-        userAgent:
-          typeof navigator !== "undefined" ? navigator.userAgent : undefined,
-        eventId,
-        locale,
-      };
-      const json = JSON.stringify(payload);
-      if (typeof navigator !== "undefined" && "sendBeacon" in navigator) {
-        const blob = new Blob([json], { type: "application/json" });
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (navigator as any).sendBeacon("/api/leads", blob);
-      } else {
-        fetch("/api/leads", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: json,
-          keepalive: true,
-        }).catch(() => {});
+      const res = await fetch("/api/leads/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          website,
+          eventId,
+          locale,
+          page: window.location.pathname,
+          referrer: document.referrer,
+        }),
+      });
+      if (!res.ok) {
+        const body = (await res.json().catch(() => ({}))) as { error?: string };
+        setError(
+          t(
+            body.error === "invalid"
+              ? "form.errorInvalid"
+              : body.error === "rate_limited"
+                ? "form.errorRate"
+                : "form.errorSend",
+          ),
+        );
+        setStatus("error");
+        return;
       }
-
-      // Track confirmed lead (no value/currency)
+      // Track confirmed lead (no PII, no value/currency)
       sendGTMEvent({
-        event: `generate_lead${isModal ? "_modal" : ""}`,
-        method: "whatsapp",
+        event: "generate_lead",
+        method: "form",
         form: "contact",
         cta: "send_message",
-        label: "contact_form_whatsapp",
+        label: "contact_form",
         event_id: eventId,
         locale,
       });
+      setStatus("sent");
     } catch {
-      // no-op
+      setError(t("form.errorSend"));
+      setStatus("error");
     }
-
-    setIsSubmitting(true);
-    setConfirmOpen(false);
-    window.open(whatsappUrl, "_blank");
-    setTimeout(() => setIsSubmitting(false), 1500);
   };
 
-  const handleCancel = () => {
-    setConfirmOpen(false);
-    sendGTMEvent({
-      event: "lead_cancel",
-      method: "whatsapp",
-      form: "contact",
-      label: "confirm_cancel",
-      locale,
-    });
-  };
+  const whatsappUrl = `https://wa.me/6285117697889?text=${encodeURIComponent(
+    `${t("whatsapp.greeting")}\n\n${t("whatsapp.nameLabel")}: ${formData.name}\n${t(
+      "whatsapp.messageLabel",
+    )}: ${formData.message}`,
+  )}`;
 
   // Removed focus-based starter; now handled in handleInputChange
   return (
@@ -204,7 +164,27 @@ ${t("whatsapp.messageLabel")}: ${formData.message}`;
         </div>
 
         <div className="max-w-6xl">
+          {status === "sent" ? (
+            <div role="status" className="max-w-2xl space-y-4 border-l-2 border-lime-green pl-6">
+              <p className="font-heading text-2xl font-bold text-ink">{t("sent.title")}</p>
+              <p className="text-ink-2">{t("sent.body")}</p>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => sendGTMEvent({ event: "contact_click_whatsapp", from: "sent", locale })}
+                className="inline-flex items-center gap-2 text-sm text-lime-green underline underline-offset-4"
+              >
+                <MessageCircle className="h-4 w-4" /> {t("sent.whatsapp")}
+              </a>
+            </div>
+          ) : (
           <form className="space-y-4" onSubmit={handleSubmit}>
+            {/* Honeypot: hidden from people and screen readers, filled by naive bots. */}
+            <div aria-hidden="true" className="absolute left-[-9999px] h-px w-px overflow-hidden">
+              <label htmlFor="contact-website">Website</label>
+              <input id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+            </div>
             <div className="grid md:grid-cols-2 gap-12">
               {/* Left Column - Personal Info */}
               <div className="grid grid-rows-[auto_auto_1fr] gap-8">
@@ -219,7 +199,9 @@ ${t("whatsapp.messageLabel")}: ${formData.message}`;
                     type="text"
                     id="contact-name"
                     name="name"
-                    placeholder={t("form.namePlaceholder")}
+                    required
+                    maxLength={200}
+                    placeholder={`${t("form.namePlaceholder")} *`}
                     value={formData.name}
                     onChange={handleInputChange}
                     className="rounded-none border-0 border-b-2 border-rule bg-transparent px-0 pb-2 text-ink placeholder:text-ink-3 focus-visible:border-lime-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-green"
@@ -233,7 +215,9 @@ ${t("whatsapp.messageLabel")}: ${formData.message}`;
                     type="email"
                     id="contact-email"
                     name="email"
-                    placeholder={t("form.emailPlaceholder")}
+                    required
+                    maxLength={200}
+                    placeholder={`${t("form.emailPlaceholder")} *`}
                     value={formData.email}
                     onChange={handleInputChange}
                     className="rounded-none border-0 border-b-2 border-rule bg-transparent px-0 pb-2 text-ink placeholder:text-ink-3 focus-visible:border-lime-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-green"
@@ -278,7 +262,9 @@ ${t("whatsapp.messageLabel")}: ${formData.message}`;
                   <Textarea
                     id="contact-message"
                     name="message"
-                    placeholder={t("form.messagePlaceholder")}
+                    required
+                    maxLength={5000}
+                    placeholder={`${t("form.messagePlaceholder")} *`}
                     value={formData.message}
                     onChange={handleInputChange}
                     className="min-h-[48px] flex-grow resize-none overflow-y-auto rounded-none border-0 border-b-2 border-rule bg-transparent px-0 pb-2 text-ink placeholder:text-ink-3 focus-visible:border-lime-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-green"
@@ -287,35 +273,36 @@ ${t("whatsapp.messageLabel")}: ${formData.message}`;
               </div>
             </div>
 
-            {/* Button aligned right */}
-            <div className="flex justify-end">
+            <div className="flex flex-col-reverse gap-4 pt-4 sm:flex-row sm:items-center sm:justify-between">
+              <p className="max-w-xl text-xs text-ink-3">
+                {t.rich("form.privacyNote", {
+                  link: (chunks) => (
+                    <Link href="/privacy" className="underline underline-offset-4 hover:text-lime-green">
+                      {chunks}
+                    </Link>
+                  ),
+                })}
+              </p>
               <CTAButton
                 type="submit"
                 variant="small"
-                disabled={isSubmitting}
-                aria-disabled={isSubmitting}
-                className={`generate_lead_cta_${locale}`}
+                disabled={status === "sending"}
+                aria-disabled={status === "sending"}
+                className={`generate_lead_cta_${locale} self-end sm:self-auto`}
               >
-                {t("form.sendButton")}
+                {status === "sending" ? t("form.sending") : t("form.sendButton")}
               </CTAButton>
             </div>
+            {status === "error" && (
+              <p role="alert" className="text-sm text-red-400">
+                {error}{" "}
+                <a href="mailto:hello@arktik.id" className="underline underline-offset-4">hello@arktik.id</a>
+              </p>
+            )}
           </form>
+          )}
         </div>
 
-        <ConfirmModal
-          open={confirmOpen}
-          onCancel={handleCancel}
-          onConfirm={() => handleConfirm({ isModal: true })}
-          confirmDisabled={isSubmitting}
-          title={t("modal.title")}
-          description={t("modal.description")}
-          confirmText={
-            isSubmitting ? t("modal.confirmingText") : t("modal.confirmText")
-          }
-          locale={locale}
-        >
-          {buildWhatsappMessage()}
-        </ConfirmModal>
       </section>
     </div>
   );

@@ -54,6 +54,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...entries("", now, 1, "monthly"),
     ...entries("blog", now, 0.8, "weekly"),
     ...entries("blog/case-studies", now, 0.6, "monthly"),
+    ...entries("privacy", now, 0.2, "yearly"),
   ];
 
   for (const p of getAllProducts()) {

@@ -126,13 +126,12 @@
       "phonePlaceholder": "Nomor telepon",
       "companyPlaceholder": "Nama perusahaan/proyek",
       "messagePlaceholder": "Ceritakan tentang proyek Anda...",
-      "sendButton": "Kirim pesan"
-    },
-    "modal": {
-      "title": "Buka WhatsApp?",
-      "description": "Anda belum mengisi form. Kami tetap bisa membuka WhatsApp dengan pesan kosong. Lanjutkan?",
-      "confirmText": "Konfirmasi & Buka WhatsApp",
-      "confirmingText": "Membuka…"
+      "sendButton": "Kirim pesan",
+      "sending": "Mengirim…",
+      "errorInvalid": "Mohon isi nama, email yang valid, dan pesan.",
+      "errorRate": "Terlalu banyak pesan dari jaringan Anda. Coba lagi nanti, atau email kami:",
+      "errorSend": "Pesan belum terkirim karena gangguan di sisi kami. Coba lagi, atau email langsung ke",
+      "privacyNote": "Kolom bertanda * wajib diisi. Data Anda hanya kami pakai untuk membalas pesan ini. <link>Kebijakan privasi</link>."
     },
     "whatsapp": {
       "greeting": "Hai Arktik! Saya tertarik dengan layanan Anda.",
@@ -141,6 +140,11 @@
       "phoneLabel": "Telepon",
       "companyLabel": "Perusahaan/Proyek",
       "messageLabel": "Pesan"
+    },
+    "sent": {
+      "title": "Pesan terkirim. Terima kasih.",
+      "body": "Kami membacanya dan membalas lewat email dalam 1 hari kerja.",
+      "whatsapp": "Butuh lebih cepat? Lanjut via WhatsApp"
     }
   },
   "works": {
@@ -243,7 +247,8 @@
   "footer": {
     "description": "Studio software di Indonesia. Aplikasi web dan mobile kustom, dikerjakan terbuka dan diserahkan atas nama Anda.",
     "copyright": "© {year} Arktik. Seluruh hak cipta dilindungi.",
-    "productsLabel": "Produk Arktik"
+    "productsLabel": "Produk Arktik",
+    "privacy": "Kebijakan privasi"
   },
   "showcase": {
     "viewport": {
@@ -406,5 +411,12 @@
       "ctaPrimary": "Mulai proyek",
       "ctaSecondary": "Lihat yang kami bangun"
     }
+  },
+  "consent": {
+    "text": "Kami memakai cookie Google Analytics untuk memahami kunjungan dan mengukur iklan kami. Cookie ini hanya aktif jika Anda setuju.",
+    "accept": "Terima",
+    "reject": "Tolak",
+    "more": "Selengkapnya",
+    "manage": "Pengaturan cookie"
   }
 }

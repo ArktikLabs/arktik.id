@@ -2,6 +2,7 @@ import Image from "next/image"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing"
 import { getAllProducts } from "@/lib/data/products"
+import { ConsentSettingsLink } from "@/components/ConsentBanner"
 
 /* Hallmark · Ft4 dense typographic colophon · design-system: design.md v2
  *
@@ -75,9 +76,15 @@ export function FooterSection() {
         </p>
 
         <div className="mt-10 flex flex-wrap items-baseline justify-between gap-4 border-t border-rule pt-6">
-          <p className="label-mono">
-            {t("copyright", { year: new Date().getFullYear() })}
-          </p>
+          <div className="space-y-2">
+            <p className="label-mono">
+              {t("copyright", { year: new Date().getFullYear() })}
+            </p>
+            <p className="label-mono flex flex-wrap gap-x-4 gap-y-1">
+              <Link href="/privacy" className="hover:text-lime-green">{t("privacy")}</Link>
+              <ConsentSettingsLink className="uppercase hover:text-lime-green" />
+            </p>
+          </div>
 
           <ul className="flex gap-5">
             {SOCIALS.map((social) => (

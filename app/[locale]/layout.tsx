@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Suspense } from "react";
 import { CursorPreloader } from "@/components/CursorPreloader";
 import { GoogleTagManager } from "@next/third-parties/google";
+import { ConsentBanner } from "@/components/ConsentBanner";
 import { NextIntlClientProvider } from "next-intl";
 import {
   getMessages,
@@ -158,6 +159,16 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} data-scroll-behavior="smooth">
       <head>
+        {/* Google Consent Mode v2: everything denied until the visitor accepts in <ConsentBanner>. Must run before
+         * GTM; a stored choice from an earlier visit is re-applied here so returning visitors aren't asked again. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+gtag('set','ads_data_redaction',true);gtag('set','url_passthrough',true);
+try{var c=JSON.parse(localStorage.getItem('arktik_consent')||'null');if(c&&(Date.now()-c.at)<15724800000&&c.v==='granted'){gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'})}}catch(e){}`,
+          }}
+        />
         <GoogleTagManager gtmId="GTM-WDNKG95C" />
       </head>
       <body
@@ -177,6 +188,7 @@ export default async function LocaleLayout({
           <CursorPreloader />
           <Suspense fallback={null}>{children}</Suspense>
           <Analytics />
+          <ConsentBanner />
         </NextIntlClientProvider>
       </body>
     </html>

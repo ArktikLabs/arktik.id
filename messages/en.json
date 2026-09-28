@@ -126,13 +126,12 @@
       "phonePlaceholder": "Phone number",
       "companyPlaceholder": "Company/Project name",
       "messagePlaceholder": "Tell us about your project...",
-      "sendButton": "Send message"
-    },
-    "modal": {
-      "title": "Open WhatsApp?",
-      "description": "You haven't filled the form. We can still open WhatsApp with a blank message. Proceed?",
-      "confirmText": "Confirm & Open WhatsApp",
-      "confirmingText": "Opening…"
+      "sendButton": "Send message",
+      "sending": "Sending…",
+      "errorInvalid": "Please fill in your name, a valid email and a message.",
+      "errorRate": "Too many messages from your network. Try again later, or email us:",
+      "errorSend": "Your message didn't go through because of a problem on our side. Try again, or email",
+      "privacyNote": "Fields marked * are required. We use your details only to reply to this message. <link>Privacy policy</link>."
     },
     "whatsapp": {
       "greeting": "Hi Arktik! I'm interested in your services.",
@@ -141,6 +140,11 @@
       "phoneLabel": "Phone",
       "companyLabel": "Company/Project",
       "messageLabel": "Message"
+    },
+    "sent": {
+      "title": "Message sent. Thank you.",
+      "body": "We read it and reply by email within 1 business day.",
+      "whatsapp": "In a hurry? Continue on WhatsApp"
     }
   },
   "works": {
@@ -243,7 +247,8 @@
   "footer": {
     "description": "A software studio in Indonesia. Custom web and mobile applications, built in the open and handed over in your name.",
     "copyright": "© {year} Arktik. All rights reserved.",
-    "productsLabel": "Arktik products"
+    "productsLabel": "Arktik products",
+    "privacy": "Privacy policy"
   },
   "showcase": {
     "viewport": {
@@ -406,5 +411,12 @@
       "ctaPrimary": "Start a project",
       "ctaSecondary": "See what we build"
     }
+  },
+  "consent": {
+    "text": "We use Google Analytics cookies to understand visits and measure our ads. They are only set if you agree.",
+    "accept": "Accept",
+    "reject": "Decline",
+    "more": "Learn more",
+    "manage": "Cookie settings"
   }
 }
