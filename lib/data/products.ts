@@ -4,8 +4,11 @@
  * locale-free facts (slug, link, images).
  *
  * Honest-copy rule (design.md): no prices, no user counts, no testimonials.
- * The product's own numbers (stock/holder/group counts) are coverage of public
- * data, not traction — keep it that way. */
+ * The product's own numbers (stock/holder/group counts, game counts) are scope,
+ * not traction — keep it that way. Never show play counts or sign-ups.
+ *
+ * Each product lists its own coverage + feature keys; the product page renders
+ * productPage.<key>.coverage.<c> and productPage.<key>.features.<f> for them. */
 
 export interface ProductShot {
   src: string;
@@ -21,6 +24,14 @@ export interface Product {
   key: string;
   name: string;
   link: string;
+  /** host shown next to the visit button */
+  domain: string;
+  /** schema.org SoftwareApplication.applicationCategory */
+  category: string;
+  /** keys under productPage.<key>.coverage — exactly 4 (grid is 2×2 / 4×1) */
+  coverage: readonly string[];
+  /** keys under productPage.<key>.features */
+  features: readonly string[];
   cover: ProductShot;
   shots: ProductShot[];
 }
@@ -31,6 +42,10 @@ export const products: Product[] = [
     key: "jejakSaham",
     name: "Jejak Saham",
     link: "https://jejaksaham.arktik.id",
+    domain: "jejaksaham.arktik.id",
+    category: "FinanceApplication",
+    coverage: ["stocks", "holders", "groups", "cadence"],
+    features: ["moves", "stock", "investor", "groups", "screener", "financials", "backtest", "watchlist"],
     cover: {
       src: "/assets/products/jejak-saham/moves.webp",
       width: 976,
@@ -49,6 +64,42 @@ export const products: Product[] = [
         width: 1984,
         height: 880,
         key: "financials",
+      },
+    ],
+  },
+  {
+    slug: "ayo-main",
+    key: "ayoMain",
+    name: "Ayo Main",
+    link: "https://ayomain.arktik.id",
+    domain: "ayomain.arktik.id",
+    category: "GameApplication",
+    coverage: ["ages", "ads", "accounts", "review"],
+    features: ["catalog", "parents", "noSignup", "offline", "creators", "review", "sandbox", "popular"],
+    cover: {
+      src: "/assets/products/ayo-main/cover.webp",
+      width: 976,
+      height: 718,
+      key: "cover",
+    },
+    shots: [
+      {
+        src: "/assets/products/ayo-main/catalog.webp",
+        width: 1600,
+        height: 895,
+        key: "catalog",
+      },
+      {
+        src: "/assets/products/ayo-main/detail.webp",
+        width: 1600,
+        height: 975,
+        key: "detail",
+      },
+      {
+        src: "/assets/products/ayo-main/maker.webp",
+        width: 1600,
+        height: 675,
+        key: "maker",
       },
     ],
   },

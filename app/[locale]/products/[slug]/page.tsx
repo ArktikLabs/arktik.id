@@ -1,10 +1,11 @@
 /* Hallmark · macrostructure: 05 Workbench (product) · design-system: design.md v2
  *
  * Sits in the showcase family: the product's own screenshots are the only
- * enrichment. Copy is factual scope — coverage of public data and the feature
- * list — with no prices, user counts or testimonials (honest-copy clause), and
- * the not-investment-advice / non-affiliation line is part of the page body,
- * not buried in a footer. */
+ * enrichment. Copy is factual scope — coverage and the feature list — with no
+ * prices, user counts or testimonials (honest-copy clause), and each product's
+ * disclaimer line (not-investment-advice, children's data, …) is part of the
+ * page body, not buried in a footer. Coverage/feature keys come from
+ * lib/data/products.ts so every product shares this one layout. */
 import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -21,18 +22,6 @@ import { getAllProducts, getProductBySlug } from "@/lib/data/products";
 interface ProductPageProps {
   params: Promise<{ locale: string; slug: string }>;
 }
-
-const COVERAGE = ["stocks", "holders", "groups", "cadence"] as const;
-const FEATURES = [
-  "moves",
-  "stock",
-  "investor",
-  "groups",
-  "screener",
-  "financials",
-  "backtest",
-  "watchlist",
-] as const;
 
 // Only the slugs in lib/data/products.ts exist; nothing renders on demand.
 export const dynamicParams = false;
@@ -81,7 +70,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             "@id": `${localeUrl(locale, `products/${slug}`)}#product`,
             name: product.name,
             url: product.link,
-            applicationCategory: "FinanceApplication",
+            applicationCategory: product.category,
             operatingSystem: "Web",
             description: t(`${k}.metaDescription`),
             inLanguage: "id-ID",
@@ -128,10 +117,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 rel="noopener"
                 className="inline-flex items-center gap-2 whitespace-nowrap rounded-pill bg-lime-green px-6 py-3 text-sm font-semibold text-carbon transition-colors duration-200 hover:bg-lime-green/90"
               >
-                {t("visit")}
+                {t(`${k}.visit`)}
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </a>
-              <span className="label-mono">jejaksaham.arktik.id</span>
+              <span className="label-mono">{product.domain}</span>
             </div>
           </div>
 
@@ -157,7 +146,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             {t(`${k}.coverageTitle`)}
           </h2>
           <dl className="grid grid-cols-2 border-t border-rule lg:grid-cols-4">
-            {COVERAGE.map((c) => (
+            {product.coverage.map((c) => (
               <div
                 key={c}
                 className="flex min-w-0 flex-col gap-1 border-b border-rule py-5 pr-4 lg:border-b-0"
@@ -182,7 +171,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <span className="section-head__rule" aria-hidden="true" />
           </div>
           <ul className="grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
-            {FEATURES.map((f) => (
+            {product.features.map((f) => (
               <li key={f} className="step">
                 <h3 className="font-heading text-lg font-semibold text-ink">
                   {t(`${k}.features.${f}.title`)}

@@ -323,12 +323,17 @@
         "description": "An ownership tracker built on public KSEI and BEI filings. Daily ownership changes of 5% or more and monthly changes of 1% or more, across about 963 listed stocks, 5,663 holders and 40 mapped business groups.",
         "more": "About Jejak Saham",
         "visit": "Visit the site"
+      },
+      "ayoMain": {
+        "tagline": "A catalog of Indonesian-language games for kids aged 2–10. No sign-up, no ads.",
+        "description": "HTML5 games curated one by one and grouped by age. Kids play straight away on a phone or laptop; parents get clear information for every game. Game makers can submit their work to be reviewed and published.",
+        "more": "About Ayo Main",
+        "visit": "Visit the site"
       }
     }
   },
   "productPage": {
     "breadcrumb": "Products",
-    "visit": "Open Jejak Saham",
     "jejakSaham": {
       "metaTitle": "Jejak Saham: IDX stock ownership tracker | Arktik",
       "metaDescription": "An Arktik product that tracks who holds, adds to, trims and exits stocks on the Indonesia Stock Exchange, from public KSEI and BEI data.",
@@ -408,6 +413,94 @@
       "disclaimer": "Jejak Saham is not investment advice. It is not affiliated with BEI, KSEI or OJK.",
       "ctaTitle": "Need a data product like this?",
       "ctaDescription": "We build systems that turn public or internal data into a tool people use every day. Tell us what you need.",
+      "ctaPrimary": "Start a project",
+      "ctaSecondary": "See what we build",
+      "visit": "Open Jejak Saham"
+    },
+    "ayoMain": {
+      "metaTitle": "Ayo Main: Indonesian-language games for kids | Arktik",
+      "metaDescription": "An Arktik product: Indonesian-language games for kids aged 2–10, curated one by one. No sign-up, no ads, no personal data from children.",
+      "visit": "Open Ayo Main",
+      "tagline": "Fun games for little ones, picked one by one.",
+      "intro": "Ayo Main brings Indonesian-language HTML5 games for kids aged 2–10 into one place. Kids just tap and play, with no account and no ads. Every game is checked before it goes live, including games submitted by outside makers.",
+      "coverageTitle": "Scope",
+      "coverage": {
+        "ages": {
+          "value": "2–10",
+          "label": "years, grouped by age"
+        },
+        "ads": {
+          "value": "0",
+          "label": "ads and in-game purchases"
+        },
+        "accounts": {
+          "value": "0",
+          "label": "accounts or personal data from kids"
+        },
+        "review": {
+          "value": "2 steps",
+          "label": "review: automated, then manual"
+        }
+      },
+      "featuresTitle": "What's inside",
+      "features": {
+        "catalog": {
+          "title": "Catalog by age",
+          "description": "Games are grouped for ages 2–4, 5–7 and 8–10, with clear game types."
+        },
+        "parents": {
+          "title": "Information for parents",
+          "description": "Every game has a page covering age, how to play, ads and children's data. Parents can also subscribe to new-game updates by email."
+        },
+        "noSignup": {
+          "title": "Play straight away",
+          "description": "No sign-up and no app to install. Games run in the browser on phones and laptops."
+        },
+        "offline": {
+          "title": "Works offline",
+          "description": "Some games can be added to the phone's home screen and played without internet."
+        },
+        "creators": {
+          "title": "Game maker programme",
+          "description": "Adult game makers can sign up, upload a game as one ZIP file and follow its status. Their name appears on games that go live."
+        },
+        "review": {
+          "title": "Queue and review",
+          "description": "Submissions enter a queue, are checked automatically, get a recommendation with reasons, and are decided manually by the team."
+        },
+        "sandbox": {
+          "title": "Sandboxed games",
+          "description": "Games from makers run separately from the site, with no access to cookies, site storage or the internet."
+        },
+        "popular": {
+          "title": "Popular and newest",
+          "description": "The catalog can be sorted by most played or newest. Plays are counted without storing anything that identifies a device."
+        }
+      },
+      "tiers": "Free for families and for game makers.",
+      "shots": {
+        "cover": {
+          "alt": "Ayo Main home page with the colourful block logo",
+          "caption": "The home page: play straight away, no sign-up."
+        },
+        "catalog": {
+          "alt": "Ayo Main game catalog with age filters",
+          "caption": "The catalog, with age filters and sort options."
+        },
+        "detail": {
+          "alt": "Parent information page for the game Warung Meong",
+          "caption": "Information for parents: age, how to play, offline, ads and children's data."
+        },
+        "maker": {
+          "alt": "The game maker page on Ayo Main",
+          "caption": "The game maker page: sign up, upload, then join the review queue."
+        }
+      },
+      "builtTitle": "How we built it",
+      "built": "Built and run by Arktik on Next.js and SQLite. Every submitted game is first played in an isolated browser with no internet access, its code is scanned, and it is assessed with AI assistance. The result is a recommendation; the decision to publish stays with the team.",
+      "disclaimer": "Ayo Main asks children for no account and no personal data, and shows no ads. Game maker accounts are for people aged 18 and over.",
+      "ctaTitle": "Need a content platform that is safe for kids?",
+      "ctaDescription": "We build products with curation, moderation and privacy from the start, from the catalog to the review flow. Tell us what you need.",
       "ctaPrimary": "Start a project",
       "ctaSecondary": "See what we build"
     }

@@ -323,12 +323,17 @@
         "description": "Pelacak kepemilikan saham dari publikasi resmi KSEI dan BEI. Perubahan kepemilikan harian ≥5% dan bulanan ≥1%, untuk sekitar 963 saham, 5.663 pemegang, dan 40 grup usaha yang sudah dipetakan.",
         "more": "Tentang Jejak Saham",
         "visit": "Buka situsnya"
+      },
+      "ayoMain": {
+        "tagline": "Katalog game berbahasa Indonesia untuk anak 2–10 tahun. Tanpa daftar, tanpa iklan.",
+        "description": "Game HTML5 yang dikurasi satu per satu dan dikelompokkan per umur. Anak langsung main di HP atau laptop; orang tua mendapat info yang jelas untuk tiap game. Pembuat game bisa mengirim karyanya untuk diperiksa dan ditayangkan.",
+        "more": "Tentang Ayo Main",
+        "visit": "Buka situsnya"
       }
     }
   },
   "productPage": {
     "breadcrumb": "Produk",
-    "visit": "Buka Jejak Saham",
     "jejakSaham": {
       "metaTitle": "Jejak Saham: pelacak kepemilikan saham BEI | Arktik",
       "metaDescription": "Produk Arktik yang melacak siapa memegang, menambah, mengurangi, dan melepas saham di BEI, dari data publik KSEI dan BEI.",
@@ -408,6 +413,94 @@
       "disclaimer": "Jejak Saham bukan rekomendasi investasi. Tidak berafiliasi dengan BEI, KSEI, atau OJK.",
       "ctaTitle": "Butuh produk data seperti ini?",
       "ctaDescription": "Kami membangun sistem yang mengubah data publik atau data internal menjadi alat yang dipakai setiap hari. Ceritakan kebutuhan Anda.",
+      "ctaPrimary": "Mulai proyek",
+      "ctaSecondary": "Lihat yang kami bangun",
+      "visit": "Buka Jejak Saham"
+    },
+    "ayoMain": {
+      "metaTitle": "Ayo Main: katalog game anak berbahasa Indonesia | Arktik",
+      "metaDescription": "Produk Arktik: game berbahasa Indonesia untuk anak 2–10 tahun yang dikurasi satu per satu. Tanpa daftar, tanpa iklan, tanpa data pribadi anak.",
+      "visit": "Buka Ayo Main",
+      "tagline": "Game seru untuk si kecil, dipilih satu per satu.",
+      "intro": "Ayo Main mengumpulkan game HTML5 berbahasa Indonesia untuk anak 2–10 tahun di satu tempat. Anak tinggal sentuh dan main, tanpa akun dan tanpa iklan. Setiap game diperiksa dulu sebelum tayang, termasuk game kiriman pembuat dari luar.",
+      "coverageTitle": "Cakupan",
+      "coverage": {
+        "ages": {
+          "value": "2–10",
+          "label": "tahun, dikelompokkan per umur"
+        },
+        "ads": {
+          "value": "0",
+          "label": "iklan dan pembelian dalam game"
+        },
+        "accounts": {
+          "value": "0",
+          "label": "akun atau data pribadi dari anak"
+        },
+        "review": {
+          "value": "2 tahap",
+          "label": "pemeriksaan: otomatis, lalu manual"
+        }
+      },
+      "featuresTitle": "Yang ada di dalamnya",
+      "features": {
+        "catalog": {
+          "title": "Katalog per umur",
+          "description": "Game dikelompokkan untuk 2–4, 5–7, dan 8–10 tahun, dengan jenis permainan yang jelas."
+        },
+        "parents": {
+          "title": "Info untuk orang tua",
+          "description": "Setiap game punya halaman yang menjelaskan umur, cara main, iklan, dan data anak. Orang tua juga bisa berlangganan kabar game baru lewat email."
+        },
+        "noSignup": {
+          "title": "Langsung main",
+          "description": "Tidak perlu daftar atau pasang aplikasi. Game jalan di browser HP maupun laptop."
+        },
+        "offline": {
+          "title": "Bisa offline",
+          "description": "Sebagian game bisa dipasang ke layar HP dan dimainkan tanpa internet."
+        },
+        "creators": {
+          "title": "Program pembuat game",
+          "description": "Pembuat game dewasa bisa mendaftar, mengunggah game dalam satu file ZIP, dan memantau statusnya. Namanya tampil di game yang tayang."
+        },
+        "review": {
+          "title": "Antrean dan review",
+          "description": "Kiriman masuk antrean, diperiksa otomatis, diberi rekomendasi beserta alasannya, lalu diputuskan manual oleh tim."
+        },
+        "sandbox": {
+          "title": "Game dalam sandbox",
+          "description": "Game dari pembuat berjalan terpisah dari situs, tanpa akses ke cookie, penyimpanan situs, atau internet."
+        },
+        "popular": {
+          "title": "Populer dan terbaru",
+          "description": "Katalog bisa diurutkan menurut yang paling sering dimainkan atau yang terbaru. Jumlah main dihitung tanpa menyimpan data pengenal perangkat."
+        }
+      },
+      "tiers": "Gratis untuk keluarga dan untuk pembuat game.",
+      "shots": {
+        "cover": {
+          "alt": "Halaman depan Ayo Main dengan logo balok warna-warni",
+          "caption": "Halaman depan: tombol main langsung, tanpa daftar."
+        },
+        "catalog": {
+          "alt": "Katalog game Ayo Main dengan filter umur",
+          "caption": "Katalog dengan filter umur dan pilihan urutan."
+        },
+        "detail": {
+          "alt": "Halaman info game Warung Meong untuk orang tua",
+          "caption": "Info untuk orang tua: umur, cara main, offline, iklan, dan data anak."
+        },
+        "maker": {
+          "alt": "Halaman untuk pembuat game di Ayo Main",
+          "caption": "Halaman pembuat game: daftar, unggah, lalu masuk antrean review."
+        }
+      },
+      "builtTitle": "Cara kami membangunnya",
+      "built": "Dibangun dan dijalankan oleh Arktik dengan Next.js dan SQLite. Setiap game kiriman dimainkan dulu di browser terisolasi tanpa akses internet, kodenya dipindai, lalu dinilai dengan bantuan AI. Hasilnya menjadi rekomendasi; keputusan tayang tetap di tangan tim.",
+      "disclaimer": "Ayo Main tidak meminta akun atau data pribadi dari anak dan tidak menampilkan iklan. Akun pembuat game hanya untuk usia 18 tahun ke atas.",
+      "ctaTitle": "Butuh platform konten yang aman untuk anak?",
+      "ctaDescription": "Kami membangun produk dengan kurasi, moderasi, dan privasi sejak awal, dari katalog sampai alur review. Ceritakan kebutuhan Anda.",
       "ctaPrimary": "Mulai proyek",
       "ctaSecondary": "Lihat yang kami bangun"
     }
