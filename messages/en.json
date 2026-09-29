@@ -335,6 +335,12 @@
         "description": "HTML5 games curated one by one and grouped by age. Kids play straight away on a phone or laptop; parents get clear information for every game. Game makers can submit their work to be reviewed and published.",
         "more": "About Ayo Main",
         "visit": "Visit the site"
+      },
+      "jelita": {
+        "tagline": "Salon software: online booking, stylist schedules, point of sale, and commissions in one app.",
+        "description": "Customers book themselves from the salon's page, stylist schedules stay in order, and the till works out commissions and deducts stock at checkout. Runs in the browser on phone and laptop, free for single-branch salons.",
+        "more": "About Jelita",
+        "visit": "Visit the site"
       }
     }
   },
@@ -509,6 +515,93 @@
       "ctaDescription": "We build products with curation, moderation and privacy from the start, from the catalog to the review flow. Tell us what you need.",
       "ctaPrimary": "Start a project",
       "ctaSecondary": "See what we build"
+    },
+    "jelita": {
+      "metaTitle": "Jelita: salon software for online booking, POS, and commissions | Arktik",
+      "metaDescription": "An Arktik product: salon and spa software for online booking, stylist schedules, point of sale, commissions, stock, and payroll. Nothing to install, free for one branch.",
+      "visit": "Open Jelita",
+      "tagline": "A full book, and a calm head.",
+      "intro": "Jelita puts a salon or spa's daily work in one place. Customers book themselves through the salon's page, the front desk sees every stylist's schedule, and the till works out commissions and deducts stock on the spot. Owners follow revenue and reports from their phone.",
+      "coverageTitle": "Coverage",
+      "coverage": {
+        "booking": {
+          "value": "24/7",
+          "label": "customers can book themselves"
+        },
+        "free": {
+          "value": "Rp0",
+          "label": "for a single-branch salon"
+        },
+        "install": {
+          "value": "0",
+          "label": "apps to install"
+        },
+        "roles": {
+          "value": "4 roles",
+          "label": "owner, admin, front desk, and stylist"
+        }
+      },
+      "featuresTitle": "What's inside",
+      "features": {
+        "booking": {
+          "title": "Online booking",
+          "description": "Every salon gets its own page with services and prices. Customers pick a service, a stylist, and a time without an account or an app."
+        },
+        "schedule": {
+          "title": "Stylist schedules",
+          "description": "Daily and weekly calendars per stylist, with working hours and breaks. Double bookings are refused up front."
+        },
+        "pos": {
+          "title": "Point of sale",
+          "description": "Charge from an appointment or a walk-in, by cash, transfer, QRIS, debit, or credit. Receipts are numbered and cashier shifts are recorded."
+        },
+        "commissions": {
+          "title": "Automatic commissions",
+          "description": "Stylist commissions are calculated when payment completes, following rules per service or per staff member."
+        },
+        "customers": {
+          "title": "Customer records",
+          "description": "Visit history, notes, and contact details in one place, searchable and exportable."
+        },
+        "stock": {
+          "title": "Product stock",
+          "description": "Stock goes down on its own when a product sells, with a low-stock flag."
+        },
+        "payroll": {
+          "title": "Payroll and reports",
+          "description": "Pay and commission summaries per period, a finance overview, and CSV exports for the owner."
+        },
+        "branding": {
+          "title": "Salon colors and logo",
+          "description": "The booking page carries the salon's own logo and colors, not Jelita's. Works across more than one branch."
+        }
+      },
+      "tiers": "There is a free plan for single-branch salons. Plans for larger salons are arranged on request.",
+      "shots": {
+        "today": {
+          "alt": "Jelita's Today dashboard for a sample salon",
+          "caption": "Today: revenue, stylist capacity, and the agenda. Data from a sample salon."
+        },
+        "calendar": {
+          "alt": "Jelita's appointment calendar by stylist",
+          "caption": "Daily schedule: every stylist gets a column."
+        },
+        "pos": {
+          "alt": "Jelita's point-of-sale screen with services and products",
+          "caption": "Point of sale: services and products, five ways to pay, commissions worked out on the spot."
+        },
+        "salon": {
+          "alt": "A sample salon's page on Jelita with services, prices, and branches",
+          "caption": "Salon page: services, prices, opening hours, and a booking button per branch."
+        }
+      },
+      "builtTitle": "How we built it",
+      "built": "Built and run by Arktik with Next.js and Postgres. The rules that matter, such as schedules that must never overlap and transactions that cannot change once settled, are enforced in the database itself. Time always follows the salon's time zone.",
+      "disclaimer": "The screens on this page use a sample salon with made-up names and data. Automatic WhatsApp reminders and online payment at booking are still in development.",
+      "ctaTitle": "Need an operations system for a service business?",
+      "ctaDescription": "We build everyday tools for appointment-based businesses, from booking to the till and reports. Tell us what you need.",
+      "ctaPrimary": "Start a project",
+      "ctaSecondary": "See what we've built"
     }
   },
   "consent": {

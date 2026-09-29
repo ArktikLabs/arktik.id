@@ -335,6 +335,12 @@
         "description": "Game HTML5 yang dikurasi satu per satu dan dikelompokkan per umur. Anak langsung main di HP atau laptop; orang tua mendapat info yang jelas untuk tiap game. Pembuat game bisa mengirim karyanya untuk diperiksa dan ditayangkan.",
         "more": "Tentang Ayo Main",
         "visit": "Buka situsnya"
+      },
+      "jelita": {
+        "tagline": "Software salon: booking online, jadwal stylist, kasir, dan komisi dalam satu aplikasi.",
+        "description": "Pelanggan pesan sendiri dari halaman salon, jadwal stylist tersusun, kasir menghitung komisi dan mengurangi stok saat pembayaran. Jalan di browser HP dan laptop, gratis untuk salon satu cabang.",
+        "more": "Tentang Jelita",
+        "visit": "Buka situsnya"
       }
     }
   },
@@ -507,6 +513,93 @@
       "disclaimer": "Ayo Main tidak meminta akun atau data pribadi dari anak dan tidak menampilkan iklan. Akun pembuat game hanya untuk usia 18 tahun ke atas.",
       "ctaTitle": "Butuh platform konten yang aman untuk anak?",
       "ctaDescription": "Kami membangun produk dengan kurasi, moderasi, dan privasi sejak awal, dari katalog sampai alur review. Ceritakan kebutuhan Anda.",
+      "ctaPrimary": "Mulai proyek",
+      "ctaSecondary": "Lihat yang kami bangun"
+    },
+    "jelita": {
+      "metaTitle": "Jelita: software salon untuk booking online, kasir, dan komisi | Arktik",
+      "metaDescription": "Produk Arktik: aplikasi salon dan spa untuk booking online, jadwal stylist, kasir, komisi, stok, dan penggajian. Tanpa install aplikasi, gratis untuk satu cabang.",
+      "visit": "Buka Jelita",
+      "tagline": "Booking penuh, kepala tetap adem.",
+      "intro": "Jelita merapikan pekerjaan harian salon dan spa di satu tempat. Pelanggan memesan sendiri lewat halaman salon, front desk melihat jadwal semua stylist, dan kasir langsung menghitung komisi serta mengurangi stok. Pemilik melihat omzet dan laporannya dari HP.",
+      "coverageTitle": "Cakupan",
+      "coverage": {
+        "booking": {
+          "value": "24 jam",
+          "label": "pelanggan bisa booking sendiri"
+        },
+        "free": {
+          "value": "Rp0",
+          "label": "untuk salon satu cabang"
+        },
+        "install": {
+          "value": "0",
+          "label": "aplikasi yang perlu dipasang"
+        },
+        "roles": {
+          "value": "4 peran",
+          "label": "pemilik, admin, front desk, dan stylist"
+        }
+      },
+      "featuresTitle": "Yang ada di dalamnya",
+      "features": {
+        "booking": {
+          "title": "Booking online",
+          "description": "Setiap salon punya halaman sendiri dengan menu dan harga. Pelanggan memilih layanan, stylist, dan jam tanpa akun atau aplikasi."
+        },
+        "schedule": {
+          "title": "Jadwal stylist",
+          "description": "Kalender harian dan mingguan per stylist, dengan jam kerja dan istirahat. Jadwal bentrok ditolak dari awal."
+        },
+        "pos": {
+          "title": "Kasir",
+          "description": "Tagih dari janji temu atau walk-in, dengan tunai, transfer, QRIS, debit, atau kredit. Struk bernomor dan shift kasir tercatat."
+        },
+        "commissions": {
+          "title": "Komisi otomatis",
+          "description": "Komisi stylist dihitung saat pembayaran selesai, sesuai aturan per layanan atau per staf."
+        },
+        "customers": {
+          "title": "Data pelanggan",
+          "description": "Riwayat kunjungan, catatan, dan kontak pelanggan di satu tempat, bisa dicari dan diunduh."
+        },
+        "stock": {
+          "title": "Stok produk",
+          "description": "Stok berkurang sendiri saat produk terjual, dengan penanda stok menipis."
+        },
+        "payroll": {
+          "title": "Penggajian dan laporan",
+          "description": "Rekap gaji dan komisi per periode, ringkasan keuangan, dan unduhan CSV untuk pemilik."
+        },
+        "branding": {
+          "title": "Warna dan logo salon",
+          "description": "Halaman booking memakai logo dan warna salon sendiri, bukan merek Jelita. Bisa untuk lebih dari satu cabang."
+        }
+      },
+      "tiers": "Ada paket gratis untuk salon satu cabang. Paket untuk salon yang lebih besar lewat konsultasi.",
+      "shots": {
+        "today": {
+          "alt": "Dashboard Hari ini di Jelita untuk salon contoh",
+          "caption": "Hari ini: omzet, kapasitas stylist, dan agenda. Data dari salon contoh."
+        },
+        "calendar": {
+          "alt": "Kalender janji temu per stylist di Jelita",
+          "caption": "Jadwal harian: setiap stylist punya kolomnya sendiri."
+        },
+        "pos": {
+          "alt": "Layar kasir Jelita dengan layanan dan produk",
+          "caption": "Kasir: layanan dan produk, lima cara bayar, komisi langsung terhitung."
+        },
+        "salon": {
+          "alt": "Halaman salon contoh di Jelita dengan menu, harga, dan cabang",
+          "caption": "Halaman salon: menu, harga, jam buka, dan tombol pesan per cabang."
+        }
+      },
+      "builtTitle": "Cara kami membangunnya",
+      "built": "Dibangun dan dijalankan oleh Arktik dengan Next.js dan Postgres. Aturan bisnis yang penting, seperti jadwal yang tidak boleh bentrok dan transaksi yang tidak bisa diubah setelah selesai, dijaga langsung di database. Waktu selalu mengikuti zona waktu salon.",
+      "disclaimer": "Tampilan di halaman ini memakai salon contoh dengan nama dan data karangan. Pengingat WhatsApp otomatis dan pembayaran online saat booking masih dalam pengembangan.",
+      "ctaTitle": "Butuh sistem operasional untuk bisnis jasa?",
+      "ctaDescription": "Kami membangun alat kerja harian untuk bisnis berbasis janji temu, dari booking sampai kasir dan laporan. Ceritakan kebutuhan Anda.",
       "ctaPrimary": "Mulai proyek",
       "ctaSecondary": "Lihat yang kami bangun"
     }

@@ -103,6 +103,42 @@ export const products: Product[] = [
       },
     ],
   },
+  {
+    slug: "jelita",
+    key: "jelita",
+    name: "Jelita",
+    link: "https://jelita.arktik.id",
+    domain: "jelita.arktik.id",
+    category: "BusinessApplication",
+    coverage: ["booking", "free", "install", "roles"],
+    features: ["booking", "schedule", "pos", "commissions", "customers", "stock", "payroll", "branding"],
+    cover: {
+      src: "/assets/products/jelita/today.webp",
+      width: 976,
+      height: 686,
+      key: "today",
+    },
+    shots: [
+      {
+        src: "/assets/products/jelita/calendar.webp",
+        width: 1600,
+        height: 1125,
+        key: "calendar",
+      },
+      {
+        src: "/assets/products/jelita/pos.webp",
+        width: 1600,
+        height: 1125,
+        key: "pos",
+      },
+      {
+        src: "/assets/products/jelita/salon.webp",
+        width: 1600,
+        height: 1125,
+        key: "salon",
+      },
+    ],
+  },
 ];
 
 export function getProductBySlug(slug: string): Product | undefined {
