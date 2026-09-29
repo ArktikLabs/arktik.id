@@ -1,6 +1,8 @@
 /* Privacy policy, /privacy (id) and /en/privacy. Written for UU PDP (UU 27/2022) and, for visitors in the EU/UK, GDPR.
  * Keep it in step with what the site really does: the contact form (app/api/leads -> hooks.arktik.id -> Telegram),
- * Google Analytics via GTM behind the consent banner (components/ConsentBanner.tsx), and Vercel Web Analytics. */
+ * Google Analytics via GTM behind the consent banner (components/ConsentBanner.tsx), and Vercel Web Analytics.
+ * The #threads section covers the "Arktik Labs Threads" Meta app (our own accounts only, posting via self-hosted
+ * Postiz); Meta App Review links to it as the data deletion instructions URL, so keep the anchor stable. */
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { Header } from "@/components/sections/Header";
@@ -10,7 +12,7 @@ import { alternatesFor } from "@/lib/seo/schema";
 
 type Props = { params: Promise<{ locale: string }> };
 
-const UPDATED = { id: "28 September 2026", en: "28 September 2026" };
+const UPDATED = { id: "29 September 2026", en: "29 September 2026" };
 
 const CONTROLLER = {
   name: "PT Bahtera Solusi Digital",
@@ -31,8 +33,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function H({ children }: { children: React.ReactNode }) {
-  return <h2 className="pt-6 font-heading text-xl font-bold text-ink">{children}</h2>;
+function H({ children, id }: { children: React.ReactNode; id?: string }) {
+  return (
+    <h2 id={id} className="scroll-mt-28 pt-6 font-heading text-xl font-bold text-ink">
+      {children}
+    </h2>
+  );
+}
+
+function H3({ children }: { children: React.ReactNode }) {
+  return <h3 className="pt-2 font-heading text-lg font-bold text-ink">{children}</h3>;
 }
 
 export default async function PrivacyPage({ params }: Props) {
@@ -152,6 +162,65 @@ export default async function PrivacyPage({ params }: Props) {
                 menyangkut data Anda, kami memberi tahu Anda paling lambat 3 x 24 jam setelah mengetahuinya.
               </p>
 
+              <section aria-labelledby="threads" className="space-y-4">
+                <H id="threads">Akun Threads Arktik dan data dari Threads</H>
+                <p>
+                  Kami memakai aplikasi <strong>&quot;Arktik Labs Threads&quot;</strong>, yang terhubung ke Threads API resmi
+                  milik Meta, untuk mengelola akun Threads milik kami sendiri: <strong>@arktiklabs</strong> dan{" "}
+                  <strong>@khaeransori</strong> (pendiri Arktik). Aplikasi ini hanya dipakai oleh tim kami, tidak dipakai
+                  orang lain, dan tidak meminta Anda atau pengguna lain untuk login.
+                </p>
+
+                <H3>Data yang kami akses lewat Threads API</H3>
+                <ul className="space-y-2">
+                  <li>Post dan balasan yang kami terbitkan di akun kami sendiri.</li>
+                  <li>
+                    Balasan dan mention publik yang ditujukan ke akun kami: username, teks, waktu, dan tautan post.
+                  </li>
+                  <li>
+                    Hasil pencarian kata kunci atas post publik di Threads: username publik, teks, waktu, dan tautan post.
+                  </li>
+                  <li>Statistik (insight) post kami sendiri, misalnya jumlah tayangan dan interaksi.</li>
+                </ul>
+
+                <H3>Untuk apa</H3>
+                <ul className="space-y-2">
+                  <li>Menjadwalkan dan menerbitkan post kami.</li>
+                  <li>Membaca dan membalas pertanyaan atau komentar yang masuk ke akun kami.</li>
+                  <li>
+                    Menemukan percakapan publik yang relevan dengan produk kami, misalnya pemilik usaha yang sedang mencari
+                    aplikasi, agar kami bisa ikut membalas secara terbuka dari akun kami.
+                  </li>
+                </ul>
+                <p>
+                  Setiap balasan ke orang lain ditinjau manusia sebelum dikirim. Kami tidak mengirim DM massal otomatis.
+                </p>
+
+                <H3>Yang tidak kami lakukan</H3>
+                <ul className="space-y-2">
+                  <li>Menjual, menyewakan, atau membagikan data ini ke pihak ketiga.</li>
+                  <li>Memakainya untuk iklan bertarget atau untuk membuat profil tentang Anda.</li>
+                  <li>Melatih model AI dengan data ini.</li>
+                  <li>Mengambil data pribadi selain yang memang tampil publik di post.</li>
+                </ul>
+
+                <H3>Penyimpanan</H3>
+                <p>
+                  Konten post dan jadwal post kami disimpan di server kami sendiri (alat penjadwalan yang kami host sendiri).
+                  Hasil pencarian dan balasan dari orang lain hanya diproses saat dibutuhkan. Jika kami mencatat sebuah
+                  percakapan sebagai calon pelanggan, yang kami simpan hanya username publik, tautan post, dan ringkasan
+                  kebutuhannya, paling lama 12 bulan, lalu dihapus.
+                </p>
+
+                <H3>Hak Anda dan penghapusan data</H3>
+                <p>
+                  Sesuai UU Pelindungan Data Pribadi (UU 27/2022), Anda bisa meminta kami menghapus data Threads Anda yang
+                  ada pada kami. Caranya: kirim email ke {mail} berisi username Threads Anda dan permintaan hapus. Kami
+                  menghapusnya paling lambat 30 hari dan mengonfirmasinya lewat email. Anda juga bisa meminta kami berhenti
+                  membalas atau menghubungi Anda di Threads kapan saja. Hak lain Anda dijelaskan di bagian Hak Anda di atas.
+                </p>
+              </section>
+
               <H>Perubahan</H>
               <p>Kebijakan ini bisa berubah. Versi terbaru selalu ada di halaman ini, dengan tanggal berlakunya.</p>
             </>
@@ -241,6 +310,64 @@ export default async function PrivacyPage({ params }: Props) {
                 Connections use HTTPS and access is limited to the people handling your message. If a breach affects your
                 data, we tell you within 72 hours of finding out.
               </p>
+
+              <section aria-labelledby="threads" className="space-y-4">
+                <H id="threads">Arktik&apos;s Threads accounts and data from Threads</H>
+                <p>
+                  We use an app called <strong>&quot;Arktik Labs Threads&quot;</strong>, connected to Meta&apos;s official
+                  Threads API, to manage our own Threads accounts: <strong>@arktiklabs</strong> and{" "}
+                  <strong>@khaeransori</strong> (Arktik&apos;s founder). Only our team uses it. Nobody else uses the app,
+                  and it never asks you or anyone else to log in.
+                </p>
+
+                <H3>What we access through the Threads API</H3>
+                <ul className="space-y-2">
+                  <li>The posts and replies we publish on our own accounts.</li>
+                  <li>Public replies and mentions directed at our accounts: username, text, time, and post link.</li>
+                  <li>
+                    Keyword search results over public posts on Threads: public username, text, time, and post link.
+                  </li>
+                  <li>Insights for our own posts, such as views and interactions.</li>
+                </ul>
+
+                <H3>What we use it for</H3>
+                <ul className="space-y-2">
+                  <li>Scheduling and publishing our posts.</li>
+                  <li>Reading and answering questions or comments sent to our accounts.</li>
+                  <li>
+                    Finding public conversations relevant to our products, for example business owners looking for an app,
+                    so we can join in with an open reply from our account.
+                  </li>
+                </ul>
+                <p>
+                  Every reply to another person is reviewed by a human before it is sent. We don&apos;t send automated
+                  mass DMs.
+                </p>
+
+                <H3>What we don&apos;t do</H3>
+                <ul className="space-y-2">
+                  <li>Sell, rent, or share this data with third parties.</li>
+                  <li>Use it for targeted advertising or to build profiles of people.</li>
+                  <li>Train AI models on it.</li>
+                  <li>Collect any personal data beyond what is publicly shown in the post.</li>
+                </ul>
+
+                <H3>Storage</H3>
+                <p>
+                  Our post content and posting schedule are stored on our own server (a scheduling tool we host
+                  ourselves). Search results and other people&apos;s replies are only processed when needed. If we note a
+                  conversation as a potential customer, we keep only the public username, the post link, and a short summary
+                  of what they need, for at most 12 months, then delete it.
+                </p>
+
+                <H3>Your rights and data deletion</H3>
+                <p>
+                  Under Indonesia&apos;s Personal Data Protection Law (UU 27/2022), you can ask us to delete any Threads
+                  data we hold about you. To do so, email {mail} with your Threads username and your deletion request. We
+                  delete it within 30 days and confirm by email. You can also ask us to stop replying to or contacting you
+                  on Threads at any time. Your other rights are described under Your rights above.
+                </p>
+              </section>
 
               <H>Changes</H>
               <p>This policy may change. The current version, with its effective date, is always on this page.</p>
