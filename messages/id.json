@@ -578,6 +578,10 @@
       },
       "tiers": "Ada paket gratis untuk salon satu cabang. Paket untuk salon yang lebih besar lewat konsultasi.",
       "shots": {
+        "landing": {
+          "alt": "Halaman depan Jelita: booking online, kasir, dan komisi untuk salon",
+          "caption": "jelita.arktik.id: daftar gratis untuk salon satu cabang."
+        },
         "today": {
           "alt": "Dashboard Hari ini di Jelita untuk salon contoh",
           "caption": "Hari ini: omzet, kapasitas stylist, dan agenda. Data dari salon contoh."

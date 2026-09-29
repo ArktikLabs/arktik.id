@@ -113,12 +113,18 @@ export const products: Product[] = [
     coverage: ["booking", "free", "install", "roles"],
     features: ["booking", "schedule", "pos", "commissions", "customers", "stock", "payroll", "branding"],
     cover: {
-      src: "/assets/products/jelita/today.webp",
+      src: "/assets/products/jelita/landing.webp",
       width: 976,
-      height: 686,
-      key: "today",
+      height: 625,
+      key: "landing",
     },
     shots: [
+      {
+        src: "/assets/products/jelita/today.webp",
+        width: 976,
+        height: 686,
+        key: "today",
+      },
       {
         src: "/assets/products/jelita/calendar.webp",
         width: 1600,

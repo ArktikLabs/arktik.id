@@ -578,6 +578,10 @@
       },
       "tiers": "There is a free plan for single-branch salons. Plans for larger salons are arranged on request.",
       "shots": {
+        "landing": {
+          "alt": "Jelita's home page: online booking, point of sale, and commissions for salons",
+          "caption": "jelita.arktik.id: sign up free for a single-branch salon."
+        },
         "today": {
           "alt": "Jelita's Today dashboard for a sample salon",
           "caption": "Today: revenue, stylist capacity, and the agenda. Data from a sample salon."
