@@ -1,8 +1,8 @@
 /* Privacy policy, /privacy (id) and /en/privacy. Written for UU PDP (UU 27/2022) and, for visitors in the EU/UK, GDPR.
  * Keep it in step with what the site really does: the contact form (app/api/leads -> hooks.arktik.id -> Telegram),
  * Google Analytics via GTM behind the consent banner (components/ConsentBanner.tsx), and Vercel Web Analytics.
- * The #threads section covers the "Arktik Labs Threads" Meta app (our own accounts only, posting via self-hosted
- * Postiz); Meta App Review links to it as the data deletion instructions URL, so keep the anchor stable. */
+ * The #threads section covers the "Arktik Labs Threads" Meta app, written generally for any connected account
+ * (no account names); Meta App Review links to it as the data deletion instructions URL, so keep the anchor stable. */
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { Header } from "@/components/sections/Header";
@@ -163,37 +163,35 @@ export default async function PrivacyPage({ params }: Props) {
               </p>
 
               <section aria-labelledby="threads" className="space-y-4">
-                <H id="threads">Akun Threads Arktik dan data dari Threads</H>
+                <H id="threads">Aplikasi Threads Arktik dan data dari Threads</H>
                 <p>
                   Kami memakai aplikasi <strong>&quot;Arktik Labs Threads&quot;</strong>, yang terhubung ke Threads API resmi
-                  milik Meta, untuk mengelola akun Threads milik kami sendiri: <strong>@arktiklabs</strong> dan{" "}
-                  <strong>@khaeransori</strong> (pendiri Arktik). Aplikasi ini hanya dipakai oleh tim kami, tidak dipakai
-                  orang lain, dan tidak meminta Anda atau pengguna lain untuk login.
+                  milik Meta, untuk mengelola akun Threads yang terhubung ke aplikasi ini. Sebuah akun hanya terhubung jika
+                  pemiliknya sendiri login dengan Threads dan menyetujui izin yang diminta.
                 </p>
 
                 <H3>Data yang kami akses lewat Threads API</H3>
                 <ul className="space-y-2">
-                  <li>Post dan balasan yang kami terbitkan di akun kami sendiri.</li>
                   <li>
-                    Balasan dan mention publik yang ditujukan ke akun kami: username, teks, waktu, dan tautan post.
+                    Dari akun yang terhubung, sebatas izin yang disetujui pemiliknya: profil dasar, post, balasan, mention,
+                    dan statistik (insight) seperti jumlah tayangan dan interaksi.
                   </li>
                   <li>
-                    Hasil pencarian kata kunci atas post publik di Threads: username publik, teks, waktu, dan tautan post.
+                    Data publik orang lain yang muncul di balasan, mention, atau hasil pencarian kata kunci atas post publik
+                    di Threads: username publik, teks, waktu, dan tautan post.
                   </li>
-                  <li>Statistik (insight) post kami sendiri, misalnya jumlah tayangan dan interaksi.</li>
                 </ul>
 
                 <H3>Untuk apa</H3>
                 <ul className="space-y-2">
-                  <li>Menjadwalkan dan menerbitkan post kami.</li>
-                  <li>Membaca dan membalas pertanyaan atau komentar yang masuk ke akun kami.</li>
-                  <li>
-                    Menemukan percakapan publik yang relevan dengan produk kami, misalnya pemilik usaha yang sedang mencari
-                    aplikasi, agar kami bisa ikut membalas secara terbuka dari akun kami.
-                  </li>
+                  <li>Menjadwalkan dan menerbitkan post.</li>
+                  <li>Membaca dan membalas balasan serta mention.</li>
+                  <li>Menyusun laporan kinerja post.</li>
+                  <li>Menemukan percakapan publik yang relevan agar bisa dibalas secara terbuka.</li>
                 </ul>
                 <p>
-                  Setiap balasan ke orang lain ditinjau manusia sebelum dikirim. Kami tidak mengirim DM massal otomatis.
+                  Data akun yang terhubung hanya dipakai untuk layanan yang diminta pemilik akun tersebut. Setiap balasan ke
+                  orang lain ditinjau manusia sebelum dikirim. Kami tidak mengirim DM massal otomatis.
                 </p>
 
                 <H3>Yang tidak kami lakukan</H3>
@@ -206,18 +204,21 @@ export default async function PrivacyPage({ params }: Props) {
 
                 <H3>Penyimpanan</H3>
                 <p>
-                  Konten post dan jadwal post kami disimpan di server kami sendiri (alat penjadwalan yang kami host sendiri).
-                  Hasil pencarian dan balasan dari orang lain hanya diproses saat dibutuhkan. Jika kami mencatat sebuah
-                  percakapan sebagai calon pelanggan, yang kami simpan hanya username publik, tautan post, dan ringkasan
+                  Token akses dan konten akun yang terhubung disimpan di server kami selama akun tersebut terhubung. Setelah
+                  akses dicabut atau akun diputus, data itu kami hapus paling lambat 30 hari, kecuali yang wajib disimpan
+                  menurut hukum. Hasil pencarian dan balasan dari orang lain hanya diproses saat dibutuhkan. Jika sebuah
+                  percakapan dicatat sebagai calon pelanggan, yang disimpan hanya username publik, tautan post, dan ringkasan
                   kebutuhannya, paling lama 12 bulan, lalu dihapus.
                 </p>
 
                 <H3>Hak Anda dan penghapusan data</H3>
                 <p>
-                  Sesuai UU Pelindungan Data Pribadi (UU 27/2022), Anda bisa meminta kami menghapus data Threads Anda yang
-                  ada pada kami. Caranya: kirim email ke {mail} berisi username Threads Anda dan permintaan hapus. Kami
-                  menghapusnya paling lambat 30 hari dan mengonfirmasinya lewat email. Anda juga bisa meminta kami berhenti
-                  membalas atau menghubungi Anda di Threads kapan saja. Hak lain Anda dijelaskan di bagian Hak Anda di atas.
+                  Anda bisa mencabut izin aplikasi kapan saja lewat pengaturan Threads atau Instagram (Izin situs web), atau
+                  dengan mengirim email ke {mail}. Sesuai UU Pelindungan Data Pribadi (UU 27/2022), Anda juga bisa meminta
+                  kami menghapus data Threads Anda yang ada pada kami: kirim email ke {mail} berisi username Threads Anda dan
+                  permintaan hapus. Kami menghapusnya paling lambat 30 hari dan mengonfirmasinya lewat email. Anda juga bisa
+                  meminta kami berhenti membalas atau menghubungi Anda di Threads kapan saja. Hak lain Anda dijelaskan di
+                  bagian Hak Anda di atas.
                 </p>
               </section>
 
@@ -312,36 +313,35 @@ export default async function PrivacyPage({ params }: Props) {
               </p>
 
               <section aria-labelledby="threads" className="space-y-4">
-                <H id="threads">Arktik&apos;s Threads accounts and data from Threads</H>
+                <H id="threads">Arktik&apos;s Threads app and data from Threads</H>
                 <p>
                   We use an app called <strong>&quot;Arktik Labs Threads&quot;</strong>, connected to Meta&apos;s official
-                  Threads API, to manage our own Threads accounts: <strong>@arktiklabs</strong> and{" "}
-                  <strong>@khaeransori</strong> (Arktik&apos;s founder). Only our team uses it. Nobody else uses the app,
-                  and it never asks you or anyone else to log in.
+                  Threads API, to manage the Threads accounts connected to it. An account is only connected when its owner
+                  logs in with Threads and approves the requested permissions.
                 </p>
 
                 <H3>What we access through the Threads API</H3>
                 <ul className="space-y-2">
-                  <li>The posts and replies we publish on our own accounts.</li>
-                  <li>Public replies and mentions directed at our accounts: username, text, time, and post link.</li>
                   <li>
-                    Keyword search results over public posts on Threads: public username, text, time, and post link.
+                    From connected accounts, limited to the permissions their owner approved: basic profile, posts,
+                    replies, mentions, and insights such as views and interactions.
                   </li>
-                  <li>Insights for our own posts, such as views and interactions.</li>
+                  <li>
+                    Public data of other people that appears in replies, mentions, or keyword search results over public
+                    posts on Threads: public username, text, time, and post link.
+                  </li>
                 </ul>
 
                 <H3>What we use it for</H3>
                 <ul className="space-y-2">
-                  <li>Scheduling and publishing our posts.</li>
-                  <li>Reading and answering questions or comments sent to our accounts.</li>
-                  <li>
-                    Finding public conversations relevant to our products, for example business owners looking for an app,
-                    so we can join in with an open reply from our account.
-                  </li>
+                  <li>Scheduling and publishing posts.</li>
+                  <li>Reading and answering replies and mentions.</li>
+                  <li>Producing post performance reports.</li>
+                  <li>Finding relevant public conversations so they can be answered with an open reply.</li>
                 </ul>
                 <p>
-                  Every reply to another person is reviewed by a human before it is sent. We don&apos;t send automated
-                  mass DMs.
+                  Data from a connected account is used only for the service its owner asked for. Every reply to another
+                  person is reviewed by a human before it is sent. We don&apos;t send automated mass DMs.
                 </p>
 
                 <H3>What we don&apos;t do</H3>
@@ -354,18 +354,21 @@ export default async function PrivacyPage({ params }: Props) {
 
                 <H3>Storage</H3>
                 <p>
-                  Our post content and posting schedule are stored on our own server (a scheduling tool we host
-                  ourselves). Search results and other people&apos;s replies are only processed when needed. If we note a
-                  conversation as a potential customer, we keep only the public username, the post link, and a short summary
-                  of what they need, for at most 12 months, then delete it.
+                  Access tokens and content of connected accounts are stored on our server for as long as the account stays
+                  connected. Once access is revoked or the account is disconnected, we delete that data within 30 days,
+                  except where the law requires us to keep it. Search results and other people&apos;s replies are only
+                  processed when needed. If a conversation is noted as a potential customer, only the public username, the
+                  post link, and a short summary of what they need are kept, for at most 12 months, then deleted.
                 </p>
 
                 <H3>Your rights and data deletion</H3>
                 <p>
-                  Under Indonesia&apos;s Personal Data Protection Law (UU 27/2022), you can ask us to delete any Threads
-                  data we hold about you. To do so, email {mail} with your Threads username and your deletion request. We
-                  delete it within 30 days and confirm by email. You can also ask us to stop replying to or contacting you
-                  on Threads at any time. Your other rights are described under Your rights above.
+                  You can revoke the app&apos;s access at any time in your Threads or Instagram settings (Website
+                  permissions), or by emailing {mail}. Under Indonesia&apos;s Personal Data Protection Law (UU 27/2022), you
+                  can also ask us to delete any Threads data we hold about you: email {mail} with your Threads username and
+                  your deletion request. We delete it within 30 days and confirm by email. You can also ask us to stop
+                  replying to or contacting you on Threads at any time. Your other rights are described under Your rights
+                  above.
                 </p>
               </section>
 
