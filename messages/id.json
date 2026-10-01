@@ -264,6 +264,23 @@
       "note": "Konsep desain dari brief klien, diisi data contoh. Bukan situs live: harga, spesifikasi, dan kontak di dalamnya tidak nyata.",
       "openDemo": "Buka demo",
       "metaPrefix": "Konsep desain"
+    },
+    "items": {
+      "lenggah": {
+        "description": "Platform e-commerce modern untuk produk fesyen dan gaya hidup premium Indonesia."
+      },
+      "mata-screen-print": {
+        "description": "Situs jasa sablon profesional dengan galeri portofolio dan pengelolaan pesanan."
+      },
+      "serenity-cove": {
+        "description": "Landing page hotel mewah dengan desain asimetris modern, animasi saat scroll, dan pengalaman pengguna premium."
+      },
+      "mulia-consulting": {
+        "description": "Situs dwibahasa untuk firma konsultan SDM dan solusi talenta di Indonesia, dirancang agar pengunjung memesan audit strategi SDM gratis."
+      },
+      "aion-tulungagung": {
+        "description": "Konsep desain untuk dealer mobil listrik: katalog model, simulasi kredit langsung di halaman, dan booking via WhatsApp, dibuat dari brief klien dengan data contoh."
+      }
     }
   },
   "caseStudyPage": {

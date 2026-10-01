@@ -8,7 +8,7 @@ import { setRequestLocale } from "next-intl/server";
 import { Header } from "@/components/sections/Header";
 import { FooterSection } from "@/components/sections/FooterSection";
 import { ConsentSettingsLink } from "@/components/ConsentBanner";
-import { alternatesFor } from "@/lib/seo/schema";
+import { alternatesFor, socialMeta } from "@/lib/seo/schema";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -24,12 +24,15 @@ const CONTROLLER = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const id = locale === "id";
+  const title = id ? "Kebijakan privasi · Arktik" : "Privacy policy · Arktik";
+  const description = id
+    ? "Data apa yang dikumpulkan situs Arktik, untuk apa, berapa lama disimpan, dan hak Anda."
+    : "What the Arktik website collects, why, how long it is kept, and your rights.";
   return {
-    title: id ? "Kebijakan privasi · Arktik" : "Privacy policy · Arktik",
-    description: id
-      ? "Data apa yang dikumpulkan situs Arktik, untuk apa, berapa lama disimpan, dan hak Anda."
-      : "What the Arktik website collects, why, how long it is kept, and your rights.",
+    title,
+    description,
     alternates: alternatesFor(locale, "privacy"),
+    ...socialMeta({ locale, path: "privacy", title, description }),
   };
 }
 

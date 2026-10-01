@@ -16,7 +16,7 @@ import { FooterSection } from "@/components/sections/FooterSection";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { PostCtaSection } from "@/components/blog/PostCtaSection";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { alternatesFor, breadcrumbs, graph, localeUrl } from "@/lib/seo/schema";
+import { alternatesFor, breadcrumbs, graph, localeUrl, socialMeta } from "@/lib/seo/schema";
 import { getAllProducts, getProductBySlug } from "@/lib/data/products";
 
 interface ProductPageProps {
@@ -41,12 +41,14 @@ export async function generateMetadata({
     title: t(`${product.key}.metaTitle`),
     description: t(`${product.key}.metaDescription`),
     alternates: alternatesFor(locale, `products/${slug}`),
-    openGraph: {
+    ...socialMeta({
+      locale,
+      path: `products/${slug}`,
       title: t(`${product.key}.metaTitle`),
       description: t(`${product.key}.metaDescription`),
-      url: localeUrl(locale, `products/${slug}`),
-      images: [{ url: product.cover.src }],
-    },
+      image: product.cover.src,
+      imageAlt: product.name,
+    }),
   };
 }
 

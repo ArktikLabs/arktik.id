@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { alternatesFor } from "@/lib/seo/schema";
+import { alternatesFor, socialMeta } from "@/lib/seo/schema";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/routing";
 import { getShowcaseBySlug, getAllShowcases, isConcept } from "@/lib/data/showcases";
@@ -19,13 +19,27 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const showcase = getShowcaseBySlug(slug);
   if (!showcase) return {};
-  const t = await getTranslations({ locale, namespace: "showcase.concept" });
+  const t = await getTranslations({ locale, namespace: "showcase" });
+  const title = isConcept(showcase)
+    ? `${showcase.title} (${t("concept.metaPrefix")}) | Arktik`
+    : `${showcase.title} | Arktik`;
+  /* showcases.ts holds one English description; the Indonesian page used to
+   * serve it as its meta description. Per-locale copy lives in messages. */
+  const description = t.has(`items.${slug}.description`)
+    ? t(`items.${slug}.description`)
+    : showcase.description;
   return {
-    title: isConcept(showcase)
-      ? `${showcase.title} (${t("metaPrefix")}) | Arktik`
-      : `${showcase.title} | Arktik`,
-    description: showcase.description,
+    title,
+    description,
     alternates: alternatesFor(locale, `showcase/${slug}`),
+    ...socialMeta({
+      locale,
+      path: `showcase/${slug}`,
+      title,
+      description,
+      image: showcase.thumbnail,
+      imageAlt: showcase.title,
+    }),
   };
 }
 

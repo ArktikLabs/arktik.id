@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { alternatesFor } from "@/lib/seo/schema";
+import { alternatesFor, socialMeta } from "@/lib/seo/schema";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import {
@@ -39,6 +39,12 @@ export async function generateMetadata({
     alternates: alternatesFor(locale, "blog"),
     title: t("title"),
     description: t("description"),
+    ...socialMeta({
+      locale,
+      path: "blog",
+      title: t("title"),
+      description: t("description"),
+    }),
   };
 }
 

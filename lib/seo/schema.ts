@@ -129,6 +129,65 @@ export function article({
   };
 }
 
+/* Per-page Open Graph + Twitter card.
+ *
+ * Next merges metadata shallowly per top-level key, so a route that sets no
+ * `openGraph` inherits the layout's: every post, guide and showcase was shared
+ * with the homepage's og:url, og:title and og:image (and og:url is what
+ * Facebook/LinkedIn dedupe on). A route that sets only part of `openGraph`
+ * loses the rest (siteName, locale), so this always returns the full object. */
+export function socialMeta({
+  locale,
+  path,
+  title,
+  description,
+  image,
+  imageAlt,
+  type = "website",
+  publishedTime,
+  modifiedTime,
+}: {
+  locale: string;
+  path: string;
+  title: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  type?: "website" | "article";
+  publishedTime?: string;
+  modifiedTime?: string;
+}) {
+  const fallback = `/assets/og-${locale === "en" ? "en" : "id"}.webp`;
+  const img = image || fallback;
+  const images = [
+    image
+      ? { url: img, alt: imageAlt || title }
+      : { url: img, width: 1200, height: 630, alt: imageAlt || title },
+  ];
+  return {
+    openGraph: {
+      type,
+      url: localeUrl(locale, path),
+      siteName: "Arktik",
+      locale: locale === "en" ? "en_US" : "id_ID",
+      alternateLocale: locale === "en" ? ["id_ID"] : ["en_US"],
+      title,
+      ...(description ? { description } : {}),
+      images,
+      ...(type === "article" && publishedTime ? { publishedTime } : {}),
+      ...(type === "article" && modifiedTime ? { modifiedTime } : {}),
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      site: "@arktiklabs",
+      creator: "@arktiklabs",
+      title,
+      ...(description ? { description } : {}),
+      images: [img],
+    },
+  };
+}
+
 /** Wraps nodes in a single @graph so one script tag carries the page. */
 export function graph(...nodes: unknown[]) {
   return { "@context": "https://schema.org", "@graph": nodes.filter(Boolean) };

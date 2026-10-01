@@ -264,6 +264,23 @@
       "note": "A design concept built from the client's brief with sample data. Not a live site: prices, specs and contacts inside are not real.",
       "openDemo": "Open demo",
       "metaPrefix": "Design concept"
+    },
+    "items": {
+      "lenggah": {
+        "description": "Modern e-commerce platform for premium Indonesian fashion and lifestyle products."
+      },
+      "mata-screen-print": {
+        "description": "Professional screen printing services website with portfolio showcase and order management."
+      },
+      "serenity-cove": {
+        "description": "Sophisticated luxury hotel landing page featuring modern asymmetrical design, scroll animations, and premium user experience."
+      },
+      "mulia-consulting": {
+        "description": "Bilingual website for an Indonesian HR consulting and talent solutions firm, built around booking a free HR strategy audit."
+      },
+      "aion-tulungagung": {
+        "description": "Design concept for an electric-car dealer: model catalogue, on-page credit simulator and WhatsApp booking, built from the client's brief with sample data."
+      }
     }
   },
   "caseStudyPage": {

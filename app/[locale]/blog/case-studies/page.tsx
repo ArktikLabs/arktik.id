@@ -1,7 +1,7 @@
 /* Hallmark · macrostructure: 20 Ecosystem Index · design-system: design.md */
 import Link from "next/link";
 import { Metadata } from "next";
-import { alternatesFor } from "@/lib/seo/schema";
+import { alternatesFor, socialMeta } from "@/lib/seo/schema";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -28,6 +28,12 @@ export async function generateMetadata({
     alternates: alternatesFor(locale, "blog/case-studies"),
     title: t("metadata.title"),
     description: t("metadata.description"),
+    ...socialMeta({
+      locale,
+      path: "blog/case-studies",
+      title: t("metadata.title"),
+      description: t("metadata.description"),
+    }),
   };
 }
 

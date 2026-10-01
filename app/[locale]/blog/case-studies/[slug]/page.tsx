@@ -1,7 +1,7 @@
 /* Hallmark · macrostructure: 02 Long Document · design-system: design.md */
 import Image from "next/image";
 import { Metadata } from "next";
-import { alternatesFor } from "@/lib/seo/schema";
+import { alternatesFor, socialMeta } from "@/lib/seo/schema";
 import { notFound } from "next/navigation";
 import { getCaseStudyBySlug, getCaseStudies } from "@/lib/content";
 import { RichTextRenderer } from "@/components/blog/RichTextRenderer";
@@ -34,15 +34,27 @@ export async function generateMetadata({
     };
   }
 
+  const title =
+    caseStudy.seoTitle || `${caseStudy.title} | Arktik Case Studies`;
+  const description =
+    caseStudy.seoDescription ||
+    markdownToText(caseStudy.challenge).slice(0, 160) ||
+    undefined;
   return {
     alternates: alternatesFor(locale, `blog/case-studies/${slug}`),
-    title:
-      caseStudy.seoTitle ||
-      `${caseStudy.title} | Arktik Case Studies`,
-    description:
-      caseStudy.seoDescription ||
-      markdownToText(caseStudy.challenge).slice(0, 160) ||
-      undefined,
+    title,
+    description,
+    ...socialMeta({
+      locale,
+      path: `blog/case-studies/${slug}`,
+      title,
+      description,
+      image: caseStudy.image,
+      imageAlt: caseStudy.imageAlt,
+      type: "article",
+      publishedTime: caseStudy.date,
+      modifiedTime: caseStudy.updated,
+    }),
   };
 }
 

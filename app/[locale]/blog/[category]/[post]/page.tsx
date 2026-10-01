@@ -1,6 +1,6 @@
 /* Hallmark · macrostructure: 02 Long Document · design-system: design.md */
 import { Metadata } from "next";
-import { alternatesFor } from "@/lib/seo/schema";
+import { alternatesFor, socialMeta } from "@/lib/seo/schema";
 import { notFound } from "next/navigation";
 import {
   getBlogPostBySlug,
@@ -41,10 +41,23 @@ export async function generateMetadata({
     };
   }
 
+  const title = post.seoTitle || `${post.title} | Arktik`;
+  const description = post.seoDescription || post.excerpt;
   return {
     alternates: alternatesFor(locale, `blog/${categorySlug}/${postSlug}`),
-    title: post.seoTitle || `${post.title} | Arktik`,
-    description: post.seoDescription || post.excerpt,
+    title,
+    description,
+    ...socialMeta({
+      locale,
+      path: `blog/${categorySlug}/${postSlug}`,
+      title,
+      description,
+      image: post.image,
+      imageAlt: post.imageAlt,
+      type: "article",
+      publishedTime: post.date,
+      modifiedTime: post.updated,
+    }),
   };
 }
 

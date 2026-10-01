@@ -1,6 +1,6 @@
 /* Hallmark · macrostructure: 02 Long Document · design-system: design.md */
 import { Metadata } from "next";
-import { alternatesFor } from "@/lib/seo/schema";
+import { alternatesFor, socialMeta } from "@/lib/seo/schema";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { getPillarPageBySlug, getBlogPosts, getPillarPages } from "@/lib/content";
@@ -44,6 +44,17 @@ export async function generateMetadata({
     title: pillar.seoTitle || `${pillar.title} | Arktik`,
     description:
       pillar.seoDescription || `Complete guide: ${pillar.title}`,
+    ...socialMeta({
+      locale,
+      path: `blog/${categorySlug}/guides/${pillarSlug}`,
+      title: pillar.seoTitle || `${pillar.title} | Arktik`,
+      description: pillar.seoDescription || `Complete guide: ${pillar.title}`,
+      image: pillar.image,
+      imageAlt: pillar.imageAlt,
+      type: "article",
+      publishedTime: pillar.date,
+      modifiedTime: pillar.updated,
+    }),
   };
 }
 
