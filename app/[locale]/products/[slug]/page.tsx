@@ -46,8 +46,7 @@ export async function generateMetadata({
       path: `products/${slug}`,
       title: t(`${product.key}.metaTitle`),
       description: t(`${product.key}.metaDescription`),
-      image: product.cover.src,
-      imageAlt: product.name,
+      /* Generated work card (title + screenshot), lib/seo/og-cards.ts. */
     }),
   };
 }

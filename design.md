@@ -171,6 +171,15 @@ with the row above it tightens to `--space-xl`; a family boundary opens to
 - **Content** pages: typography only. No enrichment.
 - **Showcase** pages: the work's own screenshots are the enrichment. Nothing added.
 
+## Open Graph cards
+
+Every indexable page has its own 1200×630 card. Cards are set in the site's own type, not a generic one: Archivo 700 display (0.95 leading, -0.03em), Instrument Sans body, and Geist Mono uppercase labels, all on carbon with one lime rule. They are rendered at build time by `app/og/[locale]/[...path]`, with the page list in `lib/seo/og-cards.ts`.
+
+- **Home**: the hand-set `og-{id,en}.webp` (hero headline).
+- **Article** (posts, guides): mono label "Tulisan/Panduan · category", title, mono footer with reading time. Stock photos are not used for sharing, because the title is what earns the click.
+- **Section** (blog index, categories, services, privacy): label, title, one-line description.
+- **Work** (products, showcases): title and description on the left, the work's own screenshot (`assets/og-shots/`) on the right. Concepts say so in the label.
+
 ## What pages MUST share
 
 - The wordmark and its placement in the N12 bar.

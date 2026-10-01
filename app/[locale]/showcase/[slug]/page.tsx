@@ -37,8 +37,7 @@ export async function generateMetadata({
       path: `showcase/${slug}`,
       title,
       description,
-      image: showcase.thumbnail,
-      imageAlt: showcase.title,
+      /* Generated work card (title + screenshot), lib/seo/og-cards.ts. */
     }),
   };
 }

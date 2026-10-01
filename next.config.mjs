@@ -20,7 +20,7 @@ const nextConfig = {
   // so a refactor of the path helper can't silently drop it from the bundle.
   outputFileTracingIncludes: {
     '/**': ['./content/**/*.md'],
-    '/og/**': ['./assets/fonts/*.ttf', './public/assets/logo.svg'],
+    '/og/**': ['./assets/fonts/*.ttf', './assets/og-shots/*.jpg', './public/assets/logo.svg'],
   },
   // Renamed slugs keep their links and rankings via a permanent redirect.
   async redirects() {
