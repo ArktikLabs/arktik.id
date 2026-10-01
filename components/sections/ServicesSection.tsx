@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 
 export function ServicesSection() {
   const t = useTranslations('services')
+  const ts = useTranslations('servicePage')
 
   const features = Object.values(
     t.raw('customDevelopment.features') as Record<string, string>
@@ -19,17 +20,20 @@ export function ServicesSection() {
       icon: Code,
       title: t('customDevelopment.title'),
       description: t('customDevelopment.description'),
+      href: '/services/web-mobile-apps',
       features: features,
     },
     {
       icon: Compass,
       title: t('consulting.title'),
       description: t('consulting.description'),
+      href: '/services/technical-consulting',
     },
     {
       icon: Sparkles,
       title: t('aiAutomation.title'),
       description: t('aiAutomation.description'),
+      href: '/services/automation-ai',
     },
     {
       icon: DraftingCompass,
@@ -58,6 +62,8 @@ export function ServicesSection() {
             title={service.title}
             description={service.description}
             features={service.features}
+            href={'href' in service ? service.href : undefined}
+            linkLabel={ts('hub.more')}
           />
         ))}
       </div>

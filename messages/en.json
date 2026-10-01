@@ -696,5 +696,235 @@
     "reject": "Decline",
     "more": "Learn more",
     "manage": "Cookie settings"
+  },
+  "servicePage": {
+    "breadcrumb": "Services",
+    "hub": {
+      "metaTitle": "Arktik services: apps, websites, automation, and consulting",
+      "metaDescription": "Web and mobile apps, business websites, automation and AI, and technical consulting. Price agreed per stage, code and accounts in your name.",
+      "title": "What we can build for your business",
+      "intro": "Four kinds of work, one way of working: the price is agreed before each stage starts, working software arrives every week, and the code and every account are in your name from day one.",
+      "more": "Read more",
+      "operationsTitle": "After launch",
+      "operations": "Hosting, monitoring, fixes, and the small changes that come up once people use it. Priced monthly, cancel any time, and every account stays in your name. Available for all of the services above."
+    },
+    "labels": {
+      "builtTitle": "What we usually build",
+      "processTitle": "How it works",
+      "processIntro": "Four stages, each agreed before it starts. The only thing you ever have to decide is whether to keep going.",
+      "promisesTitle": "What we always hold to",
+      "examplesTitle": "Examples",
+      "faqTitle": "Frequently asked questions",
+      "conceptBadge": "Design concept",
+      "productBadge": "Arktik product",
+      "ctaPrimary": "Start the conversation",
+      "ctaSecondary": "See other services"
+    },
+    "items": {
+      "webMobile": {
+        "name": "Web & mobile apps",
+        "metaTitle": "Custom Web & Mobile App Development for Businesses | Arktik",
+        "metaDescription": "Web, Android, and iOS apps built around how your business works. Price agreed per stage, a demo every week, and the code in your name.",
+        "summary": "Customer portals, booking systems, internal systems, and Android/iOS apps.",
+        "title": "Apps that follow how your business works, not the other way round",
+        "intro": [
+          "Spreadsheets passed back and forth, orders tracked in chat, the same data typed into three places. When your team bends around tools that don't fit, the business has outgrown them.",
+          "We build the web and mobile apps people use every day: customer portals, booking systems, internal systems, and online shops. The price is agreed before each stage starts, you can try working software every week, and the code and every account are in your name from day one."
+        ],
+        "built": [
+          {
+            "title": "Customer portals",
+            "description": "Customers check status, download documents, or reorder on their own without contacting your team."
+          },
+          {
+            "title": "Ordering and booking systems",
+            "description": "Schedules, slots, and confirmations that run by themselves."
+          },
+          {
+            "title": "Internal systems",
+            "description": "A replacement for the spreadsheet behind stock, orders, approvals, or reports."
+          },
+          {
+            "title": "Integrations",
+            "description": "Connecting the systems you already use, such as payments, accounting, or WhatsApp, so nobody retypes data."
+          },
+          {
+            "title": "Android and iOS apps",
+            "description": "When your users genuinely need an app on their phone."
+          },
+          {
+            "title": "Product design",
+            "description": "Screens and flows delivered as working screens, not a PDF."
+          }
+        ],
+        "examplesNote": "Three of Arktik's own products, built with the same process as client work.",
+        "faq": [
+          {
+            "q": "How much does an app cost?",
+            "a": "It depends on the scope. That is why the first step is discovery: you get a written plan and a fixed price for the next stage. The plan is yours to keep, whether you continue with us or not."
+          },
+          {
+            "q": "How long does it take?",
+            "a": "Discovery 1–2 weeks, design 2–3 weeks, build from 6 weeks, and handover 1 week. The first version is deliberately small so it is in use quickly."
+          },
+          {
+            "q": "Off-the-shelf or custom?",
+            "a": "If an existing app solves your problem, we will say so and show you which one. Custom software is expensive, so it has to be the right call."
+          },
+          {
+            "q": "What if we want to change vendors later?",
+            "a": "You can. The code, servers, domain, and accounts are in your name, and the technology is widely used, so another team can pick it up quickly."
+          }
+        ],
+        "ctaTitle": "Tell us about the process that hurts most",
+        "ctaDescription": "A few sentences is enough. The first step is a free call to map out what you need, and you can stop there with the plan in hand."
+      },
+      "websites": {
+        "name": "Business websites",
+        "metaTitle": "Business Website Development That Brings in Customers | Arktik",
+        "metaDescription": "Company profiles, landing pages, and catalogues designed to get visitors to contact you. Fast, clean on phones, and every account in your name.",
+        "summary": "Company profiles, landing pages, and catalogues designed to get visitors to contact you.",
+        "title": "A website that gets visitors to contact you",
+        "intro": [
+          "Plenty of business websites look good and stay quiet: visitors arrive, look around, and leave without getting in touch. Usually the thing they came for, such as a price, an example of the work, or how to order, is missing or hidden.",
+          "We build websites with one clear goal per page: a consultation, a quote request, or a booking. Visitors find the answer on the first screen, and one button takes them to the form or WhatsApp."
+        ],
+        "built": [
+          {
+            "title": "Company and service websites",
+            "description": "A clear portfolio and services, with the same call to action on every page."
+          },
+          {
+            "title": "Landing pages",
+            "description": "One page for one goal: a consultation, a quote, or a reservation."
+          },
+          {
+            "title": "Catalogues with prices",
+            "description": "Starting prices and estimates, so visitors know the range before they ask."
+          },
+          {
+            "title": "Forms into WhatsApp",
+            "description": "Forms and buttons that open WhatsApp with the message already filled in."
+          },
+          {
+            "title": "Bilingual websites",
+            "description": "Indonesian and English, each on its own URL."
+          },
+          {
+            "title": "SEO foundations done right",
+            "description": "Per-page titles and descriptions, a sitemap, and structured data from the start."
+          }
+        ],
+        "examplesNote": "Websites we have built, including one design concept.",
+        "faq": [
+          {
+            "q": "Whose name are the domain and hosting in?",
+            "a": "Yours, from day one. Not ours."
+          },
+          {
+            "q": "Can we start with a single page?",
+            "a": "Yes, and we often recommend it. One landing page that works beats ten pages nobody reads."
+          },
+          {
+            "q": "Who updates the content later?",
+            "a": "We agree it up front: you edit it yourself, or we make the changes as part of the monthly service after launch."
+          }
+        ],
+        "ctaTitle": "Is your website too quiet?",
+        "ctaDescription": "Send us the address and tell us who you want to reach. The first call is free."
+      },
+      "automation": {
+        "name": "Automation & AI",
+        "metaTitle": "Business Automation & AI for SMEs | Arktik",
+        "metaDescription": "Take out repetitive manual work: document handling, request sorting, summaries, internal assistants. If a spreadsheet would do, we will say so.",
+        "summary": "Document handling, request sorting, summaries, and internal assistants.",
+        "title": "Free your team from work a machine can do",
+        "intro": [
+          "Copying data from email into a system, reading documents one by one, answering the same question every day. Work like this eats the hours of people who should be doing something else.",
+          "We build automation and AI where the bottleneck actually is. Start with one process, measure the result, then move to the next. If a spreadsheet or a tool you already have would solve it, we will say so."
+        ],
+        "built": [
+          {
+            "title": "Document handling",
+            "description": "Reading invoices, forms, or PDFs and entering the data into your system."
+          },
+          {
+            "title": "Sorting incoming requests",
+            "description": "Messages from email, forms, or WhatsApp sorted and passed to the right person."
+          },
+          {
+            "title": "Automatic summaries",
+            "description": "Daily reports, conversation recaps, and summaries of long documents."
+          },
+          {
+            "title": "Internal assistants",
+            "description": "Answering your team's questions from your own company documents."
+          },
+          {
+            "title": "System integrations",
+            "description": "So nobody retypes data from one app into another."
+          }
+        ],
+        "examplesNote": "Jejak Saham turns public disclosure documents into searchable data every day.",
+        "faq": [
+          {
+            "q": "What about our company data?",
+            "a": "Before anything is built, we map out together what data is processed, where it is stored, and who can access it. Every service account is in your name."
+          },
+          {
+            "q": "What if the AI gets it wrong?",
+            "a": "We decide together which steps need a person to check the result before it is used."
+          },
+          {
+            "q": "Where do we start?",
+            "a": "With the one process that takes the most time. Discovery produces an estimate of the cost to build and run it, set against the working hours it saves."
+          }
+        ],
+        "ctaTitle": "Which work would you most like gone?",
+        "ctaDescription": "Tell us about one repetitive process. We will help you judge whether it is worth automating, and the first call is free."
+      },
+      "consulting": {
+        "name": "Technical consulting",
+        "metaTitle": "Software Consulting & Technical Reviews | Arktik",
+        "metaDescription": "A second opinion on a system you run or plan to build: code, architecture, and plan reviews. Talk directly to engineers.",
+        "summary": "Code and architecture reviews, vendor quotes, and planning before you build.",
+        "title": "A second opinion before an expensive decision",
+        "intro": [
+          "A vendor quote feels too high, or too low. The system you run keeps getting slower and harder to change. Your team wants to build something new but isn't sure how. At moments like these, one independent opinion can save far more than it costs.",
+          "We review what you have or what you are planning, then give you a written recommendation you can use, with or without us."
+        ],
+        "built": [
+          {
+            "title": "Code and architecture reviews",
+            "description": "For apps already running: what will hold up, and what to fix first."
+          },
+          {
+            "title": "Vendor quote reviews",
+            "description": "Reading proposals and prices from other vendors before you sign."
+          },
+          {
+            "title": "Planning before you build",
+            "description": "The scope of the first version and the technology choices."
+          },
+          {
+            "title": "Ownership audits",
+            "description": "Making sure the code, servers, domain, and accounts really are in your name."
+          }
+        ],
+        "examplesNote": "",
+        "faq": [
+          {
+            "q": "What if the recommendation is another vendor or an in-house team?",
+            "a": "That's fine. The recommendation is yours, and we will tell you if we are not the right fit."
+          },
+          {
+            "q": "Who does the work?",
+            "a": "The same engineers who build software at Arktik, not an account manager."
+          }
+        ],
+        "ctaTitle": "Need a second opinion?",
+        "ctaDescription": "Tell us what you are weighing up. The first call is free."
+      }
+    }
   }
 }

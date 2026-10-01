@@ -696,5 +696,235 @@
     "reject": "Tolak",
     "more": "Selengkapnya",
     "manage": "Pengaturan cookie"
+  },
+  "servicePage": {
+    "breadcrumb": "Layanan",
+    "hub": {
+      "metaTitle": "Layanan Arktik: aplikasi, website, otomasi, dan konsultasi",
+      "metaDescription": "Aplikasi web dan mobile, website bisnis, otomasi dan AI, serta konsultasi teknis. Harga disepakati per tahap, kode dan akun atas nama Anda.",
+      "title": "Yang bisa kami bangun untuk bisnis Anda",
+      "intro": "Empat jenis pekerjaan, satu cara kerja: harga disepakati sebelum setiap tahap dimulai, software yang berfungsi bisa Anda coba setiap minggu, dan kode serta seluruh akun atas nama Anda sejak hari pertama.",
+      "more": "Selengkapnya",
+      "operationsTitle": "Setelah rilis",
+      "operations": "Hosting, monitoring, perbaikan, dan perubahan kecil setelah produknya dipakai orang. Biaya bulanan, bisa dihentikan kapan saja, dan semua akun tetap atas nama Anda. Tersedia untuk semua layanan di atas."
+    },
+    "labels": {
+      "builtTitle": "Yang biasa kami bangun",
+      "processTitle": "Cara kerjanya",
+      "processIntro": "Empat tahap, masing-masing disepakati sebelum dimulai. Satu-satunya yang perlu Anda putuskan adalah lanjut atau berhenti.",
+      "promisesTitle": "Yang selalu kami pegang",
+      "examplesTitle": "Contoh pekerjaan",
+      "faqTitle": "Pertanyaan yang sering diajukan",
+      "conceptBadge": "Konsep desain",
+      "productBadge": "Produk Arktik",
+      "ctaPrimary": "Mulai obrolan",
+      "ctaSecondary": "Lihat layanan lain"
+    },
+    "items": {
+      "webMobile": {
+        "name": "Aplikasi web & mobile",
+        "metaTitle": "Jasa Pembuatan Aplikasi Web & Mobile untuk Bisnis | Arktik",
+        "metaDescription": "Aplikasi web, Android, dan iOS yang dibangun sesuai cara kerja bisnis Anda. Harga disepakati per tahap, demo tiap minggu, kode atas nama Anda.",
+        "summary": "Portal pelanggan, sistem pemesanan, sistem internal, dan aplikasi Android/iOS.",
+        "title": "Aplikasi yang mengikuti cara kerja bisnis Anda, bukan sebaliknya",
+        "intro": [
+          "Spreadsheet yang dikirim bolak-balik, pesanan yang dicatat di chat, data yang harus diketik ulang di tiga tempat. Kalau tim Anda menyesuaikan diri dengan alat yang tidak pas, itu tandanya bisnis sudah lebih besar dari alatnya.",
+          "Kami membangun aplikasi web dan mobile yang dipakai setiap hari: portal pelanggan, sistem pemesanan, sistem internal, dan toko online. Harganya disepakati sebelum setiap tahap dimulai, aplikasi yang berfungsi bisa Anda coba setiap minggu, dan kode serta semua akunnya atas nama Anda sejak hari pertama."
+        ],
+        "built": [
+          {
+            "title": "Portal pelanggan",
+            "description": "Pelanggan cek status, unduh dokumen, atau pesan ulang sendiri tanpa menghubungi tim Anda."
+          },
+          {
+            "title": "Sistem pemesanan dan booking",
+            "description": "Jadwal, slot, dan konfirmasi berjalan otomatis."
+          },
+          {
+            "title": "Sistem internal",
+            "description": "Pengganti spreadsheet untuk stok, order, approval, atau laporan."
+          },
+          {
+            "title": "Integrasi",
+            "description": "Menghubungkan sistem yang sudah Anda pakai, seperti pembayaran, akuntansi, atau WhatsApp, supaya data tidak diketik ulang."
+          },
+          {
+            "title": "Aplikasi Android dan iOS",
+            "description": "Kalau penggunanya memang butuh aplikasi di HP."
+          },
+          {
+            "title": "Desain produk",
+            "description": "Tampilan dan alurnya dikirim sebagai layar yang berfungsi, bukan PDF."
+          }
+        ],
+        "examplesNote": "Tiga produk Arktik sendiri, dibangun dengan proses yang sama seperti proyek klien.",
+        "faq": [
+          {
+            "q": "Berapa biaya membuat aplikasi?",
+            "a": "Tergantung ruang lingkupnya. Karena itu langkah pertama adalah discovery: hasilnya rencana tertulis dan harga pasti untuk tahap berikutnya. Rencana itu tetap milik Anda, mau lanjut bersama kami atau tidak."
+          },
+          {
+            "q": "Berapa lama pengerjaannya?",
+            "a": "Discovery 1–2 minggu, desain 2–3 minggu, development mulai 6 minggu, dan serah terima 1 minggu. Versi pertama sengaja dibuat kecil supaya cepat dipakai."
+          },
+          {
+            "q": "Lebih baik aplikasi siap pakai atau kustom?",
+            "a": "Kalau masalah Anda cukup diselesaikan dengan aplikasi yang sudah ada, kami akan mengatakannya dan menunjukkan yang mana. Software kustom itu mahal, jadi harus benar-benar keputusan yang tepat."
+          },
+          {
+            "q": "Kalau nanti mau pindah vendor?",
+            "a": "Bisa. Kode, server, domain, dan akun atas nama Anda, dan teknologinya yang umum dipakai, sehingga tim lain cepat memahaminya."
+          }
+        ],
+        "ctaTitle": "Ceritakan proses yang paling merepotkan",
+        "ctaDescription": "Beberapa kalimat sudah cukup. Langkah pertamanya adalah obrolan gratis untuk memetakan kebutuhan Anda, dan Anda bisa berhenti di situ sambil membawa rencananya."
+      },
+      "websites": {
+        "name": "Website bisnis",
+        "metaTitle": "Jasa Pembuatan Website Bisnis yang Mendatangkan Pelanggan | Arktik",
+        "metaDescription": "Website company profile, landing page, dan katalog yang dirancang agar pengunjung menghubungi Anda. Cepat, rapi di HP, dan semua akun atas nama Anda.",
+        "summary": "Company profile, landing page, dan katalog yang dirancang agar pengunjung menghubungi Anda.",
+        "title": "Website yang membuat pengunjung menghubungi Anda",
+        "intro": [
+          "Banyak website bisnis cantik tapi sepi: pengunjung datang, melihat-lihat, lalu pergi tanpa menghubungi. Biasanya karena informasi yang mereka cari, seperti harga, contoh hasil, atau cara memesan, tidak ada atau tersembunyi.",
+          "Kami membangun website dengan satu tujuan yang jelas per halaman: konsultasi, minta penawaran, atau booking. Pengunjung menemukan jawabannya di layar pertama, lalu tinggal menekan satu tombol ke formulir atau WhatsApp."
+        ],
+        "built": [
+          {
+            "title": "Company profile dan website jasa",
+            "description": "Portofolio dan layanan yang jelas, dengan satu ajakan yang sama di setiap halaman."
+          },
+          {
+            "title": "Landing page",
+            "description": "Satu halaman untuk satu tujuan: konsultasi, penawaran, atau reservasi."
+          },
+          {
+            "title": "Katalog dengan harga",
+            "description": "Harga mulai dan estimasi harga, supaya pengunjung tahu kisarannya sebelum bertanya."
+          },
+          {
+            "title": "Formulir ke WhatsApp",
+            "description": "Formulir dan tombol yang membuka WhatsApp dengan pesan yang sudah terisi."
+          },
+          {
+            "title": "Website dua bahasa",
+            "description": "Indonesia dan Inggris, masing-masing dengan URL sendiri."
+          },
+          {
+            "title": "Dasar SEO yang benar",
+            "description": "Judul dan deskripsi per halaman, sitemap, dan structured data sejak awal."
+          }
+        ],
+        "examplesNote": "Website yang sudah kami kerjakan, termasuk satu konsep desain.",
+        "faq": [
+          {
+            "q": "Domain dan hosting atas nama siapa?",
+            "a": "Atas nama Anda, sejak hari pertama. Bukan atas nama kami."
+          },
+          {
+            "q": "Bisa mulai dari satu halaman dulu?",
+            "a": "Bisa, dan sering kami sarankan. Satu landing page yang bekerja lebih berguna daripada sepuluh halaman yang tidak dibaca."
+          },
+          {
+            "q": "Siapa yang mengubah isinya nanti?",
+            "a": "Kami sepakati di awal: Anda ubah sendiri, atau kami yang mengubahkan sebagai bagian dari layanan bulanan setelah rilis."
+          }
+        ],
+        "ctaTitle": "Punya website yang sepi?",
+        "ctaDescription": "Kirim alamatnya dan ceritakan siapa yang ingin Anda jangkau. Obrolan pertamanya gratis."
+      },
+      "automation": {
+        "name": "Otomasi & AI",
+        "metaTitle": "Jasa Otomasi Bisnis & AI untuk UMKM | Arktik",
+        "metaDescription": "Hilangkan pekerjaan manual yang berulang: olah dokumen, sortir permintaan, ringkasan, asisten internal. Kalau spreadsheet sudah cukup, kami akan bilang.",
+        "summary": "Olah dokumen, sortir permintaan, ringkasan, dan asisten internal.",
+        "title": "Lepaskan tim Anda dari pekerjaan yang bisa dikerjakan mesin",
+        "intro": [
+          "Menyalin data dari email ke sistem, membaca dokumen satu per satu, menjawab pertanyaan yang sama setiap hari. Pekerjaan seperti ini menghabiskan jam kerja orang yang seharusnya mengurus hal lain.",
+          "Kami membangun otomasi dan AI di titik yang memang jadi hambatan. Mulai dari satu proses, ukur hasilnya, baru lanjut ke proses berikutnya. Kalau masalahnya cukup diselesaikan dengan spreadsheet atau alat yang sudah ada, kami akan mengatakannya."
+        ],
+        "built": [
+          {
+            "title": "Pengolahan dokumen",
+            "description": "Membaca invoice, formulir, atau PDF lalu memasukkan datanya ke sistem."
+          },
+          {
+            "title": "Sortir permintaan masuk",
+            "description": "Pesan dari email, formulir, atau WhatsApp dipilah dan diteruskan ke orang yang tepat."
+          },
+          {
+            "title": "Ringkasan otomatis",
+            "description": "Laporan harian, rekap percakapan, dan ringkasan dokumen panjang."
+          },
+          {
+            "title": "Asisten internal",
+            "description": "Menjawab pertanyaan tim dari dokumen perusahaan Anda sendiri."
+          },
+          {
+            "title": "Integrasi antar sistem",
+            "description": "Supaya data tidak diketik ulang dari satu aplikasi ke aplikasi lain."
+          }
+        ],
+        "examplesNote": "Jejak Saham mengolah dokumen keterbukaan informasi publik menjadi data yang bisa dicari setiap hari.",
+        "faq": [
+          {
+            "q": "Bagaimana dengan data perusahaan kami?",
+            "a": "Sebelum ada yang dibangun, kami petakan bersama data apa yang diproses, di mana disimpan, dan siapa yang bisa mengaksesnya. Semua akun layanannya atas nama Anda."
+          },
+          {
+            "q": "Bagaimana kalau AI-nya salah?",
+            "a": "Kami tentukan bersama di proses mana hasilnya perlu dicek orang sebelum dipakai."
+          },
+          {
+            "q": "Mulai dari mana?",
+            "a": "Dari satu proses yang paling menyita waktu. Discovery menghasilkan perkiraan biaya bangun dan biaya jalan, dibandingkan dengan jam kerja yang dihemat."
+          }
+        ],
+        "ctaTitle": "Pekerjaan apa yang paling ingin Anda hilangkan?",
+        "ctaDescription": "Ceritakan satu proses yang berulang. Kami bantu menilai apakah layak diotomasi, gratis untuk obrolan pertama."
+      },
+      "consulting": {
+        "name": "Konsultasi teknis",
+        "metaTitle": "Konsultasi Software & Review Teknis | Arktik",
+        "metaDescription": "Pendapat kedua untuk sistem yang sudah berjalan atau yang akan dibangun: review kode, arsitektur, dan rencana. Bicara langsung dengan engineer.",
+        "summary": "Review kode, arsitektur, penawaran vendor, dan rencana sebelum membangun.",
+        "title": "Pendapat kedua sebelum keputusan yang mahal",
+        "intro": [
+          "Vendor menawarkan harga yang terasa terlalu tinggi, atau terlalu murah. Sistem yang sudah berjalan makin lambat dan makin sulit diubah. Tim Anda ingin membangun sesuatu yang baru tapi belum yakin caranya. Di titik seperti ini, satu pendapat independen bisa menghemat biaya yang jauh lebih besar.",
+          "Kami meninjau apa yang ada sekarang atau yang sedang direncanakan, lalu memberikan rekomendasi tertulis yang bisa Anda pakai, dengan atau tanpa kami."
+        ],
+        "built": [
+          {
+            "title": "Review kode dan arsitektur",
+            "description": "Untuk aplikasi yang sudah berjalan: apa yang akan bertahan, apa yang perlu diperbaiki lebih dulu."
+          },
+          {
+            "title": "Review penawaran vendor",
+            "description": "Membaca proposal dan harga dari vendor lain sebelum Anda tanda tangan."
+          },
+          {
+            "title": "Perencanaan sebelum membangun",
+            "description": "Ruang lingkup versi pertama dan pilihan teknologinya."
+          },
+          {
+            "title": "Audit kepemilikan",
+            "description": "Memastikan kode, server, domain, dan akun benar-benar atas nama Anda."
+          }
+        ],
+        "examplesNote": "",
+        "faq": [
+          {
+            "q": "Kalau hasilnya merekomendasikan vendor lain atau tim internal?",
+            "a": "Tidak masalah. Rekomendasinya milik Anda, dan kami akan bilang kalau kami bukan pilihan yang tepat."
+          },
+          {
+            "q": "Siapa yang mengerjakan?",
+            "a": "Engineer yang sama yang membangun software di Arktik, bukan account manager."
+          }
+        ],
+        "ctaTitle": "Butuh pendapat kedua?",
+        "ctaDescription": "Ceritakan apa yang sedang Anda timbang. Obrolan pertamanya gratis."
+      }
+    }
   }
 }
