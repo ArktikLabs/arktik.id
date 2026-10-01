@@ -267,20 +267,85 @@
     },
     "items": {
       "lenggah": {
-        "description": "Modern e-commerce platform for premium Indonesian fashion and lifestyle products."
+        "description": "Bilingual website for Lenggah, a custom furniture and interior design studio: filterable portfolio, process, and a consultation form.",
+        "summary": "Lenggah is a custom furniture and interior design studio. We built its site for one job: getting a prospective client confident enough to ask for a consultation. Every part of the page leads to the form and the WhatsApp button.",
+        "built": [
+          "Pages in two languages, Indonesian and English, each on its own URL",
+          "A project portfolio filterable by category: residential, commercial, and furniture",
+          "Services, process, testimonials, and frequently asked questions",
+          "A consultation form with a budget-range picker, plus a WhatsApp button with a pre-filled message"
+        ],
+        "stack": [
+          "Next.js",
+          "Vercel"
+        ]
       },
       "mata-screen-print": {
-        "description": "Professional screen printing services website with portfolio showcase and order management."
+        "description": "Website for a screen printing shop in Bekasi (t-shirts, jackets, tote bags): catalogue with starting prices, per-piece estimates, and a quote form.",
+        "summary": "Mata Screen Print is a screen printing business in Bekasi for t-shirts, jackets, and tote bags. People ordering printing want two answers before they get in touch: roughly what it costs, and what the result looks like. The site answers both on the first screen.",
+        "built": [
+          "A service catalogue with a starting price per product",
+          "A per-piece price estimate table with minimum order quantities",
+          "A portfolio gallery of finished work",
+          "A quote request form: product, quantity, a link to the design file, and notes on sizes or deadline",
+          "A WhatsApp button with a pre-filled message"
+        ],
+        "stack": [
+          "Next.js",
+          "Vercel"
+        ]
       },
       "serenity-cove": {
-        "description": "Sophisticated luxury hotel landing page featuring modern asymmetrical design, scroll animations, and premium user experience."
+        "description": "Landing page for a luxury boutique resort with an asymmetric layout, scroll animations, and a suite catalogue with prices.",
+        "summary": "Serenity Cove Resort is a landing page for a beachfront boutique resort. The focus is atmosphere: an asymmetric layout, large photography, and animations that play as you scroll, without hiding what guests look for, such as suite types and prices.",
+        "built": [
+          "An asymmetric layout with scroll animations",
+          "An amenities section: spa, pool, restaurant, fitness centre",
+          "A suite catalogue with size, amenities, and nightly price",
+          "A guest experiences section and a reservation call to action"
+        ],
+        "stack": [
+          "Next.js",
+          "Vercel"
+        ]
       },
       "mulia-consulting": {
-        "description": "Bilingual website for an Indonesian HR consulting and talent solutions firm, built around booking a free HR strategy audit."
+        "description": "Bilingual website for an Indonesian HR consulting and talent solutions firm, built around booking a free HR strategy audit.",
+        "summary": "Mulia Consulting helps companies hire, manage, and retain people, and helps individuals grow their careers. The site is built around one step: booking a free 30-minute HR strategy audit.",
+        "built": [
+          "Pages in two languages, Indonesian and English",
+          "Service cards, each with its own pricing model, from project fees to per-placement fees",
+          "A three-step way of working that starts with a free discovery call",
+          "A contact form and a WhatsApp button for booking the audit"
+        ],
+        "stack": [
+          "Next.js",
+          "Vercel"
+        ]
       },
       "aion-tulungagung": {
-        "description": "Design concept for an electric-car dealer: model catalogue, on-page credit simulator and WhatsApp booking, built from the client's brief with sample data."
+        "description": "Design concept for an electric-car dealer: model catalogue, on-page credit simulator and WhatsApp booking, built from the client's brief with sample data.",
+        "summary": "A design concept for a licensed AION sales agent in Tulungagung. The client's brief was a single desktop page. We developed it into a full site that also works well on phones, filled with sample data until the client's official prices and details arrive.",
+        "built": [
+          "A home page, four model detail pages, promotions, gallery, and contact",
+          "A credit simulator that works out the instalment on the page, then sends the result to the sales WhatsApp. No visitor data is stored",
+          "A mobile layout and an always-visible WhatsApp button",
+          "AutoDealer and Car structured data for local search"
+        ],
+        "stack": [
+          "Static site",
+          "Caddy"
+        ]
       }
+    },
+    "details": {
+      "aboutTitle": "About this project",
+      "builtTitle": "What we built",
+      "stackTitle": "Technology",
+      "moreTitle": "More work",
+      "ctaTitle": "Have a similar project?",
+      "ctaText": "Tell us a little about your business. The first step is a free call to map out what you need.",
+      "ctaButton": "Start the conversation"
     }
   },
   "caseStudyPage": {

@@ -267,20 +267,85 @@
     },
     "items": {
       "lenggah": {
-        "description": "Platform e-commerce modern untuk produk fesyen dan gaya hidup premium Indonesia."
+        "description": "Website dua bahasa untuk Lenggah, studio furnitur kustom dan desain interior: portofolio berfilter, proses kerja, dan formulir konsultasi.",
+        "summary": "Lenggah adalah studio furnitur kustom dan desain interior. Situsnya kami bangun untuk satu tujuan: membuat calon klien cukup yakin untuk meminta konsultasi. Jadi semua bagian di halamannya mengarah ke formulir dan tombol WhatsApp.",
+        "built": [
+          "Halaman dua bahasa, Indonesia dan Inggris, dengan URL terpisah per bahasa",
+          "Portofolio proyek yang bisa difilter per kategori: hunian, komersial, dan furnitur",
+          "Bagian layanan, proses kerja, testimoni, dan pertanyaan yang sering diajukan",
+          "Formulir konsultasi dengan pilihan rentang anggaran, plus tombol WhatsApp dengan pesan yang sudah terisi"
+        ],
+        "stack": [
+          "Next.js",
+          "Vercel"
+        ]
       },
       "mata-screen-print": {
-        "description": "Situs jasa sablon profesional dengan galeri portofolio dan pengelolaan pesanan."
+        "description": "Website jasa sablon kaos, jaket, dan tote bag di Bekasi: katalog dengan harga mulai, estimasi harga per pcs, dan formulir minta penawaran.",
+        "summary": "Mata Screen Print adalah usaha sablon di Bekasi untuk kaos, jaket, dan tote bag. Pembeli sablon biasanya ingin tahu dua hal sebelum menghubungi: kira-kira berapa harganya, dan seperti apa hasilnya. Situs ini menjawab keduanya di halaman pertama.",
+        "built": [
+          "Katalog layanan dengan harga mulai per produk",
+          "Tabel estimasi harga per pcs lengkap dengan jumlah minimum order",
+          "Galeri portofolio hasil produksi",
+          "Formulir minta penawaran: jenis produk, jumlah, tautan file desain, dan catatan ukuran atau deadline",
+          "Tombol WhatsApp dengan pesan yang sudah terisi"
+        ],
+        "stack": [
+          "Next.js",
+          "Vercel"
+        ]
       },
       "serenity-cove": {
-        "description": "Landing page hotel mewah dengan desain asimetris modern, animasi saat scroll, dan pengalaman pengguna premium."
+        "description": "Landing page resort butik mewah dengan tata letak asimetris, animasi saat scroll, dan katalog suite lengkap dengan harga.",
+        "summary": "Serenity Cove Resort adalah landing page untuk resort butik di tepi pantai. Fokusnya suasana: tata letak asimetris, foto besar, dan animasi yang muncul saat halaman di-scroll, tanpa mengorbankan informasi yang dicari tamu seperti tipe suite dan harganya.",
+        "built": [
+          "Tata letak asimetris dengan animasi saat scroll",
+          "Bagian fasilitas: spa, kolam, restoran, pusat kebugaran",
+          "Katalog suite dengan luas, fasilitas, dan harga per malam",
+          "Bagian pengalaman tamu dan ajakan reservasi"
+        ],
+        "stack": [
+          "Next.js",
+          "Vercel"
+        ]
       },
       "mulia-consulting": {
-        "description": "Situs dwibahasa untuk firma konsultan SDM dan solusi talenta di Indonesia, dirancang agar pengunjung memesan audit strategi SDM gratis."
+        "description": "Website dua bahasa untuk firma konsultan SDM di Indonesia, dirancang agar pengunjung memesan audit strategi SDM gratis.",
+        "summary": "Mulia Consulting membantu perusahaan merekrut, mengelola, dan mempertahankan karyawan, serta membantu individu mengembangkan karier. Situsnya dibangun di sekitar satu langkah: memesan audit strategi SDM gratis selama 30 menit.",
+        "built": [
+          "Halaman dua bahasa, Indonesia dan Inggris",
+          "Kartu layanan dengan model harga masing-masing, dari proyek sampai biaya per penempatan",
+          "Alur kerja tiga langkah, dimulai dari discovery call gratis",
+          "Formulir kontak dan tombol WhatsApp untuk memesan audit"
+        ],
+        "stack": [
+          "Next.js",
+          "Vercel"
+        ]
       },
       "aion-tulungagung": {
-        "description": "Konsep desain untuk dealer mobil listrik: katalog model, simulasi kredit langsung di halaman, dan booking via WhatsApp, dibuat dari brief klien dengan data contoh."
+        "description": "Konsep desain untuk dealer mobil listrik: katalog model, simulasi kredit langsung di halaman, dan booking via WhatsApp, dibuat dari brief klien dengan data contoh.",
+        "summary": "Konsep desain untuk sales resmi AION di Tulungagung. Brief dari klien hanya satu halaman desktop. Dari situ kami kembangkan menjadi situs lengkap yang juga nyaman di HP, diisi data contoh sampai harga dan data resmi dari klien masuk.",
+        "built": [
+          "Halaman utama, empat halaman detail model, promo, galeri, dan kontak",
+          "Simulasi kredit yang menghitung cicilan langsung di halaman, lalu mengirim hasilnya ke WhatsApp sales. Tidak ada data pengunjung yang disimpan",
+          "Tampilan mobile dan tombol WhatsApp yang selalu terlihat",
+          "Structured data AutoDealer dan Car untuk pencarian lokal"
+        ],
+        "stack": [
+          "Situs statis",
+          "Caddy"
+        ]
       }
+    },
+    "details": {
+      "aboutTitle": "Tentang proyek ini",
+      "builtTitle": "Yang kami bangun",
+      "stackTitle": "Teknologi",
+      "moreTitle": "Karya lain",
+      "ctaTitle": "Punya proyek serupa?",
+      "ctaText": "Ceritakan sedikit tentang bisnis Anda. Langkah pertama adalah obrolan gratis untuk memetakan kebutuhannya.",
+      "ctaButton": "Mulai obrolan"
     }
   },
   "caseStudyPage": {

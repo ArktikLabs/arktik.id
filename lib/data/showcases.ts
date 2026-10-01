@@ -17,20 +17,20 @@ export const showcases: Showcase[] = [
     slug: "lenggah",
     title: "Lenggah",
     description:
-      "Modern e-commerce platform for premium Indonesian fashion and lifestyle products",
+      "Bilingual website for Lenggah, a custom furniture and interior design studio: filterable portfolio, process, and a consultation form",
     link: "https://lenggah.com",
-    category: "E-commerce",
-    tags: ["E-commerce", "Fashion", "React", "Next.js"],
+    category: "Business Website",
+    tags: ["Business", "Furniture", "Bilingual", "Next.js"],
     thumbnail: "/assets/portofolio/lenggah.webp",
   },
   {
     slug: "mata-screen-print",
     title: "Mata Screen Print",
     description:
-      "Professional screen printing services website with portfolio showcase and order management",
+      "Website for a screen printing shop in Bekasi (t-shirts, jackets, tote bags): catalogue with starting prices, per-piece estimates, and a quote form",
     link: "https://matascreenprint.com",
     category: "Business Website",
-    tags: ["Business", "Portfolio", "Services", "WordPress"],
+    tags: ["Business", "Screen Printing", "Quote Form", "Next.js"],
     thumbnail: "/assets/portofolio/matascreenprint.webp",
   },
   {

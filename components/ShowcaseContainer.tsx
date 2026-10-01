@@ -13,7 +13,7 @@
  *   · The viewport toggle is a real radiogroup now — it had no pressed state
  *     for assistive tech, only a native title tooltip. */
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -25,6 +25,8 @@ interface ShowcaseContainerProps {
   link: string;
   /** Design concept with mock data, not a live client site. */
   concept?: boolean;
+  /** Server-rendered project write-up shown under the viewer. */
+  children?: ReactNode;
 }
 
 type ViewportType = "mobile" | "tablet" | "desktop";
@@ -74,7 +76,12 @@ function ViewportControls({
   );
 }
 
-export function ShowcaseContainer({ title, link, concept = false }: ShowcaseContainerProps) {
+export function ShowcaseContainer({
+  title,
+  link,
+  concept = false,
+  children,
+}: ShowcaseContainerProps) {
   const [activeViewport, setActiveViewport] = useState<ViewportType>("desktop");
   const t = useTranslations("showcase");
 
@@ -134,6 +141,7 @@ export function ShowcaseContainer({ title, link, concept = false }: ShowcaseCont
           link={link}
           activeViewport={activeViewport}
         />
+        {children}
       </main>
     </div>
   );
