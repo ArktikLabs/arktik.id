@@ -52,8 +52,8 @@ export async function generateMetadata({
       path: `blog/${categorySlug}/${postSlug}`,
       title,
       description,
-      image: post.image,
-      imageAlt: post.imageAlt,
+      /* Generated title card, not the stock hero photo: the title is what
+       * makes someone click a shared link. */
       type: "article",
       publishedTime: post.date,
       modifiedTime: post.updated,

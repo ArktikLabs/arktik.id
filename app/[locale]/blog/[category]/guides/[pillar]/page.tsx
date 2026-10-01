@@ -49,8 +49,8 @@ export async function generateMetadata({
       path: `blog/${categorySlug}/guides/${pillarSlug}`,
       title: pillar.seoTitle || `${pillar.title} | Arktik`,
       description: pillar.seoDescription || `Complete guide: ${pillar.title}`,
-      image: pillar.image,
-      imageAlt: pillar.imageAlt,
+      /* Generated title card, not the stock hero photo: the title is what
+       * makes someone click a shared link. */
       type: "article",
       publishedTime: pillar.date,
       modifiedTime: pillar.updated,

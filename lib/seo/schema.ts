@@ -157,8 +157,10 @@ export function socialMeta({
   publishedTime?: string;
   modifiedTime?: string;
 }) {
-  const fallback = `/assets/og-${locale === "en" ? "en" : "id"}.webp`;
-  const img = image || fallback;
+  /* No page image: use the page's generated card (app/og), sized 1200×630.
+   * Pages with a real screenshot (products, showcases) pass `image`. */
+  const card = `/og/${locale === "en" ? "en" : "id"}/${path.replace(/^\/+|\/+$/g, "")}/`;
+  const img = image || card;
   const images = [
     image
       ? { url: img, alt: imageAlt || title }
