@@ -703,7 +703,7 @@
       "metaTitle": "Layanan Arktik: aplikasi, website, otomasi, dan konsultasi",
       "metaDescription": "Aplikasi web dan mobile, website bisnis, otomasi dan AI, serta konsultasi teknis. Harga disepakati per tahap, kode dan akun atas nama Anda.",
       "title": "Yang bisa kami bangun untuk bisnis Anda",
-      "intro": "Empat jenis pekerjaan, satu cara kerja: harga disepakati sebelum setiap tahap dimulai, software yang berfungsi bisa Anda coba setiap minggu, dan kode serta seluruh akun atas nama Anda sejak hari pertama.",
+      "intro": "Empat jenis pekerjaan, satu cara kerja: konsultasi pertama gratis, harga disepakati sebelum setiap tahap dimulai, software yang berfungsi bisa Anda coba setiap minggu, dan kode serta seluruh akun atas nama Anda sejak hari pertama.",
       "more": "Selengkapnya",
       "operationsTitle": "Setelah rilis",
       "operations": "Hosting, monitoring, perbaikan, dan perubahan kecil setelah produknya dipakai orang. Biaya bulanan, bisa dihentikan kapan saja, dan semua akun tetap atas nama Anda. Tersedia untuk semua layanan di atas."
@@ -761,7 +761,7 @@
         "faq": [
           {
             "q": "Berapa biaya membuat aplikasi?",
-            "a": "Tergantung ruang lingkupnya. Karena itu langkah pertama adalah discovery: hasilnya rencana tertulis dan harga pasti untuk tahap berikutnya. Rencana itu tetap milik Anda, mau lanjut bersama kami atau tidak."
+            "a": "Tergantung ruang lingkupnya. Konsultasi pertama gratis. Setelah itu discovery menghasilkan rencana tertulis dan harga pasti untuk tahap berikutnya. Rencana itu tetap milik Anda, mau lanjut bersama kami atau tidak."
           },
           {
             "q": "Berapa lama pengerjaannya?",
@@ -807,8 +807,8 @@
             "description": "Formulir dan tombol yang membuka WhatsApp dengan pesan yang sudah terisi."
           },
           {
-            "title": "Website dua bahasa",
-            "description": "Indonesia dan Inggris, masing-masing dengan URL sendiri."
+            "title": "Website multibahasa",
+            "description": "Indonesia, Inggris, atau bahasa lain yang dipakai pelanggan Anda, masing-masing dengan URL sendiri supaya tiap versi bisa ditemukan di Google."
           },
           {
             "title": "Dasar SEO yang benar",
@@ -817,6 +817,10 @@
         ],
         "examplesNote": "Website yang sudah kami kerjakan, termasuk satu konsep desain.",
         "faq": [
+          {
+            "q": "Berapa biaya membuat website?",
+            "a": "Tergantung jumlah halaman, bahasa, dan fitur seperti katalog atau formulir. Konsultasi pertama gratis: kami petakan kebutuhannya dulu, lalu harga disepakati secara tertulis sebelum pengerjaan dimulai."
+          },
           {
             "q": "Domain dan hosting atas nama siapa?",
             "a": "Atas nama Anda, sejak hari pertama. Bukan atas nama kami."
@@ -913,6 +917,10 @@
         ],
         "examplesNote": "",
         "faq": [
+          {
+            "q": "Apakah konsultasinya gratis?",
+            "a": "Obrolan pertama gratis, untuk memahami apa yang sedang Anda timbang. Kalau perlu review mendalam dan rekomendasi tertulis, ruang lingkup dan harganya disepakati lebih dulu sebelum dimulai."
+          },
           {
             "q": "Kalau hasilnya merekomendasikan vendor lain atau tim internal?",
             "a": "Tidak masalah. Rekomendasinya milik Anda, dan kami akan bilang kalau kami bukan pilihan yang tepat."

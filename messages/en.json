@@ -703,7 +703,7 @@
       "metaTitle": "Arktik services: apps, websites, automation, and consulting",
       "metaDescription": "Web and mobile apps, business websites, automation and AI, and technical consulting. Price agreed per stage, code and accounts in your name.",
       "title": "What we can build for your business",
-      "intro": "Four kinds of work, one way of working: the price is agreed before each stage starts, working software arrives every week, and the code and every account are in your name from day one.",
+      "intro": "Four kinds of work, one way of working: the first consultation is free, the price is agreed before each stage starts, working software arrives every week, and the code and every account are in your name from day one.",
       "more": "Read more",
       "operationsTitle": "After launch",
       "operations": "Hosting, monitoring, fixes, and the small changes that come up once people use it. Priced monthly, cancel any time, and every account stays in your name. Available for all of the services above."
@@ -761,7 +761,7 @@
         "faq": [
           {
             "q": "How much does an app cost?",
-            "a": "It depends on the scope. That is why the first step is discovery: you get a written plan and a fixed price for the next stage. The plan is yours to keep, whether you continue with us or not."
+            "a": "It depends on the scope. The first consultation is free. After that, discovery produces a written plan and a fixed price for the next stage. The plan is yours to keep, whether you continue with us or not."
           },
           {
             "q": "How long does it take?",
@@ -807,8 +807,8 @@
             "description": "Forms and buttons that open WhatsApp with the message already filled in."
           },
           {
-            "title": "Bilingual websites",
-            "description": "Indonesian and English, each on its own URL."
+            "title": "Multilingual websites",
+            "description": "Indonesian, English, or any other language your customers use, each on its own URL so every version can be found on Google."
           },
           {
             "title": "SEO foundations done right",
@@ -817,6 +817,10 @@
         ],
         "examplesNote": "Websites we have built, including one design concept.",
         "faq": [
+          {
+            "q": "How much does a website cost?",
+            "a": "It depends on the number of pages, languages, and features such as a catalogue or forms. The first consultation is free: we map out what you need, then the price is agreed in writing before work starts."
+          },
           {
             "q": "Whose name are the domain and hosting in?",
             "a": "Yours, from day one. Not ours."
@@ -913,6 +917,10 @@
         ],
         "examplesNote": "",
         "faq": [
+          {
+            "q": "Is the consultation free?",
+            "a": "The first call is free, to understand what you are weighing up. If you need an in-depth review and a written recommendation, the scope and price are agreed before it starts."
+          },
           {
             "q": "What if the recommendation is another vendor or an in-house team?",
             "a": "That's fine. The recommendation is yours, and we will tell you if we are not the right fit."
