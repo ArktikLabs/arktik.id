@@ -83,7 +83,7 @@ Jam yang kembali per pekan dikali biaya per jam. Misalkan admin dan kasir bersam
 
 Tingkat kesalahan dan pengerjaan ulang. Hitung berapa pesanan per bulan yang harus dikoreksi, lalu berapa menit setiap koreksi, ditambah ongkos kirim ulang atau diskon permintaan maaf kalau ada.
 
-Pendapatan yang tertahan oleh proses manual. Pemesanan yang batal karena konfirmasi baru datang besok, atau penawaran harga yang kalah karena pesaing membalas lebih dulu. Kalau yang Anda ukur jangkauan dan permintaan masuk, bukan waktu kerja internal, angkanya dicari di tempat lain, dan kami membahasnya di [kehadiran digital](/blog/digital-strategy/why-every-business-needs-a-strong-digital-presence-in-2025/).
+Pendapatan yang tertahan oleh proses manual. Pemesanan yang batal karena konfirmasi baru datang besok, atau penawaran harga yang kalah karena pesaing membalas lebih dulu. Kalau yang Anda ukur jangkauan dan permintaan masuk, bukan waktu kerja internal, angkanya dicari di tempat lain, dan kami membahasnya di [kehadiran digital](/blog/digital-strategy/why-every-business-needs-a-strong-digital-presence/).
 
 Lama perputaran uang. Hitung rata-rata hari antara barang terkirim dan uang masuk. Memotong lima hari dari angka itu mengubah kas yang tersedia, dan pengaruhnya terasa walaupun laba tidak bergerak.
 

@@ -18,9 +18,8 @@ tags:
   - communication
 seoTitle: What to Expect from a Trusted Software House Partner
 seoDescription: >-
-  Discover what a software house partnership should deliver: clear discovery,
-  transparent communication, quality, fair pricing, and dependable long-term
-  support that builds trust.
+  What a software house should deliver: clear discovery, transparent
+  communication, quality work, fair pricing, and dependable long-term support.
 ctaTitle: Build with a partner you can trust
 ctaDescription: >-
   Start with a brief discovery call. We’ll align on outcomes, risks, timelines,

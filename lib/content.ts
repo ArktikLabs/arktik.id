@@ -63,7 +63,7 @@ function authorBySlug(slug?: string): Author | undefined {
 // Categories
 
 function toCategory(doc: Doc): Category {
-  return { slug: doc.slug, title: doc.data.title, description: doc.data.description, icon: doc.data.icon }
+  return { slug: doc.slug, title: doc.data.title, description: doc.data.description, icon: doc.data.icon, body: doc.body?.trim() || undefined }
 }
 
 export function getCategories(locale?: string): Category[] {

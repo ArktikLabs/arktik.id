@@ -11,6 +11,8 @@ export interface Category {
   title: string
   description?: string
   icon?: string
+  /** Optional markdown intro shown on the category page. */
+  body?: string
 }
 
 interface SeoCta {

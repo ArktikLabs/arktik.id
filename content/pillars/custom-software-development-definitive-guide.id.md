@@ -1,5 +1,5 @@
 ---
-title: Pengembangan Software Kustom – Panduan Definitif 2025
+title: Pengembangan Software Kustom – Panduan Definitif
 introduction: >-
   Pelajari cara merancang, membangun, dan menskalakan software kustom. Panduan
   ini mengulas strategi, biaya, stack teknologi, keamanan, dan pemilihan vendor.
@@ -8,7 +8,7 @@ updated: '2025-10-18'
 category: software-development
 image: /assets/blog/1WoxQyOLPpkqRLK0AzmqS7-custom_software_development.jpg
 imageAlt: Custom Software Development Image
-seoTitle: Panduan Lengkap Pengembangan Software Kustom 2025 Terbaru
+seoTitle: Panduan Lengkap Pengembangan Software Kustom
 seoDescription: >-
   Rencanakan, anggarkan, dan wujudkan software kustom yang skalabel. Bahas SDLC,
   agile, arsitektur, keamanan, biaya, model tim, serta checklist kesiapan

@@ -1,6 +1,7 @@
 /* Hallmark · macrostructure: 20 Ecosystem Index · design-system: design.md */
 import Image from "next/image";
 import { Metadata } from "next";
+import { RichTextRenderer } from "@/components/blog/RichTextRenderer";
 import { alternatesFor, socialMeta } from "@/lib/seo/schema";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
@@ -51,8 +52,13 @@ export async function generateMetadata({
   };
 }
 
+/* "case-studies" is also a category doc, but /blog/case-studies/ has its own
+ * static route. Prerendering it here too wrote a second case-studies.html
+ * that `next start` served instead of the real page. */
 export function generateStaticParams() {
-  return getCategories().map((c) => ({ category: c.slug }));
+  return getCategories()
+    .filter((c) => c.slug !== "case-studies")
+    .map((c) => ({ category: c.slug }));
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
@@ -160,6 +166,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                   <BlogPostCard key={post.slug} post={post} locale={locale} />
                 ))}
               </div>
+            </section>
+          )}
+
+          {/* Category intro: who the topic is for and what it answers.
+           * Placed after the listings so readers reach the articles first. */}
+          {category.body && (
+            <section className="mt-16 max-w-3xl border-t border-rule pt-4">
+              <RichTextRenderer content={category.body} />
             </section>
           )}
 

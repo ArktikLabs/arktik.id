@@ -11,9 +11,8 @@ image: /assets/blog/ai-automation-businesses-unsplash.jpg
 imageAlt: AI and Automation for Businesses
 seoTitle: 'AI and Automation for Businesses: Strategy, Tools, ROI'
 seoDescription: >-
-  Learn how AI and automation improve efficiency, quality, and growth. Explore
-  top use cases, strategy, tooling, ROI measurement, and a practical roadmap to
-  implement securely.
+  How AI and automation improve efficiency, quality, and growth: use cases,
+  strategy, tooling, measuring ROI, and a practical roadmap to roll it out.
 ctaTitle: Book Your AI Strategy Consultation
 ctaDescription: >-
   Get tailored guidance on use cases, ROI, tooling, and change management. In 45

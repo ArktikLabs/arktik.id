@@ -82,7 +82,7 @@ Hours returned per week, multiplied by what an hour of that work costs you. Say 
 
 Error and rework rate. Count how many orders a month need correcting, how many minutes each correction takes, and add the reshipping costs or apology discounts where they apply.
 
-Revenue a manual bottleneck is holding back. Bookings abandoned because confirmation only arrives the next day, or quotes lost because a competitor replied first. If what you are measuring is reach and inbound enquiries rather than internal process time, the numbers live somewhere else, and we cover that in our piece on [why a strong digital presence matters](/en/blog/digital-strategy/why-every-business-needs-a-strong-digital-presence-in-2025/).
+Revenue a manual bottleneck is holding back. Bookings abandoned because confirmation only arrives the next day, or quotes lost because a competitor replied first. If what you are measuring is reach and inbound enquiries rather than internal process time, the numbers live somewhere else, and we cover that in our piece on [why a strong digital presence matters](/en/blog/digital-strategy/why-every-business-needs-a-strong-digital-presence/).
 
 Cash cycle time. Work out the average number of days between delivery and payment. Taking five days off that figure changes the cash available to you, and you will feel it even if profit does not move.
 

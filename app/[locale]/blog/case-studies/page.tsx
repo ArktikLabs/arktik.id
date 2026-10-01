@@ -23,8 +23,14 @@ export async function generateMetadata({
 }: CaseStudiesPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "caseStudiesPage" });
+  /* An empty listing is thin content: keep it out of the index (links still
+   * followed) until the first case study is published. */
+  const { caseStudies } = await getCaseStudies({ locale });
 
   return {
+    ...(caseStudies.length === 0
+      ? { robots: { index: false, follow: true } }
+      : {}),
     alternates: alternatesFor(locale, "blog/case-studies"),
     title: t("metadata.title"),
     description: t("metadata.description"),

@@ -53,9 +53,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const out: MetadataRoute.Sitemap = [
     ...entries("", now, 1, "monthly"),
     ...entries("blog", now, 0.8, "weekly"),
-    ...entries("blog/case-studies", now, 0.6, "monthly"),
     ...entries("privacy", now, 0.2, "yearly"),
   ];
+
+  // The case-study index is noindex while empty, so list it only once it has entries.
+  if ((await getCaseStudies({ locale: "id", limit: 1 })).caseStudies.length > 0) {
+    out.push(...entries("blog/case-studies", now, 0.6, "monthly"));
+  }
 
   for (const p of getAllProducts()) {
     out.push(...entries(`products/${p.slug}`, now, 0.7, "monthly"));
@@ -88,6 +92,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         });
 
       for (const c of categories) {
+        if (c.slug === "case-studies") continue; // own route, listed above
         push(`blog/${c.slug}`, undefined, 0.7);
       }
       for (const p of posts) {
