@@ -30,13 +30,23 @@ const nextConfig = {
         'blog/digital-strategy/why-every-business-needs-a-strong-digital-presence',
       ],
     ];
-    return moved.flatMap(([from, to]) =>
-      ['', '/en'].map((prefix) => ({
-        source: `${prefix}/${from}/`,
-        destination: `${prefix}/${to}/`,
-        permanent: true,
-      })),
-    );
+    /* The static home cards were replaced by generated ones; keep old share
+     * previews and cached og:image URLs resolving. */
+    const ogCards = ['id', 'en'].map((l) => ({
+      source: `/assets/og-${l}.webp`,
+      destination: `/og/${l}/home/`,
+      permanent: true,
+    }));
+    return [
+      ...ogCards,
+      ...moved.flatMap(([from, to]) =>
+        ['', '/en'].map((prefix) => ({
+          source: `${prefix}/${from}/`,
+          destination: `${prefix}/${to}/`,
+          permanent: true,
+        })),
+      ),
+    ];
   },
 }
 
