@@ -100,6 +100,30 @@ function Card({ card, logo, shot }: { card: OgCard; logo: string; shot?: string 
     color: INK,
   } as const;
 
+  if (card.kind === "home") {
+    return (
+      <div style={{ ...frame, flexDirection: "column", justifyContent: "space-between", padding: "64px 72px 52px" }}>
+        <Label>{card.label}</Label>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <Title text={card.lead} size={104} />
+          <div style={{ display: "flex", flexWrap: "wrap", marginTop: 6 }}>
+            <span style={{ fontFamily: "Archivo", fontSize: 104, lineHeight: 0.95, letterSpacing: -3.1, color: INK }}>
+              {card.connector}&nbsp;
+            </span>
+            <span style={{ fontFamily: "Archivo", fontSize: 104, lineHeight: 0.95, letterSpacing: -3.1, color: ACCENT }}>
+              {card.accent}
+            </span>
+          </div>
+          <Rule />
+          <span style={{ marginTop: 30, fontFamily: "Geist Mono", fontSize: 21, letterSpacing: 1.2, color: INK2 }}>
+            {card.subtitle}
+          </span>
+        </div>
+        <Footer logo={logo} />
+      </div>
+    );
+  }
+
   if (card.kind === "work" && shot) {
     return (
       <div style={frame}>
@@ -135,8 +159,9 @@ function Card({ card, logo, shot }: { card: OgCard; logo: string; shot?: string 
     );
   }
 
-  const isArticle = card.kind === "article";
-  const subtitle = card.kind === "section" ? clip(card.subtitle, 120) : "";
+  /* article, section, or a work card whose screenshot is missing (text-only
+   * fallback so a new product/showcase never breaks the build). */
+  const subtitle = card.kind === "section" || card.kind === "work" ? clip(card.subtitle, 120) : "";
   return (
     <div style={{ ...frame, flexDirection: "column", justifyContent: "space-between", padding: "64px 72px 52px" }}>
       <Label>{card.label}</Label>
@@ -147,7 +172,7 @@ function Card({ card, logo, shot }: { card: OgCard; logo: string; shot?: string 
           <span style={{ marginTop: 30, fontSize: 27, lineHeight: 1.4, color: INK2, maxWidth: 900 }}>{subtitle}</span>
         ) : null}
       </div>
-      <Footer logo={logo} right={isArticle ? card.meta : undefined} />
+      <Footer logo={logo} right={card.kind === "article" ? card.meta : undefined} />
     </div>
   );
 }
@@ -165,7 +190,12 @@ export async function GET(
     file("assets/fonts/InstrumentSans-Regular.ttf"),
     file("assets/fonts/GeistMono-Regular.ttf"),
     file("public/assets/logo.svg"),
-    card.kind === "work" ? file("assets/og-shots", `${card.shot}.jpg`) : Promise.resolve(undefined),
+    card.kind === "work"
+      ? file("assets/og-shots", `${card.shot}.jpg`).catch(() => {
+          console.warn(`[og] assets/og-shots/${card.shot}.jpg missing; using the text card`);
+          return undefined;
+        })
+      : Promise.resolve(undefined),
   ]);
 
   return new ImageResponse(

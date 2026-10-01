@@ -117,7 +117,7 @@ export function article({
     /* Article rich results need an image. Falling back to the locale OG card is
      * honest — it is a real image that represents this article — and beats
      * omitting the property. */
-    image: [abs(image) || `${SITE}/assets/og-${locale === "en" ? "en" : "id"}.webp`],
+    image: [abs(image) || `${SITE}${ogCardPath(locale, path)}`],
     ...(datePublished ? { datePublished } : {}),
     ...(dateModified ? { dateModified } : {}),
     author: authorName
@@ -159,7 +159,7 @@ export function socialMeta({
 }) {
   /* No page image: use the page's generated card (app/og), sized 1200×630.
    * Pages with a real screenshot (products, showcases) pass `image`. */
-  const card = `/og/${locale === "en" ? "en" : "id"}/${path.replace(/^\/+|\/+$/g, "")}/`;
+  const card = ogCardPath(locale, path);
   const img = image || card;
   const images = [
     image
@@ -193,4 +193,5 @@ export function socialMeta({
 /** Wraps nodes in a single @graph so one script tag carries the page. */
 export function graph(...nodes: unknown[]) {
   return { "@context": "https://schema.org", "@graph": nodes.filter(Boolean) };
-}
+}import { ogCardPath } from "@/lib/seo/og-paths";
+

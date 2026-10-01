@@ -1,7 +1,7 @@
 /* Open Graph card registry: which card every indexable page gets.
  *
  * Strategy (see design.md, "Open Graph cards"):
- *   home          static /assets/og-{locale}.webp (hand-set hero card)
+ *   home          "home" template: the hero headline from messages/*.json
  *   content       posts, guides            -> "article" template
  *   section       blog index, categories,
  *                 services hub + pages,
@@ -21,6 +21,7 @@ import { getAllShowcases, isConcept } from "@/lib/data/showcases";
 import { calculateCombinedReadingTime } from "@/lib/utils/reading-time";
 
 export type OgCard =
+  | { kind: "home"; label: string; lead: string; connector: string; accent: string; subtitle: string }
   | { kind: "article"; label: string; title: string; meta: string }
   | { kind: "section"; label: string; title: string; subtitle?: string }
   | { kind: "work"; label: string; title: string; subtitle?: string; shot: string };
@@ -29,9 +30,7 @@ export type OgCard =
 const messages = (locale: string): Record<string, any> => (locale === "en" ? en : id);
 const L = (locale: string, i: string, e: string) => (locale === "en" ? e : i);
 
-export function ogCardPath(locale: string, path: string) {
-  return `/og/${locale === "en" ? "en" : "id"}/${path.replace(/^\/+|\/+$/g, "")}/`;
-}
+export { ogCardPath } from "@/lib/seo/og-paths";
 
 function minutes(locale: string, n: number) {
   return L(locale, `${n} menit baca`, `${n} min read`);
@@ -41,6 +40,20 @@ export function ogCards(locale: string): Map<string, OgCard> {
   const m = messages(locale);
   const out = new Map<string, OgCard>();
   const writing = L(locale, "Tulisan", "Writing");
+
+  /* home --------------------------------------------------------------- */
+  out.set("home", {
+    kind: "home",
+    label: L(locale, "Software house · Indonesia", "Software house · Indonesia"),
+    lead: m.hero.headlineLead,
+    connector: m.hero.headlineConnector,
+    accent: m.hero.flipWords["0"],
+    subtitle: L(
+      locale,
+      "Harga disepakati per tahap · demo setiap minggu · kode atas nama Anda",
+      "Price agreed per stage · a demo every week · code in your name",
+    ),
+  });
 
   /* section ------------------------------------------------------------ */
   out.set("blog", {

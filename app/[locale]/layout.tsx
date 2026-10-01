@@ -1,3 +1,4 @@
+import { ogCardPath } from "@/lib/seo/og-paths";
 import type React from "react";
 import type { Metadata, Viewport } from "next";
 import { Archivo, Instrument_Sans } from "next/font/google";
@@ -84,7 +85,7 @@ export async function generateMetadata({
       description: t("common.description"),
       images: [
         {
-          url: locale === "id" ? "/assets/og-id.webp" : "/assets/og-en.webp",
+          url: ogCardPath(locale, ""),
           width: 1200,
           height: 630,
           alt: t("common.title"),
@@ -98,7 +99,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: t("common.title"),
       description: t("common.description"),
-      images: [locale === "id" ? "/assets/og-id.webp" : "/assets/og-en.webp"],
+      images: [ogCardPath(locale, "")],
       creator: "@arktiklabs",
     },
     abstract: t("common.description"),

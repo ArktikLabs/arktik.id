@@ -175,7 +175,8 @@ with the row above it tightens to `--space-xl`; a family boundary opens to
 
 Every indexable page has its own 1200×630 card. Cards are set in the site's own type, not a generic one: Archivo 700 display (0.95 leading, -0.03em), Instrument Sans body, and Geist Mono uppercase labels, all on carbon with one lime rule. They are rendered at build time by `app/og/[locale]/[...path]`, with the page list in `lib/seo/og-cards.ts`.
 
-- **Home**: the hand-set `og-{id,en}.webp` (hero headline).
+- **Home**: the hero headline from `messages/*.json` (`hero.headlineLead` + connector + first flip word in lime), so the card follows the copy. The old static `og-{id,en}.webp` files are removed.
+- A work card whose screenshot is missing falls back to the text card, with a build warning, so the build does not fail.
 - **Article** (posts, guides): mono label "Tulisan/Panduan · category", title, mono footer with reading time. Stock photos are not used for sharing, because the title is what earns the click.
 - **Section** (blog index, categories, services, privacy): label, title, one-line description.
 - **Work** (products, showcases): title and description on the left, the work's own screenshot (`assets/og-shots/`) on the right. Concepts say so in the label.
