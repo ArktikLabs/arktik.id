@@ -35,6 +35,14 @@ Joke about the SITUATION, never about our competence or about people.
   writing per stage, stop after any stage, code/server/domain/accounts in the client's
   name from day one, weekly demo, we tell you to buy the off-the-shelf tool when it fits.
 
+## Product names (Aan, 2026-10-01, all channels)
+
+People don't know our products yet, so always write the full domain: jejaksaham.arktik.id,
+jelita.arktik.id, ayomain.arktik.id. Never a bare "jejaksaham", "Jejak Saham", "Jelita" or
+"Ayo Main". If the post doesn't already say what the product is, add a short gloss, e.g.
+jejaksaham.arktik.id (pantau pemegang saham ≥5%, gratis). The domain is plain text, not a
+link, so it doesn't break the no-links rule.
+
 ## Mix (per ~10 posts)
 
 ~6 situational humour · ~2 selling-in-a-joke · ~1 sincere and useful (starts "mode serius
