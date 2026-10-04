@@ -423,6 +423,12 @@
         "description": "Customers book themselves from the salon's page, stylist schedules stay in order, and the till works out commissions and deducts stock at checkout. Runs in the browser on phone and laptop, free for single-branch salons.",
         "more": "About Jelita",
         "visit": "Visit the site"
+      },
+      "giliran": {
+        "tagline": "A walk-in waitlist with no app: guests scan a QR code, take a number, and get called on their phone.",
+        "description": "For cafés, restaurants, barbershops, and clinics. Guests wander off while watching the line on their phone, staff call the next party with one tap, and owners see peak hours and returning guests. Free up to 1,000 tickets a month.",
+        "more": "About Giliran",
+        "visit": "Visit the site"
       }
     }
   },
@@ -686,6 +692,97 @@
       "disclaimer": "The screens on this page use a sample salon with made-up names and data. Automatic WhatsApp reminders and online payment at booking are still in development.",
       "ctaTitle": "Need an operations system for a service business?",
       "ctaDescription": "We build everyday tools for appointment-based businesses, from booking to the till and reports. Tell us what you need.",
+      "ctaPrimary": "Start a project",
+      "ctaSecondary": "See what we've built"
+    },
+    "giliran": {
+      "metaTitle": "Giliran: walk-in waitlist and guest CRM | Arktik",
+      "metaDescription": "An Arktik product: a QR waitlist for cafés, restaurants, barbershops, and clinics. Guests get called on their phone, staff run a console, owners get analytics and loyalty stamps. Free up to 1,000 tickets a month.",
+      "visit": "Open Giliran",
+      "tagline": "The line moves from the door to your guests' phones.",
+      "intro": "Giliran replaces the crowd at the door. Guests scan a QR code, enter their name and party size, then go wherever they like while watching their place in line. Staff call them from a phone or tablet, the number shows up on the TV, and every visit becomes guest data and loyalty stamps for the owner.",
+      "coverageTitle": "Coverage",
+      "coverage": {
+        "install": {
+          "value": "0",
+          "label": "apps guests need to install"
+        },
+        "free": {
+          "value": "1,000",
+          "label": "tickets a month on the free plan"
+        },
+        "roles": {
+          "value": "3 roles",
+          "label": "owner, manager, and staff"
+        },
+        "languages": {
+          "value": "2 languages",
+          "label": "guest pages: Indonesian and English"
+        }
+      },
+      "featuresTitle": "What's inside",
+      "features": {
+        "join": {
+          "title": "Join by QR",
+          "description": "Guests scan the QR poster at the door and enter their name, number, and party size. A4/A5 posters print straight from the dashboard."
+        },
+        "status": {
+          "title": "Live status on the phone",
+          "description": "The guest page shows parties ahead and the estimated wait, then sends a notification when it's their turn."
+        },
+        "console": {
+          "title": "Staff console",
+          "description": "Call, seat, mark a no-show, or undo with one tap. It keeps working when the internet drops."
+        },
+        "tables": {
+          "title": "Tables and floor map",
+          "description": "Every table's status is visible, and the console suggests the right party for a table that just freed up."
+        },
+        "tv": {
+          "title": "TV screen",
+          "description": "The called number and the next in line show on a Smart TV or laptop, with guest names masked."
+        },
+        "booking": {
+          "title": "Table booking",
+          "description": "Guests can book a slot to come later. At check-in, bookings go ahead of walk-ins."
+        },
+        "crm": {
+          "title": "Guest data and stamps",
+          "description": "Every visit is recorded per guest, with loyalty stamps and segments such as new or regular. Phone numbers are stored encrypted."
+        },
+        "analytics": {
+          "title": "Analytics",
+          "description": "Tickets per day, average wait, peak hours, walk-aways, and a business health score for the owner."
+        }
+      },
+      "tiers": "Free up to 1,000 tickets a month for one outlet. Pro and Pro + AI plans for busier outlets.",
+      "shots": {
+        "landing": {
+          "alt": "Giliran landing page: a walk-in waitlist with no app",
+          "caption": "giliran.arktik.id: try it free, or try it as a guest at the sample outlet."
+        },
+        "console": {
+          "alt": "Giliran queue console with the guest list and table status",
+          "caption": "Staff console: the line, table suggestions, and table status on one screen. Sample outlet data."
+        },
+        "guest": {
+          "alt": "Giliran guest pages on a phone: the join form and the ticket number",
+          "caption": "The guest side: fill in a form, get a number, watch your place without installing anything."
+        },
+        "analytics": {
+          "alt": "Giliran analytics with tickets per day and a peak-hours heatmap",
+          "caption": "Analytics: tickets per day, average wait, and peak hours."
+        },
+        "contacts": {
+          "alt": "Giliran guest contacts with segments and stamps",
+          "caption": "Contacts: new, returning, and regular guests, with masked numbers."
+        }
+      },
+      "builtTitle": "How we built it",
+      "built": "Built and run by Arktik with Next.js and Postgres. The line updates in real time over server-sent events, each business's data is separated in the database itself with row-level security, and guest phone numbers are stored encrypted.",
+      "disclaimer": "The screens on this page use a sample outlet with made-up names and data. WhatsApp notifications, QRIS booking deposits, WhatsApp campaigns, and the AI assistant are still in development.",
+      "ctaTitle": "Need a system for a business that serves walk-in customers?",
+      "ctaDescription": "We build everyday tools for offline businesses, from queues and bookings to customer data. Tell us what you need.",
       "ctaPrimary": "Start a project",
       "ctaSecondary": "See what we've built"
     }

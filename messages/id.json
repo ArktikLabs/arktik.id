@@ -423,6 +423,12 @@
         "description": "Pelanggan pesan sendiri dari halaman salon, jadwal stylist tersusun, kasir menghitung komisi dan mengurangi stok saat pembayaran. Jalan di browser HP dan laptop, gratis untuk salon satu cabang.",
         "more": "Tentang Jelita",
         "visit": "Buka situsnya"
+      },
+      "giliran": {
+        "tagline": "Antrean walk-in tanpa aplikasi: tamu scan QR, ambil nomor, dan dipanggil lewat HP.",
+        "description": "Untuk kafe, resto, barbershop, dan klinik. Tamu bebas jalan-jalan sambil memantau antrean dari HP, staf memanggil dengan satu ketukan, dan pemilik melihat jam ramai serta tamu yang kembali. Gratis sampai 1.000 tiket per bulan.",
+        "more": "Tentang Giliran",
+        "visit": "Buka situsnya"
       }
     }
   },
@@ -686,6 +692,97 @@
       "disclaimer": "Tampilan di halaman ini memakai salon contoh dengan nama dan data karangan. Pengingat WhatsApp otomatis dan pembayaran online saat booking masih dalam pengembangan.",
       "ctaTitle": "Butuh sistem operasional untuk bisnis jasa?",
       "ctaDescription": "Kami membangun alat kerja harian untuk bisnis berbasis janji temu, dari booking sampai kasir dan laporan. Ceritakan kebutuhan Anda.",
+      "ctaPrimary": "Mulai proyek",
+      "ctaSecondary": "Lihat yang kami bangun"
+    },
+    "giliran": {
+      "metaTitle": "Giliran: aplikasi antrean walk-in dan CRM tamu | Arktik",
+      "metaDescription": "Produk Arktik: antrean online lewat QR untuk kafe, resto, barbershop, dan klinik. Tamu dipanggil lewat HP, staf pakai konsol, pemilik lihat analitik dan stamp loyalitas. Gratis sampai 1.000 tiket per bulan.",
+      "visit": "Buka Giliran",
+      "tagline": "Antrean pindah dari pintu ke HP tamu.",
+      "intro": "Giliran menggantikan kerumunan di depan pintu. Tamu scan QR, isi nama dan jumlah orang, lalu bebas ke mana saja sambil memantau posisinya. Staf memanggil dari HP atau tablet, nomornya muncul di layar TV, dan setiap kunjungan tercatat sebagai data tamu dan stamp loyalitas untuk pemilik.",
+      "coverageTitle": "Cakupan",
+      "coverage": {
+        "install": {
+          "value": "0",
+          "label": "aplikasi yang perlu dipasang tamu"
+        },
+        "free": {
+          "value": "1.000",
+          "label": "tiket per bulan di paket gratis"
+        },
+        "roles": {
+          "value": "3 peran",
+          "label": "pemilik, manajer, dan staf"
+        },
+        "languages": {
+          "value": "2 bahasa",
+          "label": "halaman tamu: Indonesia dan Inggris"
+        }
+      },
+      "featuresTitle": "Yang ada di dalamnya",
+      "features": {
+        "join": {
+          "title": "Antre lewat QR",
+          "description": "Tamu scan poster QR di pintu, isi nama, nomor, dan jumlah orang. Poster A4/A5 siap cetak dari dasbor."
+        },
+        "status": {
+          "title": "Status live di HP",
+          "description": "Halaman tamu menampilkan jumlah rombongan di depan dan perkiraan waktu, lalu memberi notifikasi saat giliran tiba."
+        },
+        "console": {
+          "title": "Konsol staf",
+          "description": "Panggil, dudukkan, tandai tidak datang, atau urungkan dengan satu ketukan. Tetap bisa dipakai saat internet putus."
+        },
+        "tables": {
+          "title": "Meja dan denah",
+          "description": "Status tiap meja terlihat, dan konsol menyarankan rombongan yang pas untuk meja yang baru kosong."
+        },
+        "tv": {
+          "title": "Layar TV",
+          "description": "Nomor yang dipanggil dan antrean berikutnya tampil di Smart TV atau laptop, dengan nama tamu disamarkan."
+        },
+        "booking": {
+          "title": "Booking meja",
+          "description": "Tamu bisa memesan slot untuk datang nanti. Saat check-in, booking masuk lebih dulu dari tamu walk-in."
+        },
+        "crm": {
+          "title": "Data tamu dan stamp",
+          "description": "Setiap kunjungan tercatat per tamu, lengkap dengan stamp loyalitas dan segmen seperti tamu baru atau langganan. Nomor HP disimpan terenkripsi."
+        },
+        "analytics": {
+          "title": "Analitik",
+          "description": "Tiket per hari, rata-rata tunggu, jam ramai, tamu yang batal, dan skor kesehatan bisnis untuk pemilik."
+        }
+      },
+      "tiers": "Paket gratis sampai 1.000 tiket per bulan untuk satu outlet. Paket Pro dan Pro + AI untuk outlet yang lebih ramai.",
+      "shots": {
+        "landing": {
+          "alt": "Halaman depan Giliran: antrean walk-in tanpa aplikasi",
+          "caption": "giliran.arktik.id: coba gratis, atau coba jadi tamu di outlet contoh."
+        },
+        "console": {
+          "alt": "Konsol antrean Giliran dengan daftar tamu dan status meja",
+          "caption": "Konsol staf: antrean, saran meja, dan status meja dalam satu layar. Data dari outlet contoh."
+        },
+        "guest": {
+          "alt": "Halaman tamu Giliran di HP: form antre dan nomor antrean",
+          "caption": "Dari sisi tamu: isi form, dapat nomor, pantau posisi tanpa install aplikasi."
+        },
+        "analytics": {
+          "alt": "Halaman analitik Giliran dengan grafik tiket per hari dan jam ramai",
+          "caption": "Analitik: tiket per hari, rata-rata tunggu, dan jam ramai."
+        },
+        "contacts": {
+          "alt": "Daftar kontak tamu Giliran dengan segmen dan stamp",
+          "caption": "Kontak: tamu baru, kembali, dan langganan, dengan nomor yang disamarkan."
+        }
+      },
+      "builtTitle": "Cara kami membangunnya",
+      "built": "Dibangun dan dijalankan oleh Arktik dengan Next.js dan Postgres. Antrean bergerak real-time lewat server-sent events, data tiap bisnis dipisah langsung di database dengan row-level security, dan nomor HP tamu disimpan terenkripsi.",
+      "disclaimer": "Tampilan di halaman ini memakai outlet contoh dengan nama dan data karangan. Notifikasi WhatsApp, deposit booking lewat QRIS, kampanye WA, dan asisten AI masih dalam pengembangan.",
+      "ctaTitle": "Butuh sistem untuk bisnis yang melayani tamu langsung?",
+      "ctaDescription": "Kami membangun alat kerja harian untuk bisnis offline, dari antrean dan booking sampai data pelanggan. Ceritakan kebutuhan Anda.",
       "ctaPrimary": "Mulai proyek",
       "ctaSecondary": "Lihat yang kami bangun"
     }

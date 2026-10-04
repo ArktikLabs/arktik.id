@@ -145,6 +145,48 @@ export const products: Product[] = [
       },
     ],
   },
+  {
+    slug: "giliran",
+    key: "giliran",
+    name: "Giliran",
+    link: "https://giliran.arktik.id",
+    domain: "giliran.arktik.id",
+    category: "BusinessApplication",
+    coverage: ["install", "free", "roles", "languages"],
+    features: ["join", "status", "console", "tables", "tv", "booking", "crm", "analytics"],
+    cover: {
+      src: "/assets/products/giliran/landing.webp",
+      width: 976,
+      height: 534,
+      key: "landing",
+    },
+    shots: [
+      {
+        src: "/assets/products/giliran/console.webp",
+        width: 1600,
+        height: 1000,
+        key: "console",
+      },
+      {
+        src: "/assets/products/giliran/guest.webp",
+        width: 1600,
+        height: 1530,
+        key: "guest",
+      },
+      {
+        src: "/assets/products/giliran/analytics.webp",
+        width: 1600,
+        height: 1434,
+        key: "analytics",
+      },
+      {
+        src: "/assets/products/giliran/contacts.webp",
+        width: 1600,
+        height: 1000,
+        key: "contacts",
+      },
+    ],
+  },
 ];
 
 export function getProductBySlug(slug: string): Product | undefined {
