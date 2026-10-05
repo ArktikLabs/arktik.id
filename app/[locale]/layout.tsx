@@ -4,7 +4,6 @@ import type { Metadata, Viewport } from "next";
 import { Archivo, Instrument_Sans } from "next/font/google";
 import { GeistMono } from "geist/font/mono";
 import { Analytics } from "@vercel/analytics/next";
-import { Suspense } from "react";
 import { CursorPreloader } from "@/components/CursorPreloader";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { ConsentBanner } from "@/components/ConsentBanner";
@@ -187,7 +186,9 @@ try{var c=JSON.parse(localStorage.getItem('arktik_consent')||'null');if(c&&(Date
             {t("skipToContent")}
           </a>
           <CursorPreloader />
-          <Suspense fallback={null}>{children}</Suspense>
+          {/* No <Suspense> around children: with it the layout shell streams first, so notFound() could no longer
+           * set the status and every 404 page went out as 200 (soft 404). Nothing in the tree needs it. */}
+          {children}
           <Analytics />
           <ConsentBanner />
         </NextIntlClientProvider>

@@ -1031,5 +1031,18 @@
         "ctaDescription": "Tell us what you are weighing up. The first call is free."
       }
     }
+  },
+  "notFound": {
+    "label": "404",
+    "title": "This page doesn't exist",
+    "body": "The address may have a typo, or we moved the page. Start again from one of the places below.",
+    "home": "Go to homepage",
+    "contact": "Start a project",
+    "linksLabel": "Or open",
+    "products": "Arktik products",
+    "services": "Services",
+    "blog": "Writing",
+    "portfolio": "Work",
+    "metaTitle": "Page not found · Arktik"
   }
 }

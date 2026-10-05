@@ -1031,5 +1031,18 @@
         "ctaDescription": "Ceritakan apa yang sedang Anda timbang. Obrolan pertamanya gratis."
       }
     }
+  },
+  "notFound": {
+    "label": "404",
+    "title": "Halaman ini tidak ada",
+    "body": "Mungkin alamatnya salah ketik, atau halamannya sudah kami pindahkan. Mulai lagi dari salah satu tujuan di bawah.",
+    "home": "Ke beranda",
+    "contact": "Mulai proyek",
+    "linksLabel": "Atau buka",
+    "products": "Produk Arktik",
+    "services": "Layanan",
+    "blog": "Tulisan",
+    "portfolio": "Karya",
+    "metaTitle": "Halaman tidak ditemukan · Arktik"
   }
 }

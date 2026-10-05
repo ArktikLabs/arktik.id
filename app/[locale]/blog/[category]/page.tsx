@@ -55,6 +55,10 @@ export async function generateMetadata({
 /* "case-studies" is also a category doc, but /blog/case-studies/ has its own
  * static route. Prerendering it here too wrote a second case-studies.html
  * that `next start` served instead of the real page. */
+// Unknown slugs 404 before rendering. Rendering them returned 200 "Not Found" pages: the layout's Suspense starts
+// streaming before notFound() runs, so the status was already sent (Google indexed them as soft 404s).
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return getCategories()
     .filter((c) => c.slug !== "case-studies")

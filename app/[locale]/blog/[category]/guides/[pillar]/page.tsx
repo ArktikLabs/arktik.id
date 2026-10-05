@@ -58,6 +58,10 @@ export async function generateMetadata({
   };
 }
 
+// Unknown slugs 404 before rendering. Rendering them returned 200 "Not Found" pages: the layout's Suspense starts
+// streaming before notFound() runs, so the status was already sent (Google indexed them as soft 404s).
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return getPillarPages().map((p) => ({
     category: p.category.slug,

@@ -51,8 +51,9 @@ export function Header() {
   useEffect(() => setMenuOpen(false), [pathname]);
 
   const isBlogPage = pathname?.includes("/blog");
-  // Any route that is not the homepage: section links must go back to "/".
-  const isSubPage = isBlogPage || pathname?.includes("/products");
+  // Any route that is not the homepage (privacy, services, showcase, 404 ...): section links must go back to "/".
+  // Listing sub-pages by name left the links as dead "#portfolio" anchors on every page nobody remembered to add.
+  const isSubPage = !/^\/(en|id)?\/?$/.test(pathname ?? "/");
   const localePrefix = pathname?.startsWith("/en") ? "/en" : "/id";
 
   useEffect(() => {
@@ -186,7 +187,7 @@ export function Header() {
               ))}
               <li>
                 <Link
-                  href={isBlogPage ? `${localePrefix}/blog` : "#blog"}
+                  href={isSubPage ? `${localePrefix}/blog` : "#blog"}
                   className={`whitespace-nowrap rounded-full px-3 py-2 text-sm transition-colors duration-200 ${
                     activeSection === "blog" || isBlogPage
                       ? "text-lime-green"
@@ -256,7 +257,7 @@ export function Header() {
             ))}
             <li className="border-b border-rule last:border-b-0">
               <Link
-                href={isBlogPage ? `${localePrefix}/blog` : "#blog"}
+                href={isSubPage ? `${localePrefix}/blog` : "#blog"}
                 onClick={() => setMenuOpen(false)}
                 className={`block py-4 text-base transition-colors duration-200 ${
                   activeSection === "blog" || isBlogPage
