@@ -37,8 +37,18 @@ const nextConfig = {
       destination: `/og/${l}/home/`,
       permanent: true,
     }));
+    /* Jelita's page became the Gerai family page (Jelita, Pangkas, Relaksi,
+     * Kilap); keep the old URL and its shares working. */
+    const renamedProducts = [['products/jelita', 'products/gerai']].flatMap(([from, to]) =>
+      ['', '/en'].map((prefix) => ({
+        source: `${prefix}/${from}/`,
+        destination: `${prefix}/${to}/`,
+        permanent: true,
+      })),
+    );
     return [
       ...ogCards,
+      ...renamedProducts,
       ...moved.flatMap(([from, to]) =>
         ['', '/en'].map((prefix) => ({
           source: `${prefix}/${from}/`,

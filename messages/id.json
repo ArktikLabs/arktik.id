@@ -418,11 +418,30 @@
         "more": "Tentang Ayo Main",
         "visit": "Buka situsnya"
       },
-      "jelita": {
-        "tagline": "Software salon: booking online, jadwal stylist, kasir, dan komisi dalam satu aplikasi.",
-        "description": "Pelanggan pesan sendiri dari halaman salon, jadwal stylist tersusun, kasir menghitung komisi dan mengurangi stok saat pembayaran. Jalan di browser HP dan laptop, gratis untuk salon satu cabang.",
-        "more": "Tentang Jelita",
-        "visit": "Buka situsnya"
+      "gerai": {
+        "tagline": "Satu aplikasi kerja untuk usaha jasa: booking, antrean, kasir, komisi, sampai gaji. Tiap jenis usaha punya merek sendiri.",
+        "description": "Salon, barbershop, spa, dan cuci mobil punya alur yang mirip: pelanggan datang, dilayani, bayar, lalu staf dapat komisi. Gerai menjalankan alur itu di satu mesin, dan tiap jenis usaha dapat tampilan, istilah, dan fitur khususnya sendiri. Gratis untuk satu cabang.",
+        "more": "Tentang Gerai",
+        "visit": "Buka situsnya",
+        "brandsLabel": "Pilih sesuai usaha Anda",
+        "brands": {
+          "jelita": {
+            "vertical": "Salon & kecantikan",
+            "line": "Booking per stylist, komisi, dan stok produk."
+          },
+          "pangkas": {
+            "vertical": "Barbershop",
+            "line": "Antrean walk-in dari HP pelanggan dan layar TV."
+          },
+          "relaksi": {
+            "vertical": "Spa & refleksi",
+            "line": "Ruang dan bed, couple massage, paket 10x."
+          },
+          "kilap": {
+            "vertical": "Cuci mobil & motor",
+            "line": "Antrean plat nomor, harga per ukuran, bonus pencuci."
+          }
+        }
       },
       "giliran": {
         "tagline": "Antrean walk-in tanpa aplikasi: tamu scan QR, ambil nomor, dan dipanggil lewat HP.",
@@ -604,21 +623,22 @@
       "ctaPrimary": "Mulai proyek",
       "ctaSecondary": "Lihat yang kami bangun"
     },
-    "jelita": {
-      "metaTitle": "Jelita: software salon, booking online, kasir, komisi | Arktik",
-      "metaDescription": "Produk Arktik: aplikasi salon dan spa untuk booking online, jadwal stylist, kasir, komisi, stok, dan penggajian. Tanpa install aplikasi, gratis untuk satu cabang.",
-      "visit": "Buka Jelita",
-      "tagline": "Booking penuh, kepala tetap adem.",
-      "intro": "Jelita merapikan pekerjaan harian salon dan spa di satu tempat. Pelanggan memesan sendiri lewat halaman salon, front desk melihat jadwal semua stylist, dan kasir langsung menghitung komisi serta mengurangi stok. Pemilik melihat omzet dan laporannya dari HP.",
+    "gerai": {
+      "metaTitle": "Gerai: aplikasi salon, barbershop, spa, dan cuci mobil | Arktik",
+      "metaDescription": "Produk Arktik: satu aplikasi untuk usaha jasa, hadir sebagai Jelita (salon), Pangkas (barbershop), Relaksi (spa), dan Kilap (cuci mobil). Booking, antrean, kasir, komisi, stok, absensi, dan penggajian. Gratis untuk satu cabang.",
+      "visit": "Buka situsnya",
+      "tagline": "Satu mesin, empat jenis usaha jasa.",
+      "intro": "Gerai merapikan pekerjaan harian usaha jasa: pelanggan pesan atau ambil antrean sendiri, kasir menghitung komisi dan mengurangi stok saat bayar, dan pemilik melihat omzet dari HP. Kami menjalankannya sebagai empat merek, masing-masing dengan istilah dan fitur yang pas untuk usahanya.",
+      "brandsNav": "Lihat keempat merek",
       "coverageTitle": "Cakupan",
       "coverage": {
-        "booking": {
-          "value": "24 jam",
-          "label": "pelanggan bisa booking sendiri"
+        "verticals": {
+          "value": "4 merek",
+          "label": "salon, barbershop, spa, dan cuci mobil"
         },
         "free": {
           "value": "Rp0",
-          "label": "untuk salon satu cabang"
+          "label": "untuk 1 cabang dan 3 staf"
         },
         "install": {
           "value": "0",
@@ -626,72 +646,104 @@
         },
         "roles": {
           "value": "4 peran",
-          "label": "pemilik, admin, front desk, dan stylist"
+          "label": "pemilik, admin, front desk, dan staf"
         }
       },
-      "featuresTitle": "Yang ada di dalamnya",
-      "features": {
-        "booking": {
-          "title": "Booking online",
-          "description": "Setiap salon punya halaman sendiri dengan menu dan harga. Pelanggan memilih layanan, stylist, dan jam tanpa akun atau aplikasi."
+      "brandsTitle": "Satu merek untuk tiap jenis usaha",
+      "brandsIntro": "Mesinnya sama, jadi perbaikan di satu merek ikut dinikmati merek lain. Yang beda adalah tampilan, istilah, dan fitur khusus tiap usaha.",
+      "brands": {
+        "jelita": {
+          "title": "Jelita",
+          "vertical": "Salon & kecantikan",
+          "ticks": [
+            "Booking online per stylist",
+            "Komisi per layanan dan per stylist",
+            "Stok produk berkurang saat terjual"
+          ],
+          "visit": "Buka Jelita",
+          "alt": "Halaman depan Jelita, aplikasi salon"
         },
-        "schedule": {
-          "title": "Jadwal stylist",
-          "description": "Kalender harian dan mingguan per stylist, dengan jam kerja dan istirahat. Jadwal bentrok ditolak dari awal."
+        "pangkas": {
+          "title": "Pangkas",
+          "vertical": "Barbershop",
+          "ticks": [
+            "Ambil nomor antrean dari HP, tanpa aplikasi",
+            "Pilih kapster favorit atau siapa saja",
+            "Layar TV untuk ruang tunggu"
+          ],
+          "visit": "Buka Pangkas",
+          "alt": "Halaman depan Pangkas, aplikasi barbershop"
+        },
+        "relaksi": {
+          "title": "Relaksi",
+          "vertical": "Spa & refleksi",
+          "ticks": [
+            "Ruang, bed, dan terapis tidak bentrok",
+            "Couple massage dalam satu ruang",
+            "Paket 10x terpotong otomatis"
+          ],
+          "visit": "Buka Relaksi",
+          "alt": "Halaman depan Relaksi, aplikasi spa"
+        },
+        "kilap": {
+          "title": "Kilap",
+          "vertical": "Cuci mobil & motor",
+          "ticks": [
+            "Antrean per plat nomor dan papan bay",
+            "Harga per ukuran kendaraan",
+            "Bonus dibagi ke tim pencuci"
+          ],
+          "visit": "Buka Kilap",
+          "alt": "Halaman depan Kilap, aplikasi cuci mobil"
+        }
+      },
+      "featuresTitle": "Yang sama di semua merek",
+      "features": {
+        "page": {
+          "title": "Halaman usaha sendiri",
+          "description": "Menu, harga, jam buka, dan cabang, dengan logo dan warna usaha. Pelanggan pesan atau ambil antrean tanpa akun."
         },
         "pos": {
           "title": "Kasir",
-          "description": "Tagih dari janji temu atau walk-in, dengan tunai, transfer, QRIS, debit, atau kredit. Struk bernomor dan shift kasir tercatat."
+          "description": "Tunai, transfer, QRIS, debit, atau kredit. Struk bernomor, shift kasir tercatat, dan transaksi terkunci setelah selesai."
         },
         "commissions": {
           "title": "Komisi otomatis",
-          "description": "Komisi stylist dihitung saat pembayaran selesai, sesuai aturan per layanan atau per staf."
+          "description": "Dihitung saat pembayaran selesai, sesuai aturan per layanan atau per staf."
         },
         "customers": {
           "title": "Data pelanggan",
-          "description": "Riwayat kunjungan, catatan, dan kontak pelanggan di satu tempat, bisa dicari dan diunduh."
+          "description": "Riwayat kunjungan, catatan, dan kontak di satu tempat, bisa dicari dan diunduh."
         },
         "stock": {
-          "title": "Stok produk",
-          "description": "Stok berkurang sendiri saat produk terjual, dengan penanda stok menipis."
+          "title": "Stok dan HPP",
+          "description": "Stok berkurang sendiri saat produk terjual atau bahan terpakai, dengan penanda stok menipis."
+        },
+        "loyalty": {
+          "title": "Poin dan paket",
+          "description": "Poin untuk pelanggan langganan. Di Relaksi dan Kilap juga ada paket dan member yang terpotong otomatis tiap kunjungan."
+        },
+        "attendance": {
+          "title": "Absensi",
+          "description": "Staf absen dari HP lewat QR yang berganti di layar kasir, atau dengan cek lokasi."
         },
         "payroll": {
-          "title": "Penggajian dan laporan",
-          "description": "Rekap gaji dan komisi per periode, ringkasan keuangan, dan unduhan CSV untuk pemilik."
-        },
-        "branding": {
-          "title": "Warna dan logo salon",
-          "description": "Halaman booking memakai logo dan warna salon sendiri, bukan merek Jelita. Bisa untuk lebih dari satu cabang."
+          "title": "Penggajian",
+          "description": "Gaji pokok, komisi, uang makan, BPJS, dan PPh 21 dihitung bareng. Slip gaji bisa dibuka staf sendiri."
         }
       },
-      "tiers": "Ada paket gratis untuk salon satu cabang. Paket untuk salon yang lebih besar lewat konsultasi.",
+      "tiers": "Gratis untuk 1 cabang dan 3 staf di semua merek. Paket berbayar untuk lebih banyak cabang dan staf; absensi dan penggajian ada di paket berbayar.",
       "shots": {
-        "landing": {
-          "alt": "Halaman depan Jelita: booking online, kasir, dan komisi untuk salon",
-          "caption": "jelita.arktik.id: daftar gratis untuk salon satu cabang."
-        },
-        "today": {
-          "alt": "Dashboard Hari ini di Jelita untuk salon contoh",
-          "caption": "Hari ini: omzet, kapasitas stylist, dan agenda. Data dari salon contoh."
-        },
-        "calendar": {
-          "alt": "Kalender janji temu per stylist di Jelita",
-          "caption": "Jadwal harian: setiap stylist punya kolomnya sendiri."
-        },
-        "pos": {
-          "alt": "Layar kasir Jelita dengan layanan dan produk",
-          "caption": "Kasir: layanan dan produk, lima cara bayar, komisi langsung terhitung."
-        },
-        "salon": {
-          "alt": "Halaman salon contoh di Jelita dengan menu, harga, dan cabang",
-          "caption": "Halaman salon: menu, harga, jam buka, dan tombol pesan per cabang."
+        "family": {
+          "alt": "Halaman depan Jelita, Pangkas, Relaksi, dan Kilap",
+          "caption": "Empat merek, satu mesin. Semua usaha di tangkapan layar adalah contoh."
         }
       },
       "builtTitle": "Cara kami membangunnya",
-      "built": "Dibangun dan dijalankan oleh Arktik dengan Next.js dan Postgres. Aturan bisnis yang penting, seperti jadwal yang tidak boleh bentrok dan transaksi yang tidak bisa diubah setelah selesai, dijaga langsung di database. Waktu selalu mengikuti zona waktu salon.",
-      "disclaimer": "Tampilan di halaman ini memakai salon contoh dengan nama dan data karangan. Pengingat WhatsApp otomatis dan pembayaran online saat booking masih dalam pengembangan.",
+      "built": "Keempat merek berjalan di satu kode yang sama, dibangun dan dijalankan oleh Arktik dengan Next.js dan Postgres. Merek ditentukan dari alamat yang dibuka, lalu istilah (stylist, kapster, terapis, pencuci), tampilan, dan fitur khususnya menyesuaikan. Aturan penting seperti jadwal yang tidak boleh bentrok dan transaksi yang terkunci setelah selesai dijaga langsung di database.",
+      "disclaimer": "Tampilan di halaman ini memakai usaha contoh dengan nama dan data karangan. Pengingat WhatsApp otomatis dan pembayaran online masih dalam pengembangan.",
       "ctaTitle": "Butuh sistem operasional untuk bisnis jasa?",
-      "ctaDescription": "Kami membangun alat kerja harian untuk bisnis berbasis janji temu, dari booking sampai kasir dan laporan. Ceritakan kebutuhan Anda.",
+      "ctaDescription": "Kami membangun alat kerja harian untuk bisnis berbasis janji temu dan antrean, dari booking sampai kasir dan laporan. Ceritakan kebutuhan Anda.",
       "ctaPrimary": "Mulai proyek",
       "ctaSecondary": "Lihat yang kami bangun"
     },

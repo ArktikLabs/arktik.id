@@ -12,7 +12,9 @@ import { getAllProducts } from "@/lib/data/products";
  * text left and a real screenshot right, so it reads as the same bento
  * language as the work above without repeating its image-under-scrim tiles.
  * Coverage numbers are the product's data scope, not traction — no user
- * counts, no prices (design.md honest-copy clause). */
+ * counts, no prices (design.md honest-copy clause).
+ * A product family (p.brands, e.g. Gerai) keeps ONE tile and lists its brands
+ * as links inside it, so a new vertical never adds a tile. */
 
 export function ProductsSection() {
   const t = useTranslations("products");
@@ -57,6 +59,31 @@ export function ProductsSection() {
               <p className="text-sm leading-relaxed text-ink-2">
                 {t(`items.${p.key}.description`)}
               </p>
+              {p.brands && (
+                <div className="flex flex-col gap-3">
+                  <span className="label-mono">{t(`items.${p.key}.brandsLabel`)}</span>
+                  <ul className="grid grid-cols-2 gap-2">
+                    {p.brands.map((b) => (
+                      <li key={b.key} className="min-w-0">
+                        <a
+                          href={b.link}
+                          target="_blank"
+                          rel="noopener"
+                          className="group flex h-full min-w-0 flex-col gap-0.5 rounded-card border border-rule px-4 py-3 transition-colors duration-200 hover:border-lime-green"
+                        >
+                          <span className="flex items-center justify-between gap-2 font-heading text-base font-semibold text-ink group-hover:text-lime-green">
+                            {b.name}
+                            <ArrowUpRight className="h-4 w-4 shrink-0 text-ink-3 group-hover:text-lime-green" aria-hidden="true" />
+                          </span>
+                          <span className="text-xs text-ink-2">
+                            {t(`items.${p.key}.brands.${b.key}.vertical`)}
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               <div className="mt-2 flex flex-wrap items-center gap-3">
                 <Link
                   href={`/products/${p.slug}`}
@@ -65,15 +92,17 @@ export function ProductsSection() {
                   {t(`items.${p.key}.more`)}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
-                <a
-                  href={p.link}
-                  target="_blank"
-                  rel="noopener"
-                  className="inline-flex items-center gap-1.5 whitespace-nowrap px-2 py-2.5 text-sm font-medium text-ink-2 underline decoration-rule-strong underline-offset-4 transition-colors duration-200 hover:text-lime-green hover:decoration-lime-green"
-                >
-                  {t(`items.${p.key}.visit`)}
-                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                </a>
+                {!p.brands && (
+                  <a
+                    href={p.link}
+                    target="_blank"
+                    rel="noopener"
+                    className="inline-flex items-center gap-1.5 whitespace-nowrap px-2 py-2.5 text-sm font-medium text-ink-2 underline decoration-rule-strong underline-offset-4 transition-colors duration-200 hover:text-lime-green hover:decoration-lime-green"
+                  >
+                    {t(`items.${p.key}.visit`)}
+                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                )}
               </div>
             </div>
 

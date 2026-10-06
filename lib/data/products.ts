@@ -18,6 +18,16 @@ export interface ProductShot {
   key: string;
 }
 
+/** One brand of a product family (several brands on one engine). Copy lives
+ * under products.items.<key>.brands.<brand.key> and productPage.<key>.brands. */
+export interface ProductBrand {
+  key: string;
+  name: string;
+  link: string;
+  domain: string;
+  cover: ProductShot;
+}
+
 export interface Product {
   slug: string;
   /** messages key under products.items / productPage */
@@ -34,6 +44,9 @@ export interface Product {
   features: readonly string[];
   cover: ProductShot;
   shots: ProductShot[];
+  /** Product family: the brands that run on this one engine. When set, the
+   * home tile and the product page link to each brand instead of one site. */
+  brands?: ProductBrand[];
 }
 
 export const products: Product[] = [
@@ -104,44 +117,53 @@ export const products: Product[] = [
     ],
   },
   {
-    slug: "jelita",
-    key: "jelita",
-    name: "Jelita",
+    /* Gerai = the engine behind Jelita (salon), Pangkas (barbershop), Relaksi
+     * (spa) and Kilap (car wash): one codebase, a brand per kind of business.
+     * Shown as ONE product with its brands, so the band doesn't grow by a tile
+     * per vertical. /products/jelita/ 308s here (next.config.mjs). */
+    slug: "gerai",
+    key: "gerai",
+    name: "Gerai",
     link: "https://jelita.arktik.id",
     domain: "jelita.arktik.id",
     category: "BusinessApplication",
-    coverage: ["booking", "free", "install", "roles"],
-    features: ["booking", "schedule", "pos", "commissions", "customers", "stock", "payroll", "branding"],
+    coverage: ["verticals", "free", "install", "roles"],
+    features: ["page", "pos", "commissions", "customers", "stock", "loyalty", "attendance", "payroll"],
     cover: {
-      src: "/assets/products/jelita/landing.webp",
+      src: "/assets/products/gerai/family.webp",
       width: 976,
-      height: 625,
-      key: "landing",
+      height: 552,
+      key: "family",
     },
-    shots: [
+    shots: [],
+    brands: [
       {
-        src: "/assets/products/jelita/today.webp",
-        width: 976,
-        height: 686,
-        key: "today",
+        key: "jelita",
+        name: "Jelita",
+        link: "https://jelita.arktik.id",
+        domain: "jelita.arktik.id",
+        cover: { src: "/assets/products/gerai/jelita.webp", width: 976, height: 549, key: "jelita" },
       },
       {
-        src: "/assets/products/jelita/calendar.webp",
-        width: 1600,
-        height: 1125,
-        key: "calendar",
+        key: "pangkas",
+        name: "Pangkas",
+        link: "https://pangkas.arktik.id",
+        domain: "pangkas.arktik.id",
+        cover: { src: "/assets/products/gerai/pangkas.webp", width: 976, height: 549, key: "pangkas" },
       },
       {
-        src: "/assets/products/jelita/pos.webp",
-        width: 1600,
-        height: 1125,
-        key: "pos",
+        key: "relaksi",
+        name: "Relaksi",
+        link: "https://relaksi.arktik.id",
+        domain: "relaksi.arktik.id",
+        cover: { src: "/assets/products/gerai/relaksi.webp", width: 976, height: 549, key: "relaksi" },
       },
       {
-        src: "/assets/products/jelita/salon.webp",
-        width: 1600,
-        height: 1125,
-        key: "salon",
+        key: "kilap",
+        name: "Kilap",
+        link: "https://kilap.arktik.id",
+        domain: "kilap.arktik.id",
+        cover: { src: "/assets/products/gerai/kilap.webp", width: 976, height: 549, key: "kilap" },
       },
     ],
   },

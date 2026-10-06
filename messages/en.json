@@ -418,11 +418,30 @@
         "more": "About Ayo Main",
         "visit": "Visit the site"
       },
-      "jelita": {
-        "tagline": "Salon software: online booking, stylist schedules, point of sale, and commissions in one app.",
-        "description": "Customers book themselves from the salon's page, stylist schedules stay in order, and the till works out commissions and deducts stock at checkout. Runs in the browser on phone and laptop, free for single-branch salons.",
-        "more": "About Jelita",
-        "visit": "Visit the site"
+      "gerai": {
+        "tagline": "One app for service businesses: bookings, queues, the till, commissions, even payroll. Each kind of business gets its own brand.",
+        "description": "Salons, barbershops, spas and car washes run on much the same loop: a customer comes in, gets served, pays, and staff earn a commission. Gerai runs that loop on one engine, and each kind of business gets its own look, vocabulary and features. Free for a single branch.",
+        "more": "About Gerai",
+        "visit": "Visit the site",
+        "brandsLabel": "Pick the one for your business",
+        "brands": {
+          "jelita": {
+            "vertical": "Salons & beauty",
+            "line": "Bookings per stylist, commissions and product stock."
+          },
+          "pangkas": {
+            "vertical": "Barbershops",
+            "line": "A walk-in queue on customers' phones and a TV screen."
+          },
+          "relaksi": {
+            "vertical": "Spas & reflexology",
+            "line": "Rooms and beds, couple massages, 10-visit packages."
+          },
+          "kilap": {
+            "vertical": "Car & motorbike washes",
+            "line": "A number-plate queue, prices by size, crew bonuses."
+          }
+        }
       },
       "giliran": {
         "tagline": "A walk-in waitlist with no app: guests scan a QR code, take a number, and get called on their phone.",
@@ -604,21 +623,22 @@
       "ctaPrimary": "Start a project",
       "ctaSecondary": "See what we build"
     },
-    "jelita": {
-      "metaTitle": "Jelita: salon booking, POS, and commission software | Arktik",
-      "metaDescription": "An Arktik product: salon and spa software for online booking, stylist schedules, POS, commissions, stock, and payroll. No install, free for one branch.",
-      "visit": "Open Jelita",
-      "tagline": "A full book, and a calm head.",
-      "intro": "Jelita puts a salon or spa's daily work in one place. Customers book themselves through the salon's page, the front desk sees every stylist's schedule, and the till works out commissions and deducts stock on the spot. Owners follow revenue and reports from their phone.",
+    "gerai": {
+      "metaTitle": "Gerai: software for salons, barbershops, spas and car washes | Arktik",
+      "metaDescription": "An Arktik product: one app for service businesses, shipped as Jelita (salons), Pangkas (barbershops), Relaksi (spas) and Kilap (car washes). Bookings, queues, the till, commissions, stock, attendance and payroll. Free for a single branch.",
+      "visit": "Visit the site",
+      "tagline": "One engine, four kinds of service business.",
+      "intro": "Gerai keeps a service business's daily work in order: customers book or join the queue themselves, the till works out commissions and deducts stock at checkout, and owners see revenue on their phone. We run it as four brands, each with the vocabulary and features that fit the trade.",
+      "brandsNav": "See all four brands",
       "coverageTitle": "Coverage",
       "coverage": {
-        "booking": {
-          "value": "24/7",
-          "label": "customers can book themselves"
+        "verticals": {
+          "value": "4 brands",
+          "label": "salons, barbershops, spas and car washes"
         },
         "free": {
           "value": "Rp0",
-          "label": "for a single-branch salon"
+          "label": "for 1 branch and 3 staff"
         },
         "install": {
           "value": "0",
@@ -626,72 +646,104 @@
         },
         "roles": {
           "value": "4 roles",
-          "label": "owner, admin, front desk, and stylist"
+          "label": "owner, admin, front desk and staff"
         }
       },
-      "featuresTitle": "What's inside",
-      "features": {
-        "booking": {
-          "title": "Online booking",
-          "description": "Every salon gets its own page with services and prices. Customers pick a service, a stylist, and a time without an account or an app."
+      "brandsTitle": "A brand for each kind of business",
+      "brandsIntro": "The engine is shared, so a fix in one brand reaches the others. What changes is the look, the vocabulary and each trade's own features.",
+      "brands": {
+        "jelita": {
+          "title": "Jelita",
+          "vertical": "Salons & beauty",
+          "ticks": [
+            "Online booking per stylist",
+            "Commissions per service and per stylist",
+            "Stock deducted when products sell"
+          ],
+          "visit": "Open Jelita",
+          "alt": "Jelita's landing page, salon software"
         },
-        "schedule": {
-          "title": "Stylist schedules",
-          "description": "Daily and weekly calendars per stylist, with working hours and breaks. Double bookings are refused up front."
+        "pangkas": {
+          "title": "Pangkas",
+          "vertical": "Barbershops",
+          "ticks": [
+            "Take a queue number by phone, no app",
+            "Pick a favourite barber or anyone free",
+            "A TV screen for the waiting area"
+          ],
+          "visit": "Open Pangkas",
+          "alt": "Pangkas's landing page, barbershop software"
+        },
+        "relaksi": {
+          "title": "Relaksi",
+          "vertical": "Spas & reflexology",
+          "ticks": [
+            "Rooms, beds and therapists never clash",
+            "Couple massages in one room",
+            "10-visit packages deducted automatically"
+          ],
+          "visit": "Open Relaksi",
+          "alt": "Relaksi's landing page, spa software"
+        },
+        "kilap": {
+          "title": "Kilap",
+          "vertical": "Car & motorbike washes",
+          "ticks": [
+            "A number-plate queue and bay board",
+            "Prices by vehicle size",
+            "Bonuses split across the wash crew"
+          ],
+          "visit": "Open Kilap",
+          "alt": "Kilap's landing page, car wash software"
+        }
+      },
+      "featuresTitle": "Shared by every brand",
+      "features": {
+        "page": {
+          "title": "A page of your own",
+          "description": "Menu, prices, opening hours and branches, in the business's own logo and colours. Customers book or join the queue without an account."
         },
         "pos": {
           "title": "Point of sale",
-          "description": "Charge from an appointment or a walk-in, by cash, transfer, QRIS, debit, or credit. Receipts are numbered and cashier shifts are recorded."
+          "description": "Cash, bank transfer, QRIS, debit or credit. Numbered receipts, recorded cashier shifts, and sales locked once completed."
         },
         "commissions": {
           "title": "Automatic commissions",
-          "description": "Stylist commissions are calculated when payment completes, following rules per service or per staff member."
+          "description": "Worked out when payment completes, by service or by staff member."
         },
         "customers": {
           "title": "Customer records",
-          "description": "Visit history, notes, and contact details in one place, searchable and exportable."
+          "description": "Visit history, notes and contacts in one place, searchable and downloadable."
         },
         "stock": {
-          "title": "Product stock",
-          "description": "Stock goes down on its own when a product sells, with a low-stock flag."
+          "title": "Stock and cost of goods",
+          "description": "Stock goes down on its own when products sell or materials are used, with low-stock flags."
+        },
+        "loyalty": {
+          "title": "Points and packages",
+          "description": "Points for regulars. Relaksi and Kilap also have packages and memberships deducted automatically on each visit."
+        },
+        "attendance": {
+          "title": "Attendance",
+          "description": "Staff check in from their phone with a rotating QR code on the till screen, or with a location check."
         },
         "payroll": {
-          "title": "Payroll and reports",
-          "description": "Pay and commission summaries per period, a finance overview, and CSV exports for the owner."
-        },
-        "branding": {
-          "title": "Salon colors and logo",
-          "description": "The booking page carries the salon's own logo and colors, not Jelita's. Works across more than one branch."
+          "title": "Payroll",
+          "description": "Base pay, commission, meal allowance, BPJS and PPh 21 worked out together. Staff open their own payslips."
         }
       },
-      "tiers": "There is a free plan for single-branch salons. Plans for larger salons are arranged on request.",
+      "tiers": "Free for 1 branch and 3 staff on every brand. Paid plans cover more branches and staff; attendance and payroll are on the paid plans.",
       "shots": {
-        "landing": {
-          "alt": "Jelita's home page: online booking, point of sale, and commissions for salons",
-          "caption": "jelita.arktik.id: sign up free for a single-branch salon."
-        },
-        "today": {
-          "alt": "Jelita's Today dashboard for a sample salon",
-          "caption": "Today: revenue, stylist capacity, and the agenda. Data from a sample salon."
-        },
-        "calendar": {
-          "alt": "Jelita's appointment calendar by stylist",
-          "caption": "Daily schedule: every stylist gets a column."
-        },
-        "pos": {
-          "alt": "Jelita's point-of-sale screen with services and products",
-          "caption": "Point of sale: services and products, five ways to pay, commissions worked out on the spot."
-        },
-        "salon": {
-          "alt": "A sample salon's page on Jelita with services, prices, and branches",
-          "caption": "Salon page: services, prices, opening hours, and a booking button per branch."
+        "family": {
+          "alt": "The landing pages of Jelita, Pangkas, Relaksi and Kilap",
+          "caption": "Four brands, one engine. Every business in these screenshots is a sample."
         }
       },
       "builtTitle": "How we built it",
-      "built": "Built and run by Arktik with Next.js and Postgres. The rules that matter, such as schedules that must never overlap and transactions that cannot change once settled, are enforced in the database itself. Time always follows the salon's time zone.",
-      "disclaimer": "The screens on this page use a sample salon with made-up names and data. Automatic WhatsApp reminders and online payment at booking are still in development.",
+      "built": "All four brands run on the same code, built and run by Arktik with Next.js and Postgres. The brand comes from the address you open, and the vocabulary (stylist, barber, therapist, washer), look and trade-specific features follow. Rules that matter, such as bookings that must never clash and sales that lock once completed, are enforced in the database itself.",
+      "disclaimer": "Screens on this page use sample businesses with made-up names and data. Automatic WhatsApp reminders and online payment are still in development.",
       "ctaTitle": "Need an operations system for a service business?",
-      "ctaDescription": "We build everyday tools for appointment-based businesses, from booking to the till and reports. Tell us what you need.",
+      "ctaDescription": "We build the daily tools for appointment- and queue-based businesses, from booking to the till and reports. Tell us what you need.",
       "ctaPrimary": "Start a project",
       "ctaSecondary": "See what we've built"
     },

@@ -14,7 +14,7 @@ export const services: Service[] = [
   {
     slug: "web-mobile-apps",
     key: "webMobile",
-    examples: [{ type: "product", slug: "jelita" }, { type: "product", slug: "jejak-saham" }, { type: "product", slug: "ayo-main" }],
+    examples: [{ type: "product", slug: "gerai" }, { type: "product", slug: "jejak-saham" }, { type: "product", slug: "ayo-main" }],
   },
   {
     slug: "business-websites",

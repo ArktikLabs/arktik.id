@@ -76,6 +76,15 @@ export default async function ProductPage({ params }: ProductPageProps) {
             description: t(`${k}.metaDescription`),
             inLanguage: "id-ID",
             creator: { "@id": "https://www.arktik.id/#organization" },
+            ...(product.brands && {
+              hasPart: product.brands.map((b) => ({
+                "@type": "SoftwareApplication",
+                name: b.name,
+                url: b.link,
+                applicationCategory: product.category,
+                operatingSystem: "Web",
+              })),
+            }),
           },
           breadcrumbs(locale, [
             { name: "Arktik", path: "" },
@@ -111,6 +120,28 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <p className="max-w-xl text-base leading-relaxed text-ink-2 md:text-lg">
               {t(`${k}.intro`)}
             </p>
+            {product.brands ? (
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href="#brands"
+                className="inline-flex items-center gap-2 whitespace-nowrap rounded-pill bg-lime-green px-6 py-3 text-sm font-semibold text-carbon transition-colors duration-200 hover:bg-lime-green/90"
+              >
+                {t(`${k}.brandsNav`)}
+              </a>
+              {product.brands.map((b) => (
+                <a
+                  key={b.key}
+                  href={b.link}
+                  target="_blank"
+                  rel="noopener"
+                  className="inline-flex items-center gap-1 whitespace-nowrap px-1 py-2 text-sm font-medium text-ink-2 underline decoration-rule-strong underline-offset-4 hover:text-lime-green hover:decoration-lime-green"
+                >
+                  {b.name}
+                  <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                </a>
+              ))}
+            </div>
+            ) : (
             <div className="flex flex-wrap items-center gap-4">
               <a
                 href={product.link}
@@ -123,6 +154,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               </a>
               <span className="label-mono">{product.domain}</span>
             </div>
+            )}
           </div>
 
           <figure className="min-w-0">
@@ -163,6 +195,69 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </dl>
         </section>
 
+        {/* Product family: one card per brand on this engine. */}
+        {product.brands && (
+          <section className="mt-20" id="brands" aria-labelledby="brands-title">
+            <div className="section-head mb-4">
+              <h2 id="brands-title" className="font-heading text-3xl font-bold lg:text-4xl">
+                {t(`${k}.brandsTitle`)}
+              </h2>
+              <span className="section-head__rule" aria-hidden="true" />
+            </div>
+            <p className="mb-10 max-w-2xl text-lg leading-relaxed text-ink-2">
+              {t(`${k}.brandsIntro`)}
+            </p>
+            <ul className="grid gap-6 md:grid-cols-2">
+              {product.brands.map((b) => (
+                <li key={b.key} className="tile flex min-w-0 flex-col gap-5">
+                  <a
+                    href={b.link}
+                    target="_blank"
+                    rel="noopener"
+                    tabIndex={-1}
+                    className="block overflow-hidden rounded-card border border-rule"
+                  >
+                    <Image
+                      src={b.cover.src}
+                      alt={t(`${k}.brands.${b.key}.alt`)}
+                      width={b.cover.width}
+                      height={b.cover.height}
+                      sizes="(max-width: 768px) 100vw, 560px"
+                      className="h-auto w-full"
+                    />
+                  </a>
+                  <div className="flex min-w-0 flex-col gap-2">
+                    <span className="label-mono">{t(`${k}.brands.${b.key}.vertical`)}</span>
+                    <h3 className="font-heading text-2xl font-bold text-ink">
+                      {t(`${k}.brands.${b.key}.title`)}
+                    </h3>
+                    <ul className="mt-1 flex flex-col gap-1.5 text-sm leading-relaxed text-ink-2">
+                      {(t.raw(`${k}.brands.${b.key}.ticks`) as string[]).map((x) => (
+                        <li key={x} className="flex gap-2">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lime-green" aria-hidden="true" />
+                          {x}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="mt-auto flex flex-wrap items-center gap-4 pt-2">
+                    <a
+                      href={b.link}
+                      target="_blank"
+                      rel="noopener"
+                      className="inline-flex items-center gap-2 whitespace-nowrap rounded-pill border border-rule-strong px-5 py-2.5 text-sm font-semibold text-ink transition-colors duration-200 hover:border-lime-green hover:text-lime-green"
+                    >
+                      {t(`${k}.brands.${b.key}.visit`)}
+                      <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                    </a>
+                    <span className="label-mono">{b.domain}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
         {/* Features */}
         <section className="mt-20">
           <div className="section-head mb-10">
@@ -187,6 +282,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </section>
 
         {/* Screens */}
+        {product.shots.length > 0 && (
         <section className="mt-20 grid gap-10">
           {product.shots.map((s) => (
             <figure key={s.key} className="min-w-0">
@@ -204,6 +300,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             </figure>
           ))}
         </section>
+        )}
 
         {/* How it's built + disclaimer */}
         <section className="mt-20 grid gap-8 border-t border-rule pt-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
