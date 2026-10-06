@@ -50,7 +50,15 @@ export function ProductsSection() {
                 />
                 {t("label")}
               </span>
-              <h3 className="font-heading text-3xl font-bold leading-display text-ink md:text-4xl">
+              <h3 className="flex items-center gap-4 font-heading text-3xl font-bold leading-display text-ink md:text-4xl">
+                <Image
+                  src={p.icon}
+                  alt=""
+                  width={48}
+                  height={48}
+                  unoptimized
+                  className="h-11 w-11 shrink-0 rounded-[22%] ring-1 ring-rule-strong md:h-12 md:w-12"
+                />
                 {p.name}
               </h3>
               <p className="text-lg leading-relaxed text-ink">
@@ -69,13 +77,21 @@ export function ProductsSection() {
                           href={b.link}
                           target="_blank"
                           rel="noopener"
-                          className="group flex h-full min-w-0 flex-col gap-0.5 rounded-card border border-rule px-4 py-3 transition-colors duration-200 hover:border-lime-green"
+                          className="group flex h-full min-w-0 flex-col gap-0.5 rounded-card border border-rule px-3 py-3 sm:px-4 transition-colors duration-200 hover:border-lime-green"
                         >
-                          <span className="flex items-center justify-between gap-2 font-heading text-base font-semibold text-ink group-hover:text-lime-green">
-                            {b.name}
-                            <ArrowUpRight className="h-4 w-4 shrink-0 text-ink-3 group-hover:text-lime-green" aria-hidden="true" />
+                          <span className="flex items-center gap-2.5 font-heading text-base font-semibold text-ink group-hover:text-lime-green">
+                            <Image
+                              src={b.icon}
+                              alt=""
+                              width={24}
+                              height={24}
+                              unoptimized
+                              className="h-6 w-6 shrink-0 rounded-[22%] ring-1 ring-rule-strong"
+                            />
+                            <span className="min-w-0 flex-1">{b.name}</span>
+                            <ArrowUpRight className="hidden h-4 w-4 shrink-0 text-ink-3 group-hover:text-lime-green sm:block" aria-hidden="true" />
                           </span>
-                          <span className="text-xs text-ink-2">
+                          <span className="text-xs text-ink-2 sm:pl-[34px]">
                             {t(`items.${p.key}.brands.${b.key}.vertical`)}
                           </span>
                         </a>

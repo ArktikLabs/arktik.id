@@ -25,6 +25,8 @@ export interface ProductBrand {
   name: string;
   link: string;
   domain: string;
+  /** the brand's own app icon (its favicon) */
+  icon: string;
   cover: ProductShot;
 }
 
@@ -34,6 +36,8 @@ export interface Product {
   key: string;
   name: string;
   link: string;
+  /** square app icon (SVG, same file the product uses as its favicon) */
+  icon: string;
   /** host shown next to the visit button */
   domain: string;
   /** schema.org SoftwareApplication.applicationCategory */
@@ -52,6 +56,7 @@ export interface Product {
 export const products: Product[] = [
   {
     slug: "jejak-saham",
+    icon: "/assets/products/jejak-saham/icon.svg",
     key: "jejakSaham",
     name: "Jejak Saham",
     link: "https://jejaksaham.id",
@@ -82,6 +87,7 @@ export const products: Product[] = [
   },
   {
     slug: "ayo-main",
+    icon: "/assets/products/ayo-main/icon.svg",
     key: "ayoMain",
     name: "Ayo Main",
     link: "https://ayomain.arktik.id",
@@ -122,6 +128,7 @@ export const products: Product[] = [
      * Shown as ONE product with its brands, so the band doesn't grow by a tile
      * per vertical. /products/jelita/ 308s here (next.config.mjs). */
     slug: "gerai",
+    icon: "/assets/products/gerai/icon.svg",
     key: "gerai",
     name: "Gerai",
     link: "https://jelita.arktik.id",
@@ -142,6 +149,7 @@ export const products: Product[] = [
         name: "Jelita",
         link: "https://jelita.arktik.id",
         domain: "jelita.arktik.id",
+        icon: "/assets/products/gerai/icon-jelita.svg",
         cover: { src: "/assets/products/gerai/jelita.webp", width: 976, height: 549, key: "jelita" },
       },
       {
@@ -149,6 +157,7 @@ export const products: Product[] = [
         name: "Pangkas",
         link: "https://pangkas.arktik.id",
         domain: "pangkas.arktik.id",
+        icon: "/assets/products/gerai/icon-pangkas.svg",
         cover: { src: "/assets/products/gerai/pangkas.webp", width: 976, height: 549, key: "pangkas" },
       },
       {
@@ -156,6 +165,7 @@ export const products: Product[] = [
         name: "Relaksi",
         link: "https://relaksi.arktik.id",
         domain: "relaksi.arktik.id",
+        icon: "/assets/products/gerai/icon-relaksi.svg",
         cover: { src: "/assets/products/gerai/relaksi.webp", width: 976, height: 549, key: "relaksi" },
       },
       {
@@ -163,12 +173,14 @@ export const products: Product[] = [
         name: "Kilap",
         link: "https://kilap.arktik.id",
         domain: "kilap.arktik.id",
+        icon: "/assets/products/gerai/icon-kilap.svg",
         cover: { src: "/assets/products/gerai/kilap.webp", width: 976, height: 549, key: "kilap" },
       },
     ],
   },
   {
     slug: "giliran",
+    icon: "/assets/products/giliran/icon.svg",
     key: "giliran",
     name: "Giliran",
     link: "https://giliran.arktik.id",

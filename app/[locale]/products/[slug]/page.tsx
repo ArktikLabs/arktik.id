@@ -71,6 +71,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             "@id": `${localeUrl(locale, `products/${slug}`)}#product`,
             name: product.name,
             url: product.link,
+            image: `https://www.arktik.id${product.icon}`,
             applicationCategory: product.category,
             operatingSystem: "Web",
             description: t(`${k}.metaDescription`),
@@ -111,7 +112,16 @@ export default async function ProductPage({ params }: ProductPageProps) {
         {/* Hero: name + tagline left, the live product's feed right. */}
         <section className="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:items-center">
           <div className="flex min-w-0 flex-col gap-6">
-            <h1 className="font-heading text-5xl font-bold leading-display md:text-6xl">
+            <h1 className="flex items-center gap-5 font-heading text-5xl font-bold leading-display md:text-6xl">
+              <Image
+                src={product.icon}
+                alt=""
+                width={64}
+                height={64}
+                unoptimized
+                priority
+                className="h-14 w-14 shrink-0 rounded-[22%] ring-1 ring-rule-strong md:h-16 md:w-16"
+              />
               {product.name}
             </h1>
             <p className="text-balance text-xl leading-relaxed text-ink md:text-2xl">
@@ -136,6 +146,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   rel="noopener"
                   className="inline-flex items-center gap-1 whitespace-nowrap px-1 py-2 text-sm font-medium text-ink-2 underline decoration-rule-strong underline-offset-4 hover:text-lime-green hover:decoration-lime-green"
                 >
+                  <Image src={b.icon} alt="" width={18} height={18} unoptimized className="h-[18px] w-[18px] rounded-[22%] ring-1 ring-rule-strong" />
                   {b.name}
                   <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </a>
@@ -228,7 +239,15 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   </a>
                   <div className="flex min-w-0 flex-col gap-2">
                     <span className="label-mono">{t(`${k}.brands.${b.key}.vertical`)}</span>
-                    <h3 className="font-heading text-2xl font-bold text-ink">
+                    <h3 className="flex items-center gap-3 font-heading text-2xl font-bold text-ink">
+                      <Image
+                        src={b.icon}
+                        alt=""
+                        width={36}
+                        height={36}
+                        unoptimized
+                        className="h-9 w-9 shrink-0 rounded-[22%] ring-1 ring-rule-strong"
+                      />
                       {t(`${k}.brands.${b.key}.title`)}
                     </h3>
                     <ul className="mt-1 flex flex-col gap-1.5 text-sm leading-relaxed text-ink-2">
