@@ -131,26 +131,29 @@ export default async function ProductPage({ params }: ProductPageProps) {
               {t(`${k}.intro`)}
             </p>
             {product.brands ? (
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-col items-start gap-4">
               <a
                 href="#brands"
                 className="inline-flex items-center gap-2 whitespace-nowrap rounded-pill bg-lime-green px-6 py-3 text-sm font-semibold text-carbon transition-colors duration-200 hover:bg-lime-green/90"
               >
                 {t(`${k}.brandsNav`)}
               </a>
-              {product.brands.map((b) => (
-                <a
-                  key={b.key}
-                  href={b.link}
-                  target="_blank"
-                  rel="noopener"
-                  className="inline-flex items-center gap-1 whitespace-nowrap px-1 py-2 text-sm font-medium text-ink-2 underline decoration-rule-strong underline-offset-4 hover:text-lime-green hover:decoration-lime-green"
-                >
-                  <Image src={b.icon} alt="" width={18} height={18} unoptimized className="h-[18px] w-[18px] rounded-[22%] ring-1 ring-rule-strong" />
-                  {b.name}
-                  <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-                </a>
-              ))}
+              <ul className="grid grid-cols-2 gap-x-5 gap-y-2 sm:flex sm:flex-wrap sm:items-center">
+                {product.brands.map((b) => (
+                  <li key={b.key}>
+                    <a
+                      href={b.link}
+                      target="_blank"
+                      rel="noopener"
+                      className="inline-flex items-center gap-1.5 whitespace-nowrap py-1 text-sm font-medium text-ink-2 underline decoration-rule-strong underline-offset-4 hover:text-lime-green hover:decoration-lime-green"
+                    >
+                      <Image src={b.icon} alt="" width={18} height={18} unoptimized className="h-[18px] w-[18px] rounded-[22%] ring-1 ring-rule-strong" />
+                      {b.name}
+                      <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
             ) : (
             <div className="flex flex-wrap items-center gap-4">
