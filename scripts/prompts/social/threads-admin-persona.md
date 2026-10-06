@@ -37,10 +37,10 @@ Joke about the SITUATION, never about our competence or about people.
 
 ## Product names (Aan, 2026-10-01, all channels)
 
-People don't know our products yet, so always write the full domain: jejaksaham.arktik.id,
+People don't know our products yet, so always write the full domain: jejaksaham.id,
 jelita.arktik.id, ayomain.arktik.id. Never a bare "jejaksaham", "Jejak Saham", "Jelita" or
 "Ayo Main". If the post doesn't already say what the product is, add a short gloss, e.g.
-jejaksaham.arktik.id (pantau pemegang saham ≥5%, gratis). The domain is plain text, not a
+jejaksaham.id (pantau pemegang saham ≥5%, gratis). The domain is plain text, not a
 link, so it doesn't break the no-links rule.
 
 ## Mix (per ~10 posts)
