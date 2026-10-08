@@ -45,6 +45,10 @@ export function organization(locale: string, description: string) {
     "@type": "Organization",
     "@id": `${SITE}/#organization`,
     name: "Arktik",
+    /* Both from the Kemenkumham SK AHU-0070243.AH.01.01.TAHUN 2025 (deed no. 21), not from memory. The brand
+     * site predates the PT by a month (first commit July 2025); foundingDate is the legal entity's. */
+    legalName: "PT Bahtera Solusi Digital",
+    foundingDate: "2025-08-20",
     url: localeUrl(locale),
     logo: {
       "@type": "ImageObject",
