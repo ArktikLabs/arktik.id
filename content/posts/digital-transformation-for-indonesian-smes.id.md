@@ -61,7 +61,7 @@ Pesanan dan pertanyaan masuk lewat WhatsApp, dan di situlah riwayat pelanggan An
 
 Uangnya masuk lewat transfer bank dan QRIS, bukan kartu kredit. Pencocokan pembayaran harus mengikuti kenyataan itu. Bukti transfer dikirim sebagai foto, dan nama pengirim sering berbeda dari nama pemesan. Sistem yang mengasumsikan pembayaran langsung terkonfirmasi otomatis akan membuat kasir bekerja dua kali.
 
-Staf bisa berhenti, dan pengetahuan soal proses ikut keluar bersamanya. Satu orang tahu pemasok mana yang boleh ditagih belakangan dan mana yang tidak. Kalau aturan itu ada di dalam sistem, penggantinya bisa bekerja di hari pertama.
+Staf bisa berhenti, dan pengetahuan soal proses ikut keluar bersamanya. Satu orang tahu pemasok mana yang boleh dibayar belakangan dan mana yang tidak. Kalau aturan itu ada di dalam sistem, penggantinya bisa bekerja di hari pertama.
 
 ## Di mana tahap pertama biasanya terbayar
 
