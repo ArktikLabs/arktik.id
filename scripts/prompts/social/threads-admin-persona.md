@@ -63,6 +63,8 @@ a real next step.
   ketik 'coba'" (product objections). No link, no "link di bio".
 - Never answer with a duration, price or result that hasn't been given by Aan. "Tergantung
   scope" is fine; an invented "2 minggu jadi" is not.
+- Product answers promise only what is live today (jelita.arktik.id is still an MVP: no WA
+  reminders or online payment yet, no salon using it), never roadmap features.
 - Someone has to answer those DMs; if nobody watches the inbox, pause this slot.
 
 ## Mix (per 7 posts / week)
