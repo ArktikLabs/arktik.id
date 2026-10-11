@@ -37,16 +37,39 @@ Joke about the SITUATION, never about our competence or about people.
 
 ## Product names (Aan, 2026-10-01, all channels)
 
-People don't know our products yet, so always write the full domain: jejaksaham.id,
-jelita.arktik.id, ayomain.arktik.id. Never a bare "jejaksaham", "Jejak Saham", "Jelita" or
-"Ayo Main". If the post doesn't already say what the product is, add a short gloss, e.g.
-jejaksaham.id (pantau pemegang saham ≥5%, gratis). The domain is plain text, not a
-link, so it doesn't break the no-links rule.
+People don't know our products yet, so always write the full domain: jelita.arktik.id,
+ayomain.arktik.id, giliran.arktik.id. Never a bare "Jelita", "Ayo Main" or "Giliran". If
+the post doesn't already say what the product is, add a short gloss, e.g.
+giliran.arktik.id (antrean lewat WhatsApp). The domain is plain text, not a link, so it
+doesn't break the no-links rule. Jejak Saham has its own accounts since 2026-10-05:
+@arktiklabs posts nothing about stocks or jejaksaham.id.
 
-## Mix (per ~10 posts)
+## Objection + CTA post (Aan, 2026-10-12)
 
-~6 situational humour · ~2 selling-in-a-joke · ~1 sincere and useful (starts "mode serius
-bentar") · ~1 interaction (Q&A, "spill"). One post a day, judge after 60–90 days.
+Likes alone don't sell. One post a week answers ONE buyer objection head-on and ends with
+a real next step.
+
+- Pick an objection a prospect would actually have, then answer it with a real mechanism
+  (see Honesty rules). Rotate; don't repeat an objection used in the last ~6 weeks.
+  - Software house: "mahal, worth it nggak?" · "gw nggak ngerti teknis, takut dibohongin" ·
+    "kalo vendornya ilang, kodenya gimana?" · "bisnis gw masih kecil, perlu app nggak?" ·
+    "kenapa nggak pake aplikasi yang udah ada aja?" · "abis jadi, siapa yang maintain?" ·
+    "bisa mulai kecil dulu nggak?"
+  - Products (full domain + gloss): "pelanggan gw mau nggak antre lewat WA?"
+    (giliran.arktik.id) · "ribet nggak pindah dari buku catatan?" (jelita.arktik.id).
+- Persona stays: gw/lu, may open with the objection as a quoted question and keep a light
+  punchline, but the answer must be clear even to someone who skips the joke.
+- End with one CTA: "DM aja, ketik 'estimasi'" (software-house objections) or "DM aja,
+  ketik 'coba'" (product objections). No link, no "link di bio".
+- Never answer with a duration, price or result that hasn't been given by Aan. "Tergantung
+  scope" is fine; an invented "2 minggu jadi" is not.
+- Someone has to answer those DMs; if nobody watches the inbox, pause this slot.
+
+## Mix (per 7 posts / week)
+
+~4 situational humour · 1 selling-in-a-joke · 1 objection + CTA (above) · ~1 sincere and
+useful (starts "mode serius bentar") or interaction (Q&A, "spill"). One post a day. Judge
+by DMs/inquiries, not likes.
 
 ## Replies
 
