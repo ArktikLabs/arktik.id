@@ -81,6 +81,8 @@ Kekhawatiran di balik waterfall adalah biaya yang tidak jelas ujungnya. Kekhawat
 
 Begini cara kami menjalankannya. Ruang lingkup dan harga setiap tahap disepakati tertulis sebelum tahap itu dimulai. Jadi Anda bisa berhenti setelah tahap mana pun tanpa perdebatan, karena tahap berikutnya memang belum pernah Anda setujui. Komitmennya pendek seperti agile, angkanya pasti seperti waterfall.
 
+![Gerbang tahap: troli proyek berjalan di rel melewati empat palang, discovery, desain, development, dan serah terima. Tiap palang baru naik setelah tahapnya disepakati.](/assets/figures/stage-gates-id.html)
+
 Tahap pertama adalah discovery, memakan satu sampai dua minggu, dan hasilnya rencana tertulis beserta harga tetap. Dokumen itu milik Anda mau lanjut atau tidak, jadi Anda sudah tahu lebih dulu berapa biaya untuk mengukur besarnya pekerjaan ini. Selama pembangunan, ada software yang berjalan setiap minggu dan link preview privat sejak minggu pertama.
 
 Risiko terlantar di tengah jalan ditutup dari sisi lain. Kode, server, domain, dan semua akun sudah atas nama Anda sejak hari pertama, bukan baru saat handover. Kalau Anda berhenti setelah tahap kedua, yang sudah dibangun tetap bisa dibuka, dibaca, dan dilanjutkan oleh siapa pun yang Anda pilih. Urutan tahapnya kami uraikan di [pendekatan dari ide sampai peluncuran](/blog/software-development/from-idea-to-launch-end-to-end-development-approach/), dan cara memilih isi tahap pertama ada di [tulisan tentang membangun versi kecil dulu](/blog/software-development/mvp-development-start-small-scale-fast/).

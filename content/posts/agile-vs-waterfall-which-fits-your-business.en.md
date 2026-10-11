@@ -78,6 +78,8 @@ Waterfall carries the fear of cost with no visible ceiling, and agile carries th
 
 We run builds that way. Scope and price for every stage are agreed in writing before that stage begins, so you can stop after any stage without an argument, because the next one was never something you approved. The commitment is short, the way it is in agile, and the number is certain, the way it is in waterfall.
 
+![Stage gates: a project carriage rides a rail past four gate bars, discovery, design, build and handover. Each bar lifts only once its stage is agreed.](/assets/figures/stage-gates-en.html)
+
 The first stage is discovery. It takes one to two weeks and produces a written plan with a fixed price, and that document is yours whether you continue or not, so you know in advance what it costs to measure the size of the work. During the build there is working software every week and a private preview link from week one, and what you flag in that weekly demo is what the next stage's scope gets agreed from.
 
 The risk of being stranded mid-project is closed from the other side. The code, servers, domain and every account are in your name from day one, not at handover. Stop after stage two and what exists is already yours, accounts included, so whoever you choose next can pick it up without asking us for anything. The stage sequence is set out in our [end to end approach from idea to launch](/en/blog/software-development/from-idea-to-launch-end-to-end-development-approach/), and how to choose what goes in the first stage is covered in our post on [building a small first version](/en/blog/software-development/mvp-development-start-small-scale-fast/).

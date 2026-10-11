@@ -1,6 +1,8 @@
 /* Hallmark · design-system: design.md */
 import Image from "next/image";
 import ReactMarkdown, { type Components } from "react-markdown";
+import { FigureEmbed } from "./FigureEmbed";
+import { isFigureSrc } from "./figure-src";
 
 interface RichTextRendererProps {
   content: string;
@@ -53,7 +55,9 @@ const components: Components = {
     </a>
   ),
   img: ({ src, alt }) =>
-    src ? (
+    src && isFigureSrc(String(src)) ? (
+      <FigureEmbed src={String(src)} title={alt ?? ""} />
+    ) : src ? (
       /* ponytail: fixed 1200x675 intrinsic size as a fallback; h-auto keeps
        * the real ratio once loaded. Read dims from disk if CLS is ever
        * measured to matter. */
