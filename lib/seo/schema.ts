@@ -9,6 +9,8 @@
  * `trailingSlash: true` in next.config, so every URL here ends with a slash to
  * match the canonicals already emitted in layout.tsx. */
 
+import { ogCardPath } from "./og-paths.ts";
+
 export const SITE = "https://www.arktik.id";
 
 export function localeUrl(locale: string, path = ""): string {
@@ -77,18 +79,29 @@ export function website(locale: string, name: string, description: string) {
   };
 }
 
-export type Crumb = { name: string; path?: string };
+/** `path` is required on every crumb except the last (the current page):
+ * Google flags a ListItem without `item` as a critical "Missing field item"
+ * error unless it is the final one. `hash` targets a section, e.g. `/#products`. */
+export type Crumb = { name: string; path?: string; hash?: string };
 
 /** Mirrors the visible <Breadcrumb>. Only emit where those crumbs render. */
 export function breadcrumbs(locale: string, crumbs: Crumb[]) {
   return {
     "@type": "BreadcrumbList",
-    itemListElement: crumbs.map((c, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: c.name,
-      ...(c.path ? { item: localeUrl(locale, c.path) } : {}),
-    })),
+    itemListElement: crumbs.map((c, i) => {
+      const last = i === crumbs.length - 1;
+      if (c.path === undefined && !last) {
+        throw new Error(`breadcrumbs: crumb "${c.name}" needs a path (only the last crumb may omit it)`);
+      }
+      return {
+        "@type": "ListItem",
+        position: i + 1,
+        name: c.name,
+        ...(c.path !== undefined
+          ? { item: localeUrl(locale, c.path) + (c.hash ? `#${c.hash}` : "") }
+          : {}),
+      };
+    }),
   };
 }
 
@@ -197,5 +210,4 @@ export function socialMeta({
 /** Wraps nodes in a single @graph so one script tag carries the page. */
 export function graph(...nodes: unknown[]) {
   return { "@context": "https://schema.org", "@graph": nodes.filter(Boolean) };
-}import { ogCardPath } from "@/lib/seo/og-paths";
-
+}

@@ -89,7 +89,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           },
           breadcrumbs(locale, [
             { name: "Arktik", path: "" },
-            { name: t("breadcrumb") },
+            { name: t("breadcrumb"), path: "", hash: "products" },
             { name: product.name },
           ]),
         )}
