@@ -24,7 +24,7 @@ date,type,title,category,goal,status,slug,facts,notes,research
 2026-10-15,regular,UX in Enterprise Software: Making Complex Systems Simple,design-ux,Authority,published,ux-for-complex-internal-systems,,,
 2026-10-17,pillar,Design Systems for Scalable Products,design-ux,Ebook Download,published,design-systems-for-scalable-products,,,
 2026-10-19,regular,How to Measure ROI on Digital Investments,digital-strategy,Conversion,published,how-to-measure-roi-on-digital-investments,,,
-2026-10-21,regular,Continuous Integration & Delivery Explained Simply,software-development,Awareness,todo,,,,
+2026-10-21,regular,Continuous Integration & Delivery Explained Simply,software-development,Awareness,published,ci-cd-explained-for-business-owners,,,
 2026-10-23,pillar,Software Architecture & Future-Proofing,software-development,Book a Consultation,todo,,,,
 2026-10-25,regular,Microservices vs Monoliths: Which Architecture Fits Your Business,software-development,Awareness,todo,,,,
 2026-10-27,regular,Security by Design: Building Software That Lasts,software-development,Trust,todo,,,,
