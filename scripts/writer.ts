@@ -148,9 +148,31 @@ export function clampFrontmatter(data: Record<string, unknown>, type: 'pillar' |
   return out
 }
 
+/** Quote plain one-line scalar values that YAML can't parse (the model sometimes drops the quotes the prompt asks
+ * for, e.g. `seoTitle: Predictive Analytics for SMEs: What You Can Actually Use` breaks on the second ": "). */
+export function repairFrontmatter(text: string): string {
+  const m = text.match(/^---\n([\s\S]*?)\n---/)
+  if (!m) return text
+  const fixed = m[1].split('\n').map((line) => {
+    const kv = line.match(/^([A-Za-z][\w-]*):[ \t]+(.+)$/)
+    if (!kv) return line
+    const v = kv[2].trim()
+    if (/^['"[{>|&*!]/.test(v) || !/: |\s#/.test(v)) return line
+    return `${kv[1]}: '${v.replace(/'/g, "''")}'`
+  }).join('\n')
+  return text.replace(m[1], () => fixed)
+}
+
 export function parseArticle(text: string, type: 'pillar' | 'regular' = 'regular'): Article {
   const cleaned = text.trim().replace(/^```[a-z]*\s*\n/i, '').replace(/\n```\s*$/, '')
-  const { data, content } = matter(cleaned)
+  let parsed: ReturnType<typeof matter>
+  try {
+    parsed = matter(cleaned)
+  } catch {
+    parsed = matter(repairFrontmatter(cleaned))   // throws the original kind of error if still broken
+    console.warn('repaired unquoted frontmatter values')
+  }
+  const { data, content } = parsed
   for (const k of REQUIRED_KEYS[type]) if (data[k] === undefined || data[k] === '') throw new Error(`article missing frontmatter "${k}"`)
   if (!content.trim()) throw new Error('article body is empty')
   return { frontmatter: clampFrontmatter(data, type), body: content.trim() + '\n' }

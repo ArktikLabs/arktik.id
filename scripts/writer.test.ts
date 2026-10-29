@@ -32,6 +32,15 @@ function captureWarn<T>(fn: () => T): { value: T; warnings: string[] } {
   }
 }
 
+test('parseArticle quotes an unquoted value with a second ": " instead of failing', () => {
+  const bad = DOC.replace('seoTitle: s', 'seoTitle: Predictive Analytics for SMEs: What You Can Actually Use')
+    .replace('title: T', "title: It's: a title")
+  const { value } = captureWarn(() => parseArticle(bad))
+  assert.equal(value.frontmatter.seoTitle, 'Predictive Analytics for SMEs: What You Can Actually Use')
+  assert.equal(value.frontmatter.title, "It's: a title")
+  assert.equal(value.body, '## A\n\nbody\n')
+})
+
 test('parseArticle strips a ```markdown fence', () => {
   const article = parseArticle('```markdown\n' + DOC + '```\n')
   assert.equal(article.frontmatter.title, 'T')
