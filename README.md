@@ -31,6 +31,7 @@ rendered from that list, so nothing product-specific is hardcoded in a page.
 | Ayo Main | `ayo-main` | <img src="public/assets/products/ayo-main/icon.svg" width="24" alt=""> | Indonesian-language games for kids aged 2-10 |
 | Gerai | `gerai` | <img src="public/assets/products/gerai/icon.svg" width="24" alt=""> | Software for service businesses, run as four brands (below) |
 | Giliran | `giliran` | <img src="public/assets/products/giliran/icon.svg" width="24" alt=""> | Walk-in waitlist with no app |
+| FinPlan | `finplan` | <img src="public/assets/products/finplan/icon.png" width="24" alt=""> | Personal financial planning for Indonesia (8-level ladder, one step a month) |
 
 ### Product families
 
@@ -55,7 +56,7 @@ grouped; separate apps stay separate products.
    names only, no traction numbers). WebP in `public/assets/products/<slug>/` (cover <= 976 px wide, shots
    <= 1600 px). A family brand adds `public/assets/products/<family>/<brand>.webp` instead.
 2. Icon: `public/assets/products/<slug>/icon.svg`, 64x64 viewBox on a rounded square. Use the product's own
-   favicon so arktik.id and the browser tab match. A family brand uses `public/assets/products/<family>/icon-<brand>.svg`.
+   favicon so arktik.id and the browser tab match (an app with only a PNG icon, like FinPlan, uses `icon.png`). A family brand uses `public/assets/products/<family>/icon-<brand>.svg`.
 3. Data: an entry in `lib/data/products.ts` (slug, key, name, icon, link, domain, schema.org category, exactly 4
    `coverage` keys, `features` keys, cover, shots). A new brand of an existing family is one more `brands[]`
    entry, not a new product.

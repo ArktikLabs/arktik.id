@@ -36,7 +36,8 @@ export interface Product {
   key: string;
   name: string;
   link: string;
-  /** square app icon (SVG, same file the product uses as its favicon) */
+  /** square app icon (same file the product uses as its favicon; SVG, or PNG
+   * when the app has no SVG icon) */
   icon: string;
   /** host shown next to the visit button */
   domain: string;
@@ -218,6 +219,45 @@ export const products: Product[] = [
         width: 1600,
         height: 1000,
         key: "contacts",
+      },
+    ],
+  },
+  {
+    /* Personal financial planning. The app ships a PNG icon only (no SVG
+     * favicon), so this product uses its icon.png. No prices on arktik.id. */
+    slug: "finplan",
+    icon: "/assets/products/finplan/icon.png",
+    key: "finplan",
+    name: "FinPlan",
+    link: "https://finplan.arktik.id",
+    domain: "finplan.arktik.id",
+    category: "FinanceApplication",
+    coverage: ["levels", "areas", "access", "time"],
+    features: ["ladder", "step", "checkin", "plan", "simulations", "map", "sources", "independent"],
+    cover: {
+      src: "/assets/products/finplan/landing.webp",
+      width: 976,
+      height: 610,
+      key: "landing",
+    },
+    shots: [
+      {
+        src: "/assets/products/finplan/plan.webp",
+        width: 1600,
+        height: 898,
+        key: "plan",
+      },
+      {
+        src: "/assets/products/finplan/money.webp",
+        width: 1600,
+        height: 1086,
+        key: "money",
+      },
+      {
+        src: "/assets/products/finplan/simulations.webp",
+        width: 1600,
+        height: 682,
+        key: "simulations",
       },
     ],
   },

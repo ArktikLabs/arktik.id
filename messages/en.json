@@ -448,6 +448,12 @@
         "description": "For cafés, restaurants, barbershops, and clinics. Guests wander off while watching the line on their phone, staff call the next party with one tap, and owners see peak hours and returning guests. Free up to 1,000 tickets a month.",
         "more": "About Giliran",
         "visit": "Visit the site"
+      },
+      "finplan": {
+        "tagline": "Personal financial planning: see where you stand on an 8-level ladder, then get one clear step each month.",
+        "description": "Fill in your data in about 5 minutes: income, expenses, yearly costs like the trip home for Eid, savings, installments, and BPJS. FinPlan works out where you stand and gives you one step a month. Not an expense tracker, no access to your bank account, and it sells no investment or insurance product.",
+        "more": "About FinPlan",
+        "visit": "Visit the site"
       }
     }
   },
@@ -835,6 +841,93 @@
       "disclaimer": "The screens on this page use a sample outlet with made-up names and data. WhatsApp notifications, QRIS booking deposits, WhatsApp campaigns, and the AI assistant are still in development.",
       "ctaTitle": "Need a system for a business that serves walk-in customers?",
       "ctaDescription": "We build everyday tools for offline businesses, from queues and bookings to customer data. Tell us what you need.",
+      "ctaPrimary": "Start a project",
+      "ctaSecondary": "See what we've built"
+    },
+    "finplan": {
+      "metaTitle": "FinPlan: personal financial planning for Indonesia | Arktik",
+      "metaDescription": "An Arktik product: fill in your finances in about 5 minutes, see where you stand on an 8-level ladder, and get one clear step each month. No bank access, no investment or insurance sales.",
+      "visit": "Open FinPlan",
+      "tagline": "One clear money step, every month.",
+      "intro": "FinPlan is a personal financial planning tool for Indonesia. You fill in your data in about 5 minutes: income, expenses, yearly costs like the trip home for Eid, savings, installments, and BPJS. FinPlan shows where you stand on an 8-level ladder, gives you one clear step each month, then brings you back for a monthly check-in to see your progress.",
+      "coverageTitle": "Coverage",
+      "coverage": {
+        "levels": {
+          "value": "8 levels",
+          "label": "on your financial ladder"
+        },
+        "areas": {
+          "value": "8 areas",
+          "label": "from cash flow to tax and inheritance"
+        },
+        "access": {
+          "value": "0",
+          "label": "access to your bank account, cards, or e-wallets"
+        },
+        "time": {
+          "value": "~5 min",
+          "label": "to fill in your data and see where you stand"
+        }
+      },
+      "featuresTitle": "What's inside",
+      "features": {
+        "ladder": {
+          "title": "An 8-level ladder",
+          "description": "Your finances are placed on one of 8 levels, so you can see what's already sorted and what comes next."
+        },
+        "step": {
+          "title": "One step a month",
+          "description": "Not a long to-do list. Each month there is one step that matters most, with the reason it comes first."
+        },
+        "checkin": {
+          "title": "Monthly check-in",
+          "description": "Once a month you update your numbers and mark the step you took, and the plan adjusts."
+        },
+        "plan": {
+          "title": "Rencanaku (My plan)",
+          "description": "All your goals are calculated together. If the money falls short, you choose: shift dates, retire later, or cut a little."
+        },
+        "simulations": {
+          "title": "Life-event simulations",
+          "description": "See the impact before you decide: buying a car, a child being born, changing jobs, or being laid off."
+        },
+        "map": {
+          "title": "An 8-area map",
+          "description": "Cash flow, protection, debt, emergency fund, children's education, investment by asset class, retirement including BPJS JHT and JP, and tax and inheritance."
+        },
+        "sources": {
+          "title": "Numbers with sources",
+          "description": "Every number cites its source, such as PP 45/2015 for the state pension (JP) and BPS data for school costs."
+        },
+        "independent": {
+          "title": "Nothing to sell",
+          "description": "FinPlan sells no investment or insurance product and takes no commissions. Its advice stops at the asset-class level."
+        }
+      },
+      "tiers": "Checking where you stand is free, no card needed. Plan details are on the FinPlan site.",
+      "shots": {
+        "landing": {
+          "alt": "FinPlan landing page: plan your finances from your first salary to retirement",
+          "caption": "finplan.arktik.id: fill in your data once, see where you stand on 8 levels."
+        },
+        "plan": {
+          "alt": "FinPlan's step-of-the-month card and 8-area summary",
+          "caption": "This month's step and the 8-area summary: one step, the other areas over time. Sample data."
+        },
+        "money": {
+          "alt": "FinPlan's monthly money split and retirement target card",
+          "caption": "Where the money goes each month, and the retirement target including BPJS contributions. Sample data."
+        },
+        "simulations": {
+          "alt": "FinPlan's car purchase simulation and loss-of-income simulation",
+          "caption": "Simulations: the impact of a car loan, and how long your money lasts if income stops. Sample data."
+        }
+      },
+      "builtTitle": "How we built it",
+      "built": "Built and run by Arktik with Next.js, TypeScript, and Tailwind, on PostgreSQL with row-level security (Drizzle), Better Auth for email and Google sign-in, Mayar for payments, and Resend for email, on Arktik's own server. Every number comes from a deterministic calculation engine; AI is never used to calculate numbers.",
+      "disclaimer": "FinPlan is a planning tool, not licensed financial advice. It sells no investment or insurance product and takes no commissions. The screens on this page use a sample profile with made-up data. The app itself is in Indonesian.",
+      "ctaTitle": "Have a product idea where the numbers have to be right?",
+      "ctaDescription": "We build apps whose numbers hold up, from the calculation engine to a screen people understand. Tell us what you need.",
       "ctaPrimary": "Start a project",
       "ctaSecondary": "See what we've built"
     }

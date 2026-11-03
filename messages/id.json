@@ -448,6 +448,12 @@
         "description": "Untuk kafe, resto, barbershop, dan klinik. Tamu bebas jalan-jalan sambil memantau antrean dari HP, staf memanggil dengan satu ketukan, dan pemilik melihat jam ramai serta tamu yang kembali. Gratis sampai 1.000 tiket per bulan.",
         "more": "Tentang Giliran",
         "visit": "Buka situsnya"
+      },
+      "finplan": {
+        "tagline": "Perencanaan keuangan pribadi: lihat posisi Anda di 8 level, lalu dapat satu langkah jelas tiap bulan.",
+        "description": "Isi data sekitar 5 menit: penghasilan, pengeluaran, biaya tahunan seperti mudik, tabungan, cicilan, dan BPJS. FinPlan menghitung posisi Anda dan memberi satu langkah per bulan. Bukan pencatat pengeluaran, tanpa akses ke rekening bank, dan tidak menjual produk investasi atau asuransi.",
+        "more": "Tentang FinPlan",
+        "visit": "Buka situsnya"
       }
     }
   },
@@ -835,6 +841,93 @@
       "disclaimer": "Tampilan di halaman ini memakai outlet contoh dengan nama dan data karangan. Notifikasi WhatsApp, deposit booking lewat QRIS, kampanye WA, dan asisten AI masih dalam pengembangan.",
       "ctaTitle": "Butuh sistem untuk bisnis yang melayani tamu langsung?",
       "ctaDescription": "Kami membangun alat kerja harian untuk bisnis offline, dari antrean dan booking sampai data pelanggan. Ceritakan kebutuhan Anda.",
+      "ctaPrimary": "Mulai proyek",
+      "ctaSecondary": "Lihat yang kami bangun"
+    },
+    "finplan": {
+      "metaTitle": "FinPlan: perencanaan keuangan pribadi untuk Indonesia | Arktik",
+      "metaDescription": "Produk Arktik: isi data keuangan sekitar 5 menit, lihat posisi Anda di 8 level, dan dapat satu langkah jelas tiap bulan. Tanpa akses rekening, tanpa jualan produk investasi atau asuransi.",
+      "visit": "Buka FinPlan",
+      "tagline": "Satu langkah keuangan yang jelas, setiap bulan.",
+      "intro": "FinPlan adalah alat perencanaan keuangan pribadi untuk Indonesia. Anda mengisi data sekitar 5 menit: penghasilan, pengeluaran, biaya tahunan seperti mudik, tabungan, cicilan, dan BPJS. FinPlan menunjukkan posisi Anda di tangga 8 level, memberi satu langkah yang jelas setiap bulan, lalu mengajak Anda check-in bulanan untuk melihat kemajuannya.",
+      "coverageTitle": "Cakupan",
+      "coverage": {
+        "levels": {
+          "value": "8 level",
+          "label": "tangga posisi keuangan Anda"
+        },
+        "areas": {
+          "value": "8 bidang",
+          "label": "dari arus kas sampai pajak dan warisan"
+        },
+        "access": {
+          "value": "0",
+          "label": "akses ke rekening bank, kartu, atau e-wallet"
+        },
+        "time": {
+          "value": "±5 menit",
+          "label": "untuk mengisi data dan melihat posisi Anda"
+        }
+      },
+      "featuresTitle": "Yang ada di dalamnya",
+      "features": {
+        "ladder": {
+          "title": "Tangga 8 level",
+          "description": "Posisi keuangan Anda dipetakan ke salah satu dari 8 level, sehingga terlihat apa yang sudah beres dan apa yang berikutnya."
+        },
+        "step": {
+          "title": "Satu langkah per bulan",
+          "description": "Bukan daftar tugas panjang. Setiap bulan ada satu langkah yang paling penting, lengkap dengan alasan kenapa itu didahulukan."
+        },
+        "checkin": {
+          "title": "Check-in bulanan",
+          "description": "Sebulan sekali Anda memperbarui angka dan menandai langkah yang sudah dijalankan, lalu rencananya ikut menyesuaikan."
+        },
+        "plan": {
+          "title": "Rencanaku",
+          "description": "Semua tujuan dihitung bersama. Kalau uangnya kurang, Anda yang memilih: geser tanggal, pensiun lebih lambat, atau kurangi sedikit."
+        },
+        "simulations": {
+          "title": "Simulasi peristiwa hidup",
+          "description": "Lihat dampaknya sebelum memutuskan: beli mobil, anak lahir, pindah kerja, atau kena PHK."
+        },
+        "map": {
+          "title": "Peta 8 bidang",
+          "description": "Arus kas, proteksi, utang, dana darurat, pendidikan anak, investasi per kelas aset, pensiun termasuk BPJS JHT dan JP, serta pajak dan warisan."
+        },
+        "sources": {
+          "title": "Angka dengan sumber",
+          "description": "Setiap angka menyebut sumbernya, misalnya PP 45/2015 untuk Jaminan Pensiun dan data BPS untuk biaya sekolah."
+        },
+        "independent": {
+          "title": "Tanpa jualan produk",
+          "description": "FinPlan tidak menjual produk investasi atau asuransi dan tidak menerima komisi. Sarannya berhenti di tingkat kelas aset."
+        }
+      },
+      "tiers": "Cek posisi Anda gratis, tanpa kartu. Detail paket ada di situs FinPlan.",
+      "shots": {
+        "landing": {
+          "alt": "Halaman depan FinPlan: rencanakan keuangan dari gaji pertama sampai pensiun",
+          "caption": "finplan.arktik.id: isi data sekali, lihat posisi Anda di 8 level."
+        },
+        "plan": {
+          "alt": "Kartu langkah bulan ini dan ringkasan 8 bidang di FinPlan",
+          "caption": "Langkah bulan ini dan ringkasan 8 bidang: satu langkah, bidang lain dicicil. Data contoh."
+        },
+        "money": {
+          "alt": "Pembagian uang bulanan dan kartu target pensiun di FinPlan",
+          "caption": "Pembagian uang tiap bulan dan target pensiun, termasuk iuran BPJS. Data contoh."
+        },
+        "simulations": {
+          "alt": "Simulasi beli mobil dan simulasi kehilangan penghasilan di FinPlan",
+          "caption": "Simulasi: dampak cicilan mobil, dan berapa lama uang cukup kalau penghasilan berhenti. Data contoh."
+        }
+      },
+      "builtTitle": "Cara kami membangunnya",
+      "built": "Dibangun dan dijalankan oleh Arktik dengan Next.js, TypeScript, dan Tailwind, di atas PostgreSQL dengan row-level security (Drizzle), Better Auth untuk login email dan Google, Mayar untuk pembayaran, dan Resend untuk email, di server Arktik sendiri. Semua angka dihitung oleh mesin perhitungan yang deterministik; AI tidak pernah dipakai untuk menghitung angka.",
+      "disclaimer": "FinPlan adalah alat perencanaan, bukan nasihat keuangan berlisensi. FinPlan tidak menjual produk investasi atau asuransi dan tidak menerima komisi. Tampilan di halaman ini memakai profil contoh dengan data karangan.",
+      "ctaTitle": "Punya ide produk dengan perhitungan yang harus tepat?",
+      "ctaDescription": "Kami membangun aplikasi yang angkanya bisa dipertanggungjawabkan, dari mesin perhitungan sampai tampilan yang mudah dipahami. Ceritakan kebutuhan Anda.",
       "ctaPrimary": "Mulai proyek",
       "ctaSecondary": "Lihat yang kami bangun"
     }
